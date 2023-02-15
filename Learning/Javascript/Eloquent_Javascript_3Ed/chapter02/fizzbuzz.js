@@ -8,7 +8,7 @@ const fizzValue = 3;
 const startNum = 1;
 const stopNum = 100;
 
-for (let i = startNum; i <= stopNum; i++) {
+/* for (let i = startNum; i <= stopNum; i++) {
     if (i % fizzBuzzValue === 0) {
         console.log("FizzBuzz");
     } else if (i % buzzValue === 0) {
@@ -19,7 +19,7 @@ for (let i = startNum; i <= stopNum; i++) {
         console.log(i);
     }
 }
-
+ */
 /* Book solution
 for (let n = 1; n <= 100; n++) {
     let output = "";
@@ -28,3 +28,15 @@ for (let n = 1; n <= 100; n++) {
     console.log(output || n);
 }
 */
+
+// Extending book's solution.
+for (let i = startNum; i <= stopNum; i++) {
+    let result = "";
+    if (i % fizzValue === 0) {
+        result += "Fizz";
+    }
+    if (i % buzzValue === 0) {
+        result += "Buzz";
+    }
+    console.log(result || i);
+}
