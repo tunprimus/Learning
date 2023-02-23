@@ -77,10 +77,10 @@ let rtlScripts = SCRIPTS.filter(s => s.direction == "rtl");
 console.log(map(rtlScripts, s => s.name)); // → ["Adlam", "Arabic", "Imperial Aramaic", …]
 
 // Summarise into a single value with reduce
-function reduce(array, combine, start) {
+function reduce(array, combineFunction, start) {
     let current = start;
     for (let element of array) {
-        current = combine(current, element);
+        current = combineFunction(current, element);
     }
     return current;
 }
@@ -131,3 +131,18 @@ function countBy(items, groupName) {
     return counts;
 }
 console.log(countBy([1, 2, 3, 4, 5], n => n > 2));
+
+function textScripts(text) {
+    let scripts = countBy(text, char => {
+        let script = characterScript(char.codePointAt(0));
+        return script ? script.name : "none";
+    }).filter(({name}) => name != "none");
+
+    let total = scripts.reduce((n, {count}) => n + count, 0);
+    if (total === 0) {
+        return "No scripts found";
+    }
+    return scripts.map(({name, count}) => {
+        return `${Math.round(count * 100 / total)}% ${name}`;
+    }).join(", ");
+}
