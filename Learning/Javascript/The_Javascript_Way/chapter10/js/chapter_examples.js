@@ -52,7 +52,7 @@ const movieList = [
     }
 ];
 
-/* 
+
 // Get movie titles
 const titles = [];
 for (const movie of movieList) {
@@ -91,13 +91,13 @@ averageRating = ratingSum / (nolanMovieList.length);
 console.log(averageRating);
 console.log("\n======+=====\n");
 
- */
+
 
 /* PROCEDURAL PROGRAMMING
 Use source code subdivision int functions and transform as many variables as possible into local variables.
 */
 
-/* 
+
 // Get movie titles
 const titles = () => {
     const titles = [];
@@ -143,13 +143,13 @@ nolanMovies();
 console.log(nolanMovieList.length);
 console.log(bestTitles());
 console.log(averageNolanRating());
- */
+
 
 /* PURE FUNCTIONS
 Pure function has outputs only dependent on inputs and no side effect (change in programme state of interaction with the outside wall [e.g. database access or use of console.log])
 */
 
-/* 
+
 // Get movie titles
 const titles = movies => {
     const titles = [];
@@ -196,7 +196,7 @@ console.log(nolanMovieList.length);
 console.log(bestTitles(movieList));
 console.log(averageRating(nolanMovieList));
 
- */
+
 
 const numbers = [1, 5, 10, 15];
 const doubles = numbers.map(x => x * 2);
@@ -204,7 +204,7 @@ const doubles = numbers.map(x => x * 2);
 console.log(numbers); // [1, 5, 10, 15] (no change)
 console.log(doubles); // [2, 10, 20, 30]
 
-/*
+
 const titles = movies => {
     return movies.map(movie => movie.title);
 };
@@ -236,7 +236,7 @@ const averageRating = movies => {
 };
 
 const ratingSum = movies.map(movie => movie.imdbRating).reduce((acc, value) => acc + value, 0);
-*/
+
 
 const titles = movies => movies.map(movie => movie.title);
 const byNolan = movie => movie.director === "Christopher Nolan";
