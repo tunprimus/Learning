@@ -8,7 +8,7 @@ Write a programme that creates three accounts: one belonging to Sean, another to
 */
 
 class Account {
-    constructor(name, balance, amount) {
+    constructor(name, amount) {
         this.name = name;
         this.balance = 0;
         this.amount = amount;
@@ -23,3 +23,18 @@ class Account {
         return `owner: ${this.name}, balance: ${this.balance}`;
     }
 }
+
+function createAccounts(ownerArray, amountArray) {
+    let accountsArray = [];
+    for (let i = 0; i < ownerArray.length; i++) {
+        let account = new Account(ownerArray[i]);
+        account.balance = account.credit(amountArray[i]);
+        delete account.amount;
+        accountsArray.push(account);
+    }
+    return accountsArray;
+}
+
+console.log(createAccounts(["Sean", "Brad", "Georges"], [1000, 1000, 1000]));
+console.log("\n=======\n");
+console.log(createAccounts(["Connery", "Pitt", "Luke"], [500, 9000, 2000]));
