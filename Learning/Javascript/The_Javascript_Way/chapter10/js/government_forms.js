@@ -27,3 +27,8 @@ const governmentForms = [
     }
 ];
 
+const names = forms => forms.map(form => form.name);
+const filter = (forms, func) => forms.filter(func);
+const endingWithCy = form => form.name.endsWith("cy");
+
+console.log(names(filter(governmentForms, endingWithCy)));
