@@ -221,8 +221,29 @@ console.log("\n=========+=========\n");
 For the sake of fairness, make sure you give each task to both robots, rather than generating different tasks per robot.
 */
 
+/* HINT
+You’ll have to write a variant of the runRobot function that, instead of logging the events to the console, returns the number of steps the robot took to complete the task.
+
+Your measurement function can then, in a loop, generate new states and count the steps each of the robots takes. When it has generated enough measurements, it can use console.log to output the average for each robot, which is the total number of steps taken divided by the number of measurements.
+*/
+
+function stepsCounter(state, robot, memory) {
+    for (let turn = 0;; turn++) {
+        let steps = 0;
+        if (state.parcels.length === 0) {
+            steps = turn;
+            // break;
+            return steps;
+        }
+        let action = robot(state, memory);
+        state = state.move(action.direction);
+        memory = action.memory;
+    }
+}
+
 function compareRobots(robot1, memory1, robot2, memory2) {
-    // Your code here
+    let turnCounter1 = 0;
+    let turnCounter2 = 0;
 }
 
 compareRobots(routeRobot, [], goalOrientedRobot, []);
