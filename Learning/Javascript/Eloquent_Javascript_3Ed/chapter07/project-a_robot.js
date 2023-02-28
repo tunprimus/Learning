@@ -228,7 +228,19 @@ Your measurement function can then, in a loop, generate new states and count the
 */
 
 function stepsCounter(state, robot, memory) {
-    let steps = 0;
+    for (let steps = 0;; steps++) {
+        for (let parcel of state.parcels) {
+            let {place: pickup, address} = parcel;
+        }
+
+        if (state.parcels.length == 0) {
+            return steps;
+        }
+
+        let action = robot(state, memory);
+        state = state.move(action.direction);
+        memory = action.memory;
+    }
 }
 stepsCounter(VillageState.random(), goalOrientedRobot, []);
 console.log("\n=========+=========\n");
@@ -236,6 +248,15 @@ console.log("\n=========+=========\n");
 function compareRobots(robot1, memory1, robot2, memory2) {
     let turnCounter1 = 0;
     let turnCounter2 = 0;
+
+    for (var task = 0; task < 100; task++) {
+        let taskState = VillageState.random();
+
+        turnCounter1 += stepsCounter(taskState, robot1, memory1);
+        turnCounter2 += stepsCounter(taskState, robot2, memory2);
+    }
+    console.log(`Robot 1 took ${task} turns to complete tasks, with an average of ${turnCounter1 / task}.`);
+    console.log(`Robot 2 took ${task} turns to complete tasks, with an average of ${turnCounter2 / task}.`);
 }
 
 compareRobots(routeRobot, [], goalOrientedRobot, []);
