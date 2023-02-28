@@ -33,9 +33,9 @@ function buildGraph(edges) {
 
 // Read-only because of constant declaration and global scope
 const roadGraph = buildGraph(roads);
-/* console.log(roadGraph);
+console.log(roadGraph);
 console.log("\n=========+=========\n");
- */
+
 // Define a virtual world using functional programming and not OOP - robot's current location with parcels current location and destination
 class VillageState {
     constructor(place, parcels) {
@@ -64,12 +64,12 @@ class VillageState {
 let first = new VillageState("Post Office", [{place: "Post Office", address: "Alice's House"}]);
 let next = first.move("Alice's House");
 
-/* 
+
 console.log(next.place); // → Alice's House
 console.log(next.parcels); // → []
 console.log(first.place); // → Post Office
 console.log("\n=========+=========\n");
- */
+
 
 // This helps to reduce complexity by limiting state changes
 let object = Object.freeze({value: 5});
@@ -152,10 +152,10 @@ function routeRobot(state, memory) {
     }
     return {direction: memory[0], memory: memory.slice(1)};
 }
-/* 
+
 runRobot(VillageState.random(), routeRobot, []);
 console.log("\n=========+=========\n");
- */
+
 
 // Pathfinding by searching for the shortest route between the destinations will improve the efficiency of the robot.
 // Places reached first are explored by means of a work list array via evenly crawling web/tree of known routes
@@ -203,10 +203,10 @@ function goalOrientedRobot({place, parcels}, route) {
         // Plot route to pick up parcel, otherwise plot route to deliver it
         if (parcel.place != place) {
             route = findRoute(roadGraph, place, parcel.place);
-            console.log(`Route to PICK UP Parcel 1 at ${parcel.place}: ${route}.`);
+            console.log(`Route to PICK UP Parcel at ${parcel.place}: ${route}.`);
         } else {
             route = findRoute(roadGraph, place, parcel.address);
-            console.log(`Route to DELIVER Parcel 1 to ${parcel.address}: ${route}.`);
+            console.log(`Route to DELIVER Parcel to ${parcel.address}: ${route}.`);
         }
     } else {
         console.log("... Decision: Robot continues to move in the already decided route...");
@@ -260,3 +260,35 @@ function compareRobots(robot1, memory1, robot2, memory2) {
 }
 
 compareRobots(routeRobot, [], goalOrientedRobot, []);
+
+/* Write a robot that finishes the delivery task faster than goalOrientedRobot.
+Use your compareRobots function to verify whether you improved the robot.
+*/
+
+/* HINT
+The main limitation of goalOrientedRobot is that it considers only one parcel at a time. It will often walk back and forth across the village because the parcel it happens to be looking at happens to be at the other side of the map, even if there are others much closer.
+
+One possible solution would be to compute routes for all packages and then take the shortest one. Even better results can be obtained, if there are multiple shortest routes, by preferring the ones that go to pick up a package instead of delivering a package.
+*/
+
+function efficiencyOrientedRobot({place, parcels}, route) {
+    // One should always loop over all the parcels at each place
+    if (route.length == 0) {
+        console.log("... Decision: Robot decides on a new route.\n");
+        // Checks first parcel from its list
+        let parcel = parcels[0];
+        // Plot route to pick up parcel, otherwise plot route to deliver it
+        if (parcel.place != place) {
+            route = findRoute(roadGraph, place, parcel.place);
+            console.log(`Route to PICK UP Parcel at ${parcel.place}: ${route}.`);
+        } else {
+            route = findRoute(roadGraph, place, parcel.address);
+            console.log(`Route to DELIVER Parcel to ${parcel.address}: ${route}.`);
+        }
+    } else {
+        console.log("... Decision: Robot continues to move in the already decided route...");
+    }
+    return {direction: route[0], memory: route.slice(1)};
+}
+runRobot(VillageState.random(), efficiencyOrientedRobot, []);
+console.log("\n=========+=========\n");
