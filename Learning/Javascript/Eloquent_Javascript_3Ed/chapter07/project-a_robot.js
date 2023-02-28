@@ -64,12 +64,12 @@ class VillageState {
 let first = new VillageState("Post Office", [{place: "Post Office", address: "Alice's House"}]);
 let next = first.move("Alice's House");
 
-
+/* 
 console.log(next.place); // → Alice's House
 console.log(next.parcels); // → []
 console.log(first.place); // → Post Office
 console.log("\n=========+=========\n");
-
+ */
 
 // This helps to reduce complexity by limiting state changes
 let object = Object.freeze({value: 5});
@@ -112,6 +112,7 @@ VillageState.random = function(parcelCount = 5) {
     }
     return new VillageState("Post Office", parcels);
 };
+console.log(VillageState.random());
 
 // Robot must look at surrounding state and remember prior events
 function runRobot(state, robot, memory) {
@@ -152,10 +153,10 @@ function routeRobot(state, memory) {
     }
     return {direction: memory[0], memory: memory.slice(1)};
 }
-
+/* 
 runRobot(VillageState.random(), routeRobot, []);
 console.log("\n=========+=========\n");
-
+ */
 
 // Pathfinding by searching for the shortest route between the destinations will improve the efficiency of the robot.
 // Places reached first are explored by means of a work list array via evenly crawling web/tree of known routes
@@ -213,8 +214,10 @@ function goalOrientedRobot({place, parcels}, route) {
     }
     return {direction: route[0], memory: route.slice(1)};
 }
+/* 
 runRobot(VillageState.random(), goalOrientedRobot, []);
 console.log("\n=========+=========\n");
+ */
 
 /* Write a function compareRobots that takes two robots (and their starting memory). It should generate 100 tasks and let each of the robots solve each of these tasks. When done, it should output the average number of steps each robot took per task.
 
@@ -242,9 +245,10 @@ function stepsCounter(state, robot, memory) {
         memory = action.memory;
     }
 }
+/* 
 stepsCounter(VillageState.random(), goalOrientedRobot, []);
 console.log("\n=========+=========\n");
-
+ */
 function compareRobots(robot1, memory1, robot2, memory2) {
     let turnCounter1 = 0;
     let turnCounter2 = 0;
@@ -259,7 +263,9 @@ function compareRobots(robot1, memory1, robot2, memory2) {
     console.log(`Robot 2 took ${task} turns to complete tasks, with an average of ${turnCounter2 / task}.`);
 }
 
+/* 
 compareRobots(routeRobot, [], goalOrientedRobot, []);
+ */
 
 /* Write a robot that finishes the delivery task faster than goalOrientedRobot.
 Use your compareRobots function to verify whether you improved the robot.
@@ -271,24 +277,89 @@ The main limitation of goalOrientedRobot is that it considers only one parcel at
 One possible solution would be to compute routes for all packages and then take the shortest one. Even better results can be obtained, if there are multiple shortest routes, by preferring the ones that go to pick up a package instead of delivering a package.
 */
 
-function efficiencyOrientedRobot({place, parcels}, route) {
-    // One should always loop over all the parcels at each place
+function efficientRobot1({place, parcels}, route) {
     if (route.length == 0) {
-        console.log("... Decision: Robot decides on a new route.\n");
-        // Checks first parcel from its list
-        let parcel = parcels[0];
-        // Plot route to pick up parcel, otherwise plot route to deliver it
-        if (parcel.place != place) {
-            route = findRoute(roadGraph, place, parcel.place);
-            console.log(`Route to PICK UP Parcel at ${parcel.place}: ${route}.`);
-        } else {
-            route = findRoute(roadGraph, place, parcel.address);
-            console.log(`Route to DELIVER Parcel to ${parcel.address}: ${route}.`);
+        console.log("... Decision: Robot decides on new route for every parcel.\n");
+        let routes = parcels.map(parcel => {
+            if (parcel.place != place) {
+                console.log(`Route to PICK UP parcel at ${parcel.place}.`);
+                return {route: findRoute(roadGraph, place, parcel.place), pickUp: true};
+            } else {
+                console.log(`Route to DELIVER parcel to ${parcel.address}.`);
+                return {route: findRoute(roadGraph, place, parcel.address), pickUp: false};
+            }
+        });
+
+        // Give preference to routes that are shorter and have more pickups
+        function weightRoute({route, pickUp}) {
+            return (pickUp ? 0.5 : 0) - route.length;
         }
+        route = routes.reduce((a, b) => weightRoute(a) > weightRoute(b) ? a : b).route;
+        
     } else {
-        console.log("... Decision: Robot continues to move in the already decided route...");
+        console.log("... Decision: Robot continues to move along already decided route...");
     }
     return {direction: route[0], memory: route.slice(1)};
 }
-runRobot(VillageState.random(), efficiencyOrientedRobot, []);
+
+runRobot(VillageState.random(), efficientRobot1, []);
 console.log("\n=========+=========\n");
+
+
+function efficientRobot2({place, parcels}, route) {
+    let shortestRoute = route;
+
+    if (route.length == 0) {
+        let routes = [];
+        const PICK_UP = "Pick Up";
+        const DELIVER = "Delivery";
+
+        for (let parcel of parcels) {
+            if (parcel.place != place) {
+                route = findRoute(roadGraph, place, parcel.place);
+                routes.push({
+                    path: route,
+                    steps: route.length,
+                    actionType: PICK_UP
+                });
+            } else {
+                route = findRoute(roadGraph, place, parcel.address);
+                routes.push({
+                    path: route,
+                    steps: route.length,
+                    actionType: DELIVER
+                });
+            }
+        }
+
+        if (routes.some(route => route.actionType == PICK_UP)) {
+            shortestRoute = routes.filter(route => route.actionType == PICK_UP).reduce((minRoute, route) => {
+                return route.steps < minRoute.steps ? route : minRoute
+            }).path;
+        } else {
+            shortestRoute = routes.reduce((minRoute, route) => {
+                return route.steps < minRoute.steps ? route : minRoute
+            }).path;
+        }
+
+    } else {
+        console.log("... Decision: Robot continues to move along already decided route...");
+    }
+    return {direction: shortestRoute[0], memory: shortestRoute.slice(1)};
+}
+
+runRobot(VillageState.random(), efficientRobot2, []);
+console.log("\n=========+=========\n");
+
+
+compareRobots(goalOrientedRobot, [], efficientRobot2, []);
+console.log("\n=========+=========\n");
+// goalOrientedRobot took 100 turns to complete tasks, with an average of 14.78.
+// efficientRobot1 took 100 turns to complete tasks, with an average of 12.04.
+// goalOrientedRobot took 100 turns to complete tasks, with an average of 15.28.
+// efficientRobot2 took 100 turns to complete tasks, with an average of 11.91.
+
+compareRobots(efficientRobot1, [], efficientRobot2, []);
+console.log("\n=========+=========\n");
+// efficientRobot1 took 100 turns to complete tasks, with an average of 12.18.
+// efficientRobot2 took 100 turns to complete tasks, with an average of 12.19.
