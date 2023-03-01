@@ -99,9 +99,11 @@ function defaultLinks() {
     links.push(new SocialNews("Go Make Things", "gomakethings.com", "Chris Ferdinandi"));
     return links;
 }
+defaultLinks();
 
 /* Function for display */
-function displayStartMenu(defaultLinks) {
+function displayStartMenu() {
+    const links = defaultLinks();
     let option = "";
     do {
         console.log("Type one of the options below.");
@@ -111,7 +113,14 @@ function displayStartMenu(defaultLinks) {
 
         switch(option) {
             case "show":
-                console.log("show");
+                if (links.length > 0) {
+                    for (var i = 0; i < links.length; i++) {
+                        alert(`${i + 1}: ${links[i].describe()}`);
+                    }
+                } else {
+                    alert("No links to show");
+                }
+                // console.log("show");
                 break;
             case "add":
                 console.log("add");
