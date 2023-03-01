@@ -118,14 +118,22 @@ function displayStartMenu() {
                         alert(`${i + 1}: ${links[i].describe()}`);
                     }
                 } else {
-                    alert("No links to show");
+                    alert("No links to show!");
                 }
                 // console.log("show");
                 break;
             case "add":
-                console.log("add");
+                const newLinkTitle = prompt("Enter link title:");
+                const newLinkUrl = prompt("Enter link url:");
+                const newLinkAuthor = prompt("Enter link author:");
+                links.push(new SocialNews(newLinkTitle, newLinkUrl, newLinkAuthor));
+                alert("Link added to list!");
+                // console.log("add");
                 break;
             case "remove":
+                if (links.length <= 0) {
+                    alert("Please enter link author:");
+                }
                 console.log("remove");
                 break;
             case "quit":
