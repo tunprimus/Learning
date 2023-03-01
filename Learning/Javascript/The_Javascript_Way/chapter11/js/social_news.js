@@ -15,7 +15,7 @@
 class SocialNews {
     constructor(title, url, author) {
         this.value = [title, url, author];
-        this.content = [];
+        this.content = [...this.value];
     }
 
     getTitle() {
