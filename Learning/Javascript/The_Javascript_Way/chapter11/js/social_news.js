@@ -16,6 +16,22 @@ class SocialNews {
     constructor(title, url, author) {
         this.value = [title, url, author];
         this.content = [...this.value];
+
+        let absoluteUrl = url;
+
+        if (!absoluteUrl.startsWith("http://") && !absoluteUrl.startsWith("https://")) {
+            absoluteUrl = "http://" + absoluteUrl;
+        }
+
+        this.title = title;
+        this.url = absoluteUrl;
+        this.author = author;
+
+    }
+
+    // Describe the link as a string.
+    describe() {
+        return `${this.title} at ${this.url} by author: ${this.author}`;
     }
 
     getTitle() {
@@ -76,16 +92,21 @@ class SocialNewsIterator {
     }
 }
 
+function defaultLinks() {
+    const links = [];
+    links.push(new SocialNews("JavaScript Classes", "https://www.toolsqa.com/javascript/javascript-classes/", "Arunkumar Chandra"));
+    links.push(new SocialNews("WND", "https://www.wnd.com/", "Joseph Farah"));
+    links.push(new SocialNews("Go Make Things", "gomakethings.com", "Chris Ferdinandi"));
+    return links;
+}
 
 /* Function for display */
-function displayStartMenu() {
+function displayStartMenu(defaultLinks) {
     let option = "";
     do {
         console.log("Type one of the options below.");
-        console.log("show -> Show the list of links");
-        console.log("add -> Add a new link");
-        console.log("remove -> Remove an existing link");
-        console.log("quit -> Leave the programme");
+        console.log("show -> Show the list of links \nadd -> Add a new link \nremove -> Remove an existing link \nquit -> Leave the programme");
+        
         option = prompt("Enter your desired action:");
 
         switch(option) {
