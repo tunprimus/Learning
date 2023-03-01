@@ -13,9 +13,21 @@
 */
 
 class SocialNews {
-    constructor(value) {
-        this.value = value;
+    constructor(title, url, author) {
+        this.value = [title, url, author];
         this.content = [];
+    }
+
+    getTitle() {
+        return this.value[0];
+    }
+
+    getUrl() {
+        return this.value[1];
+    }
+
+    getAuthor() {
+        return this.value[2];
     }
 
     has(value) {
