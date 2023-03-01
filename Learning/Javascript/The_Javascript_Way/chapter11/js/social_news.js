@@ -75,6 +75,7 @@ class SocialNews {
     }
 }
 
+// Iterable class
 class SocialNewsIterator {
     constructor(socialNews) {
         this.socialNews = socialNews;
