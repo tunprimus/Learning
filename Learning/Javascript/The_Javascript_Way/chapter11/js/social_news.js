@@ -111,7 +111,7 @@ function displayStartMenu() {
         
         option = prompt("Enter your desired action:");
 
-        switch(option) {
+        switch (option) {
             case "show":
                 if (links.length > 0) {
                     for (var i = 0; i < links.length; i++) {
@@ -129,15 +129,27 @@ function displayStartMenu() {
                 links.push(new SocialNews(newLinkTitle, newLinkUrl, newLinkAuthor));
                 alert("Link added to list!");
                 // console.log("add");
+                // console.log(links);
                 break;
             case "remove":
-                if (links.length <= 0) {
-                    alert("Please enter link author:");
+                if (links.length < 1) {
+                    alert("Cannot remove from an empty list!");
+                } else {
+                    let index = -1;
+                    const maxIndex = links.length;
+                    do {
+                        index = Number(prompt(`Enter index of link to remove (must be between 1 and ${maxIndex})`));
+                    }
+                    while (index < 1 || index > maxIndex);
+                    links.splice(index - 1, 1);
+                    alert("Link removed successfully!");
                 }
-                console.log("remove");
+                // console.log("remove");
+                // console.log(links);
                 break;
             case "quit":
-                console.log("Have a nice day, bye!");
+                alert("Have a nice day, bye!");
+                // console.log("Have a nice day, bye!");
                 break;
             default:
                 console.log("Unknown option");
