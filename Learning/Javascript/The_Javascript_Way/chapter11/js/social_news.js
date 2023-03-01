@@ -12,6 +12,59 @@
 - Start menu is shown after each action until user quits
 */
 
+class SocialNews {
+    constructor(value) {
+        this.value = value;
+        this.content = [];
+    }
+
+    has(value) {
+        return this.content.includes(value);
+    }
+
+    add(value) {
+        if (!this.has(value)) {
+            this.content.push(value);
+        }
+    }
+
+    delete(value) {
+        if (this.has(value)) {
+            this.content = this.content.filter(item => item !== value);
+        }
+    }
+
+    static from(collection) {
+        let socialNews = new SocialNews;
+        for (let value of collection) {
+            socialNews.add(value);
+        }
+        return socialNews;
+    }
+
+    [Symbol.iterator]() {
+        return new SocialNewsIterator(this);
+    }
+}
+
+class SocialNewsIterator {
+    constructor(socialNews) {
+        this.socialNews = socialNews;
+        this.position = 0;
+    }
+
+    next() {
+        if (this.position >= this.socialNews.content.length) {
+            return {done: true};
+        } else {
+            let result = {value: this.socialNews.content[this.position], done: false};
+            this.position++;
+            return result;
+        }
+    }
+}
+
+
 /* Function for display */
 function displayStartMenu() {
     let option = "";
@@ -23,23 +76,26 @@ function displayStartMenu() {
         console.log("quit -> Leave the programme");
         option = prompt("Enter your desired action:");
 
-        case "show":
-            console.log("show");
-            break;
-        case "add":
-            console.log("add");
-            break;
-        case "remove":
-            console.log("remove");
-            break;
-        case "quit":
-            console.log("Have a nice day, bye!");
-            break;
-        default:
-            console.log("Unknown option");
-            break;
+        switch(option) {
+            case "show":
+                console.log("show");
+                break;
+            case "add":
+                console.log("add");
+                break;
+            case "remove":
+                console.log("remove");
+                break;
+            case "quit":
+                console.log("Have a nice day, bye!");
+                break;
+            default:
+                console.log("Unknown option");
+                break;
+        }
     }
     while (option != "quit");
 }
 
+displayStartMenu();
 

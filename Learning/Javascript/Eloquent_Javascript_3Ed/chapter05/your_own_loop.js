@@ -2,7 +2,7 @@
 When defining the function, you can use a regular loop to do the actual looping.
 */
 
-function higherLoop(start, testFunction, updateFunction,bodyFunction) {
+function higherLoop(start, testFunction, updateFunction, bodyFunction) {
     for (let value = start; testFunction(value); value = updateFunction(value)) {
         bodyFunction(value);
     }
