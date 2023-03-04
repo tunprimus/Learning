@@ -1,0 +1,310 @@
+:root {
+    /* Preferred colours variables */
+    --hotpink: #FF69B4;
+	--hotpink: hsl(330, 100%, 71%);
+    --solarised-magenta: #D33682;
+	--solarised-magenta: hsl(331, 64%, 52%);
+
+    /* Colour themes */
+	/* >>> Building a colour scheme. https://web.dev/building-a-colour-scheme/
+	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-colour-theming/ */
+	--theme-colour-HSL: hsl(...);
+	--theme-colour-h: ...;
+	--theme-colour-s: ...%;
+	--theme-colour-l: ...%;
+
+	--theme-colour: hsl(var(--theme-colour-h), var(--theme-colour-s), var(--theme-colour-l));
+	--lighten-percentage: 20%;
+	--darken-percentage: 15%;
+
+	--theme-colour-background: var(--theme-colour);
+	--theme-colour--light: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + var(--lighten-percentage)));
+	--theme-colour--light-l: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + var(--lighten-percentage)));
+	--theme-colour--light-d: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) + var(--lighten-percentage)));
+
+	--theme-colour--dark: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
+	--theme-colour--dark-l: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) - var(--darken-percentage)));
+	--theme-colour--dark-l: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - var(--darken-percentage)));
+
+	--theme-colour--complement: hsl(calc(var(--theme-colour-h) + 180), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--complement--split1: hsl(calc(var(--theme-colour-h) + 150), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--complement--split2: hsl(calc(var(--theme-colour-h) + 210), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--triad1: hsl(calc(var(--theme-colour-h) + 120), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--triad2: hsl(calc(var(--theme-colour-h) + 240), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--tetrad1: hsl(calc(var(--theme-colour-h) + 90), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--tetrad2: hsl(calc(var(--theme-colour-h) + 180), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--tetrad3: hsl(calc(var(--theme-colour-h) + 270), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--analogue1: hsl(calc(var(--theme-colour-h) + 30), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--analogue2: hsl(calc(var(--theme-colour-h) + 60), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--analogue3: hsl(calc(var(--theme-colour-h) + 90), var(--theme-colour-s), var(--theme-colour-l));
+
+	--light-theme-accent1: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
+	--light-theme-accent2: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - calc(var(--golden-ratio) * var(--lighten-percentage))));
+	--dark-theme-accent1: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + calc(2 * var(--lighten-percentage))));
+	--dark-theme-accent1: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + calc(var(--golden-ratio) * var(--lighten-percentage))));
+
+	--shadow-colour: hsl(var(--theme-colour-h), 60%, 50%);
+	--shadow-start: 1px;
+	--alpha-07: 0.70;
+	--alpha-03: 0.33;
+	--alpha-02: 0.20;
+    
+	/* box-shadow: X-offset Y-offset Blur-size Colour*/
+	--box-shadow1: calc(var(--shadow-start) / 2) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-07));
+
+	--box-shadow2: var(--shadow-start) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-03)), calc(var(--shadow-start) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) hsla(var(--shadow-colour) / var(--alpha-03));
+
+	--box-shadow3: var(--shadow-start) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-02)), calc(var(--shadow-start) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) hsla(var(--shadow-colour) / var(--alpha-02)), calc(var(--shadow-start) * 4) calc(var(--shadow-start) * var(--golden-ratio) * 4) calc(var(--shadow-start) * var(--golden-ratio) * 4) hsla(var(--shadow-colour) / var(--alpha-02));
+
+	/**-- Change contrastThreshold to 50% when L value of colour equals 50% --**/
+	--contrast-threshold: 60%;
+	--switch: calc((var(--theme-colour-l) - var(--contrast-threshold)) * -100);
+	--theme-text-colour: hsl(0, 0%, var(--switch));
+	
+	--text-grey12: hsl(0, 0%, 12%);
+	--text-grey25: hsl(0, 0%, 25%);
+	--text-grey50: hsl(0, 0%, 50%);
+	--text-grey75: hsl(0, 0%, 75%);
+
+	/*-- End of colour themes  --*/
+
+    /* Fonts */
+	--font-stack-title: Garamond, Georgia, Palatino, serif;
+	--font-stack-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Open Sans", "Helvetica Neue", Helvetica, Arial, Poppins, Verdana, Tahoma, sans-serif;
+	--custom-font-size-1: calc(1vw + 1vh + .5vmin);
+	--custom-font-size-2: calc(0.9rem + 1vw);
+	--custom-font-size-3: calc(15px + 0.390625vw);
+	--custom-font-size-4: calc(1rem + ((1vw - 3px) * 0.6173));
+	--custom-font-size-5: calc(1rem + (1.5 - 1) * ((100vw - 21rem) / (35 - 21)));
+	--min-font-size: 16;
+    --max-font-size: 32;
+    --min-viewport-width: 320;
+    --max-viewport-width: 2560;
+    --custom-font-size-6: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
+	min-height: 0vw;
+	--golden-ratio: 1.61803398875;
+	/* >>> Modular scale: https://every-layout.dev/rudiments/modular-scale/ */
+	--fs-5: calc(var(--fs-4) / var(--golden-ratio));
+	--fs-4: calc(var(--fs-3) / var(--golden-ratio));
+	--fs-3: calc(var(--fs-2) / var(--golden-ratio));
+	--fs-2: calc(var(--fs-1) / var(--golden-ratio));
+	--fs-1: calc(var(--fs0) / var(--golden-ratio));
+	--fs0: var(--custom-font-size-N);
+	--fs1: calc(var(--fs0) * var(--golden-ratio));
+	--fs2: calc(var(--fs1) * var(--golden-ratio));
+	--fs3: calc(var(--fs2) * var(--golden-ratio));
+	--fs4: calc(var(--fs3) * var(--golden-ratio));
+	--fs5: calc(var(--fs4) * var(--golden-ratio));
+	/*-- End of fonts --*/
+
+    --grid-min: 20ch;
+	--flex-min: 35rem;
+	--pancake-min: var(--grid-min);
+
+    /* Paddings, Margins, Gaps */
+	--padding-sm: clamp(1rem, 3%, 1.5rem);
+	--padding-md: clamp(1.5rem, 6%, 3rem);
+	--padding-lg: clamp(3rem, 12%, 6rem);
+
+	--margin-sm: min(2rem, 4vh);
+	--margin-md: min(4rem, 8vh);
+	--margin-lg: min(8rem, 16vh);
+
+	--layout-gap-sm: clamp(1rem, 3vmax, 1.5rem);
+	--layout-gap-md: clamp(1.5rem, 6vmax, 3rem);
+	--layout-gap-lg: clamp(3rem, 8vmax, 4rem);
+	/*-- End of paddings, margins and gaps --*/
+
+    /* Inputs */
+	--input-border: var(--text-grey50);
+	--input-focus-h: 245;
+	--input-focus-s: 100%;
+	--input-focus-l: 42%;
+	/*-- End of inputs --*/
+}
+
+/* ------ */
+/* Resets */
+/* ------ */
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+	border: 0;
+	background-repeat: no-repeat;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+html {
+    font-size: var(--custom-font-size-N);
+	scroll-behavior: smooth;
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+html, body {
+	height: 100%;
+	min-height: 100%;
+}
+
+body {
+	min-height: 100vh;
+	line-height: var(--golden-ratio);
+	line-height: calc(3px + 2.5ex + 3px);
+	line-height: calc(1.618 - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
+	-webkit-font-smoothing: antialiased;
+	color: var(--theme-text-colour);
+}
+
+p {
+	max-width: 65ch;
+}
+
+/* HTML5 blocks - needed in older browsers */
+article, aside, figcaption, figure, footer, header, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+	list-style-position: unset;
+}
+
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+	text-decoration: none;
+	color: inherit;
+	display: inline-block;
+	background-color: transparent;
+}
+
+img, picture, video, iframe, canvas, object, embed, svg  {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border-style: none;
+}
+
+svg {
+	fill: currentColor;
+}
+
+input, button, textarea, optgroup, select {
+	font: inherit;
+	font-size: 100%;
+	vertical-align: middle;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+}
+
+input[type="button"] {
+	cursor: pointer;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+    font-size: 16px;
+}
+
+button {
+	border: none;
+	border-radius: 0.4rem;
+	font-family: inherit;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+p, li, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+	hyphens: auto;
+	font-weight: 400;
+}
+
+sup, sub {
+	line-height: 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+textarea {
+	resize: vertical;
+}
+
+/* For frameworks */
+#root,
+#__next {
+	isolation: isolate;
+}
+
+/*-- End of Resets --*/
+
+/*---------*/
+/* CLASSES */
+/*---------*/
+
+.container {
+	width: min(100vw - 3rem, var(--container-max, 80ch));
+	margin-inline: auto;
+}
+
+
+
+/* To hide */
+.offscreen, .sr-only, .visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip-path: inset(50%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+/*-- End of classes --*/
+
+
+/* ------------- */
+/* Media Queries */
+/* ------------- */
+/* Tablet portrait only */
+@media (min-width: 600px) and (max-width: 899px) {}
+/* Tablet landscape only */
+@media (min-width: 900px) and (max-width: 1199px) {}
+/* Desktop only */
+@media (min-width: 1200px) and (max-width: 1799px) {}
+/* Big desktop upwards */
+@media (min-width: 1200px) {}
+
+/* Prevent scaling beyond this breakpoint */
+@media (min-width: 1800px) {
+	:root {
+		font-size: 32px;
+	}
+}
+
+/*-- End of Media Queries --*/
