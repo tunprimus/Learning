@@ -2,16 +2,20 @@
     /* Preferred colours variables */
     --hotpink: #FF69B4;
 	--hotpink: hsl(330, 100%, 71%);
+	--orange: #FFA500;
+	--orange: hsl(39, 100%, 50%);
+	--solarised-black: #073672;
+	--solarised-black: hsl(214, 88%, 24%);
     --solarised-magenta: #D33682;
 	--solarised-magenta: hsl(331, 64%, 52%);
 
     /* Colour themes */
 	/* >>> Building a colour scheme. https://web.dev/building-a-colour-scheme/
 	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-colour-theming/ */
-	--theme-colour-HSL: hsl(...);
-	--theme-colour-h: ...;
-	--theme-colour-s: ...%;
-	--theme-colour-l: ...%;
+	--theme-colour-HSL: hsl(214, 88%, 24%);
+	--theme-colour-h: 214;
+	--theme-colour-s: 88%;
+	--theme-colour-l: 24%;
 
 	--theme-colour: hsl(var(--theme-colour-h), var(--theme-colour-s), var(--theme-colour-l));
 	--lighten-percentage: 20%;
@@ -142,7 +146,7 @@
 }
 
 html {
-    font-size: var(--custom-font-size-N);
+    font-size: var(--custom-font-size-6);
 	scroll-behavior: smooth;
 	text-rendering: optimizeLegibility;
 	-webkit-text-size-adjust: 100%;
@@ -161,6 +165,7 @@ body {
 	line-height: calc(3px + 2.5ex + 3px);
 	line-height: calc(1.618 - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
 	-webkit-font-smoothing: antialiased;
+	background-color: var(--theme-colour);
 	color: var(--theme-text-colour);
 }
 
@@ -267,6 +272,15 @@ textarea {
 .container {
 	width: min(100vw - 3rem, var(--container-max, 80ch));
 	margin-inline: auto;
+}
+
+.main {
+	background-color: var(--orange);
+	max-width: 95%;
+	max-height: 90%;
+	padding: 0.5rem;
+	border: 2px solid black;
+	color: var(--text-grey12);
 }
 
 
