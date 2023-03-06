@@ -271,19 +271,76 @@ textarea {
 
 .container {
 	width: min(100vw - 3rem, var(--container-max, 80ch));
-	margin-inline: auto;
+	/* margin-inline: auto; */
 }
 
 .main {
 	background-color: var(--orange);
 	max-width: 95%;
 	max-height: 90%;
+	margin: 1rem;
 	padding: 0.5rem;
 	border: 2px solid black;
 	color: var(--text-grey12);
 }
 
+.h1 {
+	margin: 0.5rem auto;
+	padding: 0.5rem auto;
+	color: #00539F;
+	font-size: var(--fs5);
+	text-align: center;
+	text-shadow: var(--box-shadow1);
+	font-weight: 700;
+}
 
+p,
+li {
+	font-size: var(--fs0);
+	letter-spacing: 1px;
+}
+
+.image {
+	display: block;
+	margin: 0 auto;
+}
+
+.lists {
+	padding-left: 0;
+	margin-bottom: 2rem;
+}
+
+.lists li {
+	list-style: none;
+	position: relative;
+	padding-left: 2rem;
+	margin-bottom: 1rem;
+}
+
+.lists li::before {
+	content: "✔";
+	position: absolute;
+	width: 1.2rem;
+	height: 1.2rem;
+	left: 1.2rem;
+	top: 0;
+	transform: translateX(-50%);
+	background-color: #000000;
+	color: #FFFFFF;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1rem !important;
+}
+
+.links {
+	text-decoration: underline;
+	font-size: var(--fs-3);
+	background-color: var(--solarised-black);
+	color: var(--theme-colour--triad1);
+	border-bottom: 2px dotted var(--solarised-black);
+}
 
 /* To hide */
 .offscreen, .sr-only, .visually-hidden {
