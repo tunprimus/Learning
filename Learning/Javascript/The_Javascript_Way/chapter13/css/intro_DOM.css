@@ -1,0 +1,15 @@
+:root {
+    --bg-colour: hsl(197, 71%, 73%);
+    --golden-ratio: 1.618;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    background-color: var(--bg-colour);
+    line-height: var(--golden-ratio);
+}
