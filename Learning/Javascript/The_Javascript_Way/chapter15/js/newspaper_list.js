@@ -4,24 +4,16 @@
 // Newspaper list
 const newspapers = ["https://www.nytimes.com", "https://www.washingtonpost.com", "http://www.economist.com"];
 
-/* 
-const linkNodes = newspapers.forEach(newspaper => {
+// Create object from div and loop over that
+const divElement = document.getElementById("content");
+
+// Use forEach to iterate over the array
+newspapers.forEach(newspaper => {
     const linkElement = document.createElement("a");
-    // console.log(newspaper);
-    console.log(linkElement.innerHTML = newspaper);
-    return linkElement.innerHTML = newspaper;
+    // Adds links
+    linkElement.href = newspaper;
+    // Makes links visible
+    linkElement.textContent = newspaper;
+    // Attach to page; <br> necessary to separate items
+    divElement.appendChild(linkElement).appendChild(document.createElement("br"));
 });
- */
-
-function linkNodes() {
-    newspapers.forEach(newspaper => {
-    const linkElement = document.createElement("a");
-    // console.log(newspaper);
-    // console.log(linkElement.innerHTML = newspaper);
-    return linkElement.innerHTML = newspaper;
-    });
-}
-
-linkNodes();
-
-document.getElementById("content").appendChild(linkNodes());
