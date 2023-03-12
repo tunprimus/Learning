@@ -1,4 +1,4 @@
-// Complete the following program to write the countElements() function, that takes a CSS selector as a parameter and returns the number of corresponding elements.
+// Complete the following programme to write the countElements() function, that takes a CSS selector as a parameter and returns the number of corresponding elements.
 
 function countElements(attr) {
     if (document.querySelectorAll(attr) !== null) {
