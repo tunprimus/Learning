@@ -16,11 +16,12 @@ document.addEventListener("keypress", event => {
         console.error("Invalid keypress");
     }
     // return backgroundColour;
+    /* 
+    const divElements = Array.from(document.getElementsByTagName("div"));
+ */
+    const divElements = Array.from(document.querySelectorAll("div"));
+
+    divElements.forEach(item => {
+        item.style.backgroundColor = backgroundColour;
+    });
 });
-
-const divElements = Array.from(document.getElementsByTagName("div"));
-
-divElements.forEach(item => {
-    item.style.backgroundColor = backgroundColour;
-});
-
