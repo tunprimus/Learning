@@ -8,6 +8,8 @@ document.addEventListener("keypress", event => {
     
     if (code === "red" || code === "R" || code === "r") {
         backgroundColour = "red";
+    } else if (code === "yellow" || code === "Y" || code === "y") {
+        backgroundColour = "yellow";
     } else if (code === "green" || code === "G" || code === "g") {
         backgroundColour = "green";
     } else if (code === "blue" || code === "B" || code === "b") {
