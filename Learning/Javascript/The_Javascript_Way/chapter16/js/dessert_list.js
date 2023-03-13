@@ -12,3 +12,7 @@ Bonus points for adding the possibility of changing a dessert’s name when clic
 const addBtnElement = document.getElementById("addButton");
 
 const listsElement = document.getElementById("desserts");
+
+let dessertName = "";
+
+const getDessertName = () => {};
