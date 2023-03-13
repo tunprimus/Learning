@@ -9,10 +9,18 @@ Bonus points for adding the possibility of changing a dessert’s name when clic
 - add event listener to to generated list
 */
 
-const addBtnElement = document.getElementById("addButton");
+// Refactor to use closure property
+// const addBtnElement = document.getElementById("addButton");
 
-const listsElement = document.getElementById("desserts");
+document.getElementById("addButton").addEventListener("click", () => {
+    const listsElement = document.getElementById("desserts");
+    const dessertElement = document.createElement("li");
 
-let dessertName = "";
-
-const getDessertName = () => {};
+    const dessertName = prompt("What is your dessert name?");
+    
+    /* let none = addBtnElement.addEventListener("click", () => {
+        prompt("What is your dessert name?");
+    }); */
+    dessertElement.textContent = dessertName;
+    listsElement.appendChild(dessertElement);
+});
