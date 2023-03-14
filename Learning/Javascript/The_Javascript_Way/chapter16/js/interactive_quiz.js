@@ -16,6 +16,26 @@ const questions = [
     }
 ];
 
+const quizElement = document.getElementById("content");
+const dlElement = document.createElement("dl");
+
 questions.forEach(item => {
-    const quizElement = document.getElementById("content");
+    const dtElement = document.createElement("dt");
+    const strongElement = document.createElement("strong");
+    strongElement.innerHTML = item.statement;
+    const ddElement = document.createElement("dd");
+    const btnElement = document.createElement("button");
+    btnElement.textContent = "Show answer";
+    ddElement.appendChild(btnElement);
+    // ddElement.innerHTML = item.answer;
+    ddElement.addEventListener("click", () => {
+        ddElement.innerHTML = item.answer;
+    });
+
+    dtElement.appendChild(strongElement);
+    dlElement.appendChild(dtElement);
+    dlElement.appendChild(ddElement);
 });
+
+// Add to the parent on the document
+quizElement.appendChild(dlElement);
