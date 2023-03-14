@@ -19,15 +19,18 @@ const questions = [
 const quizElement = document.getElementById("content");
 const dlElement = document.createElement("dl");
 
+let i = 1;
 questions.forEach(item => {
     const dtElement = document.createElement("dt");
     const strongElement = document.createElement("strong");
-    strongElement.innerHTML = item.statement;
+    strongElement.textContent = `Question ${i}: `;
+    strongElement.innerHTML += item.statement;
+    
     const ddElement = document.createElement("dd");
     const btnElement = document.createElement("button");
     btnElement.textContent = "Show answer";
     ddElement.appendChild(btnElement);
-    // ddElement.innerHTML = item.answer;
+    
     ddElement.addEventListener("click", () => {
         ddElement.innerHTML = item.answer;
     });
@@ -35,6 +38,8 @@ questions.forEach(item => {
     dtElement.appendChild(strongElement);
     dlElement.appendChild(dtElement);
     dlElement.appendChild(ddElement);
+    
+    i++;
 });
 
 // Add to the parent on the document
