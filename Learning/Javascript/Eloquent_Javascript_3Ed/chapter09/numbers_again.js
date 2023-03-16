@@ -3,7 +3,7 @@ Also note that it is not necessary for there to be digits in front of or after t
 be a dot alone. That is, .5 and 5. are valid JavaScript numbers, but a lone dot isn’t.
 */
 
-let numRegExp = /^[+|-]?.\d+[e|-|E\d+]?$/;
+let numRegExp = /^[+\-]?(\d+(\.\d*)?|\.\d+)([eE][+\-]?\d+)?$/;
 
 // Tests:
 for (let str of ["1", "-1", "+15", "1.55", ".5", "5.", "1.3e2", "1E-4", "1e+12"]) {
