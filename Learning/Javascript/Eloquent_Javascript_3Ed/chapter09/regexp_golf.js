@@ -1,32 +1,32 @@
 // Fill in the regular expressions
 
-verify(/.../,
-       ["my car", "bad cats"],
-       ["camper", "high art"]);
+verify(/(ca[rt])/,
+        ["my car", "bad cats"],
+        ["camper", "high art"]);
 
-verify(/.../,
-       ["pop culture", "mad props"],
-       ["plop", "prrrop"]);
+verify(/pr?op/,
+        ["pop culture", "mad props"],
+        ["plop", "prrrop"]);
 
-verify(/.../,
-       ["ferret", "ferry", "ferrari"],
-       ["ferrum", "transfer A"]);
+verify(/ferr(y|et|ari)/,
+        ["ferret", "ferry", "ferrari"],
+        ["ferrum", "transfer A"]);
 
-verify(/.../,
-       ["how delicious", "spacious room"],
-       ["ruinous", "consciousness"]);
+verify(/ious\b/,
+        ["how delicious", "spacious room"],
+        ["ruinous", "consciousness"]);
 
-verify(/.../,
-       ["bad punctuation ."],
-       ["escape the period"]);
+verify(/\s[.,:;]/,
+        ["bad punctuation ."],
+        ["escape the period"]);
 
-verify(/.../,
-       ["Siebentausenddreihundertzweiundzwanzig"],
-       ["no", "three small words"]);
+verify(/\w{7,}/,
+        ["Siebentausenddreihundertzweiundzwanzig"],
+        ["no", "three small words"]);
 
-verify(/.../,
-       ["red platypus", "wobbling nest"],
-       ["earth bed", "learning ape", "BEET"]);
+verify(/\b[^\We]+\b/i,
+        ["red platypus", "wobbling nest"],
+        ["earth bed", "learning ape", "BEET"]);
 
 
 function verify(regexp, yes, no) {
