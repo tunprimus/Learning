@@ -96,9 +96,9 @@
     }
 
     class Node {
-        constructor(name, neighbors, network, storage) {
+        constructor(name, neighbours, network, storage) {
             this.name = name;
-            this.neighbors = neighbors;
+            this.neighbours = neighbours;
             this[$network] = network;
             this.state = Object.create(null);
             this[$storage] = storage;
@@ -106,7 +106,7 @@
 
         send(to, type, message, callback) {
             let toNode = this[$network].nodes[to];
-            if (!toNode || !this.neighbors.includes(to))
+            if (!toNode || !this.neighbours.includes(to))
                 return callback(new Error(`${to} is not reachable from ${this.name}`));
             let handler = this[$network].types[type];
             if (!handler) return callback(new Error("Unknown request type " + type));
