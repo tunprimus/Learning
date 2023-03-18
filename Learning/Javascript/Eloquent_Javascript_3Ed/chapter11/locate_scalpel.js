@@ -4,13 +4,36 @@ Next, write the same function again without using async and await.
 Do request failures properly show up as rejections of the returned promise in both versions? How?
 */
 
+var bigOak = require("./crow-tech").bigOak;
+
+"use strict";
+
 async function locateScalpel(nest) {
-    // Your code here.
+    let currentLocation = nest.name;
+    // Attempt to reach every nest in the network graph with an infinite loop
+    for (;;) {
+        // AnyStorage function keeps making route request until there is a match
+        let nextLocation = await anyStorage(nest, currentLocation, "scalpel");
+        if (nextLocation == currentLocation) {
+            return currentLocation;
+        }
+        currentLocation = nextLocation;
+    }
 }
 
 function locateScalpel2(nest) {
-    // Your code here.
+    // A loop that makes recursive calls
+    function loop(currentLocation) {
+        return anyStorage(nest, currentLocation, "scalpel").then(nextLocation => {
+            if (nextLocation == currentLocation) {
+                return currentLocation;
+            } else {
+                return loop(nextLocation);
+            }
+        });
+    }
+    return loop(nest.name);
 }
 
 locateScalpel(bigOak).then(console.log); // → Butcher Shop
-
+locateScalpel2(bigOak).then(console.log); // → Butcher's Shop
