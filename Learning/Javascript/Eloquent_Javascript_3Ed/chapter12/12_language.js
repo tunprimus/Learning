@@ -1,5 +1,5 @@
 /* Example codes given in the book chapter
- */
+*/
 
 function parseExpression(programme) {
     // Skips any leading space
