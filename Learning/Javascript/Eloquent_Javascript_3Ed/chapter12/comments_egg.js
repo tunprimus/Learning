@@ -5,9 +5,9 @@ this. We can simply change skipSpace to skip comments as if they are whitespace 
 
 // This is the old skipSpace. Modify it...
 function skipSpace(string) {
-    let first = string.search(/^(\S|#)/);
-    if (first == -1) return "";
-    return string.slice(first);
+    // Need to match any number of beginning spaces of # characters with all the subsequent characters on that line
+    let toSkip = string.match(/^(\s|#.*)*/);
+    return string.slice(toSkip[0].length);
 }
 
 console.log(parse("# hello\nx"));
