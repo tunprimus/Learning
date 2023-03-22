@@ -83,3 +83,30 @@ function elt(type, ...children) {
 }
 
 document.getElementById("quote").appendChild(elt("footer", "-", elt("strong", "Karl Popper"), ", preface to the second edition of ", elt("em", "The Open Society and Its Enemies"),", 1950"));
+
+
+/* Attributes */
+
+// One can create custom attributes for a node and use getAttribute and setAttribute methods to manipulate them
+
+let paras = document.body.getElementsByTagName("p");
+for (let para of Array.from(paras)) {
+    if (para.getAttribute("data-classified") === "secret") {
+        para.remove();
+    }
+}
+
+// Prefix such custom attributes with "data-"
+
+
+/* Layout */
+
+// offsetWidth and offsetHeight properties give the space taken up by an element in pixels
+// clientWidth and clientHeight properties give the space inside the element, ignoring border width
+
+// let para = document.body.getElementsByTagName("p")[0];
+let para = document.body.getElementsByTagName("p")[10];
+console.log("clientHeight:", para.clientHeight);
+console.log("offsetHeight:", para.offsetHeight);
+// console.log(para.length);
+
