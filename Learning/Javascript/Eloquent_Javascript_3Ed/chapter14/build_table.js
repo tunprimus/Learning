@@ -33,24 +33,37 @@ const MOUNTAINS = [
 
 const divElement = document.getElementById("mountains");
 
-const tableElement = document.createElement("table");
 
+/* 
 const trElement = document.createElement("tr");
 const thElement = document.createElement("th");
 const tdElement = document.createElement("td");
+ */
 
-thElement.innerHTML += "name\t" + "height\t" + "place\t" + "\n";
 
-tableElement.appendChild(thElement);
+/* Better to create a function that will contain most of the logic */
 
-MOUNTAINS.forEach(mountain => {
-    tdElement.innerHTML += mountain.name + "\t";
-    tdElement.innerHTML += mountain.height + "\t";
-    tdElement.innerHTML += mountain.place + "\t";
+function createTable(data) {
+    // Create a new table element
+    const tableElement = document.createElement("table");
 
-    trElement.appendChild(tdElement);
-    // tableElement.appendChild(trElement);
-});
+    // Need to create headers separate from rest of the data
+    // This can be done statically or dynamically
+    // Dynamic approach will need to get keys from 1st object for labels
+    const headerFields = Object.keys(data[0]);
+    console.log(headerFields);
 
-tableElement.appendChild(trElement);
-divElement.appendChild(tableElement);
+    // Create a header row element and add the fields to it
+    const headerRow = document.createElement("tr");
+    headerFields.forEach(function (headerField) {
+        const headerCell = document.createElement("th");
+        headerCell.appendChild(document.createTextNode(headerField));
+        headerRow.appendChild(headerCell);
+    });
+    tableElement.appendChild(headerRow);
+    console.log(tableElement);
+    
+}
+
+// tableElement.appendChild(trElement);
+divElement.appendChild(createTable(MOUNTAINS));
