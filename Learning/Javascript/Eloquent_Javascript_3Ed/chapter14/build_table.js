@@ -63,14 +63,20 @@ function createTable(data) {
     tableElement.appendChild(headerRow);
     
     // Create the body in a similar way
-    const bodyRow = document.createElement("tr");
+    // const bodyRow = document.createElement("tr");
     MOUNTAINS.forEach(mountain => {
+        const bodyRow = document.createElement("tr");
         const tdElement = document.createElement("td");
-        tdElement.appendChild(document.createTextNode(mountain.name));
-        tdElement.appendChild(document.createTextNode(mountain.height));
-        tdElement.appendChild(document.createTextNode(mountain.place));
-        console.log(tdElement);
+        let i = 0;
+        let mountainValues = Object.values(mountain);
+        while (i < mountainValues.length) {
+            tdElement.appendChild(document.createTextNode(mountainValues[i]));
+            i++;
+        }
+        bodyRow.appendChild(tdElement);
+        tableElement.appendChild(bodyRow);
     });
+    // tableElement.appendChild(bodyRow);
     
     // Return table object for browser rendering
     return tableElement;
