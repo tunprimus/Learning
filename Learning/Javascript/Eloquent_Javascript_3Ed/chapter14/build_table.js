@@ -35,26 +35,24 @@ const divElement = document.getElementById("mountains");
 
 const tableElement = document.createElement("table");
 
+const trElement = document.createElement("tr");
+const thElement = document.createElement("th");
+const tdElement = document.createElement("td");
+
+thElement.innerHTML += "name\t" + "height\t" + "place\t" + "\n";
+
+tableElement.appendChild(thElement);
+
 MOUNTAINS.forEach(mountain => {
-    const trElement = document.createElement("tr");
-    const thElement = document.createElement("th");
-    const tdElement = document.createElement("td");
 
-    /* 
-    let i = 0;
-    while (i < ((Object.keys(mountain)).length)) {
-        tdElement.innerHTML += mountain.name;
-        tdElement.innerHTML += mountain.height;
-        tdElement.innerHTML += mountain.place;
-        i++;
-    } */
-
-    tdElement.innerHTML += mountain.name;
-    tdElement.innerHTML += mountain.height;
-    tdElement.innerHTML += mountain.place;
+    tdElement.innerHTML += mountain.name + "\t";
+    tdElement.innerHTML += mountain.height + "\t";
+    tdElement.innerHTML += mountain.place + "\t";
+    tdElement.innerHTML += "\n";
 
     trElement.appendChild(tdElement);
-    tableElement.appendChild(trElement);
+    trElement.appendChild(document.createTextNode("\n"));
+    // tableElement.appendChild(trElement);
 });
-
+tableElement.appendChild(trElement);
 divElement.appendChild(tableElement);
