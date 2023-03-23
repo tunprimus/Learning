@@ -151,3 +151,25 @@ console.log(count("p"));
 console.log(count(".animal")); // → 2
 console.log(count("p .animal")); // → 2
 console.log(count("p > .animal")); // → 1
+
+/* Positioning and Animating */
+
+// Changing the position property from (default) `static` through `relative` to `absolute` allows animation
+// let cat = document.querySelector("img");
+let cat = document.querySelectorAll("img")[3];
+/* console.log(cat);
+console.log(cat.length); */
+let angle = Math.PI / 2;
+
+function animate(time, lastTime) {
+    if (lastTime != null) {
+        // This prevents stuttering - even with heavy CPU usage
+        angle += (time - lastTime) * 0.001;
+    }
+    // y-coordinate with unit
+    cat.style.top = (Math.sin(angle) * 20) + "px";
+    // x-coordinate with unit
+    cat.style.left = (Math.cos(angle) * 200) + "px";
+    requestAnimationFrame(newTime => animate(newTime, time));
+}
+requestAnimationFrame(animate);
