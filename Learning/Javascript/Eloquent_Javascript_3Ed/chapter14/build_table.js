@@ -44,14 +44,13 @@ thElement.innerHTML += "name\t" + "height\t" + "place\t" + "\n";
 tableElement.appendChild(thElement);
 
 MOUNTAINS.forEach(mountain => {
-    `<tr>
     tdElement.innerHTML += mountain.name + "\t";
     tdElement.innerHTML += mountain.height + "\t";
     tdElement.innerHTML += mountain.place + "\t";
 
     trElement.appendChild(tdElement);
     // tableElement.appendChild(trElement);
-    </tr>`
 });
+
 tableElement.appendChild(trElement);
 divElement.appendChild(tableElement);
