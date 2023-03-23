@@ -61,7 +61,16 @@ function createTable(data) {
         headerRow.appendChild(headerCell);
     });
     tableElement.appendChild(headerRow);
-    console.log(tableElement);
+    
+    // Create the body in a similar way
+    const bodyRow = document.createElement("tr");
+    MOUNTAINS.forEach(mountain => {
+        const tdElement = document.createElement("td");
+        tdElement.appendChild(document.createTextNode(mountain.name));
+        tdElement.appendChild(document.createTextNode(mountain.height));
+        tdElement.appendChild(document.createTextNode(mountain.place));
+        console.log(tdElement);
+    });
     
     // Return table object for browser rendering
     return tableElement;
