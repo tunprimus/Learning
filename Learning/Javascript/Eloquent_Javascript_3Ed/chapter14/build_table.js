@@ -63,6 +63,8 @@ function createTable(data) {
     tableElement.appendChild(headerRow);
     console.log(tableElement);
     
+    // Return table object for browser rendering
+    return tableElement;
 }
 
 // tableElement.appendChild(trElement);
