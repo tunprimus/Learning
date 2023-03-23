@@ -51,7 +51,7 @@ function createTable(data) {
     // This can be done statically or dynamically
     // Dynamic approach will need to get keys from 1st object for labels
     const headerFields = Object.keys(data[0]);
-    console.log(headerFields);
+    // console.log(headerFields);
 
     // Create a header row element and add the fields to it
     const headerRow = document.createElement("tr");
@@ -62,19 +62,20 @@ function createTable(data) {
     });
     tableElement.appendChild(headerRow);
     
-    // Create the body in a similar way but with a double loop
-    // const bodyRow = document.createElement("tr");
+    // Create the body in a similar way but MUST be with a double loop
     MOUNTAINS.forEach(mountain => {
         const bodyRow = document.createElement("tr");
         for (const key in mountain) {
             const tdElement = document.createElement("td");
             tdElement.innerHTML = mountain[key];
+            if (typeof mountain[key] === "number") {
+                tdElement.style.textAlign = "right";
+            }
             bodyRow.appendChild(tdElement);
         }
         // bodyRow.appendChild(tdElement);
         tableElement.appendChild(bodyRow);
     });
-    // tableElement.appendChild(bodyRow);
     
     // Return table object for browser rendering
     return tableElement;
