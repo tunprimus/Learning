@@ -110,3 +110,33 @@ console.log("clientHeight:", para.clientHeight);
 console.log("offsetHeight:", para.offsetHeight);
 // console.log(para.length);
 
+// The getBoundingClientRect method is most effective for precise position determination - it returns an object with top, bottom, left and right properties.
+
+// Function to force DOM re-rendering
+function time(name, action) {
+    let start = Date.now();
+    action();
+    console.log(name, "took", Date.now() - start, "ms");
+}
+
+time("naive", () => {
+    let target = document.getElementById("one");
+    while (target.offsetWidth < 2000) {
+        target.appendChild(document.createTextNode("X"));
+    }
+}); // -> naive took 46 ms
+
+time("clever", function() {
+    let target = document.getElementById("two");
+    target.appendChild(document.createTextNode("XXXXX"));
+    let total = Math.ceil(2000 / (target.offsetWidth / 5));
+    target.firstChild.nodeValue = "X".repeat(total);
+}); // -> clever took 1 ms
+
+
+/* Styling */
+
+// Modify the style property of an element
+let para2 = document.getElementById("para");
+console.log(para2.style.color);
+para2.style.color = "magenta";
