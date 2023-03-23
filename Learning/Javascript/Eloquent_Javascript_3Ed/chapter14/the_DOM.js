@@ -140,3 +140,14 @@ time("clever", function() {
 let para2 = document.getElementById("para");
 console.log(para2.style.color);
 para2.style.color = "magenta";
+
+/* Query Selector */
+
+// querySelectorAll can be used on both document object / element nodes and returns a nodeList (need Array.from). Also, it is not `live`.
+function count(selector) {
+    return document.querySelectorAll(selector).length;
+}
+console.log(count("p"));
+console.log(count(".animal")); // → 2
+console.log(count("p .animal")); // → 2
+console.log(count("p > .animal")); // → 1
