@@ -11,3 +11,12 @@ body {
     background: blue;
     position: absolute;
 }
+
+dot {
+    position: absolute;
+    display: block;
+    border: 2px solid red;
+    border-radius: 50px;
+    height: 100px;
+    width: 100px;
+}
