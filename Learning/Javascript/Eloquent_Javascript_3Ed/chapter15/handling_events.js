@@ -79,3 +79,22 @@ link.addEventListener("click", event => {
 
 
 /* Key Events */
+
+// Using the "keydown" and "keyup" events
+window.addEventListener("keydown", event => {
+    if (event.key === "v") {
+        document.body.style.background = "violet";
+    }
+});
+window.addEventListener("keyup", event => {
+    if (event.key === "v") {
+        document.body.style.background = "";
+    }
+});
+
+// Monitoring for modifier keys
+window.addEventListener("keydown", event => {
+    if (event.key === " " && event.ctrlKey) {
+        console.log("Continuing!");
+    }
+});
