@@ -98,3 +98,45 @@ window.addEventListener("keydown", event => {
         console.log("Continuing!");
     }
 });
+
+
+/* Pointer Events */
+
+/* Mouse Clicks */
+// Primitive drawing programme based on mouse click
+/* 
+window.addEventListener("click", event => {
+    let dot = document.createElement("div");
+    dot.className = "dot";
+    dot.style.left = (event.pageX - 4) + "px";
+    dot.style.top = (event.pageY - 4) + "px";
+    document.body.appendChild(dot);
+});
+ */
+
+/* Mouse Motion */
+// Using mouse motion
+// Tracks the last observed mouse X position
+let lastX;
+let bar = document.querySelector("div");
+
+bar.addEventListener("mousedown", event => {
+    if (event.button === 0) {
+        lastX = event.clientX;
+        window.addEventListener("mousemove", moved);
+        // Prevents selection
+        event.preventDefault();
+    }
+});
+
+function moved(event) {
+    if (event.buttons === 0) {
+        window.removeEventListener("mousemove", moved);
+    } else {
+        let dist = event.clientX - lastX;
+        let newWidth = Math.max(10, bar.offsetWidth + dist);
+        bar.style.width = newWidth + "px";
+        lastX = event.clientX;
+    }
+};
+
