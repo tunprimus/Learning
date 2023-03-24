@@ -168,5 +168,6 @@ document.body.appendChild(document.createTextNode("supercalifragilisticexpialido
 let bar2 = document.querySelector("#progress");
 window.addEventListener("scroll", () => {
     let max = document.body.scrollHeight - innerHeight;
-    bar2.style.width = `${(pageYOffset / max) * 100}%`;
+    // bar2.style.width = `${(pageYOffset / max) * 100}%`;
+    bar2.style.width = `${(scrollY / max) * 100}%`;
 });
