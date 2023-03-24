@@ -160,3 +160,13 @@ function update(event) {
     window.addEventListener("touchend", update);
 }
 
+/* Scroll Events */
+
+// Create some content
+document.body.appendChild(document.createTextNode("supercalifragilisticexpialidocious ".repeat(1000)));
+
+let bar2 = document.querySelector("#progress");
+window.addEventListener("scroll", () => {
+    let max = document.body.scrollHeight - innerHeight;
+    bar2.style.width = `${(pageYOffset / max) * 100}%`;
+});
