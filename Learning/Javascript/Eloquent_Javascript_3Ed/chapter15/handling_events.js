@@ -59,3 +59,10 @@ button4.addEventListener("mousedown", event => {
         event.stopPropagation();
     }
 });
+
+// Using the target property of event object
+document.body.addEventListener( "click", event => {
+    if (event.target.nodeName === "BUTTON") {
+        console.log("Clicked", event.target.textContent);
+    }
+});
