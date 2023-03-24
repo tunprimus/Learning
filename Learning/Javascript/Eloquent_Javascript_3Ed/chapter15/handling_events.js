@@ -66,3 +66,16 @@ document.body.addEventListener( "click", event => {
         console.log("Clicked", event.target.textContent);
     }
 });
+
+
+/* Default Actions */
+
+// Prevent default actions
+let link = document.querySelector("a");
+link.addEventListener("click", event => {
+    console.log("Nope.");
+    event.preventDefault();
+});
+
+
+/* Key Events */
