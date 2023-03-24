@@ -162,6 +162,7 @@ function update(event) {
 
 /* Scroll Events */
 
+/* 
 // Create some content
 document.body.appendChild(document.createTextNode("supercalifragilisticexpialidocious ".repeat(1000)));
 
@@ -171,3 +172,20 @@ window.addEventListener("scroll", () => {
     // bar2.style.width = `${(pageYOffset / max) * 100}%`;
     bar2.style.width = `${(scrollY / max) * 100}%`;
 });
+ */
+
+/* Focus Events */
+// "focus", "blur" and "scroll" events do not propagate
+let help = document.querySelector('#help');
+let fields = document.querySelectorAll("input");
+for (let field of Array.from(fields)) {
+    field.addEventListener("focus", event => {
+        let text = event.target.getAttribute("data-help");
+        help.textContent = text;
+    });
+    field.addEventListener("blur", event => {
+        help.textContent = "";
+    });
+}
+
+
