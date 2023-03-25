@@ -2,36 +2,36 @@
 
 
 /* Event Handlers */
-/* 
+
 window.addEventListener("click", () => {
     console.log("You knocked?");
 });
- */
+
 
 
 /* Events And DOM Nodes */
-/* 
+
 let button1 = document.querySelector("button");
 button1.addEventListener("click", () => {
     console.log("Button clicked.");
 });
- */
+
 // A node can only have 1 onclick attribute but one can use addEventListener to add multiple handlers
 
 // Using removeEventListener - same named function must be given to both addEventListener and removeEventListener
-/* 
+
 let button2 = document.querySelectorAll("button")[1];
 function once() {
     console.log("Done");
     button2.removeEventListener("click", once);
 }
 button2.addEventListener("click", once);
- */
+
 
 /* Event Objects */
 // Event objects are what are passed as arguments to event handlers.
 // let button3 = document.querySelector("button");
-/* 
+
 let button3 = document.querySelectorAll("button")[2];
 button3.addEventListener("mousedown", event => {
     if (event.button === 0) {
@@ -42,7 +42,7 @@ button3.addEventListener("mousedown", event => {
         console.log("Right button");
     }
 });
-*/
+
 
 /* Propagation */
 
@@ -104,7 +104,7 @@ window.addEventListener("keydown", event => {
 
 /* Mouse Clicks */
 // Primitive drawing programme based on mouse click
-/* 
+
 window.addEventListener("click", event => {
     let dot = document.createElement("div");
     dot.className = "dot";
@@ -112,12 +112,12 @@ window.addEventListener("click", event => {
     dot.style.top = (event.pageY - 4) + "px";
     document.body.appendChild(dot);
 });
- */
+
 
 /* Mouse Motion */
 // Using mouse motion
 // Tracks the last observed mouse X position
-/* 
+
 let lastX;
 let bar = document.querySelector("div");
 
@@ -140,7 +140,7 @@ function moved(event) {
         lastX = event.clientX;
     }
 };
- */
+
 
 
 /* Touch Events */
@@ -162,7 +162,7 @@ function update(event) {
 
 /* Scroll Events */
 
-/* 
+
 // Create some content
 document.body.appendChild(document.createTextNode("supercalifragilisticexpialidocious ".repeat(1000)));
 
@@ -172,7 +172,7 @@ window.addEventListener("scroll", () => {
     // bar2.style.width = `${(pageYOffset / max) * 100}%`;
     bar2.style.width = `${(scrollY / max) * 100}%`;
 });
- */
+
 
 /* Focus Events */
 // "focus", "blur" and "scroll" events do not propagate
@@ -196,14 +196,14 @@ for (let field of Array.from(fields)) {
 
 /* Events And The Event Loop */
 // Using web workers
-/* 
+
 let squareWorker = new Worker("code/squareworker.js");
 squareWorker.addEventListener("message", event => {
     console.log("The worker responded:", event.data);
 });
 squareWorker.postMessage(10);
 squareWorker.postMessage(24);
- */
+
 
 
 /* Timers */
@@ -240,6 +240,7 @@ textarea.addEventListener("input", () => {
 });
 
 // Using a scheduled timeout
+
 let scheduled = null;
 window.addEventListener("mousemove", event => {
     if (!scheduled) {
@@ -250,4 +251,20 @@ window.addEventListener("mousemove", event => {
     }
     scheduled = event;
 });
+
+
+let scheduled2 = null;
+let mousePosition = document.createElement("p");
+window.addEventListener("mousemove", event => {
+    // let mousePosition = document.createElement("p");
+    if (!scheduled2) {
+        setTimeout(() => {
+            mousePosition.textContent = `Mouse at ${scheduled2.pageX}, ${scheduled2.pageY}`;
+            scheduled2 = null;
+        }, 250);
+    }
+    scheduled2 = event;
+    // document.body.appendChild(mousePosition);
+});
+document.body.appendChild(mousePosition);
 
