@@ -208,3 +208,46 @@ squareWorker.postMessage(24);
 
 /* Timers */
 
+// Using both setTimeout and clearTimeout
+let bombTimer = setTimeout(() => {
+    console.log("BOOM!");
+}, 500);
+
+if (Math.random() < 0.5) {
+    console.log("Defused.");
+    clearTimeout(bombTimer);
+}
+
+// Time animation
+let ticks = 0;
+let clock = setInterval(() => {
+    console.log("tick", ticks++);
+    if (ticks === 10) {
+        clearInterval(clock);
+        console.log("stop.");
+    }
+}, 200);
+
+
+/* Debouncing */
+
+// Using timeout
+let textarea = document.querySelector("textarea");
+let timeout;
+textarea.addEventListener("input", () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => console.log("Typed!"), 500);
+});
+
+// Using a scheduled timeout
+let scheduled = null;
+window.addEventListener("mousemove", event => {
+    if (!scheduled) {
+        setTimeout(() => {
+            document.body.textContent = `Mouse at ${scheduled.pageX}, ${scheduled.pageY}`;
+            scheduled = null;
+        }, 250);
+    }
+    scheduled = event;
+});
+
