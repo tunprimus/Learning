@@ -189,3 +189,17 @@ for (let field of Array.from(fields)) {
 }
 
 
+/* Load Events */
+// "load" events do not propagate. Occurs with window, document, images and scripts.
+// "beforeunload" events fire before leaving a page
+
+
+/* Events And The Event Loop */
+// Using web workers
+let squareWorker = new Worker("code/squareworker.js");
+squareWorker.addEventListener("message", event => {
+    console.log("The worker responded:", event.data);
+});
+squareWorker.postMessage(10);
+squareWorker.postMessage(24);
+
