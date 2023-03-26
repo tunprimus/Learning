@@ -8,17 +8,26 @@ When that works, add a feature where, if you blow up the balloon past a certain 
 
 function balloonHandler() {
     let balloonElement = document.querySelector("p");
-    balloonElement.style.fontSize = "40px";
-    // console.log(balloonElement.style.fontSize);
+
+    const balloonElementCompStyle = window.getComputedStyle( balloonElement);
+    // console.log(balloonElementCompStyle);
+    let balloonElementCurrentSize = parseFloat(balloonElementCompStyle.fontSize);
+    console.log(balloonElementCurrentSize);
+    
     let sizeFactor = 1;
     function balloonInflater() {
         window.addEventListener("keydown", event => {
             if (event.key == "ArrowUp") {
-                balloonElement.style.fontSize += `${sizeFactor}` + "px";
-                console.log(balloonElement.style.fontSize);
+                sizeFactor++;
+                let newSize = `${balloonElementCurrentSize + sizeFactor}`;
+                balloonElement.style.fontSize = newSize + "px";
+                // console.log(balloonElement.style.fontSize);
                 event.preventDefault();
             } else if (event.key == "ArrowDown") {
-                balloonElement.style.fontSize -= sizeFactor + "px";
+                sizeFactor++;
+                let newSize = `${balloonElementCurrentSize - sizeFactor}`;
+                balloonElement.style.fontSize = newSize + "px";
+                console.log(balloonElement.style.fontSize);
                 event.preventDefault();
             }
         });
