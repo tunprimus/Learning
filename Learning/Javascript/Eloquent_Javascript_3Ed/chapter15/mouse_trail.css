@@ -1,0 +1,16 @@
+
+.dot {
+    width: 600px;
+    min-width: 90%;
+    height: 400px;
+    min-height: 95vh;
+    background-color: yellow;
+}
+
+.trail {
+    height: 8px;
+    width: 8px;
+    border-radius: 4px;
+    background: blue;
+    position: absolute;
+}
