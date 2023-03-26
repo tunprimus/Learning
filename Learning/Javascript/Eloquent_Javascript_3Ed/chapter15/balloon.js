@@ -23,7 +23,7 @@ function balloonHandler() {
                 let newSize = `${balloonElementCurrentSize + sizeFactor}`;
                 if (newSize > 80) {
                     balloonElement.innerHTML = "💥";
-                    balloonElement.removeEventListener();
+                    balloonElement.removeEventListener("keydown", balloonInflater);
                 }
                 balloonElement.style.fontSize = newSize + "px";
                 console.log(balloonElement.style.fontSize);
