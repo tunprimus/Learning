@@ -7,8 +7,9 @@ When that works, add a feature where, if you blow up the balloon past a certain 
 */
 
 function balloonHandler() {
+    const maxSize = 80;
+    // Use multiple sub-functions
     let balloonElement = document.querySelector("p");
-    console.log(balloonElement);
     balloonElement.style.fontSize = "40px";
     const balloonElementCompStyle = window.getComputedStyle( balloonElement);
     
@@ -16,34 +17,37 @@ function balloonHandler() {
     console.log(balloonElementCurrentSize);
     
     let sizeFactor = 0.1;
-    function balloonInflater() {
-        window.addEventListener("keydown", event => {
-            if (event.key == "ArrowUp") {
-                sizeFactor++;
-                let newSize = `${balloonElementCurrentSize + sizeFactor}`;
-                if (newSize > 80) {
-                    balloonElement.innerHTML = "💥";
-                    balloonElement.removeEventListener("keydown", balloonInflater);
-                }
-                balloonElement.style.fontSize = newSize + "px";
-                console.log(balloonElement.style.fontSize);
-                event.preventDefault();
-            } else if (event.key == "ArrowDown") {
-                sizeFactor++;
-                let newSize = `${balloonElementCurrentSize - sizeFactor}`;
-                balloonElement.style.fontSize = newSize + "px";
-                console.log(balloonElement.style.fontSize);
-                event.preventDefault();
-            }
-        });
+    let newSize = balloonElementCurrentSize;
+    
+    // Increase balloon element size
+    function balloonGrow() {
+        newSize += balloonElementCurrentSize * sizeFactor;
+        if (newSize > maxSize) {
+            balloonElement.innerHTML = "💥";
+            window.removeEventListener("keydown", balloonChange);
+        } else {
+            balloonElement.style.fontSize = newSize + "px";
+        }
+        // balloonElement.style.fontSize = newSize + "px";
+        console.log(balloonElement.style.fontSize);
     }
-    balloonInflater();
-/* 
-    if (Number(balloonElement.style.fontSize.valueOf) > 120) {
-        balloonElement.innerHTML = "💥";
-        balloonElement.removeEventListener("keydown", balloonInflater);
+    // Reduce balloon element size
+    function balloonReduce() {
+        newSize -= balloonElementCurrentSize * sizeFactor;
+        balloonElement.style.fontSize = newSize + "px";
+        console.log(balloonElement.style.fontSize);
     }
-     */
+    // Arrow key event monitor
+    function balloonChange(event) {
+        if (event.key == "ArrowUp") {
+            balloonGrow();
+            event.preventDefault();
+        } else if (event.key == "ArrowDown") {
+            balloonReduce()
+            event.preventDefault();
+        }
+    }
+    window.addEventListener("keydown", balloonChange);
 }
 
 balloonHandler();
