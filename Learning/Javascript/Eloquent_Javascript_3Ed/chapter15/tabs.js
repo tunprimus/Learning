@@ -9,16 +9,35 @@ const tabPanelElement = document.getElementsByTagName("tab-panel");
 const divElement = document.querySelectorAll("div");
 // console.log(tabPanelElement);
 
-function tabsCreator(data1, data2) {
+function tabsHandler(data1, data2) {
     // console.log(data1);
-    for (const item of data2) {
-        const button = document.createElement("button");
-        console.log(button);
-        console.log(item);
-        console.log(item.getAttribute("data-tabname"));
-        button.textContent = item.getAttribute("data-tabname");
-        data1[0].insertBefore(button, data2[0]);
+    const divContentElement = document.createElement("div");
+    function tabsCreator() {
+        const tabsArray = [];
+        for (const item of data2) {
+            const button = document.createElement("button");
+            button.textContent = item.getAttribute("data-tabname");
+            let tab = {item, button};
+            // console.log(tab);
+            tabsArray.push(tab);
+        }
+        // console.log(tabsArray);
+        return tabsArray;
     }
+    // tabsCreator();
+    function tabsDisplay() {
+        
+        let index = 0;
+        showTabs = tabsCreator();
+        console.log(showTabs);
+        showTabs.forEach(st => {
+            index++;
+            console.log(st);
+            divContentElement.appendChild(st.button);
+        });
+        data1[0].insertBefore(divContentElement, data2[0]);
+    }
+    tabsDisplay();
 }
 
-tabsCreator(tabPanelElement, divElement);
+tabsHandler(tabPanelElement, divElement);
