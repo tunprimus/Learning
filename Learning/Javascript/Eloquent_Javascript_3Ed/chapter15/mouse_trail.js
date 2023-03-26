@@ -5,13 +5,31 @@ There are various possible approaches here. You can make your solution as simple
 
 const dotElements = document.querySelector("#dot");
 
-dotElements.addEventListener("mousemove", event => {
-    let trail = document.createElement("div");
-    trail.className = "trail";
-    trail.style.left = (event.pageX - 4) + "px";
-    trail.style.top = (event.pageY - 4) + "px";
-    document.body.appendChild(trail);
+function mouseTrail(event) {
+
+    function trailPainter() {
+        let trail = document.createElement("div");
+        trail.className = "trail";
+        trail.style.left = (event.pageX - 4) + "px";
+        trail.style.top = (event.pageY - 4) + "px";
+        dotElements.appendChild(trail);
+    }
+    trailPainter();
+    
+    document.body.addEventListener("click", ev => {
+        if (ev.button === 0 || ev.button === 2) {
+            document.body.removeEventListener("mousemove", mouseTrail);
+        }
+    });
+}
+
+/* 
+document.body.addEventListener("click", ev => {
+    if (ev.button === 0 || ev.button === 2) {
+        document.body.removeEventListener("mousemove", mouseTrail);
+    }
 });
+ */
 
-
-
+// document.body.addEventListener("click", mouseTrail);
+document.body.addEventListener("mousemove", mouseTrail);
