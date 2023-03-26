@@ -18,7 +18,7 @@ button1.addEventListener("click", () => {
 
 // A node can only have 1 onclick attribute but one can use addEventListener to add multiple handlers
 
-// Using removeEventListener - same named function must be given to both addEventListener and removeEventListener
+// Using removeEventListener - same named arguments & functions must be given to both addEventListener and removeEventListener
 
 let button2 = document.querySelectorAll("button")[1];
 function once() {

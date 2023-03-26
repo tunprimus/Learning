@@ -11,6 +11,7 @@
         "arrayish",
         "conn",
         "setx",
-        "squareworker"
+        "squareworker",
+        "tabname"
     ]
 }
