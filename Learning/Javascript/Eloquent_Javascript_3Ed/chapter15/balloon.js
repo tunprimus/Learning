@@ -18,7 +18,7 @@ function balloonHandler() {
     
     let sizeFactor = 0.1;
     let newSize = balloonElementCurrentSize;
-    
+
     // Increase balloon element size
     function balloonGrow() {
         newSize += balloonElementCurrentSize * sizeFactor;
@@ -28,15 +28,16 @@ function balloonHandler() {
         } else {
             balloonElement.style.fontSize = newSize + "px";
         }
-        // balloonElement.style.fontSize = newSize + "px";
         console.log(balloonElement.style.fontSize);
     }
+
     // Reduce balloon element size
     function balloonReduce() {
         newSize -= balloonElementCurrentSize * sizeFactor;
         balloonElement.style.fontSize = newSize + "px";
         console.log(balloonElement.style.fontSize);
     }
+
     // Arrow key event monitor
     function balloonChange(event) {
         if (event.key == "ArrowUp") {
