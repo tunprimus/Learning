@@ -1,0 +1,8 @@
+.tab-panel {
+    display: none;
+}
+
+.active-tab {
+    background-color: black;
+    border-color: red;
+}

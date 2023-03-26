@@ -19,14 +19,15 @@ function tabsHandler(data1, data2) {
             button.textContent = item.getAttribute("data-tabname");
             let tab = {item, button};
             // console.log(tab);
+            button.addEventListener("click", () => selectTab(tab));
             tabsArray.push(tab);
         }
         // console.log(tabsArray);
         return tabsArray;
     }
     // tabsCreator();
+
     function tabsDisplay() {
-        
         let index = 0;
         showTabs = tabsCreator();
         console.log(showTabs);
@@ -38,6 +39,10 @@ function tabsHandler(data1, data2) {
         data1[0].insertBefore(divContentElement, data2[0]);
     }
     tabsDisplay();
+
+    function selectTab() {
+        button.addEventListener("click", event => {});
+    }
 }
 
 tabsHandler(tabPanelElement, divElement);
