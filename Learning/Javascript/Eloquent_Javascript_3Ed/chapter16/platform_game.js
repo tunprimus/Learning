@@ -24,7 +24,7 @@ class Level {
             return row.map((ch, x) => {
                 // levelChars maps background elements to strings and actor characters to classes
                 let type = levelChars[ch];
-                if (typeof type == "string") {
+                if (typeof type === "string") {
                     return type;
                 }
                 this.startActors.push(
@@ -100,11 +100,11 @@ class Lava {
     }
 
     static create(pos, ch) {
-        if (ch == "=") {
+        if (ch === "=") {
             return new Lava(pos, new Vec(2, 0));
-        } else if (ch == "|") {
+        } else if (ch === "|") {
             return new Lava(pos, new Vec(0, 2));
-        } else if (ch == "v") {
+        } else if (ch === "v") {
             return new Lava(pos, new Vec(0, 3), pos);
         }
     }
@@ -242,4 +242,45 @@ simpleLevel = new Level(simpleLevelPlan);
 let display = new DOMDisplay(document.body, simpleLevel);
 display.syncState(State.start(simpleLevel));
 
+/* Motion and Collision */
 
+// Check if rectangle touches a grid element
+Level.prototype.touches = function(pos, size, type) {
+    let xStart = Math.floor(pos.x);
+    let xEnd = Math.ceil(pos.x + size.x);
+    let yStart = Math.floor(pos.y);
+    let yEnd = Math.ceil(pos.y + size.y);
+
+    for (let y = yStart; y < yEnd; y++) {
+        for (let x = xStart; x < xEnd; x++) {
+            let isOutside = x < 0 || x >= this.width || y < 0 || y >= this.height;
+            let here = isOutside ? "wall" : this.rows[y][x];
+            if (here === type) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+// Detect if the player is touching lava via touches
+State.prototype.update = function (time, keys) {
+    let actors = this.actors.map(actor => actor.update(time, this, keys));
+    let newState = new State(this.level, actors, this.status);
+
+    if (newState.status !== "playing") {
+        return newState;
+    }
+
+    let player = newState.player;
+    if (this.level.touches(player.pos, player.size, "lava")) {
+        return new State(this.level, actors, "lost");
+    }
+
+    for (let actor of actors) {
+        if (actor != player && overlap(actor, player)) {
+            newState = actor.collide(newState);
+        }
+    }
+    return newState;
+};
