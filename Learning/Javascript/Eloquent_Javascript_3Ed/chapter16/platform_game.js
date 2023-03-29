@@ -154,12 +154,8 @@ console.log(`${simpleLevel.width} by ${simpleLevel.height}`); // -> 22 by 9
 // Helper function to create elements and add attributes and child nodes
 function elt(name, attrs, ...children) {
     let dom = document.createElement(name);
-    // console.log(dom);
-    console.log(attrs);
 
     for (let attr of Object.keys(attrs)) {
-        // console.log(Object.keys(attr));
-        // console.log(attr);
         dom.setAttribute(attr, attrs[attr]);
     }
     for (let child of children) {
@@ -188,8 +184,8 @@ const SCALE = 20;
 function drawGrid(level) {
     return elt("table", {
         class: "background",
-        style: `width: ${level.width * SCALE}px`, ...level.rows.map(row => elt("tr", {style: `height: ${SCALE}px`}, ...row.map(type => elt("td", {class: type}))))
-    });
+        style: `width: ${level.width * SCALE}px`}, ...level.rows.map(row => elt("tr", {style: `height: ${SCALE}px`}, ...row.map(type => elt("td", {class: type}))))
+    );
 }
 
 // Draws each actor
@@ -242,9 +238,8 @@ DOMDisplay.prototype.scrollPlayerIntoView = function(state) {
     }
 };
 
-// simpleLevel = new Level(simpleLevelPlan);
+simpleLevel = new Level(simpleLevelPlan);
 let display = new DOMDisplay(document.body, simpleLevel);
-// console.log(display);
 display.syncState(State.start(simpleLevel));
-// console.log(display.syncState(State.start(simpleLevel)));
+
 

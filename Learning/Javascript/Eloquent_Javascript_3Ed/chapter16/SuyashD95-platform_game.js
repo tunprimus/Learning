@@ -542,6 +542,12 @@ DOMDisplay.prototype.scrollPlayerIntoView = function(state) {
  * accidentally try to read outside of the bounds of our `rows` array.
  */
 
+simpleLevel = new Level(simpleLevelPlan);
+let display = new DOMDisplay(document.body, simpleLevel);
+// console.log(display);
+display.syncState(State.start(simpleLevel));
+
+
 Level.prototype.touches = function(pos, size, type) {
     var xStart = Math.floor(pos.x);
     var xEnd = Math.ceil(pos.x + size.x);
