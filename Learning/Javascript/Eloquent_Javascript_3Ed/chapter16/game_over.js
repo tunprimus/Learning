@@ -20,4 +20,4 @@ async function runGame(plans, Display) {
     }
     console.log("You have won!");
 }
-
+runGame(GAME_LEVELS, DOMDisplay);
