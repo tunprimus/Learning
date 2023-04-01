@@ -6,17 +6,21 @@ Output the current number of lives (using console.log) every time a level starts
 async function runGame(plans, Display) {
     let currentLives = 3;
     for (let level = 0; level < plans.length;) {
+        console.log(`Starting new level with ${currentLives} lives.`);
         let status = await runLevel(new Level(plans[level]), Display);
         if (status == "won") {
             level++;
         } else if (status == "lost") {
             currentLives--;
-            console.log(`You have ${currentLives} left!`);
+            console.log(`You have ${currentLives} live(s) left!`);
         }
         if (currentLives < 1) {
-            console.log(`Out of lives with ${currentLives}!`);
-            break;
+            level = 0;
+            console.log(`Game over! \nOut of lives with ${currentLives} live!`);
+            currentLives = 3;
+            // break;
         }
+        // console.log("You have won!");
     }
     console.log("You have won!");
 }
