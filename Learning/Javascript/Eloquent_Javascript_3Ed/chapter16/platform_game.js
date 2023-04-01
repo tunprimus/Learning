@@ -24,7 +24,7 @@ class Level {
             return row.map((ch, x) => {
                 // levelChars maps background elements to strings and actor characters to classes
                 let type = levelChars[ch];
-                if (typeof type === "string") {
+                if (typeof type == "string") {
                     return type;
                 }
                 this.startActors.push(
@@ -100,11 +100,11 @@ class Lava {
     }
 
     static create(pos, ch) {
-        if (ch === "=") {
+        if (ch == "=") {
             return new Lava(pos, new Vec(2, 0));
-        } else if (ch === "|") {
+        } else if (ch == "|") {
             return new Lava(pos, new Vec(0, 2));
-        } else if (ch === "v") {
+        } else if (ch == "v") {
             return new Lava(pos, new Vec(0, 3), pos);
         }
     }
@@ -255,7 +255,7 @@ Level.prototype.touches = function(pos, size, type) {
         for (let x = xStart; x < xEnd; x++) {
             let isOutside = x < 0 || x >= this.width || y < 0 || y >= this.height;
             let here = isOutside ? "wall" : this.rows[y][x];
-            if (here === type) {
+            if (here == type) {
                 return true;
             }
         }
@@ -268,7 +268,7 @@ State.prototype.update = function (time, keys) {
     let actors = this.actors.map(actor => actor.update(time, this, keys));
     let newState = new State(this.level, actors, this.status);
 
-    if (newState.status !== "playing") {
+    if (newState.status != "playing") {
         return newState;
     }
 
@@ -299,7 +299,7 @@ Lava.prototype.collide = function(state) {
 Coin.prototype.collide = function(state) {
     let filtered = state.actors.filter(a => a != this);
     let status = state.status;
-    if (!filtered.some(a => a.type === "coin")) {
+    if (!filtered.some(a => a.type == "coin")) {
         status = "won";
     }
     return new State(state.level, filtered, status);
@@ -386,7 +386,7 @@ function runAnimation(frameFunc) {
     function frame(time) {
         if (lastTime != null) {
             let timeStep = Math.min(time - lastTime, 100) / 1000;
-            if (frameFunc(timeStep) === false) {
+            if (frameFunc(timeStep) == false) {
                 return;
             }
         }
@@ -405,7 +405,7 @@ function runLevel(level, Display) {
         runAnimation(time => {
             state = state.update(time, arrowKeys);
             display.syncState(state);
-            if (state.status === "playing") {
+            if (state.status == "playing") {
                 return true;
             } else if (ending > 0) {
                 ending -= time;
@@ -423,7 +423,7 @@ function runLevel(level, Display) {
 async function runGame(plans, Display) {
     for (let level = 0; level < plans.length;) {
         let status = await runLevel(new Level(plans[level]), Display);
-        if (status === "won") {
+        if (status == "won") {
             level++;
         }
     }

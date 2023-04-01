@@ -7,7 +7,7 @@
  *
  * The player can walk around with the left and right arrow keys and can jump with the up arrow. 
  * Jumping is a specialty of this game character. It can reach several times its own height and 
- * can change direction in midair. This may not be entirely realistic, but it helps give the player 
+ * can change direction in mid-air. This may not be entirely realistic, but it helps give the player 
  * the feeling of being in direct control of the on-screen avatar.
  * 
  * The game consists of a static background, laid out like a grid, with the moving elements overlaid on 
@@ -104,8 +104,7 @@ class Level {
             return row.map((ch, x) => {
                 let type = levelChars[ch];
                 if (typeof type == "string") return type;
-                this.startActors.push(
-                    type.create(new Vec(x, y), ch));
+                this.startActors.push(type.create(new Vec(x, y), ch));
                 return "empty";
             });
         });
@@ -164,7 +163,7 @@ class State {
  * given the coordinates of the character and the character itself, which is 
  * needed because the `Lava` class handles several different characters.
  *
- * The different types of actors get their own classes since their behavior is
+ * The different types of actors get their own classes since their behaviour is
  * very different.
  */
 
@@ -173,7 +172,7 @@ class State {
  * size of actors.
  *
  * The `times` method scales a vector by a given number. It will be useful when
- * we need to multiply a speed vector by a time interval to get the distance traveled
+ * we need to multiply a speed vector by a time interval to get the distance travelled
  * during that time.
  */
 
@@ -215,7 +214,7 @@ class Player {
  * bottom aligns with the bottom of the square, it appeared in.
  *
  * The `size` property is the same for all the instances of `Player`, so we store it
- * on the prototype rather than on the instances themeselves. We could have used a getter
+ * on the prototype rather than on the instances themselves. We could have used a getter
  * like `type`, but that would create and return a new `Vec` object every time the property
  * is read, which would be wasteful.
  */
@@ -282,10 +281,10 @@ class Coin {
     /*
      * The `Math.sin` function gives us the y-coordinate of a point in a circle. That
      * coordinate goes back and forth in a smooth waveform as we move along the circle,
-     * which makes the sine function useful for modeling a wavy motion.
+     * which makes the sine function useful for modelling a wavy motion.
      *
      * To avoid a situation where all coins move up and down synchronously, the starting
-     * phase of each coin is randomized. The phase of `Math.sin`'s wave, the wdith of a wave
+     * phase of each coin is randomized. The phase of `Math.sin`'s wave, the width of a wave
      * it produces, is 2π. We multiply the value returned by `Math.random` by that number to
      * give the coin a random starting position on the wave.
      */
