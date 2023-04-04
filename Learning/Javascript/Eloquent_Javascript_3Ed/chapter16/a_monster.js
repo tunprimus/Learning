@@ -3,10 +3,10 @@ We’ll call it a monster. Monsters move only horizontally. You can make them mo
 When a monster touches the player, the effect depends on whether the player is jumping on top of them or not. You can approximate this by checking whether the player’s bottom is near the monster’s top. If this is the case, the monster disappears. If not, the game is lost.
 */
 
+const monsterSpeed = Math.random() * 5;
 class Monster {
-    constructor(pos, monsterSpeed) {
+    constructor(pos) {
         this.pos = pos;
-        this.monsterSpeed = monsterSpeed;
     }
 
     get type() {
@@ -19,7 +19,7 @@ class Monster {
 
     update(time, state) {
         let player = state.player;
-        let speed = (player.pos.x < this.pos.x ? -1 : 1) * time * this.monsterSpeed;
+        let speed = (player.pos.x < this.pos.x ? -1 : 1) * time * monsterSpeed;
         let newPos = new Vec(this.pos.x + speed, this.pos.y);
 
         if (state.level.touches(newPos, this.size, "wall")) {
