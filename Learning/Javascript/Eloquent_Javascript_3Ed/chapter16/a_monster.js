@@ -3,7 +3,9 @@ We’ll call it a monster. Monsters move only horizontally. You can make them mo
 When a monster touches the player, the effect depends on whether the player is jumping on top of them or not. You can approximate this by checking whether the player’s bottom is near the monster’s top. If this is the case, the monster disappears. If not, the game is lost.
 */
 
-const monsterSpeed = Math.random() * 5;
+// const randomNumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+
+const monsterSpeed = Math.floor(Math.random() * (6 - 2 + 1) + 2);
 class Monster {
     constructor(pos) {
         this.pos = pos;
