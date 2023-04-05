@@ -144,7 +144,7 @@ document.getElementById("emailAddress").addEventListener("blur", event => {
     const emailRegex = /.+@.+\..+/;
     let validityMessage = "";
     if (!emailRegex.test(event.target.value)) {
-        validationMessage = "Invalid address";
+        validityMessage = "Invalid address";
     }
     document.getElementById("emailHelp").textContent = validityMessage;
 });
