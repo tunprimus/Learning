@@ -45,34 +45,32 @@ const getCharacters = houseCode => {
 function characterListMaker() {
     const formElements = document.querySelector("form");
     const selectElements = document.getElementById("house");
-    // console.log(selectElements);
+    
     houses.forEach(house => {
         const optionElement = document.createElement("option");
-        // console.log(optionElement);
+        // Add needed values to option element to transmit them later to the change event object
         optionElement.innerHTML = house.name;
         optionElement.value = house.code;
-        // console.log(optionElement);
         selectElements.appendChild(optionElement);
     });
 
     const charactersElement = document.getElementById("characters");
     const fragment = new DocumentFragment();
     selectElements.addEventListener("change", event => {
-        // console.log(event);
+        // Empty out the charactersElement with each new event
+        charactersElement.innerHTML = "";
+
         // console.log(event.explicitOriginalTarget.value);
         houseCode = event.explicitOriginalTarget.value;
         const characterArrays = getCharacters(houseCode);
-        console.log(characterArrays);
+        // console.log(characterArrays);
         for (const character of characterArrays) {
             const listElement = document.createElement("li");
             listElement.innerHTML = character;
-            console.log(listElement);
-            fragment.appendChild(listElement);
+            fragment.append(listElement);
         }
-        // charactersElement.append(fragment);
+        charactersElement.append(fragment);
     });
-    charactersElement.append(fragment);
-
 }
 
 characterListMaker();
