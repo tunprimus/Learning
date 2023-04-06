@@ -1,0 +1,49 @@
+/* */
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.body > * {
+    padding: 0.2rem;
+}
+
+.display,
+.buttons {
+    flex-grow: 1;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.h2 {
+    font-size: 2rem;
+}
+
+.counter {
+    font-size: 3rem;
+}
+
+.start,
+.stop {
+    min-width: 10rem;
+    width: 45%;
+    min-height: 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.start {
+    background-color: green;
+}
+
+.stop {
+    background-color: red;
+}
