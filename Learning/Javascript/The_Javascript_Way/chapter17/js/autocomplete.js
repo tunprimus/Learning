@@ -18,6 +18,7 @@ const countryList = [
     "Azerbaijan"
 ];
 
+/* 
 // Add class to suggestion
 const suggestionsElement = document.getElementById("suggestions");
 suggestionsElement.classList.add("suggestion");
@@ -44,3 +45,5 @@ countryList.forEach(item => {
 
 // Add to the div element
 suggestionsElement.appendChild(selectElement);
+ */
+
