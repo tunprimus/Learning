@@ -9,4 +9,19 @@
     height: 40px;
     background: red;
     position: relative;
+    margin-left: -20px; /* Negative margin to simplify position calculations */
+    animation-name: moveBlock; /* Name of animation */
+    animation-duration: 6s; /* Length of animation */
+    animation-fill-mode: forwards; /* Let the block in its final position */
+}
+
+@keyframes moveBlock {
+    from {
+        /* Initial position: to the left of the frame (taking negative margin into account) */
+        left: 20px;
+    }
+    to {
+        /* Final position: within the right side of the frame (taking negative margin into account) */
+        left: 100%;
+    }
 }

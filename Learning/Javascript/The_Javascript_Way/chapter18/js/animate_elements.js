@@ -113,6 +113,7 @@ let animationId = requestAnimationFrame(animate);
 
 /* Stop An Animation */
 
+/* 
 // Update the above code so as tp stop the animation
 // Move the block to the right, all the way to the end of the frame
 const moveBlock = () => {
@@ -138,3 +139,17 @@ const blockWidth = parseFloat(getComputedStyle(block).width);
 const movement = 7;
 // Start the animation
 let animationId = requestAnimationFrame(moveBlock);
+ */
+
+/* An Alternative: CSS Animations */
+
+
+/* Choosing The Right Animation Technique */
+
+/*
+Now, decision time. How should you choose between setInterval(), requestAnimationFrame(), or CSS to animate your page? The answer depends on how complex your animation is. In theory, CSS animations are more efficient performance-wise, but you can’t do everything with them.
+Here’s how you might want to approach your decision:
+• Use setInterval() if the animation isn’t in real-time and should just happen at regular intervals.
+• Favour CSS if the animation happens in real-time and can be managed with it.
+• Use requestAnimationFrame() for any other case.
+*/
