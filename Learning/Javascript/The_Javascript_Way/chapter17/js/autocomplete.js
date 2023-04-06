@@ -47,3 +47,33 @@ countryList.forEach(item => {
 suggestionsElement.appendChild(selectElement);
  */
 
+const inputElement = document.querySelector("input");
+const suggestionsElement = document.getElementById("suggestions");
+
+// Create and return list of suggestions as div elements
+const suggestionMakerElement = item => {
+    const suggestElement = document.createElement("div");
+    suggestElement.classList.add("suggestion");
+    suggestElement.textContent = item;
+
+    // Add click functionality
+    suggestElement.addEventListener("click", event => {
+        // Replace input with suggested item
+        inputElement.value = event.target.textContent;
+        // Empty the suggestion list
+        suggestionsElement.innerHTML = "";
+    });
+    return suggestElement;
+};
+
+inputElement.addEventListener("input", () => {
+    // Ensure empty suggestion list
+    suggestionsElement.innerHTML = "";
+    // Pass each country/item to add to the suggestions
+    countryList.forEach(item => {
+        // Check if input value matches start of the item
+        if (item.startsWith(inputElement.value)) {
+            suggestionsElement.appendChild(suggestionMakerElement(item));
+        }
+    });
+});
