@@ -66,6 +66,7 @@ const suggestionMakerElement = item => {
     return suggestElement;
 };
 
+
 inputElement.addEventListener("input", () => {
     // Ensure empty suggestion list
     suggestionsElement.innerHTML = "";
@@ -77,3 +78,22 @@ inputElement.addEventListener("input", () => {
         }
     });
 });
+
+
+/* 
+inputElement.addEventListener("input", inputElement.fn=function fn() {
+    // Ensure empty suggestion list
+    suggestionsElement.innerHTML = "";
+    // Pass each country/item to add to the suggestions
+    countryList.forEach(item => {
+        // Check if input value matches start of the item
+        if (item.startsWith(inputElement.value)) {
+            suggestionsElement.appendChild(suggestionMakerElement(item));
+        }
+    });
+
+    setTimeout(() => {
+        inputElement.removeEventListener("input", inputElement.fn, false);
+    }, 1000);
+}, false);
+ */
