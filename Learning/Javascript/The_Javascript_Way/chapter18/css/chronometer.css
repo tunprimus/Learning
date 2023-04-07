@@ -31,10 +31,13 @@
 }
 
 .start,
+.pause,
 .stop {
     min-width: 10rem;
-    width: 45%;
+    width: 28%;
     min-height: 3rem;
+    margin: 0.25rem;
+    border-radius: 1rem;
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
@@ -44,6 +47,18 @@
     background-color: green;
 }
 
+.pause {
+    background-color: orange;
+}
+
 .stop {
     background-color: red;
+}
+
+.reset {
+    min-width: 10rem;
+    min-height: 3rem;
+    margin: 0.5rem auto;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
