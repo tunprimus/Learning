@@ -76,33 +76,27 @@ function chronometerHandler() {
     const counterElement = document.getElementById("counter");
     const startElement = document.getElementById("start");
     // const pauseElement = document.getElementById("pause");
-    const stopElement = document.getElementById("stop");
+    // const stopElement = document.getElementById("stop");
     // const resetElement = document.getElementById("reset");
 
     const interval = null;
     let timerRunning = false;
     const timer = () => {
-        timerRunning = true;
-        if (timerRunning) {
-            const increaseCounter = () => {
+        if (!timerRunning) {
+            interval = setInterval(() => {
                 const counter = Number(counterElement.textContent);
-                // Increase counter by one
                 counterElement.textContent = counter + 1;
-            };
-            interval = setInterval(increaseCounter, 1000);
+            }, 1000);
+            startElement.textContent = "STOP";
+        } else {
+            clearInterval(interval);
+            startElement.textContent = "START";
         }
-        return interval;
+        timerRunning = !timerRunning;
     };
 
-    const stopTimer = () => {
-        clearInterval(interval);
-        // timerRunning = false;
-        // timer();
-    };
-    
-    startElement.addEventListener("click", timer);
+    startElement.addEventListener("click", );
 
-    stopElement.addEventListener("click", stopTimer);
 }
 
 chronometerHandler();
