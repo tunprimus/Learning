@@ -9,7 +9,8 @@ const ballElement = document.getElementById("ball");
 const startButtonElement = document.getElementById("start");
 const stopButtonElement = document.getElementById("stop");
 const MOVEMENT = 7;
-const ballWidth = parseFloat(getComputedStyle(ball).width);
+
+const ballWidth = parseFloat(getComputedStyle(ballElement).width);
 
 let animationId = null;
 const frameMin = 0;
@@ -26,6 +27,7 @@ const moveBall = () => {
     }
 
     ballElement.style.left = ((xBall + MOVEMENT) * direction) + "px";
+    // ballElement.style.left = `${(xBall + MOVEMENT) * direction}px`;
     animationId = requestAnimationFrame(moveBall);
 };
 
