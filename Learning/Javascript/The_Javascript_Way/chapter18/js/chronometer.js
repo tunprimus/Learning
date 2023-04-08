@@ -75,11 +75,34 @@ const validInterval = setInterval(increaseCounter, 1000);
 function chronometerHandler() {
     const counterElement = document.getElementById("counter");
     const startElement = document.getElementById("start");
-    const pauseElement = document.getElementById("pause");
+    // const pauseElement = document.getElementById("pause");
     const stopElement = document.getElementById("stop");
-    const resetElement = document.getElementById("reset");
+    // const resetElement = document.getElementById("reset");
 
+    const interval = null;
+    let timerRunning = false;
+    const timer = () => {
+        timerRunning = true;
+        if (timerRunning) {
+            const increaseCounter = () => {
+                const counter = Number(counterElement.textContent);
+                // Increase counter by one
+                counterElement.textContent = counter + 1;
+            };
+            interval = setInterval(increaseCounter, 1000);
+        }
+        return interval;
+    };
+
+    const stopTimer = () => {
+        clearInterval(interval);
+        // timerRunning = false;
+        // timer();
+    };
     
+    startElement.addEventListener("click", timer);
+
+    stopElement.addEventListener("click", stopTimer);
 }
 
 chronometerHandler();
