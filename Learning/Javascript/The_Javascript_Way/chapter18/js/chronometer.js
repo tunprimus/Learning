@@ -72,4 +72,21 @@ const increaseCounter = () => {
 const validInterval = setInterval(increaseCounter, 1000);
  */
 
+function chronometerHandler() {
+    const counterElement = document.getElementById("counter");
+    const startElement = document.getElementById("start");
+    const pauseElement = document.getElementById("pause");
+    const stopElement = document.getElementById("stop");
+    const resetElement = document.getElementById("reset");
 
+    let interval = null;
+    let currentTime = null;
+
+    function start() {}
+
+    function pause() {}
+
+    function stop() {}
+
+    function reset() {}
+}
