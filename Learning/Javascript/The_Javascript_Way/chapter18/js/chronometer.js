@@ -79,14 +79,7 @@ function chronometerHandler() {
     const stopElement = document.getElementById("stop");
     const resetElement = document.getElementById("reset");
 
-    let interval = null;
-    let currentTime = null;
-
-    function start() {}
-
-    function pause() {}
-
-    function stop() {}
-
-    function reset() {}
+    
 }
+
+chronometerHandler();
