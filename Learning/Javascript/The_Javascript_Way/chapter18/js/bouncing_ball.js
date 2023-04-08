@@ -7,7 +7,9 @@ ball should move.
 const frameElement = document.getElementById("frame");
 const ballElement = document.getElementById("ball");
 const startButtonElement = document.getElementById("start");
+// console.log(startButtonElement);
 const stopButtonElement = document.getElementById("stop");
+// console.log(stopButtonElement);
 const MOVEMENT = 7;
 
 const ballWidth = parseFloat(getComputedStyle(ballElement).width);
@@ -26,14 +28,13 @@ const moveBall = () => {
         direction *= -1;
     }
 
-    ballElement.style.left = ((xBall + MOVEMENT) * direction) + "px";
-    // ballElement.style.left = `${(xBall + MOVEMENT) * direction}px`;
+    ballElement.style.left = (xBall + MOVEMENT * direction) + "px";
     animationId = requestAnimationFrame(moveBall);
 };
 
 startButtonElement.addEventListener("click", () => {
     startButtonElement.disabled = true;
-    startButtonElement.disabled = false;
+    stopButtonElement.disabled = false;
     animationId = requestAnimationFrame(moveBall);
 });
 
