@@ -1,7 +1,6 @@
 /* The goal of this exercise is to make a basketball bounce across the screen.
 Write the JavaScript code that makes the ball bounce horizontally.
-With your solution, create a variable with values 1 or -1 that dictates the direction in which the
-ball should move.
+With your solution, create a variable with values 1 or -1 that dictates the direction in which the ball should move.
 */
 
 const frameElement = document.getElementById("frame");
