@@ -16,7 +16,7 @@ Technical requirements
 • Code duplication should be avoided.
 */
 
-class SocialNews {
+class SocialNewsLink {
     constructor(title, url, author) {
         this.value = [title, url, author];
         this.content = [...this.value];
@@ -67,30 +67,30 @@ class SocialNews {
     }
 
     static from(collection) {
-        let socialNews = new SocialNews;
+        let socialNewsLink = new SocialNewsLink;
         for (let value of collection) {
-            socialNews.add(value);
+            socialNewsLink.add(value);
         }
-        return socialNews;
+        return socialNewsLink;
     }
 
     [Symbol.iterator]() {
-        return new SocialNewsIterator(this);
+        return new SocialNewsLinkIterator(this);
     }
 }
 
 // Iterable class
-class SocialNewsIterator {
-    constructor(socialNews) {
-        this.socialNews = socialNews;
+class SocialNewsLinkIterator {
+    constructor(socialNewsLink) {
+        this.socialNewsLink = socialNewsLink;
         this.position = 0;
     }
 
     next() {
-        if (this.position >= this.socialNews.content.length) {
+        if (this.position >= this.socialNewsLink.content.length) {
             return {done: true};
         } else {
-            let result = {value: this.socialNews.content[this.position], done: false};
+            let result = {value: this.socialNewsLink.content[this.position], done: false};
             this.position++;
             return result;
         }
@@ -99,9 +99,9 @@ class SocialNewsIterator {
 
 function defaultLinks() {
     const links = [];
-    links.push(new SocialNews("JavaScript Classes", "https://www.toolsqa.com/javascript/javascript-classes/", "Arunkumar Chandra"));
-    links.push(new SocialNews("WND", "https://www.wnd.com/", "Joseph Farah"));
-    links.push(new SocialNews("Go Make Things", "gomakethings.com", "Chris Ferdinandi"));
+    links.push(new SocialNewsLink("JavaScript Classes", "https://www.toolsqa.com/javascript/javascript-classes/", "Arunkumar Chandra"));
+    links.push(new SocialNewsLink("WND", "https://www.wnd.com/", "Joseph Farah"));
+    links.push(new SocialNewsLink("Go Make Things", "gomakethings.com", "Chris Ferdinandi"));
     return links;
 }
 defaultLinks();
@@ -131,7 +131,7 @@ function displayStartMenu() {
                 const newLinkTitle = prompt("Enter link title:");
                 const newLinkUrl = prompt("Enter link url:");
                 const newLinkAuthor = prompt("Enter link author:");
-                links.push(new SocialNews(newLinkTitle, newLinkUrl, newLinkAuthor));
+                links.push(new SocialNewsLink(newLinkTitle, newLinkUrl, newLinkAuthor));
                 alert("Link added to list!");
                 // console.log("add");
                 // console.log(links);
