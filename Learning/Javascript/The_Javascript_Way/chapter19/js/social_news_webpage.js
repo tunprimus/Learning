@@ -99,7 +99,7 @@ class SocialNewsLinkIterator {
 
 function defaultLinks() {
     const links = [];
-    links.push(new SocialNewsLink("JavaScript Classes", "https://www.toolsqa.com/javascript/javascript-classes/", "Arunkumar Chandra"));
+    links.push(new SocialNewsLink("Foundation for Economic Education", "https://fee.org/", "Jonathan Miltimore"));
     links.push(new SocialNewsLink("WND", "https://www.wnd.com/", "Joseph Farah"));
     links.push(new SocialNewsLink("Go Make Things", "gomakethings.com", "Chris Ferdinandi"));
     return links;
