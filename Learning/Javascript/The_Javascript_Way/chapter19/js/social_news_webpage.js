@@ -162,13 +162,20 @@ function displayHandler() {
 
     
     links.forEach(item => {
+        // Create div element for each groups of links
         const divElement = document.createElement("div");
         divElement.classList.add("link");
+        // Prepare link title elements
         const linkElement = document.createElement("a");
-        linkElement.title = item.title;
         linkElement.href = item.url;
+        linkElement.classList.add("linkTitle");
+        linkElement.appendChild(document.createTextNode(item.title));
         console.log(linkElement);
         divElement.appendChild(linkElement);
+        // Prepare link URL elements
+        const urlElement = document.createElement("span");
+        urlElement.classList.add("linkUrl");
+        urlElement.appendChild(document.createTextNode(item.url));
         contentElement.appendChild(divElement);
     });
     // contentElement.appendChild(divElement);
