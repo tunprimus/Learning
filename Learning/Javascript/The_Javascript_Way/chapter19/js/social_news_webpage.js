@@ -106,63 +106,25 @@ function defaultLinks() {
 }
 defaultLinks();
 
-/* Function for display */
-function displayStartMenu() {
-    const links = defaultLinks();
-    let option = "";
-    do {
-        console.log("Type one of the options below.");
-        console.log("show -> Show the list of links \nadd -> Add a new link \nremove -> Remove an existing link \nquit -> Leave the programme");
-        
-        option = prompt("Enter your desired action:");
+const contentElement = document.getElementById("content");
 
-        switch (option) {
-            case "show":
-                if (links.length > 0) {
-                    for (var i = 0; i < links.length; i++) {
-                        alert(`${i + 1}: ${links[i].describe()}`);
-                    }
-                } else {
-                    alert("No links to show!");
-                }
-                // console.log("show");
-                break;
-            case "add":
-                const newLinkTitle = prompt("Enter link title:");
-                const newLinkUrl = prompt("Enter link url:");
-                const newLinkAuthor = prompt("Enter link author:");
-                links.push(new SocialNewsLink(newLinkTitle, newLinkUrl, newLinkAuthor));
-                alert("Link added to list!");
-                // console.log("add");
-                // console.log(links);
-                break;
-            case "remove":
-                if (links.length < 1) {
-                    alert("Cannot remove from an empty list!");
-                } else {
-                    let index = -1;
-                    const maxIndex = links.length;
-                    do {
-                        index = Number(prompt(`Enter index of link to remove (must be between 1 and ${maxIndex})`));
-                    }
-                    while (index < 1 || index > maxIndex);
-                    links.splice(index - 1, 1);
-                    alert("Link removed successfully!");
-                }
-                // console.log("remove");
-                // console.log(links);
-                break;
-            case "quit":
-                alert("Have a nice day, bye!");
-                // console.log("Have a nice day, bye!");
-                break;
-            default:
-                console.log("Unknown option");
-                break;
-        }
-    }
-    while (option != "quit");
+/* Function for display */
+function displayHandler() {
+    const links = defaultLinks();
+    // console.log(links);
+    const fragment = new DocumentFragment();
+    const formElement = document.createElement("form");
+    const titleInputElement = document.createElement("input");
+    const urlInputElement = document.createElement("input");
+    const authorInputElement = document.createElement("input");
+    const addButtonElement = document.createElement("button");
+    formElement.appendChild(titleInputElement);
+    formElement.appendChild(urlInputElement);
+    formElement.appendChild(authorInputElement);
+    formElement.appendChild(addButtonElement);
+    fragment.appendChild(formElement);
+    contentElement.appendChild(fragment);
 }
 
-displayStartMenu();
+displayHandler();
 
