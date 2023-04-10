@@ -107,23 +107,55 @@ function defaultLinks() {
 defaultLinks();
 
 const contentElement = document.getElementById("content");
+const divElement = document.createElement("div");
+const submitButtonElement = document.getElementById("submitButton");
+/* 
+divElement.classList.add("link");
+contentElement.appendChild(divElement);
+ */
 
 /* Function for display */
 function displayHandler() {
     const links = defaultLinks();
-    // console.log(links);
-    const fragment = new DocumentFragment();
+    
+    submitButtonElement.addEventListener("click", () => {
+        const fragment = new DocumentFragment();
+
+    // Create and style form element
     const formElement = document.createElement("form");
+    formElement.classList.add("form");
+
+    // Create and style title input element
     const titleInputElement = document.createElement("input");
+    titleInputElement.classList.add("linkTitle");
+    titleInputElement.id = "title";
+    titleInputElement.placeholder = "Title";
+
+    // Create and style URL input element
     const urlInputElement = document.createElement("input");
+    urlInputElement.classList.add("linkUrl");
+    urlInputElement.placeholder = "URL";
+
+    // Create and style author input element
     const authorInputElement = document.createElement("input");
+    authorInputElement.classList.add("linkAuthor");
+    authorInputElement.placeholder = "Author";
+
+    // Create and style add button element
     const addButtonElement = document.createElement("button");
+    addButtonElement.innerHTML = "Add link";
+    addButtonElement.classList.add("button", "btn-default", "navbar-btn");
+
+    
     formElement.appendChild(titleInputElement);
     formElement.appendChild(urlInputElement);
     formElement.appendChild(authorInputElement);
     formElement.appendChild(addButtonElement);
     fragment.appendChild(formElement);
     contentElement.appendChild(fragment);
+    
+    });
+
 }
 
 displayHandler();
