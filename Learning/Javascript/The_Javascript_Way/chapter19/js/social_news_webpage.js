@@ -107,7 +107,7 @@ function defaultLinks() {
 defaultLinks();
 
 const contentElement = document.getElementById("content");
-const divElement = document.createElement("div");
+// const divElement = document.createElement("div");
 const submitButtonElement = document.getElementById("submitButton");
 /* 
 divElement.classList.add("link");
@@ -130,31 +130,48 @@ function displayHandler() {
     titleInputElement.classList.add("linkTitle");
     titleInputElement.id = "title";
     titleInputElement.placeholder = "Title";
+    titleInputElement.required = true;
+    // console.log(titleInputElement);
 
     // Create and style URL input element
     const urlInputElement = document.createElement("input");
     urlInputElement.classList.add("linkUrl");
     urlInputElement.placeholder = "URL";
+    urlInputElement.required = true;
 
     // Create and style author input element
     const authorInputElement = document.createElement("input");
     authorInputElement.classList.add("linkAuthor");
     authorInputElement.placeholder = "Author";
+    authorInputElement.required = true;
 
     // Create and style add button element
     const addButtonElement = document.createElement("button");
     addButtonElement.innerHTML = "Add link";
     addButtonElement.classList.add("button", "btn-default", "navbar-btn");
 
-    
+    // Add to the DOM
     formElement.appendChild(titleInputElement);
     formElement.appendChild(urlInputElement);
     formElement.appendChild(authorInputElement);
     formElement.appendChild(addButtonElement);
     fragment.appendChild(formElement);
-    contentElement.appendChild(fragment);
+    contentElement.prepend(fragment);
     
     });
+
+    
+    links.forEach(item => {
+        const divElement = document.createElement("div");
+        divElement.classList.add("link");
+        const linkElement = document.createElement("a");
+        linkElement.title = item.title;
+        linkElement.href = item.url;
+        console.log(linkElement);
+        divElement.appendChild(linkElement);
+        contentElement.appendChild(divElement);
+    });
+    // contentElement.appendChild(divElement);
 
 }
 
