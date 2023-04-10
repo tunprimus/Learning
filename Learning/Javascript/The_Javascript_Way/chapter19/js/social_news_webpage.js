@@ -170,12 +170,18 @@ function displayHandler() {
         linkElement.href = item.url;
         linkElement.classList.add("linkTitle");
         linkElement.appendChild(document.createTextNode(item.title));
-        console.log(linkElement);
+        // console.log(linkElement);
         divElement.appendChild(linkElement);
         // Prepare link URL elements
         const urlElement = document.createElement("span");
-        urlElement.classList.add("linkUrl");
         urlElement.appendChild(document.createTextNode(item.url));
+        urlElement.classList.add("linkUrl");
+        divElement.appendChild(urlElement);
+        // Prepare author element
+        const authorElement = document.createElement("span");
+        authorElement.appendChild(document.createTextNode(` Submitted by ${item.author}`));
+        authorElement.classList.add("linkAuthor");
+        divElement.appendChild(authorElement);
         contentElement.appendChild(divElement);
     });
     // contentElement.appendChild(divElement);
