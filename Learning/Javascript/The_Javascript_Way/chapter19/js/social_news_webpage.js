@@ -149,6 +149,12 @@ function displayHandler() {
     const addButtonElement = document.createElement("button");
     addButtonElement.innerHTML = "Add link";
     addButtonElement.classList.add("button", "btn-default", "navbar-btn");
+    addButtonElement.id = "addButton";
+    // console.log(addButtonElement);
+
+    const addBtnSubElement = document.getElementById("addButton");
+    // console.log(addBtnSubElement);
+
 
     // Add to the DOM
     formElement.appendChild(titleInputElement);
@@ -158,6 +164,12 @@ function displayHandler() {
     fragment.appendChild(formElement);
     contentElement.prepend(fragment);
     
+
+    formElement.addEventListener("submit", event => {
+        console.log(event.target);
+        // console.log(Object.entries(event.target.childNodes));
+        event.preventDefault();
+    });
     });
 
     
@@ -185,6 +197,7 @@ function displayHandler() {
         contentElement.appendChild(divElement);
     });
     // contentElement.appendChild(divElement);
+
 
 }
 
