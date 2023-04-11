@@ -114,67 +114,82 @@ divElement.classList.add("link");
 contentElement.appendChild(divElement);
  */
 
+const linkMoverArray = [];
+let linkMoverObj = {};
+let toMergeArray = [];
+let mergedObj = {};
+
 /* Function for display */
 function displayHandler() {
     const links = defaultLinks();
+    // console.log(links);
     
     submitButtonElement.addEventListener("click", () => {
         const fragment = new DocumentFragment();
 
-    // Create and style form element
-    const formElement = document.createElement("form");
-    formElement.classList.add("form");
+        // Create and style form element
+        const formElement = document.createElement("form");
+        formElement.classList.add("form");
 
-    // Create and style title input element
-    const titleInputElement = document.createElement("input");
-    titleInputElement.classList.add("linkTitle");
-    titleInputElement.id = "title";
-    titleInputElement.placeholder = "Title";
-    titleInputElement.required = true;
-    // console.log(titleInputElement);
+        // Create and style title input element
+        const titleInputElement = document.createElement("input");
+        titleInputElement.classList.add("linkTitle");
+        titleInputElement.id = "title";
+        titleInputElement.placeholder = "Title";
+        titleInputElement.required = true;
+        // console.log(titleInputElement);
 
-    // Create and style URL input element
-    const urlInputElement = document.createElement("input");
-    urlInputElement.classList.add("linkUrl");
-    urlInputElement.placeholder = "URL";
-    urlInputElement.required = true;
+        // Create and style URL input element
+        const urlInputElement = document.createElement("input");
+        urlInputElement.classList.add("linkUrl");
+        urlInputElement.placeholder = "URL";
+        urlInputElement.required = true;
 
-    // Create and style author input element
-    const authorInputElement = document.createElement("input");
-    authorInputElement.classList.add("linkAuthor");
-    authorInputElement.placeholder = "Author";
-    authorInputElement.required = true;
+        // Create and style author input element
+        const authorInputElement = document.createElement("input");
+        authorInputElement.classList.add("linkAuthor");
+        authorInputElement.placeholder = "Author";
+        authorInputElement.required = true;
 
-    // Create and style add button element
-    const addButtonElement = document.createElement("button");
-    addButtonElement.innerHTML = "Add link";
-    addButtonElement.classList.add("button", "btn-default", "navbar-btn");
-    addButtonElement.id = "addButton";
-    // console.log(addButtonElement);
+        // Create and style add button element
+        const addButtonElement = document.createElement("button");
+        addButtonElement.innerHTML = "Add link";
+        addButtonElement.classList.add("button", "btn-default", "navbar-btn");
+        addButtonElement.id = "addButton";
+        // console.log(addButtonElement);
 
-    const addBtnSubElement = document.getElementById("addButton");
-    // console.log(addBtnSubElement);
+        const addBtnSubElement = document.getElementById("addButton");
+        // console.log(addBtnSubElement);
 
 
-    // Add to the DOM
-    formElement.appendChild(titleInputElement);
-    formElement.appendChild(urlInputElement);
-    formElement.appendChild(authorInputElement);
-    formElement.appendChild(addButtonElement);
-    fragment.appendChild(formElement);
-    contentElement.prepend(fragment);
+        // Add to the DOM
+        formElement.appendChild(titleInputElement);
+        formElement.appendChild(urlInputElement);
+        formElement.appendChild(authorInputElement);
+        formElement.appendChild(addButtonElement);
+        fragment.appendChild(formElement);
+        contentElement.prepend(fragment);
+        
+        formElement.addEventListener("submit", event => {
+            // console.log(event.target.children);
+            const holder = event.target.children;
+            for (let i = 0; i < holder.length - 1; i++) {
+                console.log(holder[i].value);
+                linkMoverArray.push(holder[i].value);
+            }
+            // event.preventDefault();
+            // console.log(linkMoverArray);
+            [linkMoverObj.title, linkMoverObj.url, linkMoverObj.author] = linkMoverArray;
+            // console.log(linkMoverObj);
+            toMergeArray.push(linkMoverObj);
+            console.log(toMergeArray);
+            const merger = [...toMergeArray, ...links];
+            console.log(merger);
+        });
+    });
     
 
-    formElement.addEventListener("submit", event => {
-        // console.log(event.target.children);
-        const holder = event.target.children;
-        for (let i = 0; i < holder.length; i++) {
-            console.log(holder[i].value);
-        }
-        // event.preventDefault();
-    });
-    });
-
+    // console.log(mergedObj);
     
     links.forEach(item => {
         // Create div element for each groups of links
