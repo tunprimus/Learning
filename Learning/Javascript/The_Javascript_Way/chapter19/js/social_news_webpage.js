@@ -166,9 +166,12 @@ function displayHandler() {
     
 
     formElement.addEventListener("submit", event => {
-        console.log(event.target);
-        // console.log(Object.entries(event.target.childNodes));
-        event.preventDefault();
+        // console.log(event.target.children);
+        const holder = event.target.children;
+        for (let i = 0; i < holder.length; i++) {
+            console.log(holder[i].value);
+        }
+        // event.preventDefault();
     });
     });
 
