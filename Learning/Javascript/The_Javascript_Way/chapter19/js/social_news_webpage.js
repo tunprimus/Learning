@@ -119,9 +119,11 @@ let linkMoverObj = {};
 let toMergeArray = [];
 let mergedObj = {};
 
+let mergedList = [];
+
 /* Function for display */
 function displayHandler() {
-    const links = defaultLinks();
+    const baseLinks = defaultLinks();
     // console.log(links);
     
     submitButtonElement.addEventListener("click", () => {
@@ -158,9 +160,6 @@ function displayHandler() {
         addButtonElement.id = "addButton";
         // console.log(addButtonElement);
 
-        const addBtnSubElement = document.getElementById("addButton");
-        // console.log(addBtnSubElement);
-
 
         // Add to the DOM
         formElement.appendChild(titleInputElement);
@@ -182,16 +181,13 @@ function displayHandler() {
             [linkMoverObj.title, linkMoverObj.url, linkMoverObj.author] = linkMoverArray;
             // console.log(linkMoverObj);
             toMergeArray.push(linkMoverObj);
-            console.log(toMergeArray);
-            const merger = [...toMergeArray, ...links];
+            // console.log(toMergeArray);
+            const merger = [...toMergeArray, ...baseLinks];
             console.log(merger);
         });
     });
     
-
-    // console.log(mergedObj);
-    
-    links.forEach(item => {
+    baseLinks.forEach(item => {
         // Create div element for each groups of links
         const divElement = document.createElement("div");
         divElement.classList.add("link");
