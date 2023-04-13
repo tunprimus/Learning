@@ -18,4 +18,14 @@ cx.strokeRect(5, 5, 50, 50);
 cx.lineWidth = 5;
 cx.strokeRect(135, 5, 50, 50);
 
+/* Paths */
+
+let cx2 = document.querySelectorAll("canvas")[2].getContext("2d");
+cx2.beginPath();
+for (let y = 0; y < 100; y += 10) {
+    cx2.moveTo(10, y);
+    cx2.lineTo(90, y);
+}
+cx2.stroke();
+
 
