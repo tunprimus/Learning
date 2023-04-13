@@ -28,4 +28,10 @@ for (let y = 0; y < 100; y += 10) {
 }
 cx2.stroke();
 
+let cx3 = document.querySelectorAll("canvas")[3].getContext("2d");
+cx3.beginPath();
+cx3.moveTo(50, 10);
+cx3.lineTo(10, 70);
+cx3.lineTo(90,70);
+cx3.fill();
 
