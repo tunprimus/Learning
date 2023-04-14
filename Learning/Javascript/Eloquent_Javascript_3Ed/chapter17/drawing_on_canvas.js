@@ -67,3 +67,59 @@ cx6.stroke();
 
 
 /* Drawing A Pie Chart */
+
+
+const results = [
+    {name: "Satisfied", count: 1043, color: "lightblue"},
+    {name: "Neutral", count: 563, color: "lightgreen"},
+    {name: "Unsatisfied", count: 510, color: "pink"},
+    {name: "No comment", count: 175, color: "silver"}
+];
+
+let cx7 = document.querySelectorAll("canvas")[7].getContext("2d");
+let total = results.reduce((sum, {count}) => sum + count, 0);
+// Start at the top
+let currentAngle = -0.5 * Math.PI;
+for (let result of results) {
+    let sliceAngle = (result.count / total) * 2 * Math.PI;
+    cx7.beginPath();
+    // centre = 100, 100, radius = 100
+    // from current angle, clockwise by slice's angle
+    cx7.arc(100, 100, 100, currentAngle, currentAngle + sliceAngle);
+    currentAngle += sliceAngle;
+    cx7.lineTo(100, 100);
+    cx7.fillStyle = result.color;
+    cx7.fill();
+}
+
+/* Text */
+
+let cx8 = document.querySelectorAll("canvas")[8].getContext("2d");
+cx8.font = "28px Georgia";
+cx8.fillStyle = "fuchsia";
+cx8.fillText("I can draw text, too!", 10, 50);
+
+
+/* Images */
+let cx9 = document.querySelectorAll("canvas")[9].getContext("2d");
+let img = document.createElement("img");
+img.src = "img/hat.png";
+img.addEventListener("load", () => {
+    for (let x = 10; x < 200; x += 30) {
+        cx9.drawImage(img, x, 10);
+    }
+});
+
+let cx10 = document.querySelectorAll("canvas")[10].getContext("2d");
+let img2 = document.createElement("img");
+img2.src = "img/player.png";
+let spriteW = 37;
+let spriteH = 80;
+img2.addEventListener("load", () => {
+    let cycle = 0;
+    setInterval(() => {
+        cx10.clearRect(0, 0, spriteW, spriteH);
+        cx10.drawImage(img2, cycle * spriteW, 0, spriteW, spriteH, 0, 0, spriteW, spriteH);
+        cycle = (cycle + 1) % 8;
+    }, 120);
+});
