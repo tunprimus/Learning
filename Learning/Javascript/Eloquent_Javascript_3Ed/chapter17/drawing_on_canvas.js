@@ -123,3 +123,143 @@ img2.addEventListener("load", () => {
         cycle = (cycle + 1) % 8;
     }, 120);
 });
+
+
+/* Transformation */
+
+let cx11 = document.querySelectorAll("canvas")[11].getContext("2d");
+cx11.scale(3, .5);
+cx11.beginPath();
+cx11.arc(50, 50, 40, 0, 7);
+cx11.lineWidth = 3;
+cx11.stroke();
+
+function flipHorizontally(context, around) {
+    context.translate(around, 0);
+    context.scale(-1, 1);
+    context.translate(-around, 0);
+};
+
+
+let cx12 = document.querySelectorAll("canvas")[12].getContext("2d");
+let img3 = document.createElement("img");
+img3.src = "img/player2.png"
+let spriteW2 = 37;
+let spriteH2 = 80;
+img3.addEventListener("load", () => {
+    flipHorizontally(cx12, 100 + spriteW2 / 2);
+    cx12.drawImage(img3, 0, 0, spriteW2, spriteH2, 100, 0, spriteW2, spriteH2);
+});
+
+
+
+/* Storing And Clearing Transformations */
+
+let cx13 = document.querySelectorAll("canvas")[13].getContext("2d");
+function branch(length, angle, scale) {
+    cx13.fillRect(0, 0, 1, length);
+    if (length < 8) {
+        return;
+    }
+    cx13.save;
+    cx13.translate(0, length);
+    cx13.rotate(-angle);
+    branch(length * scale, angle, scale);
+    cx13.rotate(2 * angle);
+    branch(length * scale, angle, scale);
+    cx13.restore();
+}
+cx13.translate(300, 0);
+branch(60, 0.5, 0.8);
+
+
+/* Back To The Game */
+
+// This also tracks its own viewport and player direction
+class CanvasDisplay {
+    constructor(parent, level) {
+        this.canvas = document.createElement("canvas");
+        this.canvas.width = Math.min(600, level.width * scale);
+        this.canvas.height = Math.min(450, level.height * scale);
+        parent.appendChild(this.canvas);
+        this.cx = this.canvas.getContext("2d");
+
+        this.flipPlayer = false;
+
+        this.viewport = {
+            left: 0,
+            top: 0,
+            width: this.canvas.width / scale,
+            height: this.canvas.height / scale
+        };
+    }
+
+    clear() {
+        this.canvas.remove();
+    }
+}
+
+// 1st compute new viewport then draws the appropriate game scene
+CanvasDisplay.prototype.syncState = function(state) {
+    this.updateViewport(state);
+    this.clearDisplay(state.status);
+    this.drawBackground(state.level);
+    this.drawActors(state.actors);
+};
+
+// Adjust viewport if player is close to the edge
+CanvasDisplay.prototype.updateViewport = function(state) {
+    let view = this.viewport;
+    let margin = view.width / 3;
+    let player = state.player;
+    let centre = player.pos.plus(player.size.times(0.5));
+
+    if (centre.x < view.left + margin) {
+        view.left = Math.max(centre.x - margin, 0);
+    } else if (centre.x > view.left + view.width - margin) {
+        view.left = Math.min(centre.x + margin - view.width, state.level.width - view.width);
+    }
+
+    if (centre.y < view.top + margin) {
+        view.top = Math.max(centre.y - margin, 0);
+    } else if (centre.y > view.top + view.height - margin) {
+        view.top = Math.min(centre.y + margin - view.height, state.level.height - view.height);
+    }
+};
+
+// Use different colours based on whether game was won or lost
+CanvasDisplay.prototype.clearDisplay = function(status) {
+    if (status === "won") {
+        this.cx.fillStyle = "rgb(68, 191, 255)";
+    } else if (status === "lost") {
+        this.cx.fillStyle = "rgb(44, 136, 214)";
+    } else {
+        this.cx.fillStyle = "rgb(52, 166, 251)";
+    }
+    this.cx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+};
+
+// Drawing the background
+let OtherSprites = document.createElement("img");
+OtherSprites.src = "img/sprites.png";
+
+CanvasDisplay.prototype.drawBackground = function(level) {
+    let {left, top, width, height} = this.viewport;
+    let xStart = Math.floor(left);
+    let xEnd = Math.ceil(left + width);
+    let yStart = Math.floor(top);
+    let yEnd = Math.ceil(top + height);
+
+    for (let y = yStart; y < yEnd; y++) {
+        for (let x = xStart; x < xEnd; x++) {
+            let tile = level.rows[y][x];
+            if (tile === "empty") {
+                continue;
+            }
+            let screenX = (x - left) * scale;
+            let screenY = (y - top) * scale;
+            let tileX = tile === "lava" ? scale : 0;
+            this.cx.drawImage(OtherSprites, tileX, 0, scale, scale, screenX, screenY, scale, scale);
+        }
+    }
+};
