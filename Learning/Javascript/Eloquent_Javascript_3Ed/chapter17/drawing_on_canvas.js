@@ -263,3 +263,22 @@ CanvasDisplay.prototype.drawBackground = function(level) {
         }
     }
 };
+
+let playerSprites = document.createElement("img");
+playerSprites.src = "img/player.png";
+const playerXOverlap = 4;
+
+CanvasDisplay.prototype.drawPlayer = function(player, x, y, width, height) {
+    width += playerXOverlap * 2;
+    x -= playerXOverlap;
+    if (player.speed.x != 0) {
+        this.flipPlayer = player.speed.x < 0;
+    }
+
+    let tile = 8;
+    if (player.speed.y != 0) {
+        tile = 9;
+    } else if (player.speed.x != 0) {
+        tile = Math.floor(Date.now() / 60) % 8;
+    }
+};
