@@ -281,4 +281,31 @@ CanvasDisplay.prototype.drawPlayer = function(player, x, y, width, height) {
     } else if (player.speed.x != 0) {
         tile = Math.floor(Date.now() / 60) % 8;
     }
+
+    this.cx.save();
+    if (this.flipPlayer) {
+        flipHorizontally(this.cx, x + width / 2);
+    }
+
+    let tileX = tile * width;
+    this.cx.drawImage(playerSprites, tileX, 0, width, height, x, y, width, height);
+
+    this.cx.restore();
 };
+
+
+CanvasDisplay.prototype.drawActors = function(actors) {
+    for (let actor of actors) {
+        let width = actor.size.x * scale;
+        let height = actor.size.y * scale;
+        let x = (actor.pos.x - this.viewport.left) * scale;
+        let y = (actor.pos.y - this.viewport.top) * scale;
+        if (actor.type === "player") {
+            this.drawPlayer(actor, x, y, width, height);
+        } else {
+            let tileY = (actor.type === "coin" ? 2 : 1) * scale;
+            this.cx.drawImage(OtherSprites, tileX, 0, width, height, x, y, width, height);
+        }
+    }
+};
+
