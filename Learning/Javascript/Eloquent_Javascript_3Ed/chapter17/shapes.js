@@ -140,5 +140,21 @@ const starMaker = (ctx, xCoord, yCoord, radius, fillColour) => {
     ctx.fillStyle = fillColour;
     ctx.fill();
 };
-
 starMaker(ctx4, 5, 5, 50, "yellow");
+
+let ctx5 = document.querySelectorAll("canvas")[5].getContext("2d");
+
+const spiralMaker2 = (ctx, centreX, centreY, startRadius, numberOfLines) => {
+    let xCentre = centreX + startRadius;
+    let yCentre = centreY + startRadius;
+    const FACTOR = 4;
+    ctx.beginPath();
+    ctx.moveTo(xCentre, yCentre);
+    for (let i = 0; i < (numberOfLines * FACTOR); i++) {
+        let angle = i * Math.PI / (numberOfLines / FACTOR);
+        let distance = startRadius * i / (numberOfLines * FACTOR);
+        ctx.lineTo(xCentre + Math.cos(angle) * distance, yCentre + Math.sin(angle) * distance);
+    }
+    ctx.stroke();
+};
+spiralMaker2(ctx5, 50, 50, 50, 100);
