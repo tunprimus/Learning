@@ -94,4 +94,4 @@ const spiralMaker = (ctx, centreX, centreY, startRadius, numberOfLines) => {
     }
     ctx.stroke();
 };
-spiralMaker(ctx3, 150, 50, 10, 10);
+spiralMaker(ctx3, 150, 70, 10, 10);
