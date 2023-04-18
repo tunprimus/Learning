@@ -125,43 +125,20 @@ function getCircleY(radians, radius) {
     return Math.sin(radians) * radius;
 }
 
-const starMaker = (ctx, centreX, centreY, length, fillColour) => {
+const starMaker = (ctx, xCoord, yCoord, radius, fillColour) => {
+    let steps = 8;
+    let xCentre = xCoord + radius;
+    let yCentre = yCoord + radius;
+
     ctx.beginPath();
-    ctx.strokeStyle = fillColour;
-    ctx.fillStyle = fillColour;
-    ctx.moveTo(centreX, centreY);
-
-    const SCALE = 180;
-    let rotationStep = 45;
-    let curAngle = 0;
-    let angle = null;
-    const coordinates = [];
-    let obj = {};
-    let distance = 0;
-    let newX = 0;
-    let newY = 0;
-    let coord = {newX, newY};
-    // console.log(coord);
-
-    for (let i = 0, newAngle = 0; i < 8, newAngle < 382; i++, newAngle += rotationStep) {
-        console.log(newAngle);
-        curAngle = newAngle;
-        if (curAngle % 90 === 0) {
-            distance = length;
-        } else if (curAngle % 45 === 0) {
-            distance = length / 4;
-        }
-        // console.log(distance);
-        angle = toRadians(curAngle);
-        console.log(angle);
-        coord.newX = Math.ceil(getCircleX(angle, distance));
-        coord.newY = Math.ceil(getCircleY(angle, distance));
-        console.log(coord);
-        // ctx.moveTo(centreX, centreY);
-        ctx.lineTo(coord.newX, coord.newY);
+    ctx.moveTo(xCentre + radius, yCentre);
+    for (let i = 1; i <= steps; i++) {
+        // Use only 2 or 4 as divisor for proper shaping
+        let angle = i * Math.PI / 2;
+        ctx.quadraticCurveTo(xCentre, yCentre, (xCentre + Math.cos(angle) * radius), (yCentre + Math.sin(angle) * radius));
     }
-    console.log(coordinates);
-
-    ctx.stroke();
+    ctx.fillStyle = fillColour;
+    ctx.fill();
 };
-starMaker(ctx4, 100, 100, 100, "yellow");
+
+starMaker(ctx4, 5, 5, 50, "yellow");
