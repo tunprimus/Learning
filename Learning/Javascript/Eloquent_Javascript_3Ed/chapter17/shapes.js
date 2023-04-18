@@ -47,3 +47,32 @@ const diamondMaker = (ctx, x, y, rotation, side1, side2, fillColour) => {
 };
 diamondMaker(ctx1, 10, 10, 45, 80, 80, "red");
 
+
+let ctx2 = document.querySelectorAll("canvas")[2].getContext("2d");
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function getRandomIntExclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); // The maximum is inclusive and the minimum is inclusive
+}
+
+const zigZagLineMaker = (ctx, startX, startY, numberOfLines) => {
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    for (let i = startX, j = startY; i < numberOfLines, j < numberOfLines; i++, j++) {
+        // ctx.moveTo(startX, startY);
+        ctx.lineTo((i + getRandomInt(numberOfLines * 5)), (j+ getRandomInt(numberOfLines * 7)));
+    }
+    ctx.stroke();
+};
+zigZagLineMaker(ctx2, 15, 15, 50);
