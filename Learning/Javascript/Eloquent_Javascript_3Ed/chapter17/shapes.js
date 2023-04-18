@@ -76,3 +76,22 @@ const zigZagLineMaker = (ctx, startX, startY, numberOfLines) => {
     ctx.stroke();
 };
 zigZagLineMaker(ctx2, 15, 15, 50);
+
+
+let ctx3 = document.querySelectorAll("canvas")[3].getContext("2d");
+
+const spiralMaker = (ctx, centreX, centreY, startRadius, numberOfLines) => {
+    ctx.beginPath();
+    ctx.moveTo(centreX, centreY);
+
+    let startSpiral = 0;
+    let endSpiral = 2;
+    for (let i = 0; i < numberOfLines; i++) {
+        ctx.arc(centreX, centreY, startRadius, startSpiral, endSpiral);
+        startRadius += 5;
+        startSpiral += 2;
+        endSpiral++;
+    }
+    ctx.stroke();
+};
+spiralMaker(ctx3, 150, 50, 10, 10);
