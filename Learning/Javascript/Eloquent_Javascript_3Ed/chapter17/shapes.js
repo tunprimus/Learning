@@ -97,3 +97,71 @@ const spiralMaker = (ctx, centreX, centreY, startRadius, numberOfLines) => {
     ctx.stroke();
 };
 spiralMaker(ctx3, 525, 525, 10, 100);
+
+
+let ctx4 = document.querySelectorAll("canvas")[4].getContext("2d");
+
+function flipHorizontally(context, around) {
+    context.translate(around, 0);
+    context.scale(-1, 1);
+    context.translate(-around, 0);
+}
+
+function flipVertically(context, around) {
+    context.translate(0, around);
+    context.scale(1, -1);
+    context.translate(0, -around);
+}
+
+function toRadians(deg) {
+    return deg * (Math.PI / 180);
+}
+
+function getCircleX(radians, radius) {
+    return Math.cos(radians) * radius;
+}
+
+function getCircleY(radians, radius) {
+    return Math.sin(radians) * radius;
+}
+
+const starMaker = (ctx, centreX, centreY, length, fillColour) => {
+    ctx.beginPath();
+    ctx.strokeStyle = fillColour;
+    ctx.fillStyle = fillColour;
+    ctx.moveTo(centreX, centreY);
+
+    const SCALE = 180;
+    let rotationStep = 45;
+    let curAngle = 0;
+    let angle = null;
+    const coordinates = [];
+    let obj = {};
+    let distance = 0;
+    let newX = 0;
+    let newY = 0;
+    let coord = {newX, newY};
+    // console.log(coord);
+
+    for (let i = 0, newAngle = 0; i < 8, newAngle < 382; i++, newAngle += rotationStep) {
+        console.log(newAngle);
+        curAngle = newAngle;
+        if (curAngle % 90 === 0) {
+            distance = length;
+        } else if (curAngle % 45 === 0) {
+            distance = length / 4;
+        }
+        // console.log(distance);
+        angle = toRadians(curAngle);
+        console.log(angle);
+        coord.newX = Math.ceil(getCircleX(angle, distance));
+        coord.newY = Math.ceil(getCircleY(angle, distance));
+        console.log(coord);
+        // ctx.moveTo(centreX, centreY);
+        ctx.lineTo(coord.newX, coord.newY);
+    }
+    console.log(coordinates);
+
+    ctx.stroke();
+};
+starMaker(ctx4, 100, 100, 100, "yellow");
