@@ -12,19 +12,16 @@ Recommended to create a function for each shape while passing the position, size
 
 let ctx0 = document.querySelectorAll("canvas")[0].getContext("2d");
 
-const trapezoidMaker = (ctx, x, y, side1, side2, side3, side4, fillColour) => {
+const trapezoidMaker = (ctx, x, y, side1, side2, side3, fillColour) => {
     // ctx = ctx;
     ctx.strokeStyle = fillColour;
+    ctx.fillStyle = fillColour;
     ctx.beginPath();
     ctx.moveTo(x, y);
     ctx.lineTo(x + side1, y);
     ctx.lineTo(x + side1, y + side2);
     ctx.lineTo(x + side1 - side3, y + side2);
-    // ctx.lineTo();
-    // ctx.lineTo();
-    // ctx.lineTo();
     ctx.stroke();
     ctx.fill();
 }
-
-trapezoidMaker(ctx0, 10, 10, 100, 50, 80, 50, "yellow");
+trapezoidMaker(ctx0, 10, 10, 100, 50, 80, "yellow");
