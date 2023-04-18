@@ -25,3 +25,25 @@ const trapezoidMaker = (ctx, x, y, side1, side2, side3, fillColour) => {
     ctx.fill();
 }
 trapezoidMaker(ctx0, 10, 10, 100, 50, 80, "yellow");
+
+let ctx1 = document.querySelectorAll("canvas")[1].getContext("2d");
+
+// Centre to rotate function that is similar to the flipHorizontally function in the chapter example
+const centreToRotate = (originX, originY, sideX, sideY) => {
+    let newX = (originX + sideX) / 2;
+    let newY = (originY + sideY) / 2;
+    return {newX, newY};
+};
+
+const diamondMaker = (ctx, x, y, rotation, side1, side2, fillColour) => {
+    ctx.fillStyle = fillColour;
+    
+    const { newX, newY } = centreToRotate(x, y, side1, side2);
+    
+    ctx.translate(newX, newY);
+    ctx.rotate(rotation * Math.PI / 180);
+    ctx.translate(-newX, -newY);
+    ctx.fillRect(newX, y, side1, side2);
+};
+diamondMaker(ctx1, 10, 10, 45, 80, 80, "red");
+
