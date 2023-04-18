@@ -82,16 +82,18 @@ let ctx3 = document.querySelectorAll("canvas")[3].getContext("2d");
 
 const spiralMaker = (ctx, centreX, centreY, startRadius, numberOfLines) => {
     ctx.beginPath();
-    ctx.moveTo(centreX, centreY);
+    // ctx.moveTo(centreX, centreY);
 
     let startSpiral = 0;
-    let endSpiral = 2;
+    let endSpiral = 0.1;
     for (let i = 0; i < numberOfLines; i++) {
+        // ctx.beginPath();
         ctx.arc(centreX, centreY, startRadius, startSpiral, endSpiral);
         startRadius += 5;
-        startSpiral += 2;
+        // startSpiral++;
         endSpiral++;
+        ctx.moveTo(centreX + startRadius, centreY);
     }
     ctx.stroke();
 };
-spiralMaker(ctx3, 150, 70, 10, 10);
+spiralMaker(ctx3, 525, 525, 10, 100);
