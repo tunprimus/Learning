@@ -30,7 +30,7 @@ for (let result of results) {
  */
 
 
-const pieChartMaker = (objectsArray, ctx, xCoord, yCoord, radius) => {
+const pieChartMaker = (objectsArray, ctx, xCoord, yCoord, radius, gap, labelMaxWidth) => {
     let centreX = xCoord + (radius / 2);
     let centreY = yCoord + (radius / 2);
     let total = objectsArray.reduce((sum, {count}) => sum + count, 0);
@@ -39,10 +39,19 @@ const pieChartMaker = (objectsArray, ctx, xCoord, yCoord, radius) => {
         let sliceAngle = (object.count / total) * 2 * Math.PI;
         ctx.beginPath();
         ctx.arc(centreX, centreY, radius, currentAngle, currentAngle + sliceAngle);
+        let angle = currentAngle + sliceAngle / 2;
         currentAngle += sliceAngle;
         ctx.lineTo(centreX, centreY);
         ctx.fillStyle = object.color;
         ctx.fill();
+
+        let x = centreX + Math.cos(angle) * (radius + gap);
+        let y = centreY + Math.sin(angle) * (radius + gap);
+        
+        ctx.font = "40px bold serif";
+        ctx.fillText(`${object.name}`, x, y, labelMaxWidth);
+        ctx.lineTo(x, y);
+        ctx.stroke();
     }
 };
-pieChartMaker(results, ctx0, 100, 100, 100);
+pieChartMaker(results, ctx0, 150, 150, 100, 50, 50);
