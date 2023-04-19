@@ -46,11 +46,17 @@ const pieChartMaker = (objectsArray, ctx, xCoord, yCoord, radius, gap, labelMaxW
         ctx.fill();
 
         let x = centreX + Math.cos(angle) * (radius + gap);
+        let xp = centreX + Math.cos(angle) * (radius);
         let y = centreY + Math.sin(angle) * (radius + gap);
+        let yp = centreY + Math.sin(angle) * (radius);
         
         ctx.font = "40px bold serif";
+        // ctx.textBaseline = "ideographic";
+        ctx.textAlign = "end";
         ctx.fillText(`${object.name}`, x, y, labelMaxWidth);
+        ctx.moveTo(xp, yp);
         ctx.lineTo(x, y);
+        ctx.setLineDash([1, 10]);
         ctx.stroke();
     }
 };
