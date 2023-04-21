@@ -1,4 +1,5 @@
 
+// import fetch from "node-fetch";
 
 /* Browsers And HTTP */
 
@@ -18,7 +19,12 @@ fetch("example/data.txt")
     .then(text => console.log(text)); // -> This is the content of the data.txt
 
 
-// Fetch uses GET by default
+// Fetch uses GET by default; other methods have to be added
 fetch("example/data.txt", {method: "DELETE"}).then(resp => {
     console.log(resp.status); // -> 405
 });
+
+// One can add a body or headers to the request
+fetch("example/data.txt", {headers: {Range: "bytes=8-19"}})
+    .then(resp => resp.text())
+    .then(console.log); // -> the content
