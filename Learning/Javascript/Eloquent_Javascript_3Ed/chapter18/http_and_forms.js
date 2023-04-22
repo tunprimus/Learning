@@ -28,3 +28,22 @@ fetch("example/data.txt", {method: "DELETE"}).then(resp => {
 fetch("example/data.txt", {headers: {Range: "bytes=8-19"}})
     .then(resp => resp.text())
     .then(console.log); // -> the content
+
+
+/* Form Fields */
+
+/* Focus */
+
+document.querySelector("input").focus();
+console.log(document.activeElement.tagName);
+
+document.querySelector("input").blur();
+console.log(document.activeElement.tagName);
+
+
+/* The Form As A Whole */
+// let form = document.querySelector("form");
+let form = document.querySelectorAll("form")[2];
+console.log(form.elements[1].type); //-> password
+console.log(form.elements.password.type); //-> password
+console.log(form.elements.name.form === form); // -> true
