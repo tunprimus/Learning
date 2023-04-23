@@ -76,3 +76,78 @@ function replaceSelection(field, word) {
     field.selectionEnd = from + word.length;
 }
 
+// Display current length of text in the field
+let text = document.querySelectorAll("input")[12];
+// console.log(text);
+let output = document.querySelector("#length");
+text.addEventListener("input", () => {
+    output.textContent = text.value.length;
+});
+
+
+/* Checkboxes And Radio Buttons */
+
+
+let checkbox = document.querySelector("#purple");
+checkbox.addEventListener("change", () => {
+    document.body.style.background = checkbox.checked ? "mediumpurple" : "";
+});
+
+let buttons = document.querySelectorAll("[name=colour]");
+for (let button of Array.from(buttons)) {
+    button.addEventListener("change", () => {
+        document.body.style.background = button.value;
+    });
+}
+
+
+/* Select Fields */
+
+
+let select = document.querySelectorAll("select")[1];
+let output2 = document.querySelector("#output");
+select.addEventListener("change", () => {
+    let number = 0;
+    for (let option of Array.from(select.options)) {
+        if (option.selected) {
+            number += Number(option.value);
+        }
+    }
+    output2.textContent = number;
+});
+
+
+/* File Fields */
+
+
+let input = document.querySelectorAll("input")[17];
+// console.log(input);
+input.addEventListener("change", () => {
+    if (input.files.length > 0) {
+        let file = input.files[0];
+        console.log("You chose", file.name);
+        if (file.type) {
+            console.log("It has type", file.type);
+        }
+    }
+});
+
+let input2 = document.querySelectorAll("input")[18];
+input2.addEventListener("change", () => {
+    for (let file of Array.from(input2.files)) {
+        let reader = new FileReader();
+        reader.addEventListener("load", () => {
+            console.log("File", file.name, "starts with", reader.result.slice(0, 20));
+        });
+        reader.readAsText(file);
+    }
+});
+
+function readFileText(file) {
+    return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        reader.addEventListener("load", () => resolve(reader.result));
+        reader.addEventListener("error", () => reject(reader.error));
+        reader.readAsText(file);
+    });
+}

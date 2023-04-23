@@ -28,27 +28,60 @@
             two
             three
         </textarea>
+        <br>
         <select>
             <option>Pancakes</option>
             <option>Pudding</option>
             <option>Ice cream</option>
         </select>
+        <br>
         <input type="text" tabindex=1> <a href=".">(help)</a>
         <button onclick="console.log('ok')" tabindex=2>OK</button>
+        <br>
 
         <button>I'm all right</button>
         <button disabled>I'm out</button>
     </form>
+    <br>
 
     <form action="example/submit.html">
         Name: <input type="text" name="name"><br>
         Password: <input type="password" name="password"><br>
         <button type="submit">Log in</button>
     </form>
+    <br>
 
     <form action="example/submit.html">
         Value: <input type="text" name="value">
         <button type="submit">Save</button>
     </form>
+    <br>
+
+    <input type="text"> length: <span id="length">0</span><br>
+
+    <label>
+        <input type="checkbox" id="purple"> Make this page purple
+    </label><br>
+
+    <label>
+        <input type="radio" name="colour" value="orange"> Orange
+    </label>
+    <label>
+        <input type="radio" name="colour" value="lightgreen"> Green
+    </label>
+    <label>
+        <input type="radio" name="colour" value="lightblue"> Blue
+    </label>
+    <br>
+    <select multiple>
+        <option value="1">0001</option>
+        <option value="2">0010</option>
+        <option value="4">0100</option>
+        <option value="8">1000</option>
+    </select> = <span id="output">0</span>
+    <br>
+    <input type="file">
+    <br>
+    <input type="file" multiple>
 </body>
 </html>
