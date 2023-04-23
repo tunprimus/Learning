@@ -47,3 +47,32 @@ let form = document.querySelectorAll("form")[2];
 console.log(form.elements[1].type); //-> password
 console.log(form.elements.password.type); //-> password
 console.log(form.elements.name.form === form); // -> true
+
+// Prevent submit
+let form2 = document.querySelectorAll("form")[3];
+form2.addEventListener("submit", event => {
+    console.log("Saving value", form.elements.value.value);
+    event.preventDefault();
+});
+
+
+/* Text Fields */
+
+
+let textarea = document.querySelector("textarea");
+textarea.addEventListener("keydown", event => {
+    // The keycode for F2 is 113
+    if (event.keyCode === 113) {
+        replaceSelection(textarea, "Khasekhemwy");
+        event.preventDefault();
+    }
+});
+function replaceSelection(field, word) {
+    let from = field.selectionStart;
+    let to = field.selectionEnd;
+    field.value = field.value.slice(0, from) + word + field.value(to);
+    // Put the cursor after the word
+    field.selectionStart = from + word.length;
+    field.selectionEnd = from + word.length;
+}
+
