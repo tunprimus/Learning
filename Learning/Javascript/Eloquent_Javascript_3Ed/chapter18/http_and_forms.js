@@ -151,3 +151,55 @@ function readFileText(file) {
         reader.readAsText(file);
     });
 }
+
+/* Storing Data Client-Side */
+
+localStorage.setItem("username", "marijn");
+console.log(localStorage.getItem("username")); // -> marijn
+localStorage.removeItem("username");
+
+
+// Crude note-taking application
+let list = document.querySelectorAll("select")[2];
+// console.log(list);
+let note = document.querySelectorAll("textarea")[2];
+// console.log(note);
+let state = null;
+function setState(newState) {
+    list.textContent = "";
+    for (let name of Object.keys(newState.notes)) {
+        let option = document.createElement("option");
+        option.textContent = name;
+        if (newState.selected === name) {
+            option.selected = true;
+        }
+        list.appendChild(option);
+    }
+    note.value = newState.notes[newState.selected];
+
+    localStorage.setItem("Notes", JSON.stringify(newState));
+    state = newState;
+}
+setState(JSON.parse(localStorage.getItem("Notes")) || {
+    notes: {"shopping list": "Carrots\nRaisins"},
+    selected: "shopping list"
+});
+
+list.addEventListener("change", () => {
+    setState({notes: state.notes, selected: list.value});
+});
+note.addEventListener("change", () => {
+    setState({
+        notes: Object.assign({}, state.notes, {[state.selected]: note.value}),
+        selected: state.selected
+    });
+});
+document.querySelectorAll("button")[6].addEventListener("click", () => {
+    let name = prompt("Note name");
+    if (name) {
+        setState({notes: Object.assign({}, state.notes, {[name]: ""}),
+            selected: name
+        });
+    }
+});
+// console.log(document.querySelectorAll("button"));
