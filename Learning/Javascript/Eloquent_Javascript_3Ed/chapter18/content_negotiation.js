@@ -13,3 +13,20 @@ for (let contentType of contentTypes) {
         .then(text => console.log(`Content Type: ${contentType}\nContent:\n${text}\n\n`))
         .catch(error => console.error(`An error occurred while fetching... ERROR: ${error}`));
 }
+
+/* 
+const url = "https://eloquentjavascript.net/author";
+const types = ["text/plain",
+                "text/html",
+                "application/json",
+                "application/rainbows+unicorns"];
+
+async function showTypes() {
+    for (let type of types) {
+        let resp = await fetch(url, {headers: {accept: type}});
+        console.log(`${type}: ${await resp.text()}\n`);
+    }
+}
+
+showTypes();
+ */
