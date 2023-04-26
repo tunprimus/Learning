@@ -52,7 +52,8 @@ for (let y = 0; y < GRID_HEIGHT; y++) {
 function randomMarker() {
     let checkMark = [];
     for (let i = 0; i < GRID_AREA; i++) {
-        checkMark.push((Math.random() < 0.3) || (Math.random() > 0.7));
+        // checkMark.push((Math.random() < 0.3) || (Math.random() > 0.7));
+        checkMark.push(Math.random() < 0.3);
     }
     return checkMark;
 }
@@ -68,13 +69,71 @@ function gridToCheckboxes(grid) {
 gridToCheckboxes(randomMarker());
 
 
+/* Handling Neighbours' Situation State */
+
+// Count the total number of adjacent/touching neighbours around a cell
+function countNeighbours(grid, x, y) {
+    let counter = 0;
+    // Loop through within the inner boundary of the whole array of grid
+    for (let yp = Math.max(0, y -1); yp <= Math.min(GRID_HEIGHT - 1, y + 1); yp++) {
+        for (let xp = Math.max(0, x - 1); xp <= Math.min(GRID_WIDTH - 1, xp + 1); xp++) {
+            // Check to make sure that cell is within the boundary but not the index cell
+            if ((xp != x || yp != y) && grid[xp + yp * GRID_WIDTH]) {
+                counter++;
+            }
+        }
+    }
+    return counter;
+}
+
+// 
+function nextGeneration(grid) {
+    let newGrid = new Array(GRID_AREA);
+    for (let y = 0; y < GRID_HEIGHT; y++) {
+        for (let x = 0; x < GRID_WIDTH; x++) {
+            let neighbours = countNeighbours(grid, x, y);
+            let offset = x + y * GRID_WIDTH;
+            if (neighbours < MIN_NEIGHBOURS_ALIVE || neighbours > MAX_NEIGHBOURS_ALIVE) {
+                newGrid[offset] = false;
+            } else if (neighbours === MIN_NEIGHBOURS_ALIVE) {
+                newGrid[offset] = grid[offset];
+            } else {
+                newGrid[offset] = true;
+            }
+        }
+    }
+    return newGrid;
+}
+
+function updateGridForNextTurn() {
+    gridToCheckboxes(nextGeneration(checkboxesToGrid()));
+}
+
+
 /* Handling The Simulation */
 
 let simulate = null;
 
+/* 
+function Simulation() {
+    if (simulate) {
+        clearInterval(simulate);
+        simulate = null;
+    } else {
+        simulate = setInterval(updateGridForNextTurn, 1000);
+    }
+}
+
+nextElement.addEventListener("click", updateGridForNextTurn);
+
+runElement.addEventListener("click", Simulation);
+ */
+
+
 function runSimulation() {
     simulate = setInterval(() => {
         // Function to update the grid
+        updateGridForNextTurn();
     }, 1000);
     runElement.disabled = true;
     nextElement.disabled = true;
@@ -88,6 +147,9 @@ function stopSimulation() {
     stopElement.style.display = "none";
 }
 
+nextElement.addEventListener("click", updateGridForNextTurn);
+
 runElement.addEventListener("click", runSimulation);
 
 stopElement.addEventListener("click", stopSimulation);
+
