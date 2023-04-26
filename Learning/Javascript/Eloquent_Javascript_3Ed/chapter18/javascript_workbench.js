@@ -5,4 +5,20 @@ Put a button next to a <textarea> field that, when pressed, uses the Function co
 const formElement = document.querySelector("form");
 const textareaElement = document.querySelector("textarea");
 const buttonElement = document.querySelector("button");
-const spanElement = document.querySelector("span");
+// const spanElement = document.querySelector("span");
+
+function workbench () {
+    
+    formElement.addEventListener("submit", (event) => {
+        // console.log(event.target.childNodes[3].value);
+        let enteredCode = event.target.childNodes[3].value;
+        let returnCode = Function("", `${enteredCode}`);
+        // console.log(returnCode);
+        return returnCode;
+        // spanElement.textContent = returnCode;
+    });
+    let spanElement = document.createElement("span");
+    spanElement.textContent = returnCode;
+    formElement.appendChild(spanElement);
+}
+workbench();
