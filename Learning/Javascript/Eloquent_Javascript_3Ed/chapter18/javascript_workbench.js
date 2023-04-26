@@ -14,7 +14,7 @@ function workbench () {
         let enteredCode = event.target.childNodes[3].value;
         let returnCode = null;
         try {
-            returnCode = Function(enteredCode)();
+            returnCode = (Function(enteredCode))();
             spanElement.innerText = String(returnCode);
         } catch (error) {
             spanElement.innerText = "Error: " + error;
