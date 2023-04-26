@@ -35,6 +35,7 @@ const stopElement = document.getElementById("stop");
 
 /* Grid Generation */
 
+// Create checkboxes towards grid making
 const checkboxes = [];
 for (let y = 0; y < GRID_HEIGHT; y++) {
     for (let x = 0; x < GRID_WIDTH; x++) {
@@ -46,6 +47,26 @@ for (let y = 0; y < GRID_HEIGHT; y++) {
     // Need to split the  arrays at the end of each row
     gridElement.appendChild(document.createElement("br"));
 }
+
+// Function to generate random values to mark checkboxes
+function randomMarker() {
+    let checkMark = [];
+    for (let i = 0; i < GRID_AREA; i++) {
+        checkMark.push((Math.random() < 0.3) || (Math.random() > 0.7));
+    }
+    return checkMark;
+}
+
+function checkboxesToGrid() {
+    return checkboxes.map(cell => cell.checked);
+}
+
+function gridToCheckboxes(grid) {
+    grid.forEach((value, index) => checkboxes[index].checked = value);
+}
+
+gridToCheckboxes(randomMarker());
+
 
 /* Handling The Simulation */
 
