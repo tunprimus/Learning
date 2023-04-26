@@ -22,8 +22,8 @@ initially. Display it as a grid of checkbox fields, with a button next to it to 
 
 
 /* Variables and constants */
-const GRID_WIDTH = 8;
-const GRID_HEIGHT = 8;
+const GRID_WIDTH = 19;
+const GRID_HEIGHT = 11;
 const GRID_AREA = GRID_WIDTH * GRID_HEIGHT;
 const MIN_NEIGHBOURS_ALIVE = 2;
 const MAX_NEIGHBOURS_ALIVE = 3;
@@ -53,7 +53,7 @@ function randomMarker() {
     let checkMark = [];
     for (let i = 0; i < GRID_AREA; i++) {
         // checkMark.push((Math.random() < 0.3) || (Math.random() > 0.7));
-        checkMark.push(Math.random() < 0.3);
+        checkMark.push(Math.random() > 0.8);
     }
     return checkMark;
 }
@@ -114,27 +114,11 @@ function updateGridForNextTurn() {
 
 let simulate = null;
 
-/* 
-function Simulation() {
-    if (simulate) {
-        clearInterval(simulate);
-        simulate = null;
-    } else {
-        simulate = setInterval(updateGridForNextTurn, 1000);
-    }
-}
-
-nextElement.addEventListener("click", updateGridForNextTurn);
-
-runElement.addEventListener("click", Simulation);
- */
-
-
 function runSimulation() {
     simulate = setInterval(() => {
         // Function to update the grid
         updateGridForNextTurn();
-    }, 1000);
+    }, 997);
     runElement.disabled = true;
     nextElement.disabled = true;
     stopElement.style.display = "inline-block";
