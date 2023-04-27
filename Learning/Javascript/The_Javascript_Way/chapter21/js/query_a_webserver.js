@@ -27,6 +27,7 @@ fetch("https://raw.githubusercontent.com/bpesquet/thejsway/master/resources/lang
     .then(response => response.text()) // Access and return response's text content
     .then(text => {
         console.log(text); // Display file content in the console
+        // console.log(typeof text);
     });
 
 
