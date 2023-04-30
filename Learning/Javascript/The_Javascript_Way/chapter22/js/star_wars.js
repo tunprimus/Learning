@@ -52,5 +52,6 @@ function generateLinks() {
         planetLinksElement.appendChild(planetLinkElement);
         planetLinksElement.appendChild(document.createTextNode(" | "));
     }
+    planetLinksElement.appendChild(document.createTextNode(" ..."));
 }
 generateLinks();
