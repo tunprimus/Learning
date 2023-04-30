@@ -1,0 +1,27 @@
+:root {
+    --flex-min: 60rem;
+}
+
+.wrapper {
+    display: flex;
+	flex-wrap: wrap;
+	margin: 1rem -0.5rem;
+}
+
+.wrapper > * {
+	flex-grow: 1;
+	flex-basis: calc((var(--flex-min) - 100%) * 999);
+	margin: 0.5rem;
+}
+
+.profile-image {
+    display: block;
+    max-width: 30vw;
+    height: auto;
+    font-size: 0.5rem;
+}
+
+.profile-image alt {
+    opacity: 0.2;
+}
+
