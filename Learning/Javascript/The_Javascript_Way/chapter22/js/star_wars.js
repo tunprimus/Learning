@@ -36,3 +36,21 @@ const displayPlanetInfo = (planetId) => {
 
 
 // Function to generate links to display planetary info
+function generateLinks() {
+    for (let planetId = 1; planetId <= PLANETS_TO_VIEW; planetId++) {
+        // Create planet link node
+        const planetLinkElement = document.createElement("a");
+        planetLinkElement.id = planetId;
+        planetLinkElement.textContent = planetId;
+        planetLinkElement.href = "#";
+        // Handle click on links
+        planetLinkElement.addEventListener("click", event => {
+            event.preventDefault();
+            displayPlanetInfo(event.target.id);
+        });
+        // Add link nodes to the page
+        planetLinksElement.appendChild(planetLinkElement);
+        planetLinksElement.appendChild(document.createTextNode(" | "));
+    }
+}
+generateLinks();
