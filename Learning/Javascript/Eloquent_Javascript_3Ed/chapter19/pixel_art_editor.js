@@ -1,5 +1,5 @@
 
-
+// console.clear();
 /* The State */
 
 class Picture {
@@ -8,17 +8,17 @@ class Picture {
         this.height = height;
         this.pixels = pixels;
     }
-    static empty(width, height, colour) {
-        let pixels = new Array(width * height).fill(colour);
+    static empty(width, height, color) {
+        let pixels = new Array(width * height).fill(color);
         return new Picture(width, height, pixels);
     }
-    pixels(x, y) {
+    pixel(x, y) {
         return this.pixels[x + y * this.width];
     }
     draw(pixels) {
         let copy = this.pixels.slice();
-        for (let {x, y, colour} of pixels) {
-            copy[x + y * this.width] = colour;
+        for (let {x, y, color} of pixels) {
+            copy[x + y * this.width] = color;
         }
         return new Picture(this.width, this.height, copy);
     }
@@ -30,6 +30,7 @@ function updateState(state, action) {
     // Spread operator can now be used
     // return Object.assign({...state, ...action});
 }
+// updateState();
 
 
 /* DOM Building */
@@ -44,11 +45,12 @@ function elt(type, props, ...children) {
         if (typeof child !== "string") {
             dom.appendChild(child);
         } else {
-            dom.appendChild(dom.createTextNode(child));
+            dom.appendChild(document.createTextNode(child));
         }
     }
     return dom;
 }
+// elt();
 
 
 /* The Canvas */
@@ -85,6 +87,7 @@ function drawPicture(picture, canvas, scale) {
         }
     }
 }
+// drawPicture();
 
 // Updating with mousedown events
 PictureCanvas.prototype.mouse = function(downEvent, onDown) {
@@ -116,6 +119,7 @@ function pointerPosition(pos, domNode) {
     let rect = domNode.getBoundingClientRect();
     return {x: Math.floor((pos.clientX - rect.left) / scale), y: Math.floor((pos.clientY - rect.top) / scale)};
 }
+// pointerPosition();
 
 // Handling touch events
 PictureCanvas.prototype.touch = function(startEvent, onDown) {
@@ -152,7 +156,7 @@ class PixelEditor {
         this.canvas = new PictureCanvas(state.picture, pos => {
             let tool = tools[this.state.tool];
             let onMove = tool(pos, this.state, dispatch);
-            if (!onMove) {
+            if (onMove) {
                 return pos => onMove(pos, this.state);
             }
         });
@@ -184,16 +188,16 @@ class ToolSelect {
 }
 
 // Colour picking
-class ColourSelect {
+class ColorSelect {
     constructor(state, {dispatch}) {
         this.input = elt("input", {
             type: "color",
-            value: state.colour,
-            onchange: () => dispatch({colour: this.input.value})
+            value: state.color,
+            onchange: () => dispatch({color: this.input.value})
         });
         this.dom = elt("label", null, "🎨 Color: ", this.input);
     }
-    syncState(state) { this.input.value = state.colour; }
+    syncState(state) { this.input.value = state.color; }
 }
 
 
@@ -201,12 +205,13 @@ class ColourSelect {
 // Implement draw tool
 function draw(pos, state, dispatch) {
     function drawPixel({x, y}, state) {
-        let drawn = {x, y, color: state.colour};
+        let drawn = {x, y, color: state.color};
         dispatch({picture: state.picture.draw([drawn])});
     }
     drawPixel(pos, state);
     return drawPixel;
 }
+// draw();
 
 // Implement rectangle tool
 function rectangle(start, state, dispatch) {
@@ -218,7 +223,7 @@ function rectangle(start, state, dispatch) {
         let drawn = [];
         for (let y = yStart; y <= yEnd; y++) {
             for (let x = xStart; x <= xEnd; x++) {
-                drawn.push({x, y, color: state.colour})
+                drawn.push({x, y, color: state.color})
             }
         }
         dispatch({picture: state.picture.draw(drawn)});
@@ -226,19 +231,20 @@ function rectangle(start, state, dispatch) {
     drawRectangle(start);
     return drawRectangle;
 }
+// rectangle();
 
 // Implement flood colour filling
 const around = [{dx: -1, dy: 0}, {dx: 1, dy: 0}, {dx: 0, dy: -1}, {dx: 0, dy: 1}];
 
 function fill({x, y}, state, dispatch) {
     let targetColour = state.picture.pixel(x, y);
-    let drawn = [{x, y, color: state.colour}];
+    let drawn = [{x, y, color: state.color}];
     for (let done = 0; done < drawn.length; done++) {
         for (let {dx, dy} of around) {
             let x = drawn[done].x + dx;
             let y = drawn[done].y + dy;
             if ((x >= 0 && x < state.picture.width) && (y >= 0 && y < state.picture.height) && (state.picture.pixel(x, y) === targetColour) && (!drawn.some(p => p.x === x && p.y === y))) {
-                drawn.push({x, y, color: state.colour});
+                drawn.push({x, y, color: state.color});
             }
         }
     }
@@ -249,7 +255,7 @@ function fill({x, y}, state, dispatch) {
 function pick(pos, state, dispatch) {
     dispatch({color: state.picture.pixel(pos.x, pos.y)});
 }
-
+// pick();
 
 /* Saving and Loading */
 
@@ -288,6 +294,7 @@ function startLoad(dispatch) {
     input.click();
     input.remove();
 }
+// startLoad();
 
 // Linked to startLoad() also
 function finishLoad(file, dispatch) {
@@ -302,6 +309,7 @@ function finishLoad(file, dispatch) {
     });
     reader.readAsDataURL(file);
 }
+// finishLoad();
 
 // Need to draw picture on canvas element before accessing
 function pictureFromImage(image) {
@@ -322,6 +330,7 @@ function pictureFromImage(image) {
     }
     return new Picture(width, height, pixels);
 }
+// pictureFromImage();
 
 
 /* Undo History */
@@ -335,17 +344,18 @@ function historyUpdateState(state, action) {
         return Object.assign({}, state, {
             picture: state.done[0],
             done: state.done.slice(1),
-            doneAt: 0,
+            doneAt: 0
         });
     } else if (action.picture && state.doneAt < Date.now() - 1000) {
         return Object.assign({}, state, {
             done: [state.picture, ...state.done],
-            doneAt: Date.now(),
+            doneAt: Date.now()
         });
     } else {
         return Object.assign({}, state, action);
     }
 }
+// historyUpdateState();
 
 // Implement dispatching of undo actions
 class UndoButton {
@@ -364,12 +374,12 @@ const startState = {
     colour: "#000000",
     picture: Picture.empty(60, 30, "#f0f0f0"),
     done: [],
-    doneAt: 0,
+    doneAt: 0
 };
 
 const baseTools = {draw, fill, rectangle, pick};
 
-const baseControls = [ToolSelect, ColourSelect, SaveButton, LoadButton, UndoButton];
+const baseControls = [ToolSelect, ColorSelect, SaveButton, LoadButton, UndoButton];
 
 function startPixelEditor({state = startState, tools = baseTools, controls = baseControls}) {
     let app = new PixelEditor(state, {
