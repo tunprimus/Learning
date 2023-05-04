@@ -42,7 +42,7 @@ function elt(type, props, ...children) {
         Object.assign(dom, props);
     }
     for (let child of children) {
-        if (typeof child !== "string") {
+        if (typeof child != "string") {
             dom.appendChild(child);
         } else {
             dom.appendChild(document.createTextNode(child));
@@ -66,7 +66,7 @@ class PictureCanvas {
     }
     syncState(picture) {
         // Prevents redraw if no change is made
-        if (this.picture === picture) {
+        if (this.picture == picture) {
             return;
         }
         this.picture = picture;
@@ -91,7 +91,7 @@ function drawPicture(picture, canvas, scale) {
 
 // Updating with mousedown events
 PictureCanvas.prototype.mouse = function(downEvent, onDown) {
-    if (downEvent.button !== 0) {
+    if (downEvent.button != 0) {
         return;
     }
     let pos = pointerPosition(downEvent, this.dom);
@@ -100,11 +100,11 @@ PictureCanvas.prototype.mouse = function(downEvent, onDown) {
         return;
     }
     let move = moveEvent => {
-        if (moveEvent.buttons === 0) {
+        if (moveEvent.buttons == 0) {
             this.dom.removeEventListener("mousemove", move);
         } else {
             let newPos = pointerPosition(moveEvent, this.dom);
-            if (newPos.x === pos.x && newPos.y === pos.y) {
+            if (newPos.x == pos.x && newPos.y == pos.y) {
                 return;
             }
             pos = newPos;
@@ -131,7 +131,7 @@ PictureCanvas.prototype.touch = function(startEvent, onDown) {
     }
     let move = moveEvent => {
         let newPos = pointerPosition(moveEvent.touches[0], this.dom);
-        if (newPos.x === pos.x && newPos.y === pos.y) {
+        if (newPos.x == pos.x && newPos.y == pos.y) {
             return;
         }
         pos = newPos;
@@ -181,7 +181,7 @@ class ToolSelect {
     constructor(state, {tools, dispatch}) {
         this.select = elt("select", {
             onchange: () => dispatch({tool: this.select.value})
-        }, ...Object.keys(tools).map(name => elt("option", {selected: name === state.tool}, name)));
+        }, ...Object.keys(tools).map(name => elt("option", {selected: name == state.tool}, name)));
         this.dom = elt("label", null, "🖌 Tool: ", this.select);
     }
     syncState(state) { this.select.value = state.tool; }
@@ -243,7 +243,7 @@ function fill({x, y}, state, dispatch) {
         for (let {dx, dy} of around) {
             let x = drawn[done].x + dx;
             let y = drawn[done].y + dy;
-            if ((x >= 0 && x < state.picture.width) && (y >= 0 && y < state.picture.height) && (state.picture.pixel(x, y) === targetColour) && (!drawn.some(p => p.x === x && p.y === y))) {
+            if ((x >= 0 && x < state.picture.width) && (y >= 0 && y < state.picture.height) && (state.picture.pixel(x, y) === targetColour) && (!drawn.some(p => p.x == x && p.y == y))) {
                 drawn.push({x, y, color: state.color});
             }
         }
@@ -298,7 +298,7 @@ function startLoad(dispatch) {
 
 // Linked to startLoad() also
 function finishLoad(file, dispatch) {
-    if (file === null) {
+    if (file == null) {
         return;
     }
     let reader = new FileReader();
@@ -337,8 +337,8 @@ function pictureFromImage(image) {
 
 // Store previous states to enable possible rollback
 function historyUpdateState(state, action) {
-    if (action.undo === true) {
-        if (state.done.length === 0) {
+    if (action.undo == true) {
+        if (state.done.length == 0) {
             return state;
         }
         return Object.assign({}, state, {

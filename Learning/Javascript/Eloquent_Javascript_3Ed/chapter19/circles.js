@@ -1,10 +1,7 @@
-/* Add keyboard shortcuts to the application. The first letter of a tool’s name selects the tool, and control-Z or command-Z activates undo.
-Do this by modifying the PixelEditor component. Add a tabIndex property of 0 to the wrapping <div> element so that it can receive keyboard focus. Note that the property corresponding to the tabindex attribute is called tabIndex, with a capital I, and our elt function expects property names. Register the key event handlers directly on that element. This means you have to click, touch, or tab to the application before you can interact with it with the keyboard.
-Remember that keyboard events have ctrlKey and metaKey (for the command key on Mac) properties that you can use to see whether those keys are held down.
+/* Define a tool called circle that draws a filled circle when you drag. The center of the circle lies at the point where the drag or touch gesture starts, and its radius is determined by the distance dragged.
 */
 
-
-console.clear();
+// console.clear();
 /* The State */
 
 class Picture {
@@ -67,26 +64,34 @@ class PictureCanvas {
         });
         this.syncState(picture);
     }
+    // Change this method to partially solve the exercise
     syncState(picture) {
         // Prevents redraw if no change is made
         if (this.picture == picture) {
             return;
         }
+        drawPicture(picture, this.dom, scale, this.picture,);
         this.picture = picture;
-        drawPicture(this.picture, this.dom, scale);
     }
 }
 
 // Function to actually draw the picture on the canvas
-function drawPicture(picture, canvas, scale) {
-    canvas.width = picture.width * scale;
-    canvas.height = picture.height * scale;
+function drawPicture(picture, canvas, scale, previousPicture) {
+    if (previousPicture == null || previousPicture.width != picture.width || previousPicture.height != picture.height) {
+        canvas.width = picture.width * scale;
+        canvas.height = picture.height * scale;
+        previousPicture = null;
+    }
+    
     let cx = canvas.getContext("2d");
 
     for (let y = 0; y < picture.height; y++) {
         for (let x = 0; x < picture.width; x++) {
-            cx.fillStyle = picture.pixel(x, y);
-            cx.fillRect(x * scale, y * scale, scale, scale);
+            let color = picture.pixel(x, y);
+            if (previousPicture == null || previousPicture.pixel(x, y) != color) {
+                cx.fillStyle = color;
+                cx.fillRect(x * scale, y * scale, scale, scale);
+            }
         }
     }
 }
@@ -102,11 +107,11 @@ PictureCanvas.prototype.mouse = function(downEvent, onDown) {
         return;
     }
     let move = moveEvent => {
-        if (moveEvent.buttons === 0) {
+        if (moveEvent.buttons == 0) {
             this.dom.removeEventListener("mousemove", move);
         } else {
             let newPos = pointerPosition(moveEvent, this.dom);
-            if (newPos.x === pos.x && newPos.y === pos.y) {
+            if (newPos.x == pos.x && newPos.y == pos.y) {
                 return;
             }
             pos = newPos;
@@ -242,6 +247,39 @@ function rectangle(start, state, dispatch) {
     return drawRectangle;
 }
 
+// Implement circle tool
+function circle(pos, state, dispatch) {
+    function drawCircle(dest) {
+        /* Area circle = PI * (radius ^ 2)
+            radius = sqrt(area / PI)
+            circumference = 2 * PI * radius
+            diameter = 2 * radius
+        */
+        let rp = Math.sqrt(Math.pow((dest.x - pos.x), 2) + Math.pow((dest.y - pos.y), 2));
+        let radiusPI = Math.ceil(rp);
+        let drawn = [];
+        for (let dy = -radiusPI; dy <= radiusPI; dy++) {
+            for (let dx = -radiusPI; dx <= radiusPI; dx++) {
+                let distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+                // Ensure distance does not exceed the radius
+                if (distance > radiusPI) {
+                    continue;
+                }
+                let y = pos.y + dy;
+                let x = pos.x + dx;
+                // Ensure circle does not exceed the canvas bounds.
+                if (y < 0 || y >= state.picture.height || x < 0 || x >= state.picture.width) {
+                    continue;
+                }
+                drawn.push({x, y, color: state.color});
+            }
+        }
+        dispatch({picture: state.picture.draw(drawn)});
+    }
+    drawCircle(pos);
+    return drawCircle;
+}
+
 // Implement flood colour filling
 const around = [
     {dx: -1, dy: 0},
@@ -257,7 +295,7 @@ function fill({x, y}, state, dispatch) {
         for (let {dx, dy} of around) {
             let x = drawn[done].x + dx;
             let y = drawn[done].y + dy;
-            if ((x >= 0 && x < state.picture.width) && (y >= 0 && y < state.picture.height) && (state.picture.pixel(x, y) === targetColour) && (!drawn.some(p => p.x == x && p.y == y))) {
+            if ((x >= 0 && x < state.picture.width) && (y >= 0 && y < state.picture.height) && (state.picture.pixel(x, y) == targetColour) && (!drawn.some(p => p.x == x && p.y == y))) {
                 drawn.push({x, y, color: state.color});
             }
         }
@@ -310,7 +348,7 @@ function startLoad(dispatch) {
 
 // Linked to startLoad() also
 function finishLoad(file, dispatch) {
-    if (file === null) {
+    if (file == null) {
         return;
     }
     let reader = new FileReader();
@@ -347,7 +385,7 @@ function pictureFromImage(image) {
 
 // Store previous states to enable possible rollback
 function historyUpdateState(state, action) {
-    if (action.undo === true) {
+    if (action.undo == true) {
         if (state.done.length == 0) {
             return state;
         }
@@ -402,5 +440,9 @@ function startPixelEditor({state = startState, tools = baseTools, controls = bas
     return app.dom;
 }
 
-document.querySelector("div").appendChild(startPixelEditor({}));
+let dom = startPixelEditor({
+    tools: Object.assign({}, baseTools, {circle})
+});
+document.querySelector("div").appendChild(dom);
+// document.querySelector("div").appendChild(startPixelEditor({}));
 
