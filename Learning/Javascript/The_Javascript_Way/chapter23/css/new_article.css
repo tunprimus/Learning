@@ -1,0 +1,52 @@
+:root {
+    --border-radius-size: 0.5rem;
+}
+
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+	/* border: 0; */
+	background-repeat: no-repeat;
+    max-width: 100%;
+    /* overflow-x: hidden; */
+    position: relative;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container > * {
+    margin: 1rem;
+    padding: 1rem auto;
+}
+
+
+.form,
+.form-input,
+.form-textarea,
+.form-button,
+.result {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    max-width: 15rem;
+}
+
+.form * + * {
+    margin-top: 1rem;
+}
+
+.form-textarea {
+    min-width: 30rem;
+}
+
+.form-button {
+    min-height: 7ch;
+}
