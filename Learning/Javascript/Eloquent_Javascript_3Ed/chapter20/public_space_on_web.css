@@ -1,0 +1,28 @@
+
+:root {
+    --grid-min: 10ch;
+    --flex-min: 100rem;
+    --pancake-min: var(--grid-min);
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem auto;
+}
+
+.flex > * {
+    flex-grow: 1;
+    flex-basis: calc((var(--flex-min) - 100%) * 9999);
+    margin: 0.5rem;
+}
+
+.file-list {
+    max-width: 30ch;
+}
+
+.file-list > * {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 25rem;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Public Space On The Web</title>
+    <link rel="stylesheet" href="public_space_on_web.css">
+    <script src="public_space_on_web.js" defer></script>
+</head>
+<body>
+    <div class="flex">
+        <h1>A Public Space On The Web</h1>
+
+        <p>This is a self-editing website and web page.</p>
+        <p>Select a file to edit and save it to update the website.</p>
+        <p>Choose file(s): <select name="file-list" id="file-list" class="file-list"></select></p>
+        <br>
+        <p>
+            <textarea name="file" id="file-editor" cols="30" rows="10"></textarea>
+            <br>
+            <button id="file-submit" onclick="SaveFile()">Save</button>
+        </p>
+    </div>
+</body>
+</html>
