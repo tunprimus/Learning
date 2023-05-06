@@ -3,7 +3,7 @@
 
 /* The File System Module */
 
-/* 
+
 let {readFile} = require("fs");
 readFile("./chapter20/file.txt", "utf8", (error, text) => {
     if (error) {
@@ -11,9 +11,9 @@ readFile("./chapter20/file.txt", "utf8", (error, text) => {
     }
     console.log("The file contains:", text);
 });
- */
 
-/* 
+
+
 const {readFile} = require("fs");
 readFile("./chapter20/file.txt", (error, text) => {
     if (error) {
@@ -21,9 +21,9 @@ readFile("./chapter20/file.txt", (error, text) => {
     }
     console.log("The file contained", buffer.length, "bytes.", "The first byte is:", buffer[0]);
 });
- */
 
-/* 
+
+
 const {writeFile} = require("fs");
 writeFile("./chapter20/graffiti.txt", "Node was here", error => {
     if (error) {
@@ -32,10 +32,10 @@ writeFile("./chapter20/graffiti.txt", "Node was here", error => {
         console.log("File written.");
     }
 });
- */
+
 
 // Asynchronous read with promises
-/* 
+
 const {readFile} = require("fs").promises;
 readFile("./chapter20/file.txt", "utf8")
     .then(text => console.log("The file contains:", text));
@@ -43,12 +43,12 @@ readFile("./chapter20/file.txt", "utf8")
 // Synchronous read
 const {readFileSync} = require("fs");
 console.log("The file contains:", readFileSync("./chapter20/file.txt", "utf8"));
- */
+
 
 /* The HTTP Module */
 
 // Create and start an HTTP server
-/* 
+
 const {createServer} = require("http");
 let server = createServer((request, response) => {
     response.writeHead(200, {"Content-Type": "text/html"});
@@ -59,10 +59,10 @@ let server = createServer((request, response) => {
 });
 server.listen(8000);
 console.log("Listening! (port 8000)");
- */
+
 
 // Acting as an HTTP client
-/* 
+
 const {request} = require("http");
 const { hostname } = require("os");
 let requestStream = request({
@@ -74,22 +74,22 @@ let requestStream = request({
     console.log("Server responded with status code", response.statusCode);
 });
 requestStream.end();
- */
+
 
 /* Streams */
 
 // Create a server that reads requests bodies and streams them back
-/* 
+
 const {createServer} = require("http");
 createServer((request, response) => {
     response.writeHead(200, {"Content-Type": "text/plain"});
     request.on("data", chunk => response.write(chunk.toString().toUpperCase()));
     request.on("end", () => response.end());
 }).listen(8000);
- */
+
 
 // Send a request to the server and write out the response
-/* 
+
 const {request} = require("http");
 request({
     host: "localhost",
@@ -98,7 +98,7 @@ request({
 }, response => {
     response.on("data", chunk => process.stdout.write(chunk.toString()));
 }).end("Hello server");
- */
+
 
 /* A File Server */
 
