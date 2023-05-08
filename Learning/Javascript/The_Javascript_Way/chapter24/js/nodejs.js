@@ -23,3 +23,13 @@ const User = require("./user.js");
 const johnDoe = new User("John", "Doe");
 // Use the created object
 console.log(johnDoe.describe());
+
+/* Using A Dependency */
+
+// Load the npm semver package as a module
+// Notice the omission of "./" since the package was installed in node_modules
+const semver = require("semver");
+
+// Check if specific versions satisfy a range
+console.log(semver.satisfies("2.19.0", "^2.18.1"));
+console.log(semver.satisfies("3.0.0", "^2.18.5"));
