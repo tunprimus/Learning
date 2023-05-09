@@ -49,6 +49,24 @@ app.get("/api/articles", (request, response) => {
 });
 
 
+/* Accepting Data */
+
+/* Handling Form Data */
+// Load the multer package as a module
+const multer = require("multer");
+
+// Access the exported services
+const upload = multer();
+
+// Handle form data submission to the "/animals" route
+app.post("/animals", upload.array(),(request, response) => {
+    const name = request.body.name;
+    const vote = request.body.strongest;
+    response.send(`Hello ${name}, you voted: ${vote}`);
+});
+
+
+
 // Start listening to incoming requests
 // If process.env PORT is not defined, port number 3000 is used
 const listener = app.listen(process.env.PORT || 3000, () => {
