@@ -82,6 +82,7 @@ app.post("/api/cars", jsonParser, (request, response) => {
 
 /* Publishing Web Pages */
 
+/* 
 // Return HTML content for requests to "/hello"
 app.get("/hello", (request, response) => {
     const htmlContent = `<!doctype html>
@@ -96,6 +97,20 @@ app.get("/hello", (request, response) => {
         </html>`;
     response.send(htmlContent);
 });
+ */
+
+// Return a web page for requests to "/hello"
+app.get("/hello", (request, response) => {
+    // response.sendFile(`${__dirname}/html/views/hello.html`);
+    // response.sendFile(`../html/views/hello.html`);
+    response.sendFile(`/home/pr0f33/zzz_personal/Learning/Javascript/The_Javascript_Way/chapter25/html/views/hello.html`);
+});
+
+// Update the "content" DOM element
+document.getElementById("content").textContent = "Hello from JavaScript!";
+
+// Serve content of the "public" subfolder directly
+app.use(express.static("public"));
 
 /* ================= */
 
