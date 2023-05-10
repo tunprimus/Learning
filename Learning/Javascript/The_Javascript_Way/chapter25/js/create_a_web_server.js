@@ -65,10 +65,43 @@ app.post("/animals", upload.array(),(request, response) => {
     response.send(`Hello ${name}, you voted: ${vote}`);
 });
 
+/* Handling JSON Data */
 
+// Load the body parser package as a module
+const bodyParser = require("body-parser");
+
+// Access the JSON parsing service
+const jsonParser = bodyParser.json();
+
+// Handle submission of a JSON car array
+app.post("/api/cars", jsonParser, (request, response) => {
+    const cars = request.body;
+    response.send(`You sent me a list of cars: ${JSON.stringify(cars)}`);
+});
+
+
+/* Publishing Web Pages */
+
+// Return HTML content for requests to "/hello"
+app.get("/hello", (request, response) => {
+    const htmlContent = `<!doctype html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <title>Hello Web Page</title>
+        </head>
+        <body>
+            Hello!
+        </body>
+        </html>`;
+    response.send(htmlContent);
+});
+
+/* ================= */
 
 // Start listening to incoming requests
 // If process.env PORT is not defined, port number 3000 is used
 const listener = app.listen(process.env.PORT || 3000, () => {
     console.log(`Your app is listening on port ${listener.address().port}`);
 });
+
