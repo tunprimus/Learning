@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Web Server Form</title>
+</head>
+<body>
+    <main class="main">
+        <h1>Various Forms for the Exercises</h1>
+        <section>
+            <h2>T-shirt Colour</h2>
+            <form action="" class="tshirt">
+                <label for="tshirt-size">T-shirt size:</label>
+                <input type="text" class="tshirt__size" id="tshirt-size" placeholder="Enter the size here">
+                <label for="tshirt-colour">T-shirt colour:</label>
+                <input type="text" class="tshirt__colour" id="tshirt-colour" placeholder="Enter the colour">
+                <input type="submit" class="tshirt__submit">
+            </form>
+            <div id="tshirt-response"></div>
+            <hr>
+        </section>
+        <section>
+            <h2>Visited Countries</h2>
+            <form action="" class="visited">
+                <label for="visited-name">Country Name:</label>
+                <input type="text" class="visited__name" id="visited-name" name="visited__name">
+                <label for="visited-year">Year of Visit:</label>
+                <input type="number" class="visited__year" id="visited-year" name="visited__year" min="1900" max="2099">
+                <input type="submit" class="visited__submit">
+            </form>
+            <div id="visited-response"></div>
+            <hr>
+        </section>
+        <section>
+            <h2>New Article</h2>
+            <form action="" class="new-article">
+                <h3 class="new-article__heading">Add new article</h3>
+                <label for="">Title:</label>
+                <input type="text" class="new-article__title">
+                <label for="">Content:</label>
+                <textarea class="new-article__content" name="new-article-content" id="new-article-content" cols="30" rows="10"></textarea>
+                <input type="submit" class="new-article__submit" value="Add">
+            </form>
+            <div id="new-article-response"></div>
+        </section>
+    </main>
+</body>
+</html>

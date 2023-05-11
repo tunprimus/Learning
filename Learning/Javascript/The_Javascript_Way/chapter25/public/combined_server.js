@@ -48,9 +48,33 @@ app.post(`/${API_ENDPOINT}/`, upload.array(),(request, response) => {
     const formVariable2 = tshirt.color;
     formVariable1 = `request.body.${formVariable1}`;
     formVariable2 = `request.body.${formVariable2}`;
-    response.send(`Hello, you sent ${formVariable1} and ${formVariable2}`);
+    response.send(`Command received! Size: ${formVariable1} and colour: ${formVariable2}`);
 });
 
+
+// New article exercise
+let articles = null;
+let API_VARIABLE1 = articles;
+app.post(`/api/${API_VARIABLE1}`, upload.array(),(request, response) => {
+    const formVariable1 = title;
+    const formVariable2 = content;
+    formVariable1 = `request.body.${formVariable1}`;
+    formVariable2 = `request.body.${formVariable2}`;
+    // To get new array of IDs
+    const idList = articles.map(article => article.id);
+    // Reduce array to single maximal value
+    const maxId = idList.reduce((prev, curr) => {
+        curr > prev ? curr : prev;
+    });
+    const id = maxId + 1;
+    articles.push({id, formVariable1, formVariable2});
+    response.send(`Good work! New articles added successfully with ID ${id}!`);
+});
+
+// Return the articles list in JSON format
+app.get(`/api/${API_VARIABLE1}`, (request, response) => {
+    response.json(`${API_VARIABLE1}`);
+});
 
 // Handle submission of a JSON array
 app.post(`/api/${API_VARIABLE}`, jsonParser, (request, response) => {
@@ -59,7 +83,13 @@ app.post(`/api/${API_VARIABLE}`, jsonParser, (request, response) => {
 });
 
 
-
+// Visited country exercise
+let countries = null;
+let API_VARIABLE2 = countries;
+app.post(`/api/${API_VARIABLE2}`, jsonParser, (request, response) => {
+    countries = request.body;
+    response.send(`You (${countries.name}) sent me a list of visited countries: ${JSON.stringify(countries)}`);
+});
 
 
 // Start listening to incoming requests
