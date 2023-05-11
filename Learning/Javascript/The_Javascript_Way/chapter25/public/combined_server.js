@@ -24,16 +24,30 @@ app.get("/", (request, response) => {
     response.send("Hello from Express");
 });
 
-
 // Return the articles list in JSON format
 app.get(`/api/${API_VARIABLE}`, (request, response) => {
     response.json(`${API_VARIABLE}`);
 });
 
-// Handle form data submission to the "/animals" route
+
+// Handle form data submission to the "/formVariable" route
 app.post(`/${API_ENDPOINT}/`, upload.array(),(request, response) => {
     const formVariable1 = `request.body.${formVariable1}`;
     const formVariable2 = `request.body.${formVariable2}`;
+    response.send(`Hello, you sent ${formVariable1} and ${formVariable2}`);
+});
+
+// T-shirt colour exercise
+let tshirt = null;
+let API_ENDPOINT = tshirt;
+
+// Handle form data submission to the "/formVariable" route
+app.post(`/${API_ENDPOINT}/`, upload.array(),(request, response) => {
+    const formVariable = tshirt;
+    const formVariable1 = tshirt.size;
+    const formVariable2 = tshirt.color;
+    formVariable1 = `request.body.${formVariable1}`;
+    formVariable2 = `request.body.${formVariable2}`;
     response.send(`Hello, you sent ${formVariable1} and ${formVariable2}`);
 });
 
