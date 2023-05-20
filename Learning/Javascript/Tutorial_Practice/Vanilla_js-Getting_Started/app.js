@@ -2,3 +2,7 @@
 Build web code with a zero-footprint web framework
 https://blog.jeremylikness.com/blog/2019-04-09_vanilla.jsgetting-started/
 */
+
+const app = document.getElementById("app");
+window.run = () => app.innerText="Fun!";
+app.innerHTML = '<button onclick="run()">Load</button>';

@@ -28,3 +28,29 @@ h1 {
 p {
     margin-left: 2em;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: gray;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    margin-left: -5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltiptext:hover {
+    visibility: visible;
+}
+
+.tooltiptext:hover .tooltiptext {
+    visibility: visible;
+}
