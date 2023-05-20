@@ -1,0 +1,30 @@
+/* Vanilla.js — Getting Started
+Build web code with a zero-footprint web framework
+https://blog.jeremylikness.com/blog/2019-04-09_vanilla.jsgetting-started/ */
+
+body {
+    font-family: sans-serif;
+}
+
+button {
+    cursor: pointer;
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 50%;
+}
+
+div.post {
+    border-top: solid black 2px;
+}
+
+h1 {
+    width: 95%;
+    font-size: 1.5em;
+    background: lightgray;
+    padding: 0.2em;
+    text-align: justify;
+}
+
+p {
+    margin-left: 2em;
+}
