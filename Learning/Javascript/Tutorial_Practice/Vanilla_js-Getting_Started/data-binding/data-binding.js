@@ -55,8 +55,41 @@ class Computed extends Observable {
     }
 }
 
+/* 
 const first = new Observable("Jeremy");
 const last = new Observable("Likeness");
 const full = new Computed(() => `${first.value} ${last.value}`.trim(), [first, last]);
 first.value = "Doreen";
 console.log(full.value);
+ */
+
+/* Bi-directional Databinding */
+const bindValue = (input, observable) => {
+    input.value = observable.value;
+    observable.subscribe(() => input.value = observable.value);
+    input.onkeyup = () => observable.value = input.value;
+};
+
+/* 
+const first1 = new Observable("Jeremy");
+const firstInput = document.getElementById("first");
+bindValue(firstInput, first1);
+ */
+
+const bindings = {};
+
+const app = () => {
+    bindings.first = new Observable("Jeremy");
+    bindings.last = new Observable("");
+    bindings.full = new Computed(() => `${bindings.first.value} ${bindings.last.value}`.trim(), [bindings.first, bindings.last]);
+    applyBindings();
+};
+
+setTimeout(app, 0);
+
+const applyBindings = () => {
+    document.querySelectorAll("[data-bind]").forEach(elem => {
+        const obs = bindings[elem.getAttribute("data-bind")];
+        bindValue(elem, obs);
+    });
+};
