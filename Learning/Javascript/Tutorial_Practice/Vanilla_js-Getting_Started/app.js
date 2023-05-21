@@ -3,36 +3,6 @@ Build web code with a zero-footprint web framework
 https://blog.jeremylikness.com/blog/2019-04-09_vanilla.jsgetting-started/
 */
 
-const app = document.getElementById("app");
-/* 
-window.run = () => app.innerText="Fun!";
-app.innerHTML = '<button onclick="run()">Load</button>';
- */
-
-const url = "https://jsonplaceholder.typicode.com";
-
-// JSON fetcher
-const get = (model, domain, done) => {
-    fetch(`url/${domain}`)
-        .then(response => response.json())
-        .then(json => {
-            model[domain] = json;
-            done();
-        });
-};
-
-// Grab posts, then users, then maps the users by id on userIdx to make them easier to reference
-const run = (model) => get(model, "users", () => 
-    get(model, "posts", () => {
-        model.users.forEach(user => model.userIdx[user.id] = user);
-        app.innerText = "";
-        model.posts.forEach(post => app.appendChild(renderPost(post, model.userIdx[post.userId])));
-    }));
-
-app.appendChild(Wrapper.generate("button", "Load").click(() => run({
-    userIdx: {},
-})).element);
-
 // Wrapper class that dynamically generate HTML elements
 class Wrapper {
     // Generates an element and populates it with text; while conditionally setting it to invisible or visible and wires up a toggle to make it easy to hide/show the element
@@ -110,3 +80,31 @@ const renderPost = (post, user) => {
         .appendChild(bodyDiv)
         .element;
 };
+
+const url = "https://jsonplaceholder.typicode.com";
+
+// JSON fetcher
+const get = (model, domain, done) => {
+    // fetch(`https://jsonplaceholder.typicode.com/${domain}`)
+    fetch(url + "/" +`${domain}`)
+        .then(response => response.json())
+        .then(json => {
+            model[domain] = json;
+            done();
+        });
+};
+
+
+const app = document.getElementById("app");
+
+// Grab posts, then users, then maps the users by id on userIdx to make them easier to reference
+const run = (model) => get(model, "users", () => 
+    get(model, "posts", () => {
+        model.users.forEach(user => model.userIdx[user.id] = user);
+        app.innerText = "";
+        model.posts.forEach(post => app.appendChild(renderPost(post, model.userIdx[post.userId])));
+    }));
+
+app.appendChild(Wrapper.generate("button", "Load").click(() => run({
+    userIdx: {},
+})).element);
