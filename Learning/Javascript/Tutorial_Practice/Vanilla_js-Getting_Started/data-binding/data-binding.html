@@ -1,0 +1,30 @@
+<!-- Client-side JavaScript Databinding without a Framework
+
+This module brought to you by Vanilla.js
+https://blog.jeremylikness.com/blog/client-side-javascript-databinding-without-a-framework/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client-side JavaScript Databinding without a Framework</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./data-binding.js" defer></script>
+</head>
+<body>
+    <div>
+        <h1>Data-Binding Example</h1>
+        <label for="firstName">
+            <div>First Name:</div><input type="text" data-bind="first" id="firstName" />
+        </label>
+        <label for="lastName">
+            <div>Last Name:</div><input type="text" data-bind="last" id="lastName"/>
+        </label>
+        <label for="fullName">
+            <div>Full Name:</div><input type="text" data-bind="full" id="fullName" disabled />
+        </label>
+    </div>
+</body>
+</html>

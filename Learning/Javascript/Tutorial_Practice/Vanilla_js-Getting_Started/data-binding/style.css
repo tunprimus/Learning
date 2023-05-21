@@ -1,0 +1,19 @@
+/* Client-side JavaScript Databinding without a Framework
+
+This module brought to you by Vanilla.js
+https://blog.jeremylikness.com/blog/client-side-javascript-databinding-without-a-framework/
+*/
+
+body {
+    padding: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+label {
+    display: block;
+}
+
+label > div, input {
+    float: left;
+    width: 90vw;
+}
