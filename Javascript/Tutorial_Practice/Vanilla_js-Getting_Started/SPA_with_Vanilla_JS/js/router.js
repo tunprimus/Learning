@@ -11,6 +11,7 @@ export class Router {
         /**
          * Arbitrary element to source events
          * @type {HTMLDivElement}
+         * The constructor uses a “phantom DOM node” (a div element that is never rendered) to set up a custom routechanged event
          */
         this._eventSource = document.createElement("div");
         /**
