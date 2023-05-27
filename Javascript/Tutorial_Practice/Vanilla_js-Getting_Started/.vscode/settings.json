@@ -3,6 +3,7 @@
         "Databinding",
         "elem",
         "keyhandler",
+        "routechanged",
         "tooltiptext"
     ]
 }
