@@ -5,6 +5,7 @@
         "elem",
         "keyhandler",
         "routechanged",
+        "slideschanged",
         "tooltiptext"
     ]
 }
