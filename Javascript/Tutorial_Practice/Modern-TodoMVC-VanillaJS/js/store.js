@@ -5,7 +5,7 @@ export const TodoStore = class extends EventTarget {
     constructor(localStorageKey) {
         super();
         this.localStorageKey = localStorageKey;
-        this.readStorage();
+        this._readStorage();
         // handle todos edited in another window
         window.addEventListener("storage", () => {
             this._readStorage();
