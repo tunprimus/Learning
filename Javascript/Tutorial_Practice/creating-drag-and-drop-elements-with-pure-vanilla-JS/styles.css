@@ -1,2 +1,18 @@
 /* Creating Drag and Drop Elements with Pure, Vanilla JavaScript https://www.cloudsigma.com/creating-drag-and-drop-elements-with-pure-vanilla-javascript/ */
 
+body {
+    margin: 0;
+}
+
+.container {
+    background-color: #DEB887;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.draggable {
+    padding: 1rem;
+    background-color: #FAF0E6;
+    border: 1px solid #708090;
+    cursor: move;
+}
