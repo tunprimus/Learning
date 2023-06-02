@@ -142,8 +142,8 @@ function quizCreator() {
         // Randomly sort options
         item.options.sort(() => Math.random() - 0.5);
         // Quiz card creation
-        let div = document.createElement("div");
-        // div.classList.add("container-mid", "hide");
+        // let div = document.createElement("div");
+        div.classList.add("container-mid", "hide");
         div.classList.add("container-mid");
         // Question number
         countOfQuestion.textContent = 1 + " of " + quizArray.length + " Question";
