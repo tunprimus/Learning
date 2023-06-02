@@ -97,10 +97,10 @@ nextBtn.addEventListener("click", (displayNext = () => {
         displayContainer.classList.add("hide");
         scoreContainer.classList.remove("hide");
         // User score
-        userScore.innerHTML = "Your score is " + scoreCount + " out of " + questionCount;
+        userScore.textContent = "Your score is " + scoreCount + " out of " + questionCount;
     } else {
         // Display questionCount
-        countOfQuestion.innerHTML = questionCount + 1 + " of " + quizArray.length + " Questions";
+        countOfQuestion.textContent = questionCount + 1 + " of " + quizArray.length + " Questions";
         // Display quiz
         quizDisplay(questionCount);
         count = 11;
@@ -114,7 +114,7 @@ nextBtn.addEventListener("click", (displayNext = () => {
 const timerDisplay = () => {
     countdown = setInterval(() => {
         count--;
-        timeLeft.innerHTML = `${count}s`;
+        timeLeft.textContent = `${count}s`;
         if (count === 0) {
             clearInterval(countdown);
             displayNext();
@@ -146,11 +146,11 @@ function quizCreator() {
         // div.classList.add("container-mid", "hide");
         div.classList.add("container-mid");
         // Question number
-        countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+        countOfQuestion.textContent = 1 + " of " + quizArray.length + " Question";
         // Question
         let question_DIV = document.createElement("p");
         question_DIV.classList.add("question");
-        question_DIV.innerHTML = item.question;
+        question_DIV.textContent = item.question;
         div.appendChild(question_DIV);
         // Options
         div.innerHTML += `
