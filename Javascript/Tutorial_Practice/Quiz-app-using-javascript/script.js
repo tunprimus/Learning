@@ -143,7 +143,8 @@ function quizCreator() {
         item.options.sort(() => Math.random() - 0.5);
         // Quiz card creation
         let div = document.createElement("div");
-        div.classList.add("container-mid", "hide");
+        // div.classList.add("container-mid", "hide");
+        div.classList.add("container-mid");
         // Question number
         countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
         // Question
@@ -152,7 +153,7 @@ function quizCreator() {
         question_DIV.innerHTML = item.question;
         div.appendChild(question_DIV);
         // Options
-        div.innerHTML = `
+        div.innerHTML += `
         <button class="option-div" onclick="checker(this)">${item.options[0]}</button>
         <button class="option-div" onclick="checker(this)">${item.options[1]}</button>
         <button class="option-div" onclick="checker(this)">${item.options[2]}</button>
