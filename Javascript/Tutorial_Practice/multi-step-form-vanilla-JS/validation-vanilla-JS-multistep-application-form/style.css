@@ -1,0 +1,400 @@
+/* Simple Vanilla JS multistep application form with validation and summary page. - https://github.com/arminas-a/multistep_application_form */
+
+/* GENERAL */
+
+@font-face {
+  font-family: "Swedbank Sans", sans-serif;
+  src: url(./Assets/SwedbankSans-Medium.ttf);
+}
+
+:root {
+  --brand-colour-one: #FEC202;
+  --brand-colour-two: #F35B1C;
+  --brand-colour-three: #EBF8F2;
+  --border-dark: 1px solid #BCD8DB;
+  --border-focus: 1px solid #31A3AE;
+  --border-invalid: 1px solid red;
+  --main-text-colour: #512B2B;
+}
+
+body {
+  font-family: "Swedbank Sans";
+  color: var(--main-text-colour);
+  margin: 0;
+  padding: 0;
+  background: #FAFAFA;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button {
+  outline: none;
+  box-shadow: none;
+}
+
+p {
+  padding-bottom: 10px;
+}
+
+p,
+a,
+span,
+label,
+textarea,
+select,
+td {
+  font-size: 12px;
+  text-decoration: none;
+  font-family: sans-serif;
+  color: var(--main-text-colour);
+}
+
+a,
+button {
+  background: var(--brand-colour-one);
+  padding: 6px 10px;
+  cursor: pointer;
+  border: 1px solid var(--brand-colour-one);
+}
+
+.logo {
+  width: 200px;
+  max-width: 75px;
+  height: auto;
+}
+
+a:hover,
+button:hover {
+  background: var(--brand-colour-two);
+  border: 1px solid var(--brand-colour-two);
+}
+
+.wrapper {
+  margin: 2rem;
+  text-align: left;
+  padding: 30px;
+  max-width: 260px;
+  background: #F1F1F1;
+  box-shadow: 2px 4px rgb(202, 202, 202);
+}
+
+/* Must be selected sign */
+em {
+  color: #C15D54;
+  padding: 0 10px;
+}
+
+/* Form style */
+#form {
+  margin: 100px auto;
+  padding: 40px;
+  text-align: left;
+}
+
+/* Error message */
+error {
+  display: block;
+}
+
+noerror {
+  display: none;
+}
+
+errorMessage {
+  font-size: 16px;
+}
+
+aside {
+  display: none;
+}
+
+/* INPUT STYLE */
+
+/* Text input */
+.text-input-container {
+  margin: 10px 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-input input[type="text"] {
+  padding: 10px;
+  border: var(--border-dark);
+  border-radius: 2px;
+  max-width: 100px;
+}
+
+.text-input input:focus {
+  border-color: var(--border-focus);
+}
+
+.text-input-label {
+  margin-right: 10px;
+}
+
+/* Number input */
+.number-input-container {
+  display: inline-block;
+}
+
+input[type="number"] {
+  border: var(--border-dark);
+  border-radius: 2px;
+  width: 32px;
+  height: 16px;
+  text-align: center;
+}
+
+input[type="number"]:focus {
+  border: var(--border-focus);
+}
+
+/* Radio input */
+.radio-input-container {
+  margin: 10px 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.radio-input-container input[type="radio"] {
+  padding: 1px 2px;
+  position: relative !important;
+  background: #FFFFFF;
+}
+
+.radio-input-container input[type="radio"]::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border: var(--border-dark);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  top: -5px;
+  left: -5px;
+  background: #FFFFFF;
+}
+
+.radio-input-container input[type="radio"]:checked::before {
+  border-top: 1px solid #F35B1C;
+}
+
+.radio-input-container input[type="radio"]:checked::after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #F35B1C;
+  width: 12px;
+  height: 12px;
+  top: -1px;
+  left: -1px;
+}
+
+.radio-input-label {
+  margin-left: 10px;
+}
+
+/* Drop-down box input */
+.select-input-container select {
+  background-color: var(--brand-colour-three);
+  border: var(--border-dark);
+  padding: 7px 20px 7px 9px;
+  background-image: url(assets/sprite.svg);
+  background-position: 100% -126px;
+  border-radius: 2px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.select-input-container select:focus {
+  border: var(--border-focus);
+}
+
+/* Checkbox input */
+.checkbox-input-container input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-input-label {
+  margin-left: 10px;
+}
+
+.checkbox-input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox {
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 1px solid #31A3AE;
+  border-radius: 2px;
+}
+
+.checkbox-input-container:hover input ~ .checkbox {
+  background-color: #FEC202;
+  border: 1px solid #FEC202;
+}
+
+.checkbox-input-container input:checked ~ .checkbox {
+  background-color: #F35B1C;
+  border: 1px solid #F35B1C;
+}
+
+.checkbox::after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-input-container input:checked ~ .checkbox:after {
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Textarea input */
+.textarea-input-container textarea {
+  border: var(--border-dark);
+  border-radius: 3px;
+  font-family: "Swedbank Sans";
+  max-width: 160px;
+}
+
+.textarea-input-container textarea:focus {
+  border: var(--border-focus);
+}
+
+input.invalid {
+  border: var(--border-invalid) !important;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+  margin-top: 10px;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  opacity: 0.25;
+  margin-right: 10px;
+}
+
+.navigation {
+  margin-top: 20px;
+}
+
+.progress {
+  margin-top: 40px;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  color: var(--brand-colour-two);
+}
+
+.tooltip::before {
+  display: inline-block;
+  content: "";
+  background-image: url(assets/sprite.svg);
+  background-position: -130px -10px;
+  width: 20px;
+  height: 20px;
+  vertical-align: top;
+  cursor: pointer;
+  position: relative;
+  margin-left: 10px;
+}
+
+.tooltip:hover::before {
+  content: " ";
+  background-position: -130px -40px;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  text-align: center;
+  background-color: #EADED7;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 18.25%;
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #EADED7 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* SUMMARY PAGE */
+
+/* Table */
+
+.summary-table td {
+  padding-bottom: 10px;
+}
+
+.summary-table {
+  text-align: left;
+  margin-top: 20px;
+}
+
+td:first-child {
+  padding-right: 40px;
+  font-weight: 700;
+}
+
+tr:first-child td {
+  color: var(--brand-colour-two);
+  text-transform: uppercase;
+  font-weight: 400;
+}
