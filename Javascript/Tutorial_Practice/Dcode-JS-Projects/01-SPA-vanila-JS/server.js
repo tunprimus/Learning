@@ -1,10 +1,12 @@
 const express = require('express');
 const path = require('path');
+// import express from 'express';
+// import { resolve } from 'path';
 
 const app = express();
 
 app.get('/*', (req, res) => {
-  res.sendFile(resolve('frontend', 'index.html'));
+  res.sendFile(path.resolve('frontend', 'index.html'));
 });
 
 app.listen(process.env.PORT || 5060, () => console.log('Server running ...'));
