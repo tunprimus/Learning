@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caesar's Cipher</title>
+</head>
+<body>
+  <h1>Caesar's Cipher</h1>
+
+  <div>
+    <label for="msg">Message</label>
+    <input type="text" class="encrypt" id="msg" shift="msg">
+  </div>
+  <div>
+    <label for="shift">Shift</label>
+    <input type="number" class="encrypt" id="shift" step="1" min="-35" max="35" value="2">
+  </div>
+  <div>
+    <label for="cipher">Encrypted Message</label>
+    <input type="text" id="cipher" readonly>
+  </div>
+
+  <!-- JavaScript Here -->
+  <script>
+    /* Variables */
+    // Base cipher
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '3', '4', '5', '6', '7', '8', '9', ' '];
+    const cipherLen = letters.length;
+
+    // Get encrypted fields
+    const fields = document.querySelectorAll('.encrypt');
+    const cipher = document.querySelector('#cipher');
+
+    /* Methods */
+
+    const encrypt = function () {
+      const shiftBy = parseInt(fields[1].value, 10);
+      let encrypted = fields[0].value.split('').map(function (char) {
+        let index = letters.indexOf(char);
+        if (index < 0) {
+          return char;
+        }
+        let shiftedIndex = shiftBy + index;
+        if (shiftedIndex > cipherLen) {
+          shiftedIndex = shiftedIndex - cipherLen;
+        }
+        return letters[shiftedIndex];
+      });
+
+      console.log(encrypted);
+    };
+    
+    const inputHandler = function (event) {
+      // Only run on encrypt fields
+      if (!event.target.matches('.encrypt')) {
+        return;
+      }
+      // Otherwise, encrypt the message
+      encrypt();
+    };
+
+    /* Event listeners */
+    document.addEventListener('input', inputHandler);
+  </script>
+</body>
+</html>
