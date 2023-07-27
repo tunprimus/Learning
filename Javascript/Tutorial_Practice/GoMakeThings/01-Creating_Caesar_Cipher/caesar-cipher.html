@@ -27,6 +27,7 @@
     // Base cipher
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '3', '4', '5', '6', '7', '8', '9', ' '];
     const cipherLen = letters.length;
+    const cipherMaxIndex = cipherLen - 1;
 
     // Get encrypted fields
     const fields = document.querySelectorAll('.encrypt');
@@ -34,21 +35,35 @@
 
     /* Methods */
 
-    const encrypt = function () {
+    const shiftMessage = function (char) {
       const shiftBy = parseInt(fields[1].value, 10);
-      let encrypted = fields[0].value.split('').map(function (char) {
-        let index = letters.indexOf(char);
-        if (index < 0) {
-          return char;
-        }
-        let shiftedIndex = shiftBy + index;
-        if (shiftedIndex > cipherLen) {
-          shiftedIndex = shiftedIndex - cipherLen;
-        }
-        return letters[shiftedIndex];
-      });
+      const index = letters.indexOf(char.toLowerCase());
 
-      console.log(encrypted);
+      if (index < 0) {
+        return char;
+      }
+
+      // Get the shifted index
+      let shiftedIndex = shiftBy + index;
+      
+      // If shifted index is greater than cipher length, start at the beginning
+      if (shiftedIndex > cipherMaxIndex) {
+        shiftedIndex = shiftedIndex - cipherLen;
+      }
+
+      // If shifted index is less than cipher length, start at the end
+      if (shiftedIndex < 0) {
+        shiftedIndex = shiftedIndex + cipherLen;
+      }
+
+      return letters[shiftedIndex];
+    };
+
+    const encrypt = function () {
+      let encrypted = fields[0].value.split('').map(shiftMessage).join('');
+      
+      // Display the encrypted message
+      cipher.value = encrypted;
     };
     
     const inputHandler = function (event) {
