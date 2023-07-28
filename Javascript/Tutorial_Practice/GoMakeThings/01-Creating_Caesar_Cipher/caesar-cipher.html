@@ -17,6 +17,10 @@
     <input type="number" class="encrypt" id="shift" step="1" min="-35" max="35" value="2">
   </div>
   <div>
+    <label for="passes">Number of passes</label>
+    <input type="number" class="encrypt" id="passes" step="1" value="5">
+  </div>
+  <div>
     <label for="cipher">Encrypted Message</label>
     <input type="text" id="cipher" readonly>
   </div>
@@ -34,7 +38,7 @@
     const cipher = document.querySelector('#cipher');
 
     /* Methods */
-
+    
     const shiftMessage = function (char) {
       const shiftBy = parseInt(fields[1].value, 10);
       const index = letters.indexOf(char.toLowerCase());
@@ -45,7 +49,7 @@
 
       // Get the shifted index
       let shiftedIndex = shiftBy + index;
-      
+
       // If shifted index is greater than cipher length, start at the beginning
       if (shiftedIndex > cipherMaxIndex) {
         shiftedIndex = shiftedIndex - cipherLen;
