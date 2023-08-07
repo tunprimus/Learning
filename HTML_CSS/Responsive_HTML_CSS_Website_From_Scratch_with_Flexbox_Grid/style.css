@@ -1,0 +1,40 @@
+.nav {
+  position: relative;
+}
+
+.nav__ul {
+  display: none;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__li:last-of-type {
+  border-right: 0;
+}
+
+.nav__link {
+  display: block;
+  padding: 0.8em;
+  background-color: #16A085;
+  color: white;
+  text-decoration: none;
+  border-right: 1px solid #34495E;
+  font-size: 0.9em;
+  padding-left: 1.5em;
+}
+
+.nav__link:hover {
+  background-color: #138E72;
+}
+
+.trigger {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.trigger:checked {
+  display: block;
+}
