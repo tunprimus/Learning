@@ -1,0 +1,102 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: whitesmoke;
+  font-family: "Rock Salt", cursive;
+  text-align: center;
+}
+
+.secondary-background {
+  background-color: snow;
+}
+
+.tagline {
+  font-family: "Quicksand", sans-serif;
+  color: lightslategrey;
+  line-height: 125px;
+}
+
+/* Header */
+
+.h1 {
+  background-color: skyblue;
+  line-height: 100px;
+  color: khaki;
+}
+
+.h2 {
+  margin: 10px;
+}
+
+/* App container */
+
+.container {
+  border: 2px solid snow;
+  display: flex;
+}
+
+/* To-Do section */
+.week {
+  display: inline-flex;
+  flex-direction: column;
+  flex-grow: 3;
+}
+
+.row {
+  min-height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.square {
+  width: 125px;
+  height: 125px;
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day.square {
+  background-color: skyblue;
+  border: 1px solid white;
+}
+
+.task.square {
+  background-color: khaki;
+  border: 1px solid white;
+}
+
+.task p {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* Reminders */
+
+.reminder {
+  background-color: khaki;
+  display: inline-flex;
+  flex-grow: 2;
+}
+
+.reminder h3 {
+  width: 100%;
+  margin: 10px;
+  color: black;
+  line-height: 90px;
+  font-size: 24px;
+}
+
+/* Footer */
+.footer {
+  font-size: 24px;
+}
