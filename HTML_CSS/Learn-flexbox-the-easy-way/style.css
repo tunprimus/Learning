@@ -1,0 +1,38 @@
+/*  */
+
+.nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  gap: 1rem;
+}
+
+.nav-list__item {
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+
+.columns {
+  display: flex;
+  gap: 2rem;
+  border: 2px solid firebrick;
+  width: 500px;
+}
+
+.columns > * {
+  /* Defaults = flex-grow: 1 flex-shrink: 1 flex-basis: auto */
+  /* flex: 1 1 auto; */
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
+}
+
+.card {
+  padding: 1rem;
+  margin: 1rem;
+  background-color: green;
+}
