@@ -66,6 +66,27 @@ body {
   transition: all 300ms ease-in-out;
 }
 
+.theme::after {
+  content: "";
+  width: 1.25rem;
+  height: 1.25rem;
+  position: absolute;
+  z-index: 2;
+  top: 2px;
+  right: 2px;
+  border-radius: 50%;
+  transition: all 300ms ease-in-out;
+}
+
+.theme.dark::before {
+  transform: translateX(calc(100% + 4px));
+}
+
+.theme.dark::after {
+  transform: translateX(calc(-100% - 4px));
+  background-image: url();
+}
+
 .h1 {
   font-size: var(--med);
 }
@@ -121,4 +142,104 @@ body {
   place-items: center;
   transition: all 300ms ease-in-out;
   cursor: pointer;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 4;
+  transition: all 300ms ease-in-out;
+}
+
+.modal-container.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  border: 3px solid var(--secondary);
+  padding: var(--med);
+  background-color: var(--primary);
+  box-shadow: 1px 4px 30px 10px var(--shadow);
+  transform: translateY(30%);
+  transition: all 300ms ease-in-out;
+}
+
+.modal-container.active .modal {
+  transform: translateY(0);
+}
+
+.modal__h2 {
+  text-align: center;
+  margin-bottom: var(--base);
+}
+
+.modal__title {
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  background-color: var(--light);
+  padding: 0.5rem;
+}
+
+.modal__title:focus {
+  outline: 2px solid var(--secondary);
+}
+
+.icons {
+  display: grid;
+  place-items: center;
+  padding: var(--sm) 0;
+  grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+  grid-gap: 1rem;
+}
+
+.icon {
+  width: var(--med);
+  height: var(--med);
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: var(--secondary);
+  border: 4px solid var(--secondary);
+  display: grid;
+  place-items: center;
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.icon.selected {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+.modal-btns {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: .5rem;
+}
+
+.modal-btns__add,
+.modal-btns__cancel {
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  background-color: var(--light);
+  padding: .5rem;
+  transition: all 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.modal-btns__add:hover,
+.modal-btns__cancel:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
 }
