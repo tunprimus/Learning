@@ -1,0 +1,142 @@
+/* Upload File with Vanilla JavaScript and Loading Animation #+++>>> https://stackabuse.com/upload-file-with-vanilla-javascript-and-loading-animation/ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #CB67E9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  color: white;
+  background-color: #CB67E9;
+}
+
+.file-upload__wrapper {
+  width: 640px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  padding: 35px;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+.file-upload__header {
+  color: #CB67E9;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.file-upload__form {
+  height: 150px;
+  border: 2px dashed #CB67E9;
+  cursor: pointer;
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.file-upload__form :where(i, p) {
+  color: #CB67E9;
+}
+
+.file-upload__icon {
+  font-size: 50px;
+}
+
+.file-upload__text {
+  font-size: 1rem;
+  margin-top: 15px;
+}
+
+.section__row {
+  background-color: #E9F0FF;
+  margin-bottom: 10px;
+  list-style: none;
+  padding: 15px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 6px;
+}
+
+.section__icon {
+  font-size: 2rem;
+  color: #CB67E9;
+}
+
+.section__span {
+  font-size: 1rem;
+}
+
+.progress-container__content-wrapper {
+  margin-left: 15px;
+  width: 100%;
+}
+
+.content-wrapper {
+  margin-left: 15px;
+  width: 100%;
+}
+
+.progress-container__details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.progress-bar-wrapper {
+  height: 10px;
+  width: 100%;
+  margin-bottom: 5px;
+  background: #FFFFFF;
+  border-radius: 30px;
+}
+
+progress-wrapper {
+  height: 100%;
+  background: #CB67E9;
+  width: 0%;
+  border-radius: 6px;
+}
+
+.uploaded-container {
+  overflow-y: scroll;
+  max-height: 230px;
+}
+
+.onprogress {
+  max-height: 160px;
+}
+
+.file-size {
+  color: #404040;
+  font-size: 11px;
+}
