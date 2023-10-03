@@ -1,0 +1,68 @@
+/* Modified from => Build a To-Do App with Local Storage using Vanilla JavaScript #+++>>> https://programmingeeksclub.com/build-a-to-do-app-with-local-storage-using-vanilla-javascript/ */
+
+body {
+  font-family: "Fira Code", "Arial Black";
+  text-align: center;
+  background-color: #151F5B;
+  color: #FFF7FF;
+}
+
+.form {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #CCCCCC;
+  font-size: 16px;
+  outline: none;
+  width: 60%;
+}
+
+.button[type="submit"] {
+  padding: 10px;
+  border: none;
+  background-color:#008CBA;
+  color: #FFFFFF;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list__item {
+  text-align: left;
+  margin: auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #2CD1FF;
+  width: 50%;
+  border-radius: 5px;
+}
+
+.list__span {
+  flex-grow: 1;
+  font-size: 16px;
+}
+
+.list__button {
+  margin-left: 20px;
+  padding: 7px;
+  width: 60px;
+  border: none;
+  background-color: #9F064A;
+  color: #FFFFFF;
+  font-size: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
