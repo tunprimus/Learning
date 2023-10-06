@@ -1,0 +1,51 @@
+<!-- Modified from Create a Pomodoro Clock with JavaScript #+++>>> https://dev.to/albertomontalesi/tutorial-create-a-pomodoro-clock-with-javascript-13om -->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a Pomodoro Clock with JavaScript</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="progressBar.js" defer></script>
+</head>
+<body>
+  <div class="pomodoro-container" id="pomodoro-container">
+    <div class="pomodoro-clock" id="pomodoro-clock">
+      <div class="pomodoro-timer" id="pomodoro-timer"></div>
+      <div>
+        <label for="pomodoro-clock-task"></label>
+        <input type="text" id="pomodoro-clock-task" class="pomodoro-clock-task" placeholder="Enter your task...">
+      </div>
+      <div class="pomodoro-clock-actions" id="pomodoro-clock-actions">
+        <button class="pomodoro-start" id="pomodoro-start">
+          <span class="play-icon" id="play-icon">&#x25B6;&#xFE0F;</span>
+          <i class="pause-icon hidden" id="pause-icon">&#x23F8;</i>
+        </button>
+        
+        <button class="pomodoro-stop hidden" id="pomodoro-stop">&#x23F9;</button>
+      </div>
+      <div class="pomodoro-clock-title" id="pomodoro-clock-title">
+        <span class="pomodoro-clock-title__span">Changes made here will reflect at the start of the next work / break session</span>
+      </div>
+      <div class="pomodoro-clock-actions" id="pomodoro-clock-actions">
+        <div class="pomodoro-input">
+          <label for="input-work-duration">Work Duration</label>
+          <input name="input-work-duration" id="input-work-duration" class="input-work-duration" type="number">
+        </div>
+        <div class="pomodoro-input">
+          <label for="input-break-duration">Break Duration</label>
+          <input name="input-break-duration" id="input-break-duration" class="input-work-duration" type="number">
+        </div>
+      </div>
+    </div>
+    <!-- Session Log Display -->
+    <div class="pomodoro-info" id="pomodoro-info">
+      <h3 class="h3">Your Sessions</h3>
+      <ul class="pomodoro-sessions" id="pomodoro-sessions"></ul>
+    </div>
+  </div>
+</body>
+</html>
