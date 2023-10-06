@@ -1,3 +1,97 @@
 /* Build a Pomodoro Timer using HTML, CSS, and JavaScript #+++>>> https://javascript.plainenglish.io/build-a-pomodoro-timer-using-html-css-and-javascript-7a7a8410052c?gi=8e27ece2d14e */
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+:root {
+  --bg: #2B2A30;
+  --normal-ring: #17171A;
+  --red-ring: #5D0000;
+  --green-ring: #00AA51;
+  --timer-bg: radial-gradient(71.4% 71.4% at 51.7% 28.6%, #3A393F 0%, #17171A 100%);
+  --font-timer: "Bebas Neue", cursive;
+  --font-start-stop: "Montserrat", sans-serif;
+  --font-colour: #FFFFFF;
+}
+
+.container {
+  height: 600px;
+  width: 600px;
+  background-color: transparent;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  place-items: center;
+}
+
+.outer-ring {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  place-items: center;
+  width: 415px;
+  height: 415px;
+  border-radius: 50%;
+  box-shadow: -5px 14px 44px #000000, 5px -16px 50px rgba(255, 255, 255, 0.15);
+  background-color: var(--normal-ring);
+}
+
+.timer {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background-color: var(--timer-bg);
+  box-shadow: inset 0px 0px 114px rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 8rem;
+}
+
+.time {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.time__span {
+  display: inline;
+  color: var(--font-colour);
+  font-family: var(--font-timer);
+  font-size: 5rem;
+  letter-spacing: 0.1em;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.start-stop {
+  color: var(--font-colour);
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  text-align: center;
+  letter-spacing: 0.6em;
+  margin: 1rem 0;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.setting {
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 25px;
+  height: 25px;
+  color: #585858;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+}

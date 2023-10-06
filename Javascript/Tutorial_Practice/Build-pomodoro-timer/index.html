@@ -6,18 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Build a Pomodoro Timer using HTML, CSS, and JavaScript</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
 </head>
 <body>
   <div class="container">
     <div class="outer-ring" id="outerRing">
       <div class="timer" id="timer">
         <div class="time" id="time">
-          <span class="minutes" id="minutes">00</span>
-          <span class="colon" id="colon">:</span>
-          <span class="seconds" id="seconds"></span>
+          <span class="time__span minutes" id="minutes">00</span>
+          <span class="time__span colon" id="colon">:</span>
+          <span class="time__span seconds" id="seconds">10</span>
         </div>
         <div class="start-stop" id="startStop">START</div>
-        <span class="setting" id="setting"><i class="fas fa-cog"></i></span>
+        <span class="setting" id="setting"><i class="fas fa-cog">&#x2699;</i></span>
       </div>
     </div>
   </div>
