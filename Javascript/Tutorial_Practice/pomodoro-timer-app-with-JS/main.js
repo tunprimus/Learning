@@ -9,9 +9,11 @@ const timer = {
 };
 
 let interval;
+const buttonSound = new Audio('button-sound.mp3');
 
 const mainButton = document.getElementById('js-btn');
 mainButton.addEventListener('click', () => {
+  buttonSound.play();
   const { action } = mainButton.dataset;
   if (action === 'start') {
     startTimer();
@@ -70,6 +72,7 @@ function startTimer() {
         default:
           switchMode('pomodoro');
       }
+      document.querySelector(`[data-sound="${timer.mode}"]`).play();
       startTimer();
     }
   }, 1000);
@@ -92,6 +95,8 @@ function updateClock() {
   const sec = document.getElementById('js-seconds');
   min.textContent = minutes;
   sec.textContent = seconds;
+
+  const text = timer.mode === 'pomodoro' ? 'Get back to work!' : document.title = `${minutes}:${seconds} - ${text}`;
 
   const progress = document.getElementById('js-progress');
   progress.value = timer[timer.mode] * 60 - timer.remainingTime.total;
