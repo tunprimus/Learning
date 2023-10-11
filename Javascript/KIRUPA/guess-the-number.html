@@ -4,45 +4,110 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guess the Number</title>
+  <style>
+    .body {
+      font-family: monospace;
+      background-color: #FDE74C;
+    }
+
+    .main {
+      display: grid;
+      justify-content: center;
+      /* justify-items: center; */
+      align-content: center;
+    }
+
+    .h1 {
+      font-size: 3rem;
+      margin: 1.25rem;
+      text-align: center;
+    }
+
+    .p {
+      font-size: 1.25rem;
+      line-height: 1.25;
+      width: -webkit-fill-available;
+      text-align: center;
+    }
+
+    .form {
+      display: grid;
+      grid-template-columns: 1fr 120px;
+      width: 100%;
+    }
+
+    .form__item {
+      padding: 0.625rem;
+      margin: 0.625rem;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 1.125rem;
+      border: 0.1875rem solid black;
+      border-radius: 0.625rem;
+    }
+
+    .guess-button {
+      background-color: #B2DEFF;
+      cursor: pointer;
+    }
+
+    .guess-button:hover {
+      background-color: #88C9FA;
+    }
+  </style>
 </head>
-<body>
+<body class="body">
   <div class="main">
+    <h1 class="h1">Guess the Number</h1>
     <form action="" class="form" onsubmit="return false">
-      <input type="number" name="" id="numberField" placeholder="Enter a number" inputmode="decimal">
-      <input type="submit" value="Guess" id="guessButton">
+      <input class="form__item" type="number" name="" id="numberField" placeholder="Enter a number" inputmode="decimal">
+      <input class="form__item guess-button" type="submit" value="Guess" id="guessButton">
     </form>
-    <p class="results" id="results"></p>
+    <p class="p results" id="results"></p>
   </div>
   <!-- JavaScript Here -->
   <script>
-    const numberToGuess = 10;
+    let numberToGuess;
     const numberFieldElement = document.querySelector('#numberField');
     const guessButtonElement = document.querySelector('#guessButton');
     const results = document.querySelector('#results');
 
     guessButtonElement.addEventListener('click', checkNumber, false);
 
+    function setNumberToGuess() {
+      numberToGuess = getRandomNumber(0, 100);
+    }
+    setNumberToGuess();
+
+    function getRandomNumber(low, high) {
+      let randNum = Math.floor(Math.random() * (high - low + 1)) + low;
+      return randNum;
+    }
+
     function checkNumber(evt) {
       let enteredNumber = numberField.value;
       numberField.value = '';
 
       if (enteredNumber == numberToGuess) {
-        let message = `<p>--------- New Game Time ---------</p>
-          <p>&#x1F490; Your guess of ${enteredNumber} is <b>correct</b>!</p>
-          <p>-----------------------------------------</p>`;
+        let message = `<p class="p results__item">--------- New Game Time ---------</p>
+          <p class="p results__item">&#x1F490; Your guess of ${enteredNumber} is <b>correct</b>!</p>
+          <p class="p results__item">-----------------------------------------</p>`;
         
         results.insertAdjacentHTML('afterbegin', message);
+
+        setNumberToGuess();
+
         return;
       }
 
       if (enteredNumber < numberToGuess) {
-        let message = `<p>&#x2693; Your guess of ${enteredNumber} is <b>too low</b>!</p>`;
+        let message = `<p class="p results__item">&#x2693; Your guess of ${enteredNumber} is <b>too low</b>!</p>`;
 
         results.insertAdjacentHTML('afterbegin', message);
       }
 
       if (enteredNumber > numberToGuess) {
-        let message = `<p>&#x1F388; Your guess of ${enteredNumber} is too <b>too high</b>!</p>`;
+        let message = `<p class="p results__item">&#x1F388; Your guess of ${enteredNumber} is too <b>too high</b>!</p>`;
 
         results.insertAdjacentHTML('afterbegin', message);
       }
