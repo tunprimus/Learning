@@ -7,28 +7,47 @@
 </head>
 <body>
   <div class="main">
+    <form action="" class="form" onsubmit="return false">
+      <input type="number" name="" id="numberField" placeholder="Enter a number" inputmode="decimal">
+      <input type="submit" value="Guess" id="guessButton">
+    </form>
     <p class="results" id="results"></p>
   </div>
   <!-- JavaScript Here -->
   <script>
-    let numberToGuess = 10;
-    let enteredNumber = 15;
+    const numberToGuess = 10;
+    const numberFieldElement = document.querySelector('#numberField');
+    const guessButtonElement = document.querySelector('#guessButton');
+    const results = document.querySelector('#results');
 
-    function checkNumber() {
+    guessButtonElement.addEventListener('click', checkNumber, false);
+
+    function checkNumber(evt) {
+      let enteredNumber = numberField.value;
+      numberField.value = '';
+
       if (enteredNumber == numberToGuess) {
-        console.log('You win!');
+        let message = `<p>--------- New Game Time ---------</p>
+          <p>&#x1F490; Your guess of ${enteredNumber} is <b>correct</b>!</p>
+          <p>-----------------------------------------</p>`;
+        
+        results.insertAdjacentHTML('afterbegin', message);
         return;
       }
 
       if (enteredNumber < numberToGuess) {
-        console.log('Your guess is too low!');
+        let message = `<p>&#x2693; Your guess of ${enteredNumber} is <b>too low</b>!</p>`;
+
+        results.insertAdjacentHTML('afterbegin', message);
       }
 
       if (enteredNumber > numberToGuess) {
-        console.log('Your guess is too high!');
+        let message = `<p>&#x1F388; Your guess of ${enteredNumber} is too <b>too high</b>!</p>`;
+
+        results.insertAdjacentHTML('afterbegin', message);
       }
     }
-    checkNumber();
+    // checkNumber();
   </script>
 </body>
 </html>
