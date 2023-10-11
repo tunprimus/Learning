@@ -88,6 +88,13 @@
       let enteredNumber = numberField.value;
       numberField.value = '';
 
+      if (enteredNumber == '') {
+        let message = `<p class="p results__item">&#x26D4; Guess a number first!</p>`;
+
+        results.insertAdjacentHTML('afterbegin', message);
+        return;
+      }
+
       if (enteredNumber == numberToGuess) {
         let message = `<p class="p results__item">--------- New Game Time ---------</p>
           <p class="p results__item">&#x1F490; Your guess of ${enteredNumber} is <b>correct</b>!</p>
