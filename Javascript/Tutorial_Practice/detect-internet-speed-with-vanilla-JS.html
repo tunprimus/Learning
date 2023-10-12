@@ -18,6 +18,10 @@
       color: #EAEAEA;
     }
 
+    .hide {
+      display: none !important;
+    }
+
     .container {
       position: relative;
       display: inline-block;
@@ -70,15 +74,88 @@
       color: #AAFFFF;
       text-shadow: 0 0 0.5rem #81ECEC;
     }
+
+    .loader-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      font-size: 4rem;
+      margin: 0.75rem 0 2rem 0;
+    }
+
+    .content__small {
+      font-size: 40%;
+    }
+
+    .loader-content__button {
+      position: relative;
+      height: 15rem;
+      width: 15rem;
+      font-size: 1.125rem;
+      font-weight: bold;
+      line-height: 1.5;
+      border-radius: 50%;
+      background-color: #223140;
+      color: #EAEAEA;
+      cursor: pointer;
+      border: 0;
+      box-shadow: 0 0 0.75rem #81ECEC;
+    }
+
+    .loader-content__button:hover {
+      background-color: #1F3C4E;
+    }
+
+    .loader-content__button::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: -0.125rem;
+      left: -0.125rem;
+      border: 0.125rem solid #7ED6D4;
+      border-radius: 50%;
+      animation: buttonRing 2s linear;
+    }
+
+    @keyframes buttonRing {
+      60%, 100% {
+        height: calc(100% + 3.75rem);
+        width: calc(100% + 3.75rem);
+        top: -2rem;
+        left: -2rem;
+        opacity: 0;
+      }
+    }
+
+    .loader-content__button::after {
+      content: "";
+      position: absolute;
+      height: calc(100% + 0.25rem);
+      width: calc(100% + 0.25rem);
+      top: -0.125rem;
+      left: -0.125rem;
+      background: linear-gradient(45deg, #25476E, #C7ECEE);
+      z-index: -1;
+      border-radius: 50%;
+    }
   </style>
 </head>
 <body class="body">
   <div class="container">
     <div class="loader-widget">
       <h1 class="h1 loader-widget__h1">CHECK YOUR INTERNET SPEED</h1>
-      <span class="loader"></span>
+      <span class="loader hide"></span>
       <div class="loader-content">
-        <div class="content"></div>
+        <div class="content">24<small class="content__small">Mbps</small></div>
+        <button class="loader-content__button">CHECK</button>
       </div>
     </div>
   </div>
