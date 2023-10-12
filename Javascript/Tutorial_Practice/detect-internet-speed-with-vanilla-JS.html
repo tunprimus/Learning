@@ -154,12 +154,47 @@
       <h1 class="h1 loader-widget__h1">CHECK YOUR INTERNET SPEED</h1>
       <span class="loader hide"></span>
       <div class="loader-content">
-        <div class="content">24<small class="content__small">Mbps</small></div>
+        <div class="content"><span class="content__value">24</span><small class="content__small">Mbps</small></div>
         <button class="loader-content__button">CHECK</button>
       </div>
     </div>
   </div>
   <!-- JavaScript Here -->
-  <script></script>
+  <script>
+    const buttonElement = document.querySelector('button');
+    buttonElement.addEventListener('click', () => {
+      var imageLink = 'https://upload.wikimedia.org/wikipedia/commons/7/74/Tokio_Skytree.jpg', downloadSize = 821404, time_start, time_end, downloadSrc = new Image();
+      time_start = new Date().getTime();
+      console.log(time_start);
+      var cacheImage = '?nn=' + time_start;
+      downloadSrc.src = imageLink + cacheImage;
+      console.log(downloadSrc);
+      downloadSrc.onload = function() {
+        // This function will trigger once the image loads
+        time_end = new Date().getTime();
+        var timeDuration = (time_end - time_start) / 1000,
+          loadedBits = downloadSize * 8,
+          totalSpeed = ((loadedBits / timeDuration) / (1024 * 1024)).toFixed(2)
+        ;
+        speedValueElement = document.querySelector('.content__value');
+        speedValueElement.textContent = totalSpeed;
+      }
+      /*
+      var imageLinkLarge = 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Tokyo_Sky_Tree_2012.JPG', downloadSizeLarge = 8576988, time_startLarge, time_endLarge, downloadSrcLarge = new Image();
+      time_startLarge = new Date().getTime();
+      console.log(time_startLarge);
+      var cacheImageLarge = '?nn=' + time_startLarge;
+      downloadSrcLarge.src = imageLinkLarge + cacheImageLarge;
+      console.log(downloadSrcLarge);
+      downloadSrcLarge.onload = function() {
+        // This function will trigger once the image loads
+        time_endLarge = new Date().getTime();
+        var timeDurationLarge = (time_endLarge - time_startLarge) / 1000
+          loadedBitsLarge = downloadSizeLarge * 8,
+          totalSpeedLarge = (loadedBitsLarge / timeDurationLarge) / (1024 * 1024).toFixed(2)
+        ;
+      } */
+    });
+  </script>
 </body>
 </html>
