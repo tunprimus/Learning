@@ -16,14 +16,15 @@
   position: relative;
 }
 
-.game {}
+/* .game {} */
 
 .content {
-  /**/
+  padding: 0.75rem;
 }
 
 .question {
   padding: 0.5rem 1rem;
+  font-size: 1.5rem;
 }
 
 .answer {
@@ -34,8 +35,8 @@
 
 .answer__input {
   display: inline-block;
-  width: 78%;
-  margin-left: 1rem;
+  width: 80%;
+  margin-left: 0.25rem;
 }
 
 .answer__input--radio {
@@ -45,13 +46,16 @@
 
 .submit {
   min-width: 10ch;
-  width: 100%;
+  width: 90%;
 	min-height: 44px;
+  margin: 0.5rem 5%;
   background-color: rebeccapurple;
   color: white;
   border: none;
+  border-radius: 0.5rem;
   cursor: pointer;
   position: absolute;
+  bottom: 0;
 }
 
 .hide {
