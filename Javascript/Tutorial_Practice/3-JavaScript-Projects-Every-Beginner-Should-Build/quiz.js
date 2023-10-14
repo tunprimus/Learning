@@ -47,16 +47,48 @@ const questionElem = document.querySelector('.question');
 const answerContainerElem = document.querySelector('.answer');
 const submitElem = document.querySelector('.submit');
 const playElem = document.querySelector('.play');
+const correctElem = document.querySelector('.correct');
+const wrongElem = document.querySelector('.wrong');
+const scoreElem = document.querySelector('.score');
 
 let questIndex = 0;
 let correctCount = 0;
 let wrongCount = 0;
 let total = 0;
 let selectedAnswer;
+const END_OF_QUESTIONS = data.length;
+
+const playAgain = () => {
+  questIndex = 0;
+  correctCount = 0;
+  wrongCount = 0;
+  total = 0;
+  showQuestion(questIndex);
+};
+
+playElem.addEventListener('click', () => {
+  resultScreenElem.classList.toggle('hide');
+  gameScreenElem.classList.toggle('hide');
+  playAgain();
+});
+
+/* 
+const showResult = () => {
+  resultScreenElem.classList.toggle('hide');
+  gameScreenElem.classList.toggle('hide');
+
+  correctElem.textContent = `Correct Answers: ${correctCount}`;
+  wrongElem.textContent = `Wrong Answers: ${wrongCount}`;
+  scoreElem.textContent = `Score: ${(total) * 10}`;
+};
+ */
 
 const showQuestion = (qNumber) => {
+  if (questIndex === END_OF_QUESTIONS) {
+    return showResult();
+  }
+  selectedAnswer = null;
   questionElem.textContent = data[qNumber].question;
-  const fragment = new DocumentFragment();
   answerContainerElem.innerHTML = data[qNumber].answers.map((item, index) =>
     `
       <input class="answer__input answer__input--radio" type="radio" name="answer" id="${index}" value="${item.isCorrect}">
@@ -71,34 +103,33 @@ const showQuestion = (qNumber) => {
 const selectAnswer = () => {
   answerContainerElem.querySelectorAll('input').forEach(el => {
     el.addEventListener('click', (evt) => {
-      selectAnswer = evt.target.value;
+      selectedAnswer = evt.target.value;
     });
   });
 };
 
 const submitAnswer = () => {
   submitElem.addEventListener('click', () => {
-    selectedAnswer === true ? correctCount++ : wrongCount++;
-    questIndex++;
-    showQuestion(questIndex);
+    if (selectedAnswer !== null) {
+      selectedAnswer === 'true' ? correctCount++ : wrongCount++;
+      questIndex++;
+      showQuestion(questIndex);
+    } else {
+      alert('Please select an answer!');
+    }
+    // total = correctCount - wrongCount;
   });
 };
 
 showQuestion(questIndex);
 submitAnswer();
 
-/* 
-const showQuestion = (qNumber) => {
-  questionElem.textContent = data[qNumber].question;
-  const fragment = new DocumentFragment();
-  answerContainerElem.innerHTML = data[qNumber].answers.map((item, index) =>
-    `
-    <div class="answer content__answer">
-      <input class="answer__input answer__input--radio" type="radio" name="answer" id="${index}" value="${item.isCorrect}">
-      <label class="answer__input" for="${index}">${item.answer}</label>
-      <span class="break"></span>
-    </div>
-    `
-  );
+const showResult = () => {
+  resultScreenElem.classList.toggle('hide');
+  gameScreenElem.classList.toggle('hide');
+
+  correctElem.textContent = `Correct Answers: ${correctCount}`;
+  wrongElem.textContent = `Wrong Answers: ${wrongCount}`;
+  scoreElem.textContent = `Score: ${(correctCount - wrongCount) * 10}`;
 };
- */
+
