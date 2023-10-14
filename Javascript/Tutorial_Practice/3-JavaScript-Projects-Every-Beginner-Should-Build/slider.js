@@ -2,6 +2,8 @@ const leftElem = document.querySelector('.left');
 const rightElem = document.querySelector('.right');
 const sliderElem = document.querySelector('.slider');
 const imagesElem = document.querySelectorAll('.image');
+const bottomElem = document.querySelector('.bottom');
+const buttonsElem = document.querySelectorAll('.button');
 
 let slideNumber = 1;
 const slideLength = imagesElem.length;
