@@ -61,3 +61,37 @@
 .hide {
   display: none;
 }
+
+.result {
+  padding: 1rem;
+  text-align: center;
+}
+
+.correct {
+  color: green;
+}
+
+.wrong {
+  color: red;
+}
+
+.play {
+  min-width: 10ch;
+  min-height: 44px;
+  color: white;
+  background-color: rebeccapurple;
+  padding: 0.625rem 1.25rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 280px) {
+  .body {
+    font-size: .60rem;
+  }
+  .result {
+    padding: 0.20rem 0.15rem;
+  }
+}
+
