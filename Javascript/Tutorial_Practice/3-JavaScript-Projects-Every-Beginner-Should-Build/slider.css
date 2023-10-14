@@ -23,25 +23,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5vw;
-  gap: 5vw;
+  margin: 2.5vw;
+  gap: 2.5vw;
 }
 
 .top > * {
-  margin: 2vw;
+  margin: 0.5vw;
 }
 
 .arrow {
-  height: 15vw;
-  font-size: 15vw;
+  height: 10vw;
+  font-size: 10vw;
+  color: #EAEAEA;
   cursor: pointer;
 }
 
 .frame {
-  width: 45vw;
-  height: 33vw;
+  width: 50vw;
+  height: 50vw;
   overflow: hidden;
-  margin: auto;
+  /* margin: auto; */
+  padding: 10% 0;
+}
+
+.slider {
+  display: flex;
+  width: 70vw;
+  height: 45vw;
+  /* overflow: hidden; */
+  margin: 0.2rem auto;
+  transition: all 1s ease-in-out;
 }
 
 .image {
@@ -52,11 +63,11 @@
 
 .bottom {
   display: flex;
-  gap: 5vw;
+  gap: 1.5vw;
 }
 
 .bottom > * {
-  margin: 2.5vw;
+  margin: 1.5vw;
 }
 
 .button {
