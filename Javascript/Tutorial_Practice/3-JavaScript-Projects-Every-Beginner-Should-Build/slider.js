@@ -33,6 +33,7 @@ buttonsElem.forEach((button, pos) => {
   button.addEventListener('click', () => {
     resetBtnBg();
     sliderElem.style.transform = `translateX(-${pos * 100}%)`;
+    slideNumber = pos + 1;
     button.style.backgroundColor = 'white';
   });
 });
@@ -64,11 +65,15 @@ const jumpToEndSlide = () => {
 
 rightElem.addEventListener('click', () => {
   slideNumber < slideLength ? nextSlide() : getFirstSlide();
+  resetBtnBg();
+  buttonsElem[slideNumber - 1].style.backgroundColor = 'white';
 });
 
 leftElem.addEventListener('click', () => {
   slideNumber === 1 ? jumpToEndSlide() 
     : slideNumber > 1 ? prevSlide() : getLastSlide();
+  resetBtnBg();
+  buttonsElem[slideNumber - 1].style.backgroundColor = 'white';
 });
 
 
