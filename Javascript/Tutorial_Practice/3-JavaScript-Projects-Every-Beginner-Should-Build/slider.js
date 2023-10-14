@@ -63,17 +63,20 @@ const jumpToEndSlide = () => {
   slideNumber = slideLength;
 };
 
-rightElem.addEventListener('click', () => {
-  slideNumber < slideLength ? nextSlide() : getFirstSlide();
+const changeColour = () => {
   resetBtnBg();
   buttonsElem[slideNumber - 1].style.backgroundColor = 'white';
+};
+
+rightElem.addEventListener('click', () => {
+  slideNumber < slideLength ? nextSlide() : getFirstSlide();
+  changeColour();
 });
 
 leftElem.addEventListener('click', () => {
   slideNumber === 1 ? jumpToEndSlide() 
     : slideNumber > 1 ? prevSlide() : getLastSlide();
-  resetBtnBg();
-  buttonsElem[slideNumber - 1].style.backgroundColor = 'white';
+  changeColour();
 });
 
 
