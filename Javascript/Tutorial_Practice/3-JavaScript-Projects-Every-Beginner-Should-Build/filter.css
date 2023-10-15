@@ -2,3 +2,73 @@
   min-height: 100vh;
   font-family: "Open Sans", sans-serif;
 }
+
+.container {
+  display: flex;
+  padding: 2vw;
+}
+
+.left-menu {
+  flex: 1
+}
+
+.search {
+  padding: 0.625rem;
+  width: 15vw;
+  border: 0.0625rem solid grey;
+}
+
+.h1 {
+  font-size: 1.875rem;
+  color: #555555;
+  font-weight: 300;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.categories > * {
+  margin: 0.625rem;
+}
+
+.category {
+  font-size: 1.25rem;
+  font-weight: 300;
+  padding: 0.3125rem;
+  cursor: pointer;
+}
+
+.content {
+  flex: 4;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.products > * {
+  margin: 0.625rem;
+}
+
+.product {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  align-items: center;
+}
+
+.product > * {
+  margin: .75rem;
+}
+
+.product__image {
+  width: 15vw;
+  height: auto;
+  object-fit: contain;
+}
