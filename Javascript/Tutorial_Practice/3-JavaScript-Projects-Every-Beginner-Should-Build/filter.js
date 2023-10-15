@@ -119,3 +119,16 @@ searchInput.addEventListener('keyup', (evt) => {
     displayProducts(data);
   }
 });
+
+const setCategories = () => {
+  const allCategories = data.map(item => item.category);
+  const categories = ['All', ...allCategories.filter((item, i) => {
+    return allCategories.indexOf(item) === i;
+  })];
+
+  categoriesContainer.innerHTML = categories.map(category => `
+    <span class="category">${category}</span>
+  `).join('');
+};
+
+setCategories();
