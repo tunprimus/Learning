@@ -129,6 +129,12 @@ const setCategories = () => {
   categoriesContainer.innerHTML = categories.map(category => `
     <span class="category">${category}</span>
   `).join('');
+
+  categoriesContainer.addEventListener('click', (evt) => {
+    const selectedCategory = evt.target.textContent;
+
+    selectedCategory === 'All' ? displayProducts(data) : displayProducts(data.filter((item) => item.category === selectedCategory));
+  });
 };
 
 setCategories();
