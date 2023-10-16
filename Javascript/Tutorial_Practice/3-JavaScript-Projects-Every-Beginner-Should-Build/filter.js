@@ -137,4 +137,16 @@ const setCategories = () => {
   });
 };
 
+const setPrices = () => {
+  const priceList = data.map(item => item.price);
+  const minPrice = Math.min(...priceList);
+  const maxPrice = Math.max(...priceList);
+
+  priceRange.min = minPrice;
+  priceRange.max = maxPrice;
+  priceRange.value = maxPrice;
+  priceValue.textContent = `$${maxPrice}`;
+};
+
 setCategories();
+setPrices();
