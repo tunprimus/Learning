@@ -87,7 +87,7 @@ const data = [
     id: 13,
     name: 'Plane',
     img: '../../../../assets/images/plane.png',
-    price: 500000,
+    price: 800,
     category: 'Casual',
   },
 ];
@@ -146,6 +146,11 @@ const setPrices = () => {
   priceRange.max = maxPrice;
   priceRange.value = maxPrice;
   priceValue.textContent = `$${maxPrice}`;
+
+  priceRange.addEventListener('input', (evt) => {
+    priceValue.textContent = `$${evt.target.value}`;
+    displayProducts(data.filter(item => item.price <= evt.target.value));
+  });
 };
 
 setCategories();
