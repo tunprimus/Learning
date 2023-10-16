@@ -1,3 +1,5 @@
+import Home from './Home.js';
+
 const container = document.getElementById('container');
 
 const navigateTo = (url) => {
@@ -41,6 +43,9 @@ function loadNavbar() {
 
 function loadPage() {
   loadNavbar();
+  if (location.pathname === '/') {
+    new Home('container');
+  }
 }
 
 
