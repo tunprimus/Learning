@@ -1,7 +1,9 @@
+import CartHelper from "./helper/cart-helper.js";
 import ProductsHelper from "./helper/products-helper.js";
 import Product from "./product.js";
 
 const FAKE_STORE_PRODUCT_LINK = 'httpsx://fakestoreapi.com/products';
+let count = 0;
 
 export default class Home {
   constructor(selector) {
@@ -31,5 +33,24 @@ export default class Home {
     });
     productsHTML += `</div>`;
     this.container.innerHTML += productsHTML;
+
+    if (count === 0) {
+      this.applyListeners();
+      count = 1;
+    }
+  }
+
+  applyListeners() {
+    document.addEventListener('click', ({ target }) => {
+      if (location.pathname === '/') {
+        let parent = target.parentNode.nodeName !== 'document' && target.parentNode.attributes['data-product-id'];
+        const productAttr = target.attributes['data-product-id'] || parent;
+
+        if (target.matches('.pd-card-btn') || target.parentNode.matches('.pd-card-btn') && productAttr !== undefined) {
+          const clickedProduct = this.products.find(item => item.id === Number(productAttr.value));
+          CartHelper.addToCart(clickedProduct);
+        }
+      }
+    });
   }
 }

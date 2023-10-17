@@ -44,6 +44,9 @@ function loadNavbar() {
 
 function loadPage() {
   loadNavbar();
+  if (!localStorage.getItem('cart')) {
+    localStorage.setItem('cart', JSON.stringify([]));
+  }
   if (location.pathname === '/') {
     new Home('container');
   }
