@@ -1,6 +1,6 @@
-import CartHelper from "./helper/cart-helper.js";
-import ProductsHelper from "./helper/products-helper.js";
-import Product from "./product.js";
+import CartHelper from './helper/cart-helper.js';
+import ProductsHelper from './helper/products-helper.js';
+import Product from './product.js';
 
 const FAKE_STORE_PRODUCT_LINK = 'httpsx://fakestoreapi.com/products';
 let count = 0;

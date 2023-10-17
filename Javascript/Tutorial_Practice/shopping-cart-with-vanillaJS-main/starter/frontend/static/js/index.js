@@ -1,5 +1,5 @@
 import Home from './Home.js';
-import CartHelper from "./helper/cart-helper.js";
+import CartHelper from './helper/cart-helper.js';
 
 const container = document.getElementById('container');
 
@@ -49,6 +49,8 @@ function loadPage() {
   }
   if (location.pathname === '/') {
     new Home('container');
+  } else if (location.pathname === '/cart') {
+    new Cart('container');
   }
 }
 
