@@ -1,6 +1,7 @@
 import CartHelper from './helper/cart-helper';
 import CartItem from '.cart-item';
 
+let count = 0;
 export default class Cart {
   constructor(selector) {
     this.container = document.getElementById(selector);
@@ -38,5 +39,36 @@ export default class Cart {
 
     this.cartHTML += '</div></div>';
     this.container.innerHTML += this.cartHTML;
+
+    if (count === 0) {
+      this.applyListeners();
+      count = 1;
+    }
+  }
+
+  applyListeners() {
+    document.addEventListener('click', (evt) => {
+      const { target } = evt;
+      let parent = target.parentNode.nodeName !== '#document' && target.parentNode.attributes['data-product-id'];
+      const productAttr = target.attributes['data-product-id'] || parent;
+
+      if (location.pathname === 'cart') {
+        // Clear the shopping cart
+        if (target.matches('#clear-all') || target.parentNode.matches('#clear-all')) {
+          CartHelper.setCart = [];
+          this.cart = CartHelper.getCart;
+          CartHelper.updateNavCartValue = CartHelper.getCartItemCount;
+        }
+
+        // Remove shopping cart from UI when cart is empty
+        if (CartHelper.getCart.length <= 0) {
+          this.cart = CartHelper.getCart;
+          if (document.querySelector('.shopping-cart') !== null) {
+            document.querySelector('.shopping-cart').remove();
+            this.loadCart();
+          }
+        }
+      }
+    });
   }
 }
