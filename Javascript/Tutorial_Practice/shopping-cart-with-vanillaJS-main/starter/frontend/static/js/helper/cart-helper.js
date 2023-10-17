@@ -36,4 +36,8 @@ export default class CartHelper {
     const cart = document.getElementById('nav-cart-item');
     card.innerText = value;
   }
+
+  static addTotalPrice() {
+    return this.getCart.reduce((acc, item) => (item.amount * item.price) + acc, 0).toFixed(2);
+  }
 }

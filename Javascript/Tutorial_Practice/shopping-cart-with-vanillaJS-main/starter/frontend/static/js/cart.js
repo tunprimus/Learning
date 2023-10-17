@@ -14,7 +14,7 @@ export default class Cart {
       <div id="sp-cart" class="shopping-cart container">
         <!-- Title -->
         <div class="title mt-5">
-          <h1>Total Price : <span id="cart-total-price">$2040 Total price here<span></h1>
+          <h1>Total Price : <span id="cart-total-price">$ ${CartHelper.calcTotalPrice()}<span></h1>
         </div>
         <div class="mb-5">
           <button class="btn btn-primary" id="clear-all">CLEAR ALL <i class="fa-sharp fa-solid fa-trash"></i></button>
