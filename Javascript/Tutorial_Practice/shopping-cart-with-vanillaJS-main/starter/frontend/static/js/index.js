@@ -1,4 +1,5 @@
 import Home from './Home.js';
+import CartHelper from "./helper/cart-helper.js";
 
 const container = document.getElementById('container');
 
@@ -21,7 +22,7 @@ const route = (event) => {
   }
 };
 
-function generateNavbarHTML() {
+function generateNavbarHTML(cartItemCount) {
   return `
     <nav class="navbar shadow-sm sticky-top">
       <div class="container">
@@ -29,7 +30,7 @@ function generateNavbarHTML() {
         <a href="/cart" data-link id="cart-route" onclick="route()">
           <div class="ms-auto" id="cart" style="text-decoration: none; color : black">
             <i style="font-size: 20px" class="fa-solid fa-cart-shopping"></i>
-            <span class="cartItem"id="nav-cart-item">0</span>
+            <span class="cartItem"id="nav-cart-item">${cartItemCount}</span>
           </div>
         </a>
       </div>
@@ -38,7 +39,7 @@ function generateNavbarHTML() {
 }
 
 function loadNavbar() {
-  container.innerHTML = generateNavbarHTML();
+  container.innerHTML = generateNavbarHTML(CartHelper.getCartItemCount);
 }
 
 function loadPage() {

@@ -1,7 +1,7 @@
 import ProductsHelper from "./helper/products-helper.js";
 import Product from "./product.js";
 
-const FAKE_STORE_PRODUCT_LINK = 'https://fakestoreapi.com/products';
+const FAKE_STORE_PRODUCT_LINK = 'httpsx://fakestoreapi.com/products';
 
 export default class Home {
   constructor(selector) {
