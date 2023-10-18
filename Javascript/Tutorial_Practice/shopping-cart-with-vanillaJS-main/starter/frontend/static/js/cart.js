@@ -60,6 +60,11 @@ export default class Cart {
           CartHelper.updateNavCartValue = CartHelper.getCartItemCount;
         }
 
+        // Remove the clicked item(s)
+        if (target.matches('.delete-btn') || target.parentNode.matches('.delete-btn')) {
+          CartHelper.remove();
+        }
+
         // Remove shopping cart from UI when cart is empty
         if (CartHelper.getCart.length <= 0) {
           this.cart = CartHelper.getCart;
