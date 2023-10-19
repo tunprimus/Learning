@@ -68,13 +68,18 @@ export default class Cart {
             CartHelper.remove(id);
           }
 
-          // Increase the product quantity
+          // Increase the product count / quantity
           if (target.matches('.plus-btn') || target.parentNode.matches('.plus-btn')) {
             this.cart = CartHelper.getCart;
             const clickedProduct = this.cart.find(item => item.id === id);
             if (clickedProduct) {
               CartHelper.addToCart(clickedProduct);
             }
+          }
+
+          // Reduce the product count / quantity
+          if (target.matches('.minus-btn') || target.parentNode.matches('.minus-btn')) {
+            CartHelper.removeItemFromCart(id);
           }
         }
 

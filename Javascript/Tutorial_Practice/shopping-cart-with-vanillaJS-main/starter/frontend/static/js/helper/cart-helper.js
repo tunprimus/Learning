@@ -43,6 +43,46 @@ export default class CartHelper {
     }
   }
 
+  static removeItemFromCart(id) {
+    let cart = this.getCart;
+    let stop = false;
+    cart = cart.reduce((acc, item) => {
+      if (item.id === id) {
+        if (item.amount === 1) {
+          stop = true;
+          return acc;
+        } else {
+          return [...acc, { ...item, amount: item.amount - 1 }];
+        }
+      } else {
+        return [...acc, item];
+      }
+    }, []);
+
+    if (stop === true) {
+      return;
+    }
+
+    // Set updated cart to localStorage
+    this.setCart = cart;
+
+    // Update navbar cart item  count
+    this.updateNavCartValue = this.getCartItemCount;
+
+    // Update its own item count in the cart page
+    if (location.pathname === '/cart') {
+      const updatedItem = cart.find(item => item.id === id);
+
+      if (updatedItem) {
+        document.getElementById(id).value = updatedItem.amount;
+        const totalPrice = this.getCartItemPrice(updatedItem.price, updatedItem.amount);
+        this.updateCartItemPrice(totalPrice, id);
+      } else {
+        return;
+      }
+    }
+  }
+
   static updateCartItemPrice(totalPrice, id) {
     document.getElementById(`price-${id}`).innerText = `$${totalPrice}`;
     this.updateCartTotalPrice(this.calcTotalPrice());
