@@ -5,7 +5,8 @@ export default class CartHelper {
 
   static get getCartItemCount() {
     let cart = this.getCart;
-    if (cart && cart.length > 0) {
+    //TODO: Fix optional chaining problem
+    if (cart !== null && cart.length > 0) {
       return cart.reduce((acc, currItem) => acc + currItem.amount, 0);
     }
     return 0;
@@ -94,7 +95,7 @@ export default class CartHelper {
 
   static set updateNavCartValue(value) {
     const cart = document.getElementById('nav-cart-item');
-    card.innerText = value;
+    cart.innerText = value;
   }
 
   static addTotalPrice() {
