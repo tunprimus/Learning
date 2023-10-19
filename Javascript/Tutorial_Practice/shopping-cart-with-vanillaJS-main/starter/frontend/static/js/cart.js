@@ -67,6 +67,15 @@ export default class Cart {
           if (target.matches('.delete-btn') || target.parentNode.matches('.delete-btn')) {
             CartHelper.remove(id);
           }
+
+          // Increase the product quantity
+          if (target.matches('.plus-btn') || target.parentNode.matches('.plus-btn')) {
+            this.cart = CartHelper.getCart;
+            const clickedProduct = this.cart.find(item => item.id === id);
+            if (clickedProduct) {
+              CartHelper.addToCart(clickedProduct);
+            }
+          }
         }
 
         // Remove shopping cart from UI when cart is empty

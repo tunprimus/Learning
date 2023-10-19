@@ -34,7 +34,7 @@ export default class CartItem {
           </button>
         </div>
 
-        <div class="total-price" id="${this.id}">$ ${this.price}</div>
+        <div class="total-price" id="price-${this.id}">$ ${this.price}</div>
       </div>
     `;
   }

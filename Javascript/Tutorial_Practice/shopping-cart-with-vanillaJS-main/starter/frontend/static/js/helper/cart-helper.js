@@ -29,7 +29,27 @@ export default class CartHelper {
 
     // Set updated cart to localStorage
     this.setCart = cart;
+
+    // Update navbar cart item count
     this.updateNavCartValue = this.getCartItemCount;
+
+    // In the cart page, it should update its own item count
+    if (location.pathname === '/cart') {
+      cart = this.getCart;
+      const updatedItem = cart.find(item => item.id == product.id);
+      const totalPrice = this.getCartItemPrice(updatedItem.price, updatedItem.amount);
+      this.updateCartTotalPrice(totalPrice, product.id);
+      document.getElementById(product.id).value = updatedItem.amount;
+    }
+  }
+
+  static updateCartItemPrice(totalPrice, id) {
+    document.getElementById(`price-${id}`).innerText = `$${totalPrice}`;
+    this.updateCartTotalPrice(this.calcTotalPrice());
+  }
+
+  static getCartItemPrice(price, amount) {
+    return (price * amount).toFixed(2);
   }
 
   static set updateNavCartValue(value) {
