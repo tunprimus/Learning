@@ -40,4 +40,17 @@ export default class CartHelper {
   static addTotalPrice() {
     return this.getCart.reduce((acc, item) => (item.amount * item.price) + acc, 0).toFixed(2);
   }
+
+  static remove(id) {
+    document.getElementById(`item-${id}`).remove();
+    this.setCart = this.getCart.filter((item) => item.id !== id);
+
+    // Update the navbar
+    this.updateNavCartValue = this.getCartItemCount;
+    this.updateCartTotalPrice(this.calcTotalPrice());
+  }
+
+  static updateCartTotalPrice(totalPrice) {
+    document.getElementById('cart-total-price').innerText = `$${totalPrice}`;
+  }
 }
