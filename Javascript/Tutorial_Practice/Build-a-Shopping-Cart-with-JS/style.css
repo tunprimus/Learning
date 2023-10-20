@@ -5,6 +5,7 @@ Artist: freeCodeCamp.org */
 :root {
   /* >>> Contextual Spacing For Intrinsic Web Design: https://moderncss.dev/contextual-spacing-for-intrinsic-web-design/ */
 	/* Paddings, Margins, Gaps */
+	--padding-es: clamp(0.5rem, 1.5%, 0.75rem);
 	--padding-sm: clamp(1rem, 3%, 1.5rem);
 	--padding-md: clamp(1.5rem, 6%, 3rem);
 	--padding-lg: clamp(3rem, 12%, 6rem);
@@ -52,6 +53,7 @@ Artist: freeCodeCamp.org */
   justify-content: space-between;
   color: white;
   padding: var(--space-responsive--small) var(--space-responsive);
+  margin-bottom: var(--space-responsive--ex-large);
 }
 
 .cart {
@@ -76,4 +78,87 @@ Artist: freeCodeCamp.org */
   color: white;
   padding: var(--space-responsive--tiny);
   border-radius: var(--border-radius-value);
+}
+
+.shop {
+  --min: 30ch;
+  display: grid;
+  /* grid-template-columns: repeat(4, minmax(200px, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-responsive--ex-large);
+  justify-content: center;
+}
+
+.shop > * {
+  margin: 2.5%;
+}
+
+/* --- Responsive flex: using flex & flex-wrap - control number of items + optimised gap 
+Build your Responsive website without media query - https://dev.to/afif/build-your-responsive-website-without-media-query-omj
+--- */
+.responsive-flex3 {
+  display: flex;
+  flex-wrap: wrap; /* this */
+  gap: 10px;
+}
+
+.responsive-flex3 > div {
+  flex: max(400px, 100% / 4 + 0.1%); /* and this */
+}
+
+.item {
+  border: 0.125rem solid #212529;
+  border-radius: var(--border-radius-value);
+}
+
+.item__details {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-responsive--ex-small);
+  padding: 2.5%;
+  row-gap: 2.5%;
+  column-gap: 2.5%;
+  gap: 2.5%;
+}
+
+.item__details > * {
+  margin: 2.5%;
+}
+
+.price-quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.25rem;
+  font-size: 1rem;
+}
+
+.buttons > * {
+  margin: 2.5%;
+}
+
+.buttons__minus,
+.buttons__plus {
+  justify-content: center;
+  font-size: .8rem;
+  padding: 0;
+  opacity: 0.75;
+}
+
+.buttons__minus {
+  background-color: lightpink;
+  color: red;
+  cursor: pointer;
+}
+
+.buttons__plus {
+  background-color: lightgreen;
+  color: green;
+  cursor: pointer;
 }
