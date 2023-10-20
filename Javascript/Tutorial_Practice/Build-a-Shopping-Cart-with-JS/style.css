@@ -16,6 +16,7 @@ Artist: freeCodeCamp.org */
 	--space-responsive--medium: calc(6px + 1.5625vw);
 	--space-responsive--small: calc(4px + 1.5625vw);
 	--space-responsive--ex-small: calc(2px + 1.5625vw);
+	--space-responsive--tiny: calc(0.1px + 0.5625vw);
 
   --margin-sm: min(2rem, 4vh);
 	--margin-md: min(4rem, 8vh);
@@ -54,12 +55,25 @@ Artist: freeCodeCamp.org */
 }
 
 .cart {
+  position: relative;
   background-color: #FFFFFF;
   color: #212529;
   font-size: 1.8rem;
   padding: var(--space-responsive--ex-small);
+  border-radius: var(--border-radius-value);
 }
 
 .cart__icon {
   transform: rotateY(180deg);
+}
+
+.cart__amount {
+  position: absolute;
+  top: -0.75rem;
+  right: -0.3rem;
+  font-size: 1rem;
+  background-color: red;
+  color: white;
+  padding: var(--space-responsive--tiny);
+  border-radius: var(--border-radius-value);
 }
