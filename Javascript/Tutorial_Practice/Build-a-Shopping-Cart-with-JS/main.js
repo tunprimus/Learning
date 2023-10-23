@@ -83,8 +83,9 @@ const incrementItemCount = (item) => {
     search.item += 1;
   }
   
-  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
   updateItemCount(selectedItemId);
+
+  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
 const decrementItemCount = (item) => {
@@ -97,8 +98,11 @@ const decrementItemCount = (item) => {
     search.item -= 1;
   }
 
-  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
   updateItemCount(selectedItemId);
+  
+  basket = basket.filter((obj) => obj.item !== 0);
+
+  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
 const updateItemCount = (curId) => {
