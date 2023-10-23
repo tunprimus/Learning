@@ -56,6 +56,11 @@ Artist: freeCodeCamp.org */
   margin-bottom: var(--space-responsive--ex-large);
 }
 
+.navbar__link {
+  text-decoration: none;
+  color: white;
+}
+
 .cart {
   position: relative;
   background-color: #FFFFFF;

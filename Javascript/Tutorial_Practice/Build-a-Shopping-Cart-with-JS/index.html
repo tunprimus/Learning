@@ -9,16 +9,21 @@ Artist: freeCodeCamp.org -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clothing Store - Build a Shopping Cart with JavaScript Project Tutorial</title>
   <link rel="stylesheet" href="src/style.css">
+  <script src="src/Data.js" defer></script>
   <script src="src/main.js" defer></script>
 </head>
 <body class="body">
   <!-- <h1 class="h1">Store Heading</h1> -->
   <div class="navbar">
-    <h2 class="h2">Clothing Store</h2>
-    <div class="cart">
-      <span class="cart__icon">&#x1F6D2;</span>
-      <div class="cart__amount" id="cart__amount">0</div>
-    </div>
+    <a class="navbar__link" href="index.html">
+      <h2 class="h2">Clothing Store</h2>
+    </a>
+    <a class="navbar__link" href="cart.html">
+      <div class="cart">
+        <span class="cart__icon">&#x1F6D2;</span>
+        <div class="cart__amount" id="cart__amount">0</div>
+      </div>
+    </a>
   </div>
 
   <div class="shop" id="shop">
