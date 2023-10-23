@@ -42,10 +42,12 @@ const basket = [{
 }];
  */
 
-const basket = [];
+const basket = JSON.parse(localStorage.getItem('clothing-store-data')) || [];
 
 const generateShop = () => {
   return shopElement.innerHTML = shopItemsData.map((item) => {
+    const selectedItemId = item.id;
+    let search = basket.find((obj) => obj.id === selectedItemId) || [];
     return `
       <div id="product-id-${item.id}" class="item">
         <img src="${item.img}" alt="casual shirt on hanger" class="item__image" width="100%">
@@ -56,7 +58,7 @@ const generateShop = () => {
             <h2 class="h2">$ ${item.price}</h2>
             <div class="buttons">
               <span onclick="decrementItemCount(${item.id})" class="buttons__minus">&#x2796;</span>
-              <div id="${item.id}" class="quantity">0</div>
+              <div id="${item.id}" class="quantity">${search.item === undefined ? 0 : search.item}</div>
               <span onclick="incrementItemCount(${item.id})" class="buttons__plus">&#x2795;</span>
             </div>
           </div>
