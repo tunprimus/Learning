@@ -67,6 +67,7 @@ Artist: freeCodeCamp.org */
 
 .cart__icon {
   transform: rotateY(180deg);
+  cursor: pointer;
 }
 
 .cart__amount {
