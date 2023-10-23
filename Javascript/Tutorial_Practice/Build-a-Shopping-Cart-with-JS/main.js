@@ -35,10 +35,14 @@ const shopItemsData = [
   },
 ];
 
+/* 
 const basket = [{
   id: 'a000',
-  item: 0,
+  item: 1,
 }];
+ */
+
+const basket = [];
 
 const generateShop = () => {
   return shopElement.innerHTML = shopItemsData.map((item) => {
@@ -77,6 +81,7 @@ const incrementItemCount = (item) => {
     search.item += 1;
   }
   
+  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
   updateItemCount(selectedItemId);
 };
 
@@ -90,6 +95,7 @@ const decrementItemCount = (item) => {
     search.item -= 1;
   }
 
+  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
   updateItemCount(selectedItemId);
 };
 
