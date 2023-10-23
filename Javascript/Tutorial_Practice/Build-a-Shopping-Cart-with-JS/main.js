@@ -37,7 +37,7 @@ const shopItemsData = [
 
 const basket = [{
   id: 'a000',
-  item: 1,
+  item: 0,
 }];
 
 const generateShop = () => {
@@ -77,7 +77,6 @@ const incrementItemCount = (item) => {
     search.item += 1;
   }
   
-  // console.log(basket);
   updateItemCount(selectedItemId);
 };
 
@@ -91,13 +90,17 @@ const decrementItemCount = (item) => {
     search.item -= 1;
   }
 
-  // console.log(basket);
   updateItemCount(selectedItemId);
 };
 
 const updateItemCount = (curId) => {
-  const search = basket.find((obj) => obj.id === curId);
-  console.log(search.item);
-  // document.getElementById(curId).innerHTML = search.item;
-  document.getElementById(curId).textContent = search.item;
+  const counted = basket.find((obj) => obj.id === curId);
+  
+  document.getElementById(curId).textContent = counted.item;
+  calculateItemCount();
+};
+
+const calculateItemCount = () => {
+  const cartIcon = document.getElementById('cart__amount');
+  cartIcon.textContent = basket.map((obj) => obj.item).reduce((acc, item) => acc + item, 0);
 };
