@@ -42,7 +42,7 @@ const basket = [{
 }];
  */
 
-const basket = JSON.parse(localStorage.getItem('clothing-store-data')) || [];
+let basket = JSON.parse(localStorage.getItem('clothing-store-data')) || [];
 
 const generateShop = () => {
   return shopElement.innerHTML = shopItemsData.map((item) => {
@@ -98,16 +98,19 @@ const decrementItemCount = (item) => {
     search.item -= 1;
   }
 
-  updateItemCount(selectedItemId);
-  
   basket = basket.filter((obj) => obj.item !== 0);
+
+  updateItemCount(selectedItemId);
 
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
 const updateItemCount = (curId) => {
-  const counted = basket.find((obj) => obj.id === curId);
-  
+  let counted = basket.find((obj) => obj.id === curId);
+  if (counted === undefined) {
+    document.getElementById(curId).textContent = 0;
+    return;
+  }
   document.getElementById(curId).textContent = counted.item;
   calculateItemCount();
 };
