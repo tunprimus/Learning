@@ -191,9 +191,13 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
   cursor: pointer;
 }
 
+
+
+
+
 .shopping-cart {
   display: grid;
-  grid-template-columns: repeat(1, 40vw);
+  grid-template-columns: repeat(1, 50vw);
   justify-content: center;
   grid-gap: 0.9375rem;
 }
@@ -213,8 +217,10 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
 
 .details-cart__title-price {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
+
 
 .details-cart__close-btn {
   align-self: flex-end;

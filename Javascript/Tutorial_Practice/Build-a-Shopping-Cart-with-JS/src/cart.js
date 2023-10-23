@@ -11,30 +11,28 @@ const calculateItemCount = () => {
 calculateItemCount();
 
 const generateCartItems = () => {
-  if (basket.length > 0) {
+  const basketSize = basket.length;
+  if (basketSize !== 0) {
     labelElement.innerHTML = '';
-    return (shoppingCartElement.innerHTML = basket.map((obj) => {
-      const { id, item } = obj;
-      let search = shopItemsData.find((el) => el.id === id) || [];
+    return (shoppingCartElement.innerHTML = basket.map((objCart) => {
+      let { id, item } = objCart;
+      let searchInCart = shopItemsData.find((el) => el.id === id) || [];
       return `
         <div class="shopping-cart__item">
-          <img src="${search.img}" alt="${search.desc}" class="shopping-cart__image" width="40%">
+          <img src="${searchInCart.img}" alt="${searchInCart.desc}" class="shopping-cart__image" width="40%">
           <div class="shopping-cart__details details-cart">
-
             <div class="details-cart__title">
-              <h4 class="details-cart__title-price>
-                <p>${search.name}</p>
-                <p>$ ${search.price}</p>
+              <h4 class="details-cart__title-price">
+                <p>${searchInCart.name}</p>
+                <p>$ ${searchInCart.price}</p>
               </h4>
               <span class="details-cart__close-btn">&#x2716;</span>
             </div>
-
             <div class="details-cart__cart-buttons">
               <span class="buttons__minus">&#x2796;</span>
               <div class="quantity">0</div>
               <span class="buttons__plus">&#x2795;</span>
             </div>
-
             <h3 class="details-cart__text"></h3>
           </div>
         </div>
