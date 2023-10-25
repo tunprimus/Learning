@@ -1,4 +1,54 @@
 /* Modified from : Vanilla JavaScript Project: Building a Country Info App Using Fetch API
 Developer: Code With Mayank */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+.body {
+  background-image: linear-gradient(rgb(228, 181, 95), rgb(236, 156, 7));
+  height: 100vh;
+  font-family: monospace;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 50%;
+  margin: 5rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  background-color: rgb(227, 151, 10);
+  overflow: auto;
+  filter: drop-shadow(5px 5px 5px rgb(159, 104, 2));
+}
+
+.container * {
+  margin: 0.5rem 0;
+}
+
+.h2 {
+  font-size: 2rem;
+}
+
+.h3 {
+  font-size: 1.5rem;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 0.5rem 2rem;
+  font-weight: bold;
+  outline: none;
+  border: none;
+}
+
+.country-flag {
+  width: 10rem;
+}
+
+.info {
+  display: none;
+}
