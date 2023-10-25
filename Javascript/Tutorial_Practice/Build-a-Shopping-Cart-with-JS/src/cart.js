@@ -79,10 +79,11 @@ const decrementItemCount = (item) => {
     search.item -= 1;
   }
 
+  updateItemCount(selectedItemId);
+  
   basket = basket.filter((obj) => obj.item !== 0);
 
-  updateItemCount(selectedItemId);
-
+  generateCartItems();
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
