@@ -117,6 +117,14 @@ let removeItem = (targetItem) => {
   calculateItemCount();
 };
 
+let clearCart = () => {
+  basket = [];
+
+  generateCartItems();
+  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
+  calculateItemCount();
+};
+
 let totalAmount = () => {
   const basketSize = basket.length;
 
@@ -129,7 +137,7 @@ let totalAmount = () => {
     labelElement.innerHTML = `
       <h2>Total Bill: $ ${amount}</h2>
       <button class="checkout">Checkout</button>
-      <button class="remove-all">Clear Cart</button>
+      <button onclick="clearCart()" class="remove-all">Clear Cart</button>
     `;
   } else {
     return;
