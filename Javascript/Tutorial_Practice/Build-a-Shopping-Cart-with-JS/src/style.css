@@ -92,7 +92,7 @@ Artist: freeCodeCamp.org */
   --min: 30ch;
   display: grid;
   /* grid-template-columns: repeat(4, minmax(200px, 1fr)); */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--space-responsive--ex-large);
   justify-content: center;
 }
