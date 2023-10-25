@@ -66,6 +66,8 @@ const incrementItemCount = (item) => {
     search.item += 1;
   }
   
+  generateCartItems();
+  
   updateItemCount(selectedItemId);
 
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
