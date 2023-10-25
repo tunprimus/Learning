@@ -178,7 +178,9 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
   margin-bottom: 1.25rem;
 }
 
-.home-btn {
+.home-btn,
+.checkout,
+.remove-all {
   background-color: #212529;
   color: white;
   border: none;
@@ -260,6 +262,21 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
 
 .details-cart__text {
   margin-top: var(--space-responsive);
+}
+
+.checkout,
+.remove-all {
+  font-weight: bold;
+}
+
+.checkout {
+  background-color: green;
+  color: white;
+}
+
+.remove-all {
+  background-color: red;
+  color: white;
 }
 
 
