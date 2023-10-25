@@ -51,6 +51,7 @@ Artist: freeCodeCamp.org */
   display: flex;
   background-color: #212529;
   justify-content: space-between;
+  align-items: center;
   color: white;
   padding: var(--space-responsive--small) var(--space-responsive);
   margin-bottom: var(--space-responsive--ex-large);

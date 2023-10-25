@@ -17,14 +17,15 @@ let generateCartItems = () => {
     return (shoppingCartElement.innerHTML = basket.map((objCart) => {
       let { id, item } = objCart;
       let searchInCart = shopItemsData.find((el) => el.id === id) || [];
+      let { img, desc, name, price } = searchInCart;
       return `
         <div class="shopping-cart__item">
-          <img src="${searchInCart.img}" alt="${searchInCart.desc}" class="shopping-cart__image" width="40%">
+          <img src="${img}" alt="${desc}" class="shopping-cart__image" width="40%">
           <div class="shopping-cart__details details-cart">
             <div class="details-cart__title">
               <h4 class="details-cart__title-price">
-                <p>${searchInCart.name}</p>
-                <p class="details-cart__cart-item-price">$ ${searchInCart.price}</p>
+                <p>${name}</p>
+                <p class="details-cart__cart-item-price">$ ${price}</p>
               </h4>
               <span onclick="removeItem(${id})" class="details-cart__close-btn">&#x2716;</span>
             </div>
