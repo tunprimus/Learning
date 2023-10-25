@@ -191,10 +191,6 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
   cursor: pointer;
 }
 
-
-
-
-
 .shopping-cart {
   display: grid;
   grid-template-columns: repeat(1, 50vw);
@@ -208,8 +204,12 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
   display: flex;
 }
 
+.details-cart {
+  width: 100%;
+  padding: var(--space-responsive--tiny);
+}
+
 .details-cart__title {
-  width: 23vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -219,8 +219,16 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
   display: flex;
   justify-content: center;
   align-items: center;
+  grid-gap: 0.75rem;
 }
 
+.details-cart__cart-item-price {
+  background-color: #212529;
+  color: white;
+  margin-left: 0.5rem;
+  border-radius: var(--border-radius-value);
+  padding: var(--space-responsive--tiny);
+}
 
 .details-cart__close-btn {
   align-self: flex-end;
@@ -228,4 +236,41 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
   font-size: 1.2rem;
   font-weight: 100;
   cursor: pointer;
+}
+
+.details-cart__cart-buttons {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-responsive--tiny);
+}
+
+.details-cart__cart-buttons > * {
+  margin-left: var(--space-responsive--tiny);
+}
+
+.cart-buttons__minus,
+.cart-buttons__plus {
+  font-size: .5rem;
+  padding: .2rem;
+}
+
+.cart-quantity {
+  font-size: 1.1rem;
+}
+
+
+@media screen and (max-width: 440px) {
+  .shopping-cart {
+    display: grid;
+    grid-template-columns: repeat(1, 80vw);
+    grid-gap: 0.9375rem;
+  }
+
+  .details-cart__title-price {
+    font-size: .75rem;
+  }
+
+  .details-cart__cart-item-price {
+    margin-left: 0.1rem;
+  }
 }

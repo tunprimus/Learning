@@ -24,14 +24,14 @@ const generateCartItems = () => {
             <div class="details-cart__title">
               <h4 class="details-cart__title-price">
                 <p>${searchInCart.name}</p>
-                <p>$ ${searchInCart.price}</p>
+                <p class="details-cart__cart-item-price">$ ${searchInCart.price}</p>
               </h4>
               <span class="details-cart__close-btn">&#x2716;</span>
             </div>
             <div class="details-cart__cart-buttons">
-              <span class="buttons__minus">&#x2796;</span>
-              <div class="quantity">0</div>
-              <span class="buttons__plus">&#x2795;</span>
+              <span onclick="decrementItemCount(${id})" class="buttons__minus cart-buttons__minus">&#x2796;</span>
+              <div id="${id}" class="quantity cart-quantity">${item}</div>
+              <span onclick="incrementItemCount(${id})" class="buttons__plus cart-buttons__plus">&#x2795;</span>
             </div>
             <h3 class="details-cart__text"></h3>
           </div>
@@ -50,3 +50,49 @@ const generateCartItems = () => {
 };
 
 generateCartItems();
+
+const incrementItemCount = (item) => {
+  const selectedItemId = item.id;
+  let search = basket.find((obj) => obj.id === selectedItemId);
+
+  if (search === undefined) {
+    basket.push({
+      id: selectedItemId,
+      item: 1,
+    });
+  } else {
+    search.item += 1;
+  }
+  
+  updateItemCount(selectedItemId);
+
+  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
+};
+
+const decrementItemCount = (item) => {
+  const selectedItemId = item.id;
+  let search = basket.find((obj) => obj.id === selectedItemId);
+
+  if (search === undefined || search.item === 0) {
+    return;
+  } else {
+    search.item -= 1;
+  }
+
+  basket = basket.filter((obj) => obj.item !== 0);
+
+  updateItemCount(selectedItemId);
+
+  localStorage.setItem('clothing-store-data', JSON.stringify(basket));
+};
+
+const updateItemCount = (curId) => {
+  let counted = basket.find((obj) => obj.id === curId);
+  if (counted === undefined) {
+    document.getElementById(curId).textContent = 0;
+    return;
+  }
+  document.getElementById(curId).textContent = counted.item;
+  calculateItemCount();
+};
+
