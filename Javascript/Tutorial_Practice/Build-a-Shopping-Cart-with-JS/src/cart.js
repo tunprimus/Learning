@@ -114,6 +114,7 @@ let removeItem = (targetItem) => {
   totalAmount();
 
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
+  calculateItemCount();
 };
 
 let totalAmount = () => {
@@ -133,6 +134,7 @@ let totalAmount = () => {
   } else {
     return;
   }
+  calculateItemCount();
 };
 
 totalAmount();
