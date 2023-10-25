@@ -27,6 +27,7 @@ Artist: freeCodeCamp.org */
 	--layout-gap-md: clamp(1.5rem, 6vmax, 3rem);
 	--layout-gap-lg: clamp(3rem, 8vmax, 4rem);
 
+  --border-radius-value--small: 0.2rem;
   --border-radius-value: 0.4rem;
 	--border-radius-value--large: 1.2rem;
 	--border-radius-value--medium: 0.8rem;
@@ -116,6 +117,10 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
 .item {
   border: 0.125rem solid #212529;
   border-radius: var(--border-radius-value);
+}
+
+.item__image {
+  border-radius: var(--border-radius-value--small) var(--border-radius-value--small) 0 0;
 }
 
 .item__details {
