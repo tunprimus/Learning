@@ -3,14 +3,14 @@ const shoppingCartElement = document.getElementById('shopping-cart');
 
 let basket = JSON.parse(localStorage.getItem('clothing-store-data')) || [];
 
-const calculateItemCount = () => {
+let calculateItemCount = () => {
   const cartIcon = document.getElementById('cart__amount');
   cartIcon.textContent = basket.map((obj) => obj.item).reduce((acc, item) => acc + item, 0);
 };
 
 calculateItemCount();
 
-const generateCartItems = () => {
+let generateCartItems = () => {
   const basketSize = basket.length;
   if (basketSize !== 0) {
     labelElement.innerHTML = '';
@@ -54,7 +54,7 @@ const generateCartItems = () => {
 
 generateCartItems();
 
-const incrementItemCount = (item) => {
+let incrementItemCount = (item) => {
   const selectedItemId = item.id;
   let search = basket.find((obj) => obj.id === selectedItemId);
 
@@ -74,7 +74,7 @@ const incrementItemCount = (item) => {
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
-const decrementItemCount = (item) => {
+let decrementItemCount = (item) => {
   const selectedItemId = item.id;
   let search = basket.find((obj) => obj.id === selectedItemId);
 
@@ -93,28 +93,30 @@ const decrementItemCount = (item) => {
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
-const updateItemCount = (curId) => {
+let updateItemCount = (curId) => {
   let counted = basket.find((obj) => obj.id === curId);
   if (counted === undefined) {
     document.getElementById(curId).textContent = 0;
     return;
   }
   document.getElementById(curId).textContent = counted.item;
-  generateCartItems();
+  
   calculateItemCount();
+  totalAmount();
 };
 
-const removeItem = (targetItem) => {
+let removeItem = (targetItem) => {
   const selectedItemId = targetItem.id;
 
   basket = basket.filter((obj) => obj.id !== selectedItemId);
 
   generateCartItems();
+  totalAmount();
 
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
-const totalAmount = () => {
+let totalAmount = () => {
   const basketSize = basket.length;
 
   if (basketSize > 0) {

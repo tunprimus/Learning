@@ -13,7 +13,7 @@ const basket = [{
 
 let basket = JSON.parse(localStorage.getItem('clothing-store-data')) || [];
 
-const generateShop = () => {
+let generateShop = () => {
   return shopElement.innerHTML = shopItemsData.map((item) => {
     const selectedItemId = item.id;
     let search = basket.find((obj) => obj.id === selectedItemId) || [];
@@ -39,7 +39,7 @@ const generateShop = () => {
 
 generateShop();
 
-const incrementItemCount = (item) => {
+let incrementItemCount = (item) => {
   const selectedItemId = item.id;
   let search = basket.find((obj) => obj.id === selectedItemId);
 
@@ -57,7 +57,7 @@ const incrementItemCount = (item) => {
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
-const decrementItemCount = (item) => {
+let decrementItemCount = (item) => {
   const selectedItemId = item.id;
   let search = basket.find((obj) => obj.id === selectedItemId);
 
@@ -74,7 +74,7 @@ const decrementItemCount = (item) => {
   localStorage.setItem('clothing-store-data', JSON.stringify(basket));
 };
 
-const updateItemCount = (curId) => {
+let updateItemCount = (curId) => {
   let counted = basket.find((obj) => obj.id === curId);
   if (counted === undefined) {
     document.getElementById(curId).textContent = 0;
@@ -84,7 +84,7 @@ const updateItemCount = (curId) => {
   calculateItemCount();
 };
 
-const calculateItemCount = () => {
+let calculateItemCount = () => {
   const cartIcon = document.getElementById('cart__amount');
   cartIcon.textContent = basket.map((obj) => obj.item).reduce((acc, item) => acc + item, 0);
 };
