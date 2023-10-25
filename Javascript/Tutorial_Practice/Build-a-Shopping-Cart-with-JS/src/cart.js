@@ -28,12 +28,14 @@ const generateCartItems = () => {
               </h4>
               <span class="details-cart__close-btn">&#x2716;</span>
             </div>
+
             <div class="details-cart__cart-buttons">
               <span onclick="decrementItemCount(${id})" class="buttons__minus cart-buttons__minus">&#x2796;</span>
               <div id="${id}" class="quantity cart-quantity">${item}</div>
               <span onclick="incrementItemCount(${id})" class="buttons__plus cart-buttons__plus">&#x2795;</span>
             </div>
-            <h3 class="details-cart__text"></h3>
+
+            <h3 class="details-cart__text">$ ${item * searchInCart.price}</h3>
           </div>
         </div>
       `;
@@ -80,7 +82,7 @@ const decrementItemCount = (item) => {
   }
 
   updateItemCount(selectedItemId);
-  
+
   basket = basket.filter((obj) => obj.item !== 0);
 
   generateCartItems();

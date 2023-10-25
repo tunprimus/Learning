@@ -258,6 +258,10 @@ Build your Responsive website without media query - https://dev.to/afif/build-yo
   font-size: 1.1rem;
 }
 
+.details-cart__text {
+  margin-top: var(--space-responsive);
+}
+
 
 @media screen and (max-width: 440px) {
   .shopping-cart {
