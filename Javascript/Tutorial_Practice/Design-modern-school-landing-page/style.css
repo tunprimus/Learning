@@ -1,1 +1,147 @@
 /* Design a Modern School Landing Page | HTML, CSS & Vanilla JS Tutorial by Mute Coder | https://www.youtube.com/watch?v=83OO97Zy8Dw */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Oswald", sans-serif;
+  font-weight: 300;
+  color: var(--cl--3--);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+body {
+  --cl--1--: #FFFFFF;
+  --cl--2--: #173041;
+  --cl--3--: #1C467E;
+  --cl--4--: #EA4427;
+  --gap--: clamp(1rem, 5vw, 5rem);
+  --shadow--1--: drop-shadow(6px 6px 4px rgba(0, 0, 0, 0.25));
+  --shadow--2--: 6px 6px 4px rgba(0, 0, 0, 0.25);
+  background-color: var(--cl--1--);
+}
+
+.image {
+  display: flex;
+  max-width: 100%;
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  -o-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.ul {
+  list-style: none;
+}
+
+.row {
+  display: flex;
+}
+
+.flex {
+  flex-wrap: wrap;
+  gap: var(--gap--);
+}
+
+.flex > * {
+  flex: 1 1 30rem;
+}
+
+.column {
+  display: grid;
+}
+
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: var(--gap--);
+  gap: var(--gap--);
+}
+
+.container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+
+/* Navigation */
+.header {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--gap--);
+  padding: 1.5rem 0;
+}
+
+.logo__image {
+  max-height: 150px;
+  object-fit: contain;
+  -webkit-filter: var(--shadow--1--);
+  filter: var(--shadow--1--);
+}
+
+.toggle-menu {
+  display: none;
+}
+
+.nav {
+  align-items: center;
+  gap: var(--gap--);
+}
+
+.nav__link {
+  position: relative;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--cl--2--);
+  padding: 0 0.5rem;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--cl--1--);
+  z-index: -1;
+  -o-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.nav__link:hover::after,
+.nav__link.active::after {
+  width: 2.5px;
+  background-color: var(--cl--4--);
+}
+
+.nav__link:hover
+.nav__link.active {
+  color: var(--cl--4--);
+}
+
+/* End navigation */
+
+
+
+
+/* Media Queries */
+@media (min-width: 1300px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+/* End media */
