@@ -1,0 +1,1 @@
+/* Design a Modern School Landing Page | HTML, CSS & Vanilla JS Tutorial by Mute Coder | https://www.youtube.com/watch?v=83OO97Zy8Dw */
