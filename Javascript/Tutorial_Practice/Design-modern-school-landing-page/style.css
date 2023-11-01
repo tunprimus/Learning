@@ -2,8 +2,9 @@
 
 :root {
   --border-radius: 0.5rem;
-  --border-radius-large: 2.5rem;
-  --border-radius-very-large: 5rem;
+  --border-radius-large: 1.25rem;
+  --border-radius-very-large: 2.5rem;
+  --border-radius-massive: 5rem;
   --border-radius-circle: 50%;
   --border-radius-ellipse: 25%;
 }
@@ -213,6 +214,84 @@ body {
 }
 
 /* End hero section */
+
+
+/* Cards section */
+
+.cards {
+  padding: 4rem 0;
+}
+
+.card {
+  position: relative;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.card::after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  width: 100%;
+  height: 75%;
+  background-color: var(--cl--4--);
+  z-index: -1;
+  -o-border-radius: var(--border-radius);
+  -ms-border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+  border-radius: var(--border-radius);
+  -o-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.card:hover::after {
+  height: 10%;
+  background-color: var(--cl--2--);
+  box-shadow: var(--shadow--2--);
+}
+
+.card-content {
+  padding: 1.2rem;
+  background-color: var(--cl--4--);
+  text-align: center;
+  -o-border-radius: var(--border-radius);
+  -ms-border-radius: var(--border-radius);
+  -moz-border-radius: var(--border-radius);
+  -webkit-border-radius: var(--border-radius);
+  border-radius: var(--border-radius);
+  -o-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.card:hover .card-content {
+  background-color: var(--cl--1--);
+  box-shadow: var(--shadow--2--);
+}
+
+.card-icon__image {
+  /* width: 80px;
+  height: 80px; */
+  font-size: 5rem;
+  margin: 1rem auto;
+  padding: 1rem;
+  border: 5px solid var(--cl--1--);
+  -o-border-radius: var(--border-radius-circle);
+  -ms-border-radius: var(--border-radius-circle);
+  -moz-border-radius: var(--border-radius-circle);
+  -webkit-border-radius: var(--border-radius-circle);
+  border-radius: var(--border-radius-circle);
+}
+
+/* End cards section */
 
 
 
