@@ -15,7 +15,7 @@ Design a Modern School Landing Page | HTML, CSS & Vanilla JS Tutorial by Mute Co
   <header class="container row">
     <a href="#" class="link logo"><img src="../../../../assets/images/letang-secondary-boarding-school-logo.jpg" alt="letang secondary boarding school logo" class="image logo__image"></a>
     <button class="toggle-menu" id="toggle-menu" onclick="toggleMenu();"></button>
-    <nav class="nav navigation row">
+    <nav class="nav navigation row" id="navigation" role="navigation" aria-label="">
       <a href="#" class="link nav__link active">Home</a>
       <a href="#" class="link nav__link">News</a>
       <a href="#" class="link nav__link">Timetable</a>
@@ -24,5 +24,19 @@ Design a Modern School Landing Page | HTML, CSS & Vanilla JS Tutorial by Mute Co
     </nav>
   </header>
   <!-- End navigation -->
+
+  <!-- Hero section -->
+  <section class="hero column container">
+    <div class="row flex">
+      <div class="hero-content">
+        <h2 class="h2 hero-content__heading">Empowering the Next Generation: A World-Class Education for Every Student</h2>
+        <p class="p hero-content__text">Take care of your child's future.</p>
+        <a href="#" class="page-btn">More</a>
+      </div>
+      <div class="hero-img"><img src="../" alt="" class="hero-image"></div>
+    </div>
+    <p class="p hero-text">Why mor than 100 thousand parents entrusted their children to us.</p>
+  </section>
+  <!-- End hero section -->
 </body>
 </html>

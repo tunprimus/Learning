@@ -144,4 +144,64 @@ body {
     max-width: 1200px;
   }
 }
+
+@media (max-width: 1000px) {
+  .toggle-menu {
+    display: flex;
+    cursor: pointer;
+    /* background-image: url(../../../../assets/icons/dripicons-2/SVG/menu.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px;
+    background-color: transparent; */
+    width: 30px;
+    height: 30px;
+    border: 0;
+    position: fixed;
+    right: 5%;
+    z-index: 1000;
+    -o-transition: background-size 0.5s ease-in-out;
+    -ms-transition: background-size 0.5s ease-in-out;
+    -moz-transition: background-size 0.5s ease-in-out;
+    -webkit-transition: background-size 0.5s ease-in-out;
+    transition: background-size 0.5s ease-in-out;
+  }
+
+  .toggle-menu::after {
+    content: "\2630";
+    font-size: 2rem;
+  }
+
+  .toggle-menu.active {
+    position: fixed;
+    right: 5%;
+    /* background-image: url(../../../../assets/icons/dripicons-2/SVG/cross.svg);
+    background-size: 25px; */
+  }
+
+  .toggle-menu.active::after {
+    content: "\2716";
+    font-size: 2rem;
+  }
+
+  .nav {
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 0;
+    opacity: 0;
+    -o-transform: scale(0);
+    -ms-transform: scale(0);
+    -moz-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -o-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+  }
+}
 /* End media */
