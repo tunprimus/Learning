@@ -35,6 +35,7 @@ body {
   --shadow--1--: drop-shadow(6px 6px 4px rgba(0, 0, 0, 0.25));
   --shadow--2--: 6px 6px 4px rgba(0, 0, 0, 0.25);
   background-color: var(--cl--1--);
+  padding: 1vw;
 }
 
 .image {
@@ -74,7 +75,7 @@ body {
 }
 
 .grid {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: var(--gap--);
   gap: var(--gap--);
 }
@@ -222,10 +223,17 @@ body {
   padding: 4rem 0;
 }
 
+
 .card {
   position: relative;
   padding: 2rem;
   cursor: pointer;
+}
+
+@supports not (gap: 4rem) {
+  .card {
+    margin: 1vw;
+  }
 }
 
 .card::after {
@@ -257,7 +265,8 @@ body {
 }
 
 .card-content {
-  padding: 1.2rem;
+  padding: clamp(0.5rem, 5vw, 1.2rem);
+  padding-top: 2.4rem;
   background-color: var(--cl--4--);
   text-align: center;
   -o-border-radius: var(--border-radius);
@@ -278,17 +287,56 @@ body {
 }
 
 .card-icon__image {
-  /* width: 80px;
-  height: 80px; */
-  font-size: 5rem;
-  margin: 1rem auto;
-  padding: 1rem;
-  border: 5px solid var(--cl--1--);
+  width: 10vmin;
+  height: 10vmin;
+  font-size: 4rem;
+  text-align: left;
+  margin: 5vw auto;
+  padding: 2vw;
+  border: 2px solid var(--cl--1--);
   -o-border-radius: var(--border-radius-circle);
   -ms-border-radius: var(--border-radius-circle);
   -moz-border-radius: var(--border-radius-circle);
   -webkit-border-radius: var(--border-radius-circle);
   border-radius: var(--border-radius-circle);
+  object-fit: contain;
+  -webkit-filter: var(--shadow--1--);
+  filter: var(--shadow--1--);
+}
+
+.card-icon__image:hover {
+  border-color: var(--cl--3--);
+}
+
+.h4 {
+  font-weight: 400;
+  font-size: clamp(1rem, 5vw, 1.2rem);
+  text-transform: capitalize;
+}
+
+.card-icon__heading {
+  margin: 0.7rem auto;
+  margin-top: 4vw;
+  color: var(--cl--1--);
+  -o-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.card-icon__text {
+  color: var(--cl--1--);
+  -o-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.card-icon__heading:hover,
+.card-icon__text:hover {
+  color: var(--cl--3--);
 }
 
 /* End cards section */
