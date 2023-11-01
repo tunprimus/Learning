@@ -341,6 +341,18 @@ body {
   color: var(--cl--3--);
 }
 
+
+
+
+
+
+.teacher__image {
+  object-fit: contain;
+  /* max-height: 320px; */
+  max-width: 100%;
+  margin: 2vw auto;
+}
+
 /* End cards section */
 
 
