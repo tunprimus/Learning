@@ -1,5 +1,14 @@
 /* Design a Modern School Landing Page | HTML, CSS & Vanilla JS Tutorial by Mute Coder | https://www.youtube.com/watch?v=83OO97Zy8Dw */
 
+:root {
+  --border-radius: 0.5rem;
+  --border-radius-large: 2.5rem;
+  --border-radius-very-large: 5rem;
+  --border-radius-circle: 50%;
+  --border-radius-ellipse: 25%;
+}
+
+
 *,
 *::before,
 *::after {
@@ -135,6 +144,75 @@ body {
 
 /* End navigation */
 
+
+/* Hero Section */
+
+.hero {
+  grid-gap: 2rem;
+  gap: 2rem;
+  padding: 4rem 0;
+}
+
+.hero-content {
+  align-self: center;
+}
+
+.h2 {
+  font-weight: 600;
+  font-size: clamp(1.25rem, 5vw, 2.75rem);
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.p {
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.hero-content__text {
+  margin: 2rem auto;
+}
+
+.page-btn {
+  padding: 0.25rem 0.75rem;
+  font-weight: 500;
+  font-size: 1.25rem;
+  text-transform: capitalize;
+  color: var(--cl--1--);
+  background-color: var(--cl--4--);
+  border: 1px solid var(--cl--4--);
+  -o-border-radius: var(--border-radius-large);
+  -ms-border-radius: var(--border-radius-large);
+  -moz-border-radius: var(--border-radius-large);
+  -webkit-border-radius: var(--border-radius-large);
+  border-radius: var(--border-radius-large);
+  -o-transition: 0.5s ease-in-out;
+  -ms-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.page-btn:hover {
+  color: var(--cl--2--);
+  background-color: transparent;
+  box-shadow: var(--shadow--2--);
+}
+
+.hero-image {
+  object-fit: contain;
+  max-height: 320px;
+  margin: 0 auto;
+}
+
+.hero-text {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* End hero section */
 
 
 
