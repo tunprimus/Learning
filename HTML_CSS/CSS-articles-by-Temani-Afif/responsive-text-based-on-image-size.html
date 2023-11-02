@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Text Based on Image Size</title>
+  <style>
+    /* 1. Make the container a shrink-to-fit element (inline-block, float, table, flex)
+    2. Make title width 0 so as not to contribute to container. Add min-width 100% to resize width to equal that of the image and the container
+    */
+    .box {
+      display: inline-block;
+    }
+
+    .h1 {
+      width: 0;
+      min-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <img src="../../../assets/images/globe.png" alt="">
+    <h1 class="h1">E che dell'occhio divina sé e piaceri a non. D'angoscia noi prieghi nostri alcun prieghi da' di. Santo sogiacere per.</h1>
+  </div>
+  <div class="box">
+    <img src="../../../assets/images/Azul.jpg" alt="">
+    <h1 class="h1">E che dell'occhio divina sé e piaceri a non. D'angoscia noi prieghi nostri alcun prieghi da' di. Santo sogiacere per.</h1>
+  </div>
+</body>
+</html>
