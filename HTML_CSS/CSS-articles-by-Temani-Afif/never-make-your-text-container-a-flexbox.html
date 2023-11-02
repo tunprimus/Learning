@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Never Make Your Text Container a Flexbox Container</title>
+  <style type="text/css">
+    .body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 25vh auto;
+    }
+    
+    .box {
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body class="body">
+  <p class="box">Mirthful his forgot evil to pleasure in for him soul flatterers, the <a href="">and heartless</a> so maddest shun by the of..</p>
+  
+  <p class="box"><span>Mirthful his forgot evil to pleasure in for him soul flatterers, the <a href="">and heartless</a> so maddest shun by the of..</span></p>
+
+  <div class="box"><p>Mirthful his forgot evil to pleasure in for him soul flatterers, the <a href="">and heartless</a> so maddest shun by the of..</p></div>
+</body>
+</html>
