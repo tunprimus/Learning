@@ -1,4 +1,5 @@
 // @ts-check
+const { add, multiply, subtract, divide } = require('./calculator');
 
 /**
  * Student Name
@@ -88,3 +89,5 @@ const person1 = new Person({
   age: 34,
 });
 console.log(person1.greet());
+
+console.log(add(20, 30));
