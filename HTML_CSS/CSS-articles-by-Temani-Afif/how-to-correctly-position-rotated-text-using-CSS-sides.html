@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Correctly Position Rotated Text Using CSS</title>
+  <style type="text/css">
+    /* 1. There is always a relation between transform-origin and top/left/bottom/right. Top and left go with transform-origin: top left
+    2. Always rotate before translate (RoBoT)
+    3. Rotation is +90deg for text orientation to the bottom and -90deg to the top
+    4. Translation is +/-100% for corners and +/-50% for sides
+    */
+    .container {
+      width: 80%;
+      height: 80vh;
+      margin: 5vh auto;
+      border: 2px solid;
+      position: relative;
+      background: linear-gradient(red, red) center/100% 1px no-repeat, linear-gradient(red, red) center/1px 100% no-repeat;
+    }
+
+    .top {
+      transform-origin: top right;
+      right: 50%;
+      top: 0;
+      transform: rotate(-90deg) translateY(-50%);
+    }
+
+    .top:hover {
+      transform-origin: top left;
+      left: 50%;
+      right: auto;
+      transform: rotate(90deg) translateY(-50%);
+    }
+
+    .left {
+      transform-origin: top left;
+      left: 0;
+      top: 50%;
+      transform: rotate(-90deg) translateX(-50%);
+    }
+
+    .left:hover {
+      transform-origin: bottom left;
+      top: auto;
+      bottom: 50%;
+      transform: rotate(90deg) translateX(-50%);
+    }
+
+    .right {
+      transform-origin: top right;
+      right: 0;
+      top: 50%;
+      transform: rotate(90deg) translateX(50%);
+    }
+
+    .right:hover {
+      transform-origin: bottom right;
+      top: auto;
+      bottom: 50%;
+      transform: rotate(-90deg) translateX(50%);
+    }
+
+    .bottom {
+      transform-origin: bottom left;
+      left: 50%;
+      bottom: 0;
+      transform: rotate(-90deg) translateY(50%);
+    }
+
+    .bottom:hover {
+      transform-origin: bottom right;
+      right: 50%;
+      left: auto;
+      transform: rotate(90deg) translateY(50%);
+    }
+
+    .container > [class] {
+      position: absolute;
+      background-color: lightblue;
+      padding: 10px;
+      font-size: 25px;
+      text-transform: uppercase;
+      font-family: serif;
+    }
+
+    .container > [class]::before {
+      content: attr(class);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="right"></div>
+    <div class="left"></div>
+    <div class="top"></div>
+    <div class="bottom"></div>
+  </div>
+</body>
+</html>
