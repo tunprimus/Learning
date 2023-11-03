@@ -22,3 +22,7 @@ app.get('/', (req, res) => {
 app.listen('3000', () => {
   console.log('listening.....');
 });
+
+.app.get('editor', (req, res) => {
+  res.sendFile(path.join(initial_path, 'editor.html'));
+});

@@ -1,0 +1,26 @@
+/* "FullStack - How to create a working blogging website with pure HTML, CSS and JS in 2021."
+https://dev.to/themodernweb/fullstack-how-to-create-a-working-blogging-website-with-pure-html-css-and-js-in-2021-9di/
+*/
+
+.banner {
+  width: 100%;
+  height: 25rem;
+  position: relative;
+  background-color: #E7E7E7;
+  background-size: cover;
+  background-position: center;
+}
+
+.banner-upload-btn {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
