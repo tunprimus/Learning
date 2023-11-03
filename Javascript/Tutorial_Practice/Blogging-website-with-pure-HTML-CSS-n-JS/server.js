@@ -23,6 +23,22 @@ app.listen('3000', () => {
   console.log('listening.....');
 });
 
-app.get('editor', (req, res) => {
+app.get('/editor', (req, res) => {
   res.sendFile(path.join(initial_path, 'editor.html'));
+});
+
+app.post('/upload', (req, res) => {
+  let file = req.files.image;
+  let date = new Date();
+
+  let imageName = date.getTime() + file.name;
+  let path = 'public/uploads' + imageName;
+
+  file.mv(path, (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      res.json(`uploads/${imageName}`);
+    }
+  });
 });
