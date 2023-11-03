@@ -51,3 +51,30 @@ const addImage = (imagePath, alt) => {
   let textToInsert = `\r![${alt}](${imagePath})\r`;
   articleField.value = articleField.value.slice(0, curPos) + textToInsert + articleField.value.slice(curPos);
 };
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+publishBtn?.addEventListener('click', () => {
+  if (articleField.value.length && blogTitleField.value.length) {
+    let letters = 'abcdefghijklmnopqrstuvwxyz';
+    let blogTitle = blogTitleField.value.split(' ').join('-');
+    let id = '';
+    for (let i = 0; i < 4; i++) {
+      id += letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    let docName = `${blogTitle}-${id}`;
+    let publishDate = new Date();
+
+    db.collection('blog').doc(docName).set({
+      title: blogTitleField.value,
+      article: articleField.value,
+      bannerImage: bannerPath,
+      publishAt: `${publishDate.getDate()} ${months[publishDate.getMonth()]} ${publishDate.getFullYear()}`,
+    }).then(() => {
+      location.href = `/${docName}`;
+    }).catch(err => {
+      console.error(err);
+    });
+  }
+});
