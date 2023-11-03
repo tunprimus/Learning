@@ -32,7 +32,7 @@ app.post('/upload', (req, res) => {
   let date = new Date();
 
   let imageName = date.getTime() + file.name;
-  let path = 'public/uploads' + imageName;
+  let path = 'public/uploads/' + imageName;
 
   file.mv(path, (err, result) => {
     if (err) {
