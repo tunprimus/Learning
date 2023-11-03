@@ -1,11 +1,29 @@
+<!-- "FullStack - How to create a working blogging website with pure HTML, CSS and JS in 2021."
+https://dev.to/themodernweb/fullstack-how-to-create-a-working-blogging-website-with-pure-html-css-and-js-in-2021-9di/ -->
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Blog : Homepage</title>
+  <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-  
+  <nav class="navbar">
+    <img src="img/logo.png" alt="" class="logo">
+    <ul class="links-container">
+      <li class="link-item"><a href="/" class="link">Home</a></li>
+      <li class="link-item"><a href="/editor" class="link">Editor</a></li>
+    </ul>
+  </nav>
+  <header class="header">
+    <div class="content">
+      <h1 class="heading">
+        <span class="small heading-small">Welcome in the world of</span> blog <span class="no-fill heading-no-fill">writing</span>
+        <a href="/editor" class="btn heading-btn">Write a blog</a>
+      </h1>
+    </div>
+  </header>
 </body>
 </html>
