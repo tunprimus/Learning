@@ -1,0 +1,17 @@
+{
+  "name": "Blogging-website-with-pure-HTML-CSS-n-JS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express-fileupload": "^1.4.2",
+    "express.js": "^1.0.0",
+    "nodemon": "^3.0.1"
+  }
+}
