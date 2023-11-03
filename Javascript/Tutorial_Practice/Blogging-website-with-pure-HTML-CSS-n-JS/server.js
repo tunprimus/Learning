@@ -31,7 +31,7 @@ app.post('/upload', (req, res) => {
   let file = req.files.image;
   let date = new Date();
 
-  let imageName = date.getTime() + file.name;
+  let imageName = date.getDate() + date.getTime() + file.name;
   let path = 'public/uploads/' + imageName;
 
   file.mv(path, (err, result) => {
