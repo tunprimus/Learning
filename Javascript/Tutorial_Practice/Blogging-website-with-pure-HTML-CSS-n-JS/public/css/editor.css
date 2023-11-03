@@ -24,3 +24,51 @@ https://dev.to/themodernweb/fullstack-how-to-create-a-working-blogging-website-w
   align-items: center;
   cursor: pointer;
 }
+
+.blog {
+  width: 4.375rem;
+  min-width: 25rem;
+  height: 6.25rem;
+  display: block;
+  margin: auto;
+  padding: 3.125rem 0;
+}
+
+textarea::-webkit-scrollbar {
+  width: 0.625rem;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-value);
+}
+
+.title,
+.article {
+  width: 100%;
+  min-height: 6.25rem;
+  height: auto;
+  outline: none;
+  font-size: 3.125rem;
+  font-weight: 600;
+  color: #2D2D2D;
+  resize: none;
+  border: none;
+  padding: 0.625rem;
+  border-radius: var(--border-radius-value);
+}
+
+.title::placeholder,
+.article::placeholder {
+  color: #2D2D2D;
+}
+
+.article {
+  height: 31.25rem;
+  font-size: 1.25rem;
+  margin-top: 1.25rem;
+  line-height: 1.25;
+  font-weight: 500;
+  padding-bottom: 6.25rem;
+  white-space: pre-wrap;
+}
