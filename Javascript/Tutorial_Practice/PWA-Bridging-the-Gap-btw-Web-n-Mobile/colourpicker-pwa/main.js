@@ -1,5 +1,8 @@
+// @ts-check
+
 import './style.css';
 import { colours } from "./data/colour-data.js";
+import { registerSW } from 'virtual:pwa-register';
 
 const createColourPallet = () => {
   colours.forEach((colour) => {
@@ -30,3 +33,14 @@ const copyContent = async (text) => {
 };
 
 createColourPallet();
+
+if ('serviceWorker' in navigator) {
+  const updateSW = registerSW({
+    onNeedRefresh() {
+      const isUpdate = window.confirm('New Update Available. Click OK to update');
+      if (isUpdate) {
+        updateSW(true);
+      }
+    }
+  });
+}
