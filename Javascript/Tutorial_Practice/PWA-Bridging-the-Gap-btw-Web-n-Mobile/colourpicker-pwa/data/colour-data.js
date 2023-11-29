@@ -1,0 +1,1 @@
+/* PWA: Bridging the Gap Between Web and Mobile Development | https://blog.greenroots.info/how-to-build-a-progressive-web-app-using-javascript-and-vite */
