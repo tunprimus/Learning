@@ -7,7 +7,17 @@
   <title>Fibonacci and Going Beyond Recursion</title>
 </head>
 <body>
-  <div class="wrapper"></div>
+  <div class="wrapper">
+    <label for="fibonacci-number">Enter your desired Fibonacci number</label>
+    <input type="number" name="fibonacci-number" id="fibonacci-number">
+    <button onclick="">Generate Fibonacci Number</button>
+
+    <div class="fibonacci-output" id="fibonacci-output" hidden>
+      <p class="fibonacci-result">The value from base approach is <span class="fibonacci-result__value fibonacci-result__value--base"></span>and took <span class="fibonacci-result__time fibonacci-result__time--base"></span> long.</p>
+      <p class="fibonacci-result">The value from memoise approach is <span class="fibonacci-result__value fibonacci-result__value--memoise"></span>and took <span class="fibonacci-result__time fibonacci-result__time--memoise"></span> long.</p>
+      <p class="fibonacci-result">The value from iterative approach is <span class="fibonacci-result__value fibonacci-result__value--iterative"></span>and took <span class="fibonacci-result__time fibonacci-result__time--iterative"></span> long.</p>
+    </div>
+  </div>
   <!-- JavaScript Here-->
   <script>
     function fibonacciBase(n) {
