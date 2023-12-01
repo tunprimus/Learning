@@ -10,16 +10,48 @@
   <div class="wrapper"></div>
   <!-- JavaScript Here-->
   <script>
-    function fibonacci(n) {
+    function fibonacciBase(n) {
       if (n === 0) {
         return 0;
       } else if (n === 1) {
         return 1;
       } else {
-        return fibonacci(n - 1) + fibonacci(n - 2);
+        return fibonacciBase(n - 1) + fibonacciBase(n - 2);
       }
     }
-    console.log('Result is ', fibonacci(10));
+    console.log('Result is', fibonacciBase(10));
+
+    function fibonacciMemoise(index, cache = []) {
+      if (cache[index]) {
+        return cache[index];
+      } else {
+        if (index <= 2) {
+          return 1;
+        } else {
+          cache[index] = fibonacciMemoise(index - 1, cache) + fibonacciMemoise(index - 2, cache);
+        }
+      }
+      return cache[index];
+    }
+    console.log('Result is', fibonacciMemoise(10));
+
+    function fibonacciIterative(n) {
+      if (n === 0) {
+        return 0;
+      } else if (n === 1) {
+        return 1;
+      } else {
+        let a = 0;
+        let b = 1;
+        for (let i = 2; i <= n; i++) {
+          let c = a + b;
+          a = b;
+          b = c;
+        }
+        return b;
+      }
+    }
+    console.log('Result is', fibonacciIterative(10));
   </script>
 </body>
 </html>
