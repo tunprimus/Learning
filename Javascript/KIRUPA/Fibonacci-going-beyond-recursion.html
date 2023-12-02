@@ -9,8 +9,8 @@
 <body>
   <div class="wrapper">
     <label for="fibonacci-number">Enter your desired Fibonacci number</label>
-    <input type="number" name="fibonacci-number" id="fibonacci-number">
-    <button onclick="">Generate Fibonacci Number</button>
+    <input type="number" name="fibonacci-number" id="fibonacci-number" class="fibonacci-number">
+    <button class="fibonacci-number-btn" id="fibonacci-number-btn" onclick="generateFibonacci()">Generate Fibonacci Number</button>
 
     <div class="fibonacci-output" id="fibonacci-output" hidden>
       <p class="fibonacci-result">The value from base approach is <span class="fibonacci-result__value fibonacci-result__value--base"></span>and took <span class="fibonacci-result__time fibonacci-result__time--base"></span> long.</p>
@@ -20,6 +20,24 @@
   </div>
   <!-- JavaScript Here-->
   <script>
+    const desiredFibonacciNumber = document.getElementById('fibonacci-number');
+    const fibonacciBtn = document.getElementById('fibonacci-number-btn');
+    const fibonacciOutput = document.getElementById('fibonacci-output');
+    const fibonacciBaseValue = document.querySelector('.fibonacci-result__value--base');
+    const fibonacciBaseTime = document.querySelector('.fibonacci-result__time--base');
+    const fibonacciMemoiseValue = document.querySelector('.fibonacci-result__value--memoise');
+    const fibonacciMemoiseTime = document.querySelector('.fibonacci-result__time--memoise');
+    const fibonacciIterativeValue = document.querySelector('.fibonacci-result__value--iterative');
+    const fibonacciIterativeTime = document.querySelector('.fibonacci-result__time--iterative');
+
+    function measureExecutionTime(fn, nodeElement) {
+      let startTime = performance.now();
+      nodeElement.textContent = fn;
+      let endTime = performance.now();
+      let elapsed = endTime - startTime;
+      return elapsed;
+    }
+
     function fibonacciBase(n) {
       if (n === 0) {
         return 0;
@@ -29,7 +47,7 @@
         return fibonacciBase(n - 1) + fibonacciBase(n - 2);
       }
     }
-    console.log('Result is', fibonacciBase(10));
+    // console.log('Result is', fibonacciBase(10));
 
     function fibonacciMemoise(index, cache = []) {
       if (cache[index]) {
@@ -43,7 +61,7 @@
       }
       return cache[index];
     }
-    console.log('Result is', fibonacciMemoise(10));
+    // console.log('Result is', fibonacciMemoise(10));
 
     function fibonacciIterative(n) {
       if (n === 0) {
@@ -61,7 +79,19 @@
         return b;
       }
     }
-    console.log('Result is', fibonacciIterative(10));
+    // console.log('Result is', fibonacciIterative(10));
+
+    function generateFibonacci() {
+      let fibNum = Number(desiredFibonacciNumber.value);
+      if (typeof fibNum !== 'number' || Number.isNaN(fibNum)) {
+        return;
+      }
+
+      fibonacciBaseTime.textContent = measureExecutionTime(fibonacciBase(fibNum), fibonacciBaseValue);
+
+      desiredFibonacciNumber.value = '';
+      fibonacciOutput.removeAttribute('hidden');
+    }
   </script>
 </body>
 </html>
