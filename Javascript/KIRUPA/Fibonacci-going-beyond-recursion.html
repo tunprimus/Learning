@@ -13,9 +13,9 @@
     <button class="fibonacci-number-btn" id="fibonacci-number-btn" onclick="generateFibonacci()">Generate Fibonacci Number</button>
 
     <div class="fibonacci-output" id="fibonacci-output" hidden>
-      <p class="fibonacci-result">The value from base approach is <span class="fibonacci-result__value fibonacci-result__value--base"></span>and took <span class="fibonacci-result__time fibonacci-result__time--base"></span> long.</p>
-      <p class="fibonacci-result">The value from memoise approach is <span class="fibonacci-result__value fibonacci-result__value--memoise"></span>and took <span class="fibonacci-result__time fibonacci-result__time--memoise"></span> long.</p>
-      <p class="fibonacci-result">The value from iterative approach is <span class="fibonacci-result__value fibonacci-result__value--iterative"></span>and took <span class="fibonacci-result__time fibonacci-result__time--iterative"></span> long.</p>
+      <p class="fibonacci-result">The value from base approach is <span class="fibonacci-result__value fibonacci-result__value--base"></span> and took <span class="fibonacci-result__time fibonacci-result__time--base"></span>s  long.</p>
+      <p class="fibonacci-result">The value from memoise approach is <span class="fibonacci-result__value fibonacci-result__value--memoise"></span> and took <span class="fibonacci-result__time fibonacci-result__time--memoise"></span>s long.</p>
+      <p class="fibonacci-result">The value from iterative approach is <span class="fibonacci-result__value fibonacci-result__value--iterative"></span> and took <span class="fibonacci-result__time fibonacci-result__time--iterative"></span>s long.</p>
     </div>
   </div>
   <!-- JavaScript Here-->
@@ -30,11 +30,16 @@
     const fibonacciIterativeValue = document.querySelector('.fibonacci-result__value--iterative');
     const fibonacciIterativeTime = document.querySelector('.fibonacci-result__time--iterative');
 
-    function measureExecutionTime(fn, nodeElement) {
+    function measureExecutionTime(fn, nodeElement1, nodeElement2) {
       let startTime = performance.now();
-      nodeElement.textContent = fn;
+      console.log(startTime);
+      let buffer = fn;
       let endTime = performance.now();
-      let elapsed = endTime - startTime;
+      console.log(endTime);
+      let elapsed = (endTime - startTime) / 1000;
+      nodeElement1.textContent = buffer.toString();
+      nodeElement2.textContent = elapsed.toString();
+      // console.log(elapsed);
       return elapsed;
     }
 
@@ -87,7 +92,9 @@
         return;
       }
 
-      fibonacciBaseTime.textContent = measureExecutionTime(fibonacciBase(fibNum), fibonacciBaseValue);
+      measureExecutionTime(fibonacciIterative(fibNum), fibonacciIterativeValue, fibonacciIterativeTime);
+      measureExecutionTime(fibonacciMemoise(fibNum), fibonacciMemoiseValue, fibonacciMemoiseTime);
+      measureExecutionTime(fibonacciBase(fibNum), fibonacciBaseValue, fibonacciBaseTime);
 
       desiredFibonacciNumber.value = '';
       fibonacciOutput.removeAttribute('hidden');
