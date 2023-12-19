@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Complex Apps with Vanilla JavaScript Series</title>
+</head>
+<body>
+  <form action="" id="add-todo">
+    <label for="todo">What do you want to do?</label>
+    <input type="text" id="todo">
+    <button type="submit">Add Todo</button>
+  </form>
+
+  <ul id="app"></ul>
+  <!-- JavaScript Here -->
+  <script>
+    let app = document.querySelector('#app');
+    let form = document.querySelector('#add-todo');
+
+    form.addEventListener('submit', addTodo);
+
+    /**
+     * Add todo to the list
+     * @param {Event} event The event object
+     */
+    function addTodo(event) {
+      event.preventDefault();
+
+      if (!form.todo.value) {
+        return;
+      }
+
+      let li = document.createElement('li');
+      li.textContent = form.todo.value;
+      app.appendChild(li);
+
+      form.todo.value = '';
+    }
+  </script>
+</body>
+</html>
