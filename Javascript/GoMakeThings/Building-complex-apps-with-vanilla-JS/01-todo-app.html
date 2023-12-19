@@ -57,6 +57,9 @@
       // Append to the UI
       app.appendChild(li);
 
+      // Hide the no-todos message
+      noTodos.setAttribute('hidden', '');
+
       // Clear the form field
       form.todo.value = '';
 
@@ -83,6 +86,11 @@
 
       // Save the list
       localStorage.setItem('todos', app.innerHTML);
+
+      // If there are no todos, show the no-todos message
+      if (!app.innerHTML.trim().length) {
+        noTodos.removeAttribute('hidden');
+      }
     }
 
     /**
