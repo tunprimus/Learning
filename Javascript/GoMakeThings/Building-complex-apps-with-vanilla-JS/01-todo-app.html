@@ -18,8 +18,10 @@
     let app = document.querySelector('#app');
     let form = document.querySelector('#add-todo');
 
+    // Add todos when form is submitted
     form.addEventListener('submit', addTodo);
 
+    // Load saved todos
     app.innerHTML = localStorage.getItem('todos') || '';
 
     /**
@@ -27,18 +29,31 @@
      * @param {Event} event The event object
      */
     function addTodo(event) {
+      // Stop the form from reloading the page
       event.preventDefault();
 
+      // If there is no field value, ignore the submission
       if (!form.todo.value) {
         return;
       }
 
+      // Otherwise, add a todo
       let li = document.createElement('li');
       li.textContent = form.todo.value;
+
+      // Add a remove button
+      let btn = document.createElement('button');
+      btn.textContent = 'Delete';
+      btn.setAttribute('data-delete', '');
+      li.appendChild(btn);
+
+      // Append to the UI
       app.appendChild(li);
 
+      // Clear the form field
       form.todo.value = '';
 
+      // Save list
       localStorage.setItem('todos', app.innerHTML);
     }
   </script>
