@@ -20,6 +20,8 @@
 
     form.addEventListener('submit', addTodo);
 
+    app.innerHTML = localStorage.getItem('todos') || '';
+
     /**
      * Add todo to the list
      * @param {Event} event The event object
@@ -36,6 +38,8 @@
       app.appendChild(li);
 
       form.todo.value = '';
+
+      localStorage.setItem('todos', app.innerHTML);
     }
   </script>
 </body>
