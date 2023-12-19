@@ -84,6 +84,20 @@
       // Save the list
       localStorage.setItem('todos', app.innerHTML);
     }
+
+    /**
+     * Load saved todo items into the UI
+     */
+    function loadSavedTodos() {
+      let saved = localStorage.getItem('todos');
+      if (saved) {
+        app.innerHTML = saved;
+      } else {
+        noTodos.removeAttribute('hidden');
+      }
+    }
+    // Load saved todos
+    loadSavedTodos();
   </script>
 </body>
 </html>
