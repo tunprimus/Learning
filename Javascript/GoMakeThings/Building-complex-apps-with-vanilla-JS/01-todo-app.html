@@ -13,16 +13,23 @@
   </form>
 
   <ul id="app"></ul>
+  <p id="no-todos" hidden><em>You do not have any todos yet.</em></p>
+
   <!-- JavaScript Here -->
   <script>
+    // DOM elements
     let app = document.querySelector('#app');
     let form = document.querySelector('#add-todo');
+    let noTodos = document.querySelector('#no-todos');
 
     // Add todos when form is submitted
     form.addEventListener('submit', addTodo);
 
     // Load saved todos
     app.innerHTML = localStorage.getItem('todos') || '';
+
+    // Remove todos when delete button is clicked
+    document.addEventListener('click', removeTodo);
 
     /**
      * Add todo to the list
@@ -54,6 +61,27 @@
       form.todo.value = '';
 
       // Save list
+      localStorage.setItem('todos', app.innerHTML);
+    }
+
+    /**
+     * Remove todo items
+     * @param {Event} event The event object
+     */
+    function removeTodo(event) {
+      // Only run on [data-delete] items
+      if (!event.target.matches('[data-delete]')) {
+        return;
+      }
+
+      // Otherwise, remove the todo
+      let li = event.target.closest('li');
+      if (!li) {
+        return;
+      }
+      li.remove();
+
+      // Save the list
       localStorage.setItem('todos', app.innerHTML);
     }
   </script>
