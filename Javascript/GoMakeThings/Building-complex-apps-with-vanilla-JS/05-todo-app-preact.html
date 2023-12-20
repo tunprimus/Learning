@@ -27,18 +27,19 @@
   <!-- JavaScript Here -->
   <!-- <script src="reef.min.js" defer></script> -->
   <script type="module">
-    let { store, component } = reef;
+    // import { html, render, signal } from 'https://cdn.jsdeliver.net/npm/preact-htm-signals-standalone/dist/standalone.js';
+    import { html, render, signal, effect } from './preact-htm-signals-standalone.min.js';
 
     // DOM elements
     let app = document.querySelector('#app');
     let form = document.querySelector('#add-todo');
 
     // Reactive todo data
-    let todos = store(JSON.parse(localStorage.getItem('todos-reef')) || []);
+    let todos = signal(JSON.parse(localStorage.getItem('todos-preact')) || []);
+    let arr = todos.value;
 
     /**
      * Add todo to the list
-     * @param {Event} event The event object
      */
     function addTodo(event) {
       // Stop the form from reloading the page
@@ -49,9 +50,8 @@
         return;
       }
 
-      // Otherwise, add todo and rerender the UI
-      todos.push(form.todo.value);
-      render(app, getHTML());
+      // Otherwise, add todo
+      todos.value = [...todos.value, form.todo.value];
 
       // Clear the form field
       form.todo.value = '';
@@ -68,8 +68,10 @@
         return;
       }
 
-      // Otherwise, remove todos and rerender the UI
-      todos.splice(index, 1);
+      // Otherwise, remove the todo
+      let todosTemp = [...todos.value];
+      todosTemp.splice(index, 1);
+      todos.value = todosTemp;
     }
 
     /**
@@ -77,15 +79,15 @@
      */
     function getHTML() {
       // If there is no todo, show a message
-      if (!todos.length) {
-        return `<p><em>You do not have any todos yet.</em></p>`;
+      if (!todos.value.length) {
+        return html`<p><em>You do not have any todos yet.</em></p>`;
       }
 
       // Otherwise, render the todo items
       return `
         <ul>
-          ${todos.map(function(todo, index) {
-            return `<li>${todo} <button data-delete="${index}">Delete</button></li>`;
+          ${todos.value.map(function(todo, index) {
+            return html`<li>${todo} <button data-delete="${index}">Delete</button></li>`;
           }).join('')}
         </ul>
       `;
@@ -99,11 +101,11 @@
 
     // Create a component
     // Renders into the UI and updates whenever the data changes
-    component(app, getHTML);
+    render(html`<${getHTML} />`, app);
 
-    document.addEventListener('reef:render', function(event) {
+    effect(function() {
       // Save the list
-      localStorage.setItem('todos-reef', JSON.stringify(todos));
+      localStorage.setItem('todos-preact', JSON.stringify(todos.value));
     });
   </script>
 </body>
