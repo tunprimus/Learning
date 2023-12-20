@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Building Complex Apps with Vanilla JavaScript Series - Part 4 - Using Reef Store</title>
+  <title>Building Complex Apps with Vanilla JavaScript Series - Part 5 - Using Preact</title>
   <style>
     body {
       margin: 1rem auto;
@@ -12,9 +12,6 @@
       max-width: 40rem;
     }
   </style>
-  <!-- <script src="../../../../assets/scripts/reef-master/dist/reef.min.js" defer></script> -->
-  <!-- <script type="module" src="reef.min.js" defer></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/reefjs@13/dist/reef.min.js"></script>
 </head>
 <body>
   <h1>Todos</h1>
@@ -29,7 +26,7 @@
 
   <!-- JavaScript Here -->
   <!-- <script src="reef.min.js" defer></script> -->
-  <script>
+  <script type="module">
     let { store, component } = reef;
 
     // DOM elements
