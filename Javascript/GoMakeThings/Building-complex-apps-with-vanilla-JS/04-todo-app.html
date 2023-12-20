@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Building Complex Apps with Vanilla JavaScript Series - Part 3 - Using Vanilla JS State-based UI Library</title>
+  <style>
+    body {
+      margin: 1rem auto;
+      width: 88%;
+      max-width: 40rem;
+    }
+  </style>
+  <!-- <script src="../../../../assets/scripts/reef-master/dist/reef.min.js" defer></script> -->
+  <!-- <script type="module" src="reef.min.js" defer></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/reefjs@13/dist/reef.min.js"></script>
+</head>
+<body>
+  <h1>Todos</h1>
+
+  <form action="" id="add-todo">
+    <label for="todo">What do you want to do?</label>
+    <input type="text" id="todo">
+    <button type="submit">Add Todo</button>
+  </form>
+
+  <ul id="app"></ul>
+
+  <!-- JavaScript Here -->
+  <!-- <script src="reef.min.js" defer></script> -->
+  <script>
+    let { store, component } = reef;
+
+    // DOM elements
+    let app = document.querySelector('#app');
+    let form = document.querySelector('#add-todo');
+
+    // Reactive todo data
+    let todos = store(JSON.parse(localStorage.getItem('todos-reef')) || []);
+
+    /**
+     * Add todo to the list
+     * @param {Event} event The event object
+     */
+    function addTodo(event) {
+      // Stop the form from reloading the page
+      event.preventDefault();
+
+      // If there is no field value, ignore the submission
+      if (!form.todo.value) {
+        return;
+      }
+
+      // Otherwise, add todo and rerender the UI
+      todos.push(form.todo.value);
+      render(app, getHTML());
+
+      // Clear the form field
+      form.todo.value = '';
+    }
+
+    /**
+     * Remove todo items
+     * @param {Event} event The event object
+     */
+    function removeTodo(event) {
+      // Only run on [data-delete] items
+      let index = event.target.getAttribute('data-delete');
+      if (!index) {
+        return;
+      }
+
+      // Otherwise, remove todos and rerender the UI
+      todos.splice(index, 1);
+    }
+
+    /**
+     * Create the HTML based on the app state
+     */
+    function getHTML() {
+      // If there is no todo, show a message
+      if (!todos.length) {
+        return `<p><em>You do not have any todos yet.</em></p>`;
+      }
+
+      // Otherwise, render the todo items
+      return `
+        <ul>
+          ${todos.map(function(todo, index) {
+            return `<li>${todo} <button data-delete="${index}">Delete</button></li>`;
+          }).join('')}
+        </ul>
+      `;
+    }
+
+    // Add todos when form is submitted
+    form.addEventListener('submit', addTodo);
+
+    // Remove todos when delete button is clicked
+    document.addEventListener('click', removeTodo);
+
+    // Create a component
+    // Renders into the UI and updates whenever the data changes
+    component(app, getHTML);
+
+    document.addEventListener('reef:render', function(event) {
+      // Save the list
+      localStorage.setItem('todos-reef', JSON.stringify(todos));
+    });
+  </script>
+</body>
+</html>
