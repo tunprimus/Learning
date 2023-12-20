@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Building Complex Apps with Vanilla JavaScript Series - Part 6 - Using Preact with State Store</title>
+  <style>
+    body {
+      margin: 1rem auto;
+      width: 88%;
+      max-width: 40rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Todos</h1>
+
+  <form action="" id="add-todo">
+    <label for="todo">What do you want to do?</label>
+    <input type="text" id="todo">
+    <button type="submit">Add Todo</button>
+  </form>
+
+  <ul id="app"></ul>
+
+  <!-- JavaScript Here -->
+  <!-- <script src="reef.min.js" defer></script> -->
+  <script type="module">
+    // import { html, render, signal } from 'https://cdn.jsdeliver.net/npm/preact-htm-signals-standalone/dist/standalone.js';
+    import { html, render, signal, effect } from './preact-htm-signals-standalone.min.js';
+
+    // DOM elements
+    let app = document.querySelector('#app');
+    let form = document.querySelector('#add-todo');
+
+    // Create a data store
+    let todos = (function() {
+      // Reactive todo data
+      let state = signal(JSON.parse(localStorage.getItem('todos-preact')) || []);
+
+      /**
+       * Get the todo list
+       * @return {Array} the todo list items
+       */
+      function get() {
+        return state.value;
+      }
+
+      /**
+       * Add an item to the todo list
+       * @param {string} todo The item to add
+       */
+      function add(todo) {
+        state.value = [...state.value, todo];
+      }
+
+      /**
+       * Remove an item from the todo list
+       * @param {integer} index The index of the item to remove
+       */
+      function remove(index) {
+        let arr = [...state.value];
+        arr.splice(index, 1);
+        state.value = arr;
+      }
+
+      return {get, add, remove};
+    })();
+
+    
+
+    /**
+     * Add todo to the list
+     */
+    todos.add(form.todo.value);
+
+    /**
+     * Remove todo items
+     * @param {Event} event The event object
+     */
+    function removeTodo(event) {
+      // Only run on [data-delete] items
+      let index = event.target.getAttribute('data-delete');
+      if (!index) {
+        return;
+      }
+
+      // Otherwise, remove the todo
+      todos.remove(index);
+    }
+  
+
+    /**
+     * Create the HTML based on the app state
+     */
+    function getHTML() {
+      // If there is no todo, show a message
+      if (!todos.value.length) {
+        return html`<p><em>You do not have any todos yet.</em></p>`;
+      }
+
+      // Otherwise, render the todo items
+      return `
+        <ul>
+          ${todos.get().map(function(todo, index) {
+            return html`<li>${todo} <button data-delete="${index}">Delete</button></li>`;
+          }).join('')}
+        </ul>
+      `;
+    }
+
+    // Add todos when form is submitted
+    form.addEventListener('submit', addTodo);
+
+    // Remove todos when delete button is clicked
+    document.addEventListener('click', removeTodo);
+
+    // Create a component
+    // Renders into the UI and updates whenever the data changes
+    render(html`<${getHTML} />`, app);
+
+    effect(function() {
+      // Save the list
+      localStorage.setItem('todos-preact', JSON.stringify(todos.value));
+    });
+  </script>
+</body>
+</html>
