@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Complex Apps with Vanilla JavaScript Series - Part 2 - Using State</title>
+</head>
+<body>
+  <form action="" id="add-todo">
+    <label for="todo">What do you want to do?</label>
+    <input type="text" id="todo">
+    <button type="submit">Add Todo</button>
+  </form>
+
+  <ul id="app"></ul>
+
+  <!-- JavaScript Here -->
+  <script>
+    // DOM elements
+    let app = document.querySelector('#app');
+    let form = document.querySelector('#add-todo');
+    let noTodos = document.querySelector('#no-todos');
+
+    // Add todos when form is submitted
+    form.addEventListener('submit', addTodo);
+
+    // Todo data
+    let todos = JSON.parse(localStorage.getItem('todos-state-based')) || [];
+
+    // Remove todos when delete button is clicked
+    document.addEventListener('click', removeTodo);
+
+    // Render the UI
+    app.innerHTML = getHTML();
+
+    /**
+     * Create the HTML based on the app state
+     */
+    function getHTML() {
+      // If there is no todo, show a message
+      if (!todos.length) {
+        return `<p><em>You do not have any todos yet.</em></p>`;
+      }
+
+      // Otherwise, render the todo items
+      return `
+        <ul>
+          ${todos.map(function(todo, index) {
+            return `<li>${todo} <button data-delete="${index}">Delete</button></li>`;
+          }).join('')}
+        </ul>
+      `;
+    }
+
+    /**
+     * Add todo to the list
+     * @param {Event} event The event object
+     */
+    function addTodo(event) {
+      // Stop the form from reloading the page
+      event.preventDefault();
+
+      // If there is no field value, ignore the submission
+      if (!form.todo.value) {
+        return;
+      }
+
+      // Otherwise, add todo and rerender the UI
+      todos.push(form.todo.value);
+      app.innerHTML = getHTML();
+
+      // Clear the form field
+      form.todo.value = '';
+
+      // Save list
+      localStorage.setItem('todos-state-based', JSON.stringify(todos));
+    }
+
+    /**
+     * Remove todo items
+     * @param {Event} event The event object
+     */
+    function removeTodo(event) {
+      // Only run on [data-delete] items
+      let index = event.target.getAttribute('data-delete');
+      if (!index) {
+        return;
+      }
+
+      // Otherwise, remove todos and rerender the UI
+      todos.splice(index, 1);
+      app.innerHTML = getHTML();
+
+      // Save the list
+      localStorage.setItem('todos-state-based', JSON.stringify(todos));
+    }
+  </script>
+</body>
+</html>
