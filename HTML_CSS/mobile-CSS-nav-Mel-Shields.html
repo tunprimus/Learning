@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mobile CSS Nav - by Mel Shields</title>
+  <style>
+    body {
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1e1e23;
+      opacity: 1;
+      font-family: "work sans", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      transition: 200ms;
+    }
+
+    a:hover {
+      opacity: 0.5;
+    }
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .container {
+      margin-top: 3.125rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .phone {
+      background-color: #36383f;
+      border-radius: 2.5rem;
+      width: 18.75rem;
+      height: 37.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 1.875rem 3.125rem 6.25rem #85888c;
+    }
+
+    .content {
+      border: 0.0625rem solid #36383f;
+      border-radius: 1.25rem;
+      width: 94%;
+      height: 91%;
+      background-color: #f5f6fa;
+      overflow: hidden;
+    }
+
+    .nav {
+      background-color: #1e1e23;
+      height: 4.0625rem;
+    }
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      top: 1.5625rem;
+      left: 1.5625rem;
+      z-index: 1;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .menu-toggle__input {
+      display: flex;
+      width: 2.5rem;
+      height: 2rem;
+      position: absolute;
+      cursor: pointer;
+      opacity: 0;
+      z-index: 2;
+    }
+
+    .menu-toggle__span {
+      display: flex;
+      width: 1.8125rem;
+      height: 0.125rem;
+      margin-bottom: 0.3125rem;
+      position: relative;
+      background-color: #ffffff;
+      border-radius: 0.1875rem;
+      z-index: 1;
+      transform-origin: 0.3125rem 0;
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), background-color 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    }
+
+    .menu-toggle__span:first-child {
+      transform-origin: 0% 0%;
+    }
+
+    .menu-toggle__span:nth-last-child(2) {
+      transform-origin: 0% 100%;
+    }
+
+    .menu-toggle__input:checked ~ .menu-toggle__span {
+      opacity: 1;
+      transform: rotate(45deg) translate(-0.1875rem, -0.0625rem);
+      background-color: #36383f;
+    }
+
+    .menu-toggle__input:checked ~ .menu-toggle__span:nth-last-child(3) {
+      opacity: 0;
+      transform: rotate(0deg) scale(0.2 0.2);
+    }
+
+    .menu-toggle__input:checked ~ .menu-toggle__span:nth-last-child(2) {
+      transform: rotate(-45deg) translate(0, -0.0625rem);
+    }
+
+    .menu {
+      position: absolute;
+      width: 11.25rem;
+      height: 25rem;
+      box-shadow: 0 0 0.625rem #85888c;
+      margin: -3.125rem 0 0 -3.125rem;
+      padding: 3.125rem;
+      padding-top: 7.8125rem;
+      background-color: #f5f6fa;
+      -webkit-font-smoothing: antialiased;
+      transform-origin: 0% 0%;
+      transform: translate(-100%, 0);
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.77, 1);
+    }
+
+    .menu__item {
+      padding: 0.625rem;
+      transition-delay: 2s;
+    }
+
+    .menu-toggle__input:checked ~ .menu {
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="phone">
+      <div class="content">
+        <nav role="navigation" class="nav">
+          <div id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle__input" class="menu-toggle__label"></label>
+            <input type="checkbox" name="menu-toggle__input" id="menu-toggle__input" class="menu-toggle__input">
+            <span class="menu-toggle__span"></span>
+            <span class="menu-toggle__span"></span>
+            <span class="menu-toggle__span"></span>
+            <ul id="menu" class="menu">
+              <li class="menu__item"><a href="#" class="menu__link">Home</a></li>
+              <li class="menu__item"><a href="#" class="menu__link">About</a></li>
+              <li class="menu__item"><a href="#" class="menu__link">Info</a></li>
+              <li class="menu__item"><a href="#" class="menu__link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
