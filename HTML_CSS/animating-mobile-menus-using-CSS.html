@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Animating Mobile Menus Using CSS - by LogRocket</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 2.5rem;
+      min-height: 100vh;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    }
+
+    .screen1_container {
+      width: 17rem;
+      height: 80vh;
+      background-color: #533557;
+      position: relative;
+      overflow: hidden;
+      border: 0.9375rem solid rgb(54, 53, 53);
+      border-top: 1.875rem solid rgb(54, 53, 53);
+      border-bottom: 1.875rem solid rgb(54, 53, 53);
+      border-radius: 3.75rem;
+    }
+
+    .screen1_menu_container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f1d6f5;
+      color: #533557;
+      padding: 0 0.625rem;
+    }
+
+    .screen1_menu_btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 3.125rem;
+      height: 3.125rem;
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .screen1_menu_hamburger {
+      width: 1.25rem;
+      height: 0.125rem;
+      background-color: #533557;
+      border-radius: 0.3125rem;
+      z-index: 10;
+      transition: all 0.5s ease;
+    }
+
+    .screen1_menu_hamburger::before,
+    .screen1_menu_hamburger::after {
+      content: "";
+      position: absolute;
+      width: 1.25rem;
+      height: 0.125rem;
+      background-color: #533557;
+      border-radius: 0.3125rem;
+      transition: all 0.5s ease;
+    }
+
+    .screen1_menu_hamburger::before {
+      transform: translateY(-0.375rem);
+    }
+
+    .screen1_menu_hamburger::after {
+      transform: translateY(0.375rem);
+    }
+
+    .screen1_menu_items {
+      background-color: #f1d6f5;
+      color: #533557;
+      position: absolute;
+      left: 100%;
+      height: 100%;
+      width: 70%;
+      padding-top: 4.375rem;
+      top: 0;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .screen1_menu_list-item {
+      padding: 0.625rem 0;
+      text-align: center;
+      list-style-type: none;
+      transition: all 0.5s ease;
+    }
+
+    .screen1_menu_list-item:hover {
+      letter-spacing: 0.125rem;
+      opacity: 0.6;
+    }
+
+    .screen1_menu_input:checked ~ .screen1_menu_hamburger {
+      transform: translateX(-3.125rem);
+      background-color: transparent;
+    }
+
+    .screen1_menu_input:checked ~ .screen1_menu_hamburger::before {
+      transform: rotate(45deg) translate(2.1875rem, -2.1875rem);
+    }
+
+    .screen1_menu_input:checked ~ .screen1_menu_hamburger::after {
+      transform: rotate(-45deg) translate(2.1875rem);
+    }
+
+    .screen1_menu_input:checked ~ .screen1_menu_items {
+      left: 40%;
+    }
+
+    .screen1_menu_input {
+      display: none;
+    }
+
+    .page_content {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .page_content_h3 {
+      padding-bottom: 0.625rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="screen1_container">
+    <!-- The nav bar with logo and menu items -->
+    <nav class="screen1_menu_container">
+      <h4 class="nav-heading">Logo</h4>
+      <label for="screen1_menu_check" class="screen1_menu_btn">
+        <!-- checkbox to track when the hamburger menu is clicked on -->
+        <input type="checkbox" name="screen1_menu_check" id="screen1_menu_check" class="screen1_menu_check screen1_menu_input">
+        <!-- the hamburger menu -->
+        <div class="screen1_menu_hamburger"></div>
+        <!-- menu items -->
+        <ul class="screen1_menu_items">
+          <li class="screen1_menu_list-item">Home</li>
+          <li class="screen1_menu_list-item">About</li>
+          <li class="screen1_menu_list-item">Contact</li>
+        </ul>
+      </label>
+    </nav>
+
+    <!-- The page body content -->
+    <div class="page_content">
+      <h3 class="page_content_h3">This is the first screen</h3>
+      <p class="page_content_p">We are creating animated mobile menus.</p>
+    </div>
+  </div>
+</body>
+</html>
