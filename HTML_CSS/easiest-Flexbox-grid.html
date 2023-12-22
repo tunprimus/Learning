@@ -1,0 +1,217 @@
+<!-- Modified from: How to Create a Flexbox Grid | https://www.taniarascia.com/easiest-flex-grid-ever/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+      font-size: 1.3rem;
+      color: #cccccc;
+      background-color: #000000;
+      margin-bottom: 4.375rem;
+    }
+
+    .main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .column,
+    .article,
+    .aside {
+      padding: 0.9rem;
+      border: 0.0625rem solid #666666;
+      margin: 0.3125rem 0;
+      background-color: #343436;
+    }
+
+    .row,
+    .section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .column,
+    .article,
+    .aside {
+      flex-basis: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+      .row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+      }
+
+      .column {
+        flex: 1;
+      }
+
+      .article {
+        flex: 7.5;
+      }
+
+      .aside {
+        flex: 2.5;
+      }
+
+      .pct-20 {
+        flex: 2;
+      }
+
+      .pct-25 {
+        flex: 2.5;
+      }
+
+      .pct-55 {
+        flex: 5.5;
+      }
+
+      .pct-75 {
+        flex: 7.5;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="main">
+    <!-- Grid-like -->
+    <div class="row">
+      <div class="column">100%</div>
+    </div>
+    <div class="row">
+      <div class="column">50%</div>
+      <div class="column">50%</div>
+    </div>
+    <div class="row">
+      <div class="column">33%</div>
+      <div class="column">33%</div>
+      <div class="column">33%</div>
+    </div>
+    <div class="row">
+      <div class="column">25%</div>
+      <div class="column">25%</div>
+      <div class="column">25%</div>
+      <div class="column">25%</div>
+    </div>
+    <div class="row">
+      <div class="column">20%</div>
+      <div class="column">20%</div>
+      <div class="column">20%</div>
+      <div class="column">20%</div>
+      <div class="column">20%</div>
+    </div>
+    <div class="row">
+      <div class="column">16.67%</div>
+      <div class="column">16.67%</div>
+      <div class="column">16.67%</div>
+      <div class="column">16.67%</div>
+      <div class="column">16.67%</div>
+      <div class="column">16.67%</div>
+    </div>
+    <div class="row">
+      <div class="column">14.2857%</div>
+      <div class="column">14.2857%</div>
+      <div class="column">14.2857%</div>
+      <div class="column">14.2857%</div>
+      <div class="column">14.2857%</div>
+      <div class="column">14.2857%</div>
+      <div class="column">14.2857%</div>
+    </div>
+    <div class="row">
+      <div class="column">12.5%</div>
+      <div class="column">12.5%</div>
+      <div class="column">12.5%</div>
+      <div class="column">12.5%</div>
+      <div class="column">12.5%</div>
+      <div class="column">12.5%</div>
+      <div class="column">12.5%</div>
+      <div class="column">12.5%</div>
+    </div>
+    <div class="row">
+      <div class="column">11.111%</div>
+      <div class="column">11.111%</div>
+      <div class="column">11.111%</div>
+      <div class="column">11.111%</div>
+      <div class="column">11.111%</div>
+      <div class="column">11.111%</div>
+      <div class="column">11.111%</div>
+      <div class="column">11.111%</div>
+      <div class="column">11.111%</div>
+    </div>
+    <div class="row">
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+      <div class="column">10%</div>
+    </div>
+    <div class="row">
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+      <div class="column">9.091%</div>
+    </div>
+    <div class="row">
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+      <div class="column">8.333%</div>
+    </div>
+    <!-- Two different column sizes -->
+    <div class="row">
+      <div class="column pct-25">Twenty-five Percent</div>
+      <div class="column pct-75">Seventy-five Percent</div>
+    </div>
+    <!-- Three different column sizes -->
+    <div class="row">
+      <div class="column pct-25">25% Left Sidebar</div>
+      <div class="column pct-55">55% Main Content</div>
+      <div class="column pct-20">20% Right Sidebar</div>
+    </div>
+    <!-- Nesting -->
+    <div class="row">
+      <div class="column">
+        <div class="row">
+          <div class="column">Nested</div>
+          <div class="column">Nested</div>
+        </div>
+      </div>
+      <div class="column">
+        Nothing Nested
+      </div>
+    </div>
+    <!-- Sematic HTML -->
+    <section class="section">
+      <article class="article">Article</article>
+      <aside class="aside">Aside</aside>
+    </section>
+  </main>
+</body>
+</html>
