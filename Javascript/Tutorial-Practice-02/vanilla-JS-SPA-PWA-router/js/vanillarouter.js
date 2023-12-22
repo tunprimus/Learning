@@ -40,7 +40,10 @@ class VanillaRouter {
   }
 
   _hashChanged() {
-    this._tryNav(document.location.hash.substring(1));
+    let slug = this._tryNav(document.location.hash.substring(1));
+    if (typeof slug === 'undefined') {
+      this._tryNav('/');
+    }
   }
 
   _triggerPopState(evt) {
