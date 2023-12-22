@@ -1,0 +1,70 @@
+<!-- A SPA/PWA Router in Pure Vanilla ES6 JavaScript | https://javascript.plainenglish.io/a-spa-pwa-router-in-pure-vanilla-es6-javascript-e8f79cfd0111 -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vanilla Router</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+    }
+
+    body {
+      padding-left: 1rem;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 10rem 1fr;
+      grid-gap: 1rem;
+      gap: 1rem;
+    }
+
+    .aside {
+      border-right: 2px solid #dddddd;
+    }
+
+    .list-group {
+      list-style: none;
+    }
+
+    .list__item,
+    .products__item {
+      padding: 0.3rem;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vanilla Router</h1>
+  <main class="main">
+    <aside class="aside">
+      <ul class="list-group">
+        <li class="list__item"><a href="/" class="list__link">Home</a></li>
+        <li class="list__item"><a href="/products" class="list__link">Products</a>
+          <ul class="products-group">
+            <li class="products__item"><a href="/products/451/details" class="products__link">HC 23i</a></li>
+          </ul>
+        </li>
+        <li class="list__item"><a href="/about" class="list__link">About</a></li>
+        <li class="list__item"><a href="/missing" class="list__link">Missing route</a></li>
+      </ul>
+    </aside>
+    <section class="section"></section>
+  </main>
+  <footer class="footer">
+    Proudly written as <a target="_blank noopener" href="https://github.com/mvneerven/vanillarouter">open source</a> by</a>
+        <a href="https://neerventure.com" target="_blank noopener">Neer-venture</a>
+  </footer>
+</body>
+</html>
