@@ -47,4 +47,4 @@ class Events {
   }
 }
 
-export { Events };
+export default Events;
