@@ -82,6 +82,7 @@ class VanillaRouter {
     return new URL(href, document.location.origin);
   }
 
+  
   _onNavClick(evt) {
     var _e$target;
     // handle click in document
@@ -96,6 +97,14 @@ class VanillaRouter {
       evt.preventDefault();
     }
   }
+
+  /* 
+  _onNavClick(e) { // handle click in document
+    const href = e.target?.closest("[href]")?.href;
+    if (href && this._tryNav(href)) {
+      e.preventDefault();
+    }
+  } */
 
   /**
    * Makes the router navigate to the given route
