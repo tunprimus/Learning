@@ -1,0 +1,334 @@
+<!-- How To Build a Multi-Step Form - https://vahid.blog/post/2020-09-11-how-to-build-a-multi-step-form/ -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How To Build a Multi-Step Form</title>
+</head>
+<body>
+  <!-- 1. Create the Form -->
+  <main>
+    <form name="multistep-form" method="POST">
+      <div id="empty"></div>
+    
+      <p>
+        <label>Gender: </label>
+        <label>Male&nbsp;<input type="radio" name="gender" id="male" value="M" required/></label
+        >&nbsp;&nbsp;
+        <label>Female&nbsp;<input type="radio" name="gender" id="female" value="F" required/></label>
+      </p>
+    
+      <p>
+        <label for="inputBirthday">Birthday: </label>
+        <input type="text" name="birthday" id="inputBirthday" maxlength="10" pattern="(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/(19|20)\d\d" title="Birthday must follow format: MM/DD/YYYY" placeholder="MM/DD/YYYY" required/>
+      </p>
+      <p>
+        <label>Height: </label>
+        <input type="number" name="height-feet" id="height-feet" placeholder="ft" maxlength="1" max="8" min="3" required/>&nbsp;&nbsp;
+        <input type="number" name="height-inches" id="height-inches" maxlength="2" max="11" min="0" placeholder="in" required/>
+      </p>
+      <p>
+        <label for="inputWeight">Weight (lbs): </label>
+        <input type="number" name="inputWeight" id="inputWeight" placeholder="lbs" maxlength="3" max="999" min="100" required/>
+      </p>
+    
+      <p>Do you currently have a life insurance policy?</p>
+      <p>
+        <label>Yes&nbsp;
+        <input type="radio" name="alreadyHasInsurance" id="insuranceYes" value="Y" required/></label>
+        &nbsp;&nbsp;
+    
+        <label>No&nbsp;<input type="radio" name="alreadyHasInsurance" id="insuranceNo" value="N" required/></label>
+      </p>
+    
+      <div id="hasInsurance" style="display: none">
+        <p>
+          <label for="currentPolicyAmount">Current policy coverage amount ($US): &nbsp;</label>
+          <input type="number" name="currentPolicyAmount" id="currentPolicyAmount" placeholder="" min="1" />
+        </p>
+      </div>
+    
+      <label for="newCoverageAmount">How much coverage would you like us to quote you? ($US)</label>
+      <small>It's OK to estimate.</small>
+      <p>
+        <select name="newCoverageAmount" id="newCoverageAmount" required>
+          <option value="" selected="selected">Please select</option>
+          <option value="<200K">$0 - $199,999</option>
+          <option value="200K-300K">$200,000 - $299,999</option>
+          <option value="300K-400K">$300,000 - $399,999</option>
+          <option value="400K-500K">$400,000 - $499,999</option>
+          <option value="500K-600K">$500,000 - $599,999</option>
+          <option value="600K-700K">$600,000 - $699,999</option>
+          <option value="700K-800K">$700,000 - $799,999</option>
+          <option value="800K-900K">$800,000 - $899,999</option>
+          <option value="900K-1000K">$900,000 - $999,999</option>
+          <option value="1000K-1500K">$1,000,000 - $1,499,999</option>
+          <option value="1500K-2000K">$1,500,000 - $1,999,999</option>
+          <option value="2000K-5000K">$2,000,000 - $4,999,999</option>
+          <option value=">5000K">$5,000,000 or greater</option>
+        </select>
+      </p>
+    
+      <label for="newCoverageDuration">What duration for coverage?</label>
+      <p>
+        <select name="newCoverageDuration" id="newCoverageDuration" required>
+          <option value="" selected="selected">Please select</option>
+          <option value="10 years">10 years</option>
+          <option value="15 years">15 years</option>
+          <option value="20 years">20 years</option>
+          <option value="30 years">30 years</option>
+          <option value="Permanent">Permanent</option>
+        </select>
+      </p>
+    
+      <p>
+        Have you ever used any tobacco or nicotine products?
+        <small>(Even if you smoke or recently quit, our agents may be able to find you low rates).</small
+        >
+      </p>
+      <p>
+        <label>Yes&nbsp;<input type="radio" name="hasUsedTobacco" id="tobaccoYes" value="Y" required/></label>
+        &nbsp;&nbsp;
+        <label>No&nbsp;<input type="radio" name="hasUsedTobacco" id="tobaccoNo" value="N" required/></label>
+      </p>
+
+      <div id="smoker" style="display: none">
+        <p>
+          Cigarettes: &nbsp;
+          <select name="tobaccoCigarettesState" id="tobaccoCigarettesState" title="tobaccoCigarettesState">
+            <option value="" selected="selected">Please select</option>
+            <option value="never">Never</option>
+            <option value="I currently smoke">I currently smoke</option>
+            <option value="I quit within the last year">I quit within the last year</option>
+            <option value="I quit more than a year ago">I quit more than a year ago</option>
+            <option value="I quit more than 2 years ago">I quit more than 2 years ago</option>
+            <option value="I quit more than 3 years ago">I quit more than 3 years ago</option>
+            <option value="I quit more than 4 years ago">I quit more than 4 years ago</option>
+            <option value="I quit more than 5 years ago">I quit more than 5 years ago</option>
+          </select>
+        </p>
+
+        <p>
+          Other: &nbsp;
+          <select name="tobaccoOtherState" id="tobaccoOtherState" title="tobaccoOtherState">
+            <option value="" selected="selected">Please select</option>
+            <option value="never">Never</option>
+            <option value="Current user">Current user</option>
+            <option value="I quit within the last year">I quit within the last year</option>
+            <option value="I quit more than a year ago">I quit more than a year ago</option>
+            <option value="I quit more than 2 years ago">I quit more than 2 years ago</option>
+            <option value="I quit more than 3 years ago">I quit more than 3 years ago</option>
+            <option value="I quit more than 4 years ago">I quit more than 4 years ago</option>
+            <option value="I quit more than 5 years ago">I quit more than 5 years ago</option>
+          </select>
+        </p>
+      </div>
+    
+      <div id="driving-violation" style="display: none">
+        <p>
+          Have you received any driving violations, besides parking tickets, in the past five years?
+        </p>
+        <p>
+          <label>Yes&nbsp;<input type="radio" name="drivingViolations" id="drivingViolationYes" value="Y" required/></label>
+          &nbsp;&nbsp;
+          <label>No&nbsp;<input type="radio" name="drivingViolations" id="drivingViolationNo" value="N" required/></label>
+        </p>
+        <p>
+          <label># of violations in the past 5 years: &nbsp;
+            <select name="violationsPast5Years" id="violationsPast5Years">
+              <option value="" selected="selected">Please select</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6 or more">6 or more</option>
+            </select></label
+          >
+        </p>
+        <p>
+          <label># of violations in the past 3 years: &nbsp;
+            <select name="violationsPast3Years" id="violationsPast3Years">
+              <option value="" selected="selected">Please select</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6 or more">6 or more</option>
+            </select></label
+          >
+        </p>
+      </div>
+      
+      <p>Do you currently engage in <em>any</em> of these activities or sports?</p>
+      <table>
+        <tr>
+          <td>
+            <ul>
+              <li>Piloting aircraft</li>
+              <li>Hang gliding</li>
+              <li>Bungee jumping</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Scuba diving</li>
+              <li>Mountain & rock climbing</li>
+              <li>Skydiving</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    
+      <label>Yes
+        <input type="radio" name="engagesInDangerousActivities" id="dangerousActivitiesYes" value="Y" required/></label>
+      &nbsp;&nbsp;
+      <label>No
+        <input type="radio" name="engagesInDangerousActivities" id="dangerousActivitiesNo" value="N" required/></label>
+    
+      <p>
+        Have you ever been treated for any of the below? (Check all that apply.)
+        <small
+          >Even if you have less than perfect health, our agents may be able to find you affordable rates.
+        </small>
+      </p>
+    
+      <table border="0">
+        <tr>
+          <td>
+            <label><input name="alcohol" type="checkbox" id="Alcohol" value="Y" />Alcohol or Substance Abuse</label><br />
+            <label><input name="cholesterol" type="checkbox" id="Cholesterol" value="Y" />Cholesterol</label><br />
+            <label><input name="asthma" type="checkbox" id="Asthma" value="Y" />Asthma</label><br />
+            <label><input name="depressionAnxiety" type="checkbox" id="DepressionAnxiety" value="Y" />Depression or Anxiety</label><br />
+            <label><input name="bloodPressure" type="checkbox" id="Bloodpressure" value="Y" />Blood Pressure</label><br />
+          </td>
+          <td>
+            <label><input name="diabetes" type="checkbox" id="Diabetes" value="Y" />Diabetes</label><br />
+            <label><input name="cancer" type="checkbox" id="Cancer" value="Y" />Cancer</label><br />
+            <label><input name="heartIssue" type="checkbox" id="Heartissue" value="Y" />Heart issue</label><br />
+            <label><input name="sleepApnoea" type="checkbox" id="Sleepapnoea" value="Y" />Sleep Apnoea</label><br />
+            <label><input name="noneOfThese" type="checkbox" id="Noneofthese" value="Y" />None of these</label><br />
+          </td>
+        </tr>
+      </table>
+    
+      <p>
+        Did your parents and/or siblings have any incidents of heart disease, cancer, stroke or diabetes before the age of 65?
+      </p>
+      <p>
+        <label>Yes&nbsp;<input type="radio" name="familyRisk" id="familyriskYes" value="Y" required/></label>
+        &nbsp;&nbsp;
+        <label>No&nbsp;<input type="radio" name="familyRisk" id="familyriskNo" value="N" required/></label>
+      </p>
+    
+      <table>
+        <tr>
+          <td>
+            <label for="inputFirst">First Name </label>
+            <input type="text" name="firstname" id="inputFirst" placeholder="" required/>
+          </td>
+          <td>
+            <label for="inputLast">Last Name</label>
+            <input type="text" name="lastname" id="inputLast" placeholder="" required/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="streetAddress">Street Address </label>
+            <input type="text" name="streetAddress" id="streetAddress" placeholder="" required/>
+          </td>
+    
+          <td>
+            <label for="city">City </label>
+            <input type="text" name="city" id="city" placeholder="" required/>
+          </td>
+        </tr>
+    
+        <tr>
+          <td>
+            <label for="state">State </label>
+            <input type="text" name="state" id="state" placeholder="" pattern="[A-Za-z]{2}" title="Please enter two-letter state abbreviation" maxlength="2" required/>
+          </td>
+    
+          <td>
+            <label for="zipcode">Zip </label>
+            <input
+              type="text" name="zip-code" id="zip-code" pattern="[0-9]{5}" placeholder="" minlength="5" maxlength="5" title="Zip code must contain 5 digits" required/>
+          </td>
+        </tr>
+    
+        <tr>
+          <td>
+            <label for="inputEmail">Email </label>
+            <input type="email" name="email" id="inputEmail" placeholder="" required/>
+          </td>
+    
+          <td>
+            <label for="phone">Phone </label>
+            <input type="phone" name="phone" id="phone" placeholder="" pattern="[0-9]{10}" title="Phone # must have 10 digits" maxlength="10" required/>
+          </td>
+        </tr>
+    
+        <tr>
+          <td colspan="2">
+            <label for="inputComments">Any Additional Comments: </label><br />
+            <textarea name="additionalComments" id="inputComments" rows="5" placeholder="(optional)"></textarea>
+          </td>
+        </tr>
+      </table>
+    
+      <p></p>
+    
+      <p>Please verify everything above one last time, and then submit below!</p>
+      <button type="submit">Send</button>
+    </form>
+  </main>
+
+  <!-- JavaScript Here -->
+  <script>
+    /* 2. Add initial Javascript to make certain fields appear or disappear */
+
+    function showHide(show, hide = false) {
+      document.getElementById(show).style.display = 'block';
+      if (hide) {
+        document.getElementById(hide).style.display = 'none';
+      }
+    }
+
+    //1. Identify all 6 elements that trigger the visible/invisible states of our 3 dependent sections
+    let insuranceYes = document.getElementById(insuranceYes);
+    let insuranceNo = document.getElementById(insuranceNo);
+    let tobaccoYes = document.getElementById(tobaccoYes);
+    let tobaccoNo = document.getElementById(tobaccoNo);
+    let drivingViolationYes = document.getElementById(drivingViolationYes);
+    let drivingViolationNo = document.getElementById(drivingViolationNo);
+
+    //2. Add event listeners to all 6
+    insuranceYes.addEventListener('click', () => {
+      showHide('hasInsurance');
+    });
+
+    insuranceNo.addEventListener('click', () => {
+      showHide('empty', 'hasInsurance');
+    });
+
+    tobaccoYes.addEventListener('click', () => {
+      showHide('smoker');
+    });
+
+    tobaccoNo.addEventListener('click', () => {
+      showHide('empty', 'smoker');
+    });
+
+    drivingViolationYes.addEventListener('click', () => {
+      showHide('driving-violation');
+    });
+
+    drivingViolationNo.addEventListener('click', () => {
+      showHide('empty', 'driving-violation');
+    });
+  </script>
+</body>
+</html>
