@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>The Dialogue Element</title>
+  <style>
+    dialog {
+      border: 15px solid rebeccapurple;
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <!-- <dialog>
+    <p>Hey, do not do that.</p>
+    <form method="dialog">
+      <button>OK, sorry</button>
+    </form>
+  </dialog> -->
+
+  <!-- <dialog>
+    <p>Are you <em>sure</em> you want to do that?</p>
+    <form method="dialog">
+      <button value="cancel">Cancel</button>
+      <button value="confirm">Confirm</button>
+    </form>
+  </dialog> -->
+
+  <!-- Recreating a prompt() modal with the dialogue element -->
+  <dialog>
+    <form method="dialog">
+      <label for="wizard">Who is your favourite wizard?</label>
+      <input type="text" name="wizard" id="wizard" oninput="this.form.elements.confirm.value=this.value;">
+      <button value="cancel">Cancel</button>
+      <button id="confirm" value="confirm">Submit</button>
+    </form>
+  </dialog>
+
+  <button data-show-modal>Show Modal</button>
+
+  <!-- JavaScript Here -->
+  <script>
+    // Get the modal
+    let btn = document.querySelector('[data-show-modal]');
+    let modal = document.querySelector('dialog');
+
+    // Show the modal
+    btn.addEventListener('click', function() {
+      modal.showModal();
+    });
+    modal.addEventListener('close', function(event) {
+      if (modal.returnValue === 'cancel') {
+        return;
+      }
+      console.log('modal.returnValue!');
+    });
+  </script>
+</body>
+</html>
