@@ -1,0 +1,19 @@
+/* Creating a Progressive Web Application (PWA) using HTML and Vanilla JavaScript | https://dev.to/delineas/creating-a-progressive-web-application-pwa-using-html-and-vanilla-javascript-nje */
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+* + * {
+	margin-top: 1.5rem;
+}
+
+.player {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

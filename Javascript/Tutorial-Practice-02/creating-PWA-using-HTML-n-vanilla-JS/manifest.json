@@ -1,0 +1,16 @@
+{
+	"short_name": "PWA MP3 Player",
+	"name": "Progressive Web Application MP3 Player",
+	"description": "An MP3 Player built as a Progressive Web Application",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#fff",
+	"theme_color": "#3f51b5",
+	"icons": [
+		{
+			"src": "icon.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		}
+	]
+}

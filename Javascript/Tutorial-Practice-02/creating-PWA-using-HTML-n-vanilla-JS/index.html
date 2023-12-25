@@ -1,0 +1,32 @@
+<!-- Creating a Progressive Web Application (PWA) using HTML and Vanilla JavaScript | https://dev.to/delineas/creating-a-progressive-web-application-pwa-using-html-and-vanilla-javascript-nje -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Creating a Progressive Web Application (PWA) using HTML and Vanilla JavaScript</title>
+	<link rel="manifest" href="manifest.json">
+	<link rel="stylesheet" href="style.css">
+	<script src="main.js" defer></script>
+</head>
+<body>
+	<div class="player">
+		<audio src="song.mp3" id="audio-element" class="audio-element" controls></audio>
+		<button type="button" id="play-button" class="play-button">Play/Pause</button>
+	</div>
+
+	<!-- JavaScript Here -->
+	<script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', function() {
+				navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+					console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function(error) {
+					console.log('ServiceWorker registration failed: ', error);
+				});
+			});
+		}
+	</script>
+</body>
+</html>
