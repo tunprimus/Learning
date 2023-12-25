@@ -1,0 +1,59 @@
+<!-- How to upload and process an image file with vanilla JS | https://gomakethings.com/how-to-upload-and-process-an-image-file-with-vanilla-js/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to upload and process an image file with vanilla JS</title>
+</head>
+<body>
+	<form id="upload">
+		<label for="file">File to upload</label>
+		<input type="file" name="file" id="file" accept="image/*">
+
+		<button>Upload</button>
+	</form>
+
+	<div id="app"></div>
+
+	<!-- JavaScript Here -->
+	<script>
+		/**
+		 * Handle submit events
+		 * @param {Event} event The event object
+		 */
+		function handleSubmit(event) {
+			// Stop the form from reloading the page
+			event.preventDefault();
+
+			// If there is no file, do nothing
+			if (!file.value.length) {
+				return;
+			}
+
+			// Create a new FileReader() object
+			let reader = new FileReader();
+
+			// Setup the callback event to run when the file is read
+			reader.onload = logFile;
+
+			// Read the file
+			reader.readAsDataURL(file.files[0]);
+		}
+
+		let app = document.querySelector('#app');
+
+		/**
+		 * Log the uploaded file to the console
+		 * @param {event} Event The file loaded event
+		 */
+		function logFile(event) {
+			let str = event.target.result;
+			let img = document.createElement('img');
+			img.src = str;
+			app.append(img);
+			console.log(str);
+		}
+	</script>
+</body>
+</html>
