@@ -6,6 +6,8 @@ const board = document.getElementById('game-board');
 let snake = [{x: 10, y: 10}];
 let food = generateFood();
 let direction = 'right';
+let gameInterval;
+let gameSpeedDelay = 200;
 
 function draw() {
 	board.innerHTML = '';
@@ -63,7 +65,23 @@ function move() {
 			break;
 	}
 	snake.unshift(head);
-	snake.pop();
+	
+	if (head.x === food.x && head.y === food.y) {
+		food = generateFood();
+		clearInterval();
+		gameInterval = setInterval(() => {
+			move();
+			draw();
+		}, gameSpeedDelay);
+	} else {
+		snake.pop();
+	}
 }
 
 draw();
+/* 
+let timeInterval = setInterval(() => {
+	move();
+	draw();
+}, 200);
+ */
