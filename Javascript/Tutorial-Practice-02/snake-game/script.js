@@ -93,6 +93,31 @@ function startGame() {
 	}, gameSpeedDelay);
 }
 
+function handleKeypress(event) {
+	if ((!gameStarted && event.code === 'Space') || (!gameStarted && event.key === ' ')) {
+		startGame();
+	} else {
+		switch(event.key) {
+			case 'ArrowUp':
+				direction = 'up';
+				break;
+			case 'ArrowDown':
+				direction = 'down';
+				break;
+			case 'ArrowLeft':
+				direction = 'left';
+				break;
+			case 'ArrowRight':
+				direction = 'right';
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+document.addEventListener('keydown', handleKeypress);
+
 // draw();
 /* 
 let timeInterval = setInterval(() => {
