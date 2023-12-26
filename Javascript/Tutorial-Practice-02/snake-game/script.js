@@ -42,9 +42,11 @@ function setPosition(element, position) {
 }
 
 function drawFood() {
-	const foodElement = createGameElement('div', 'food');
-	setPosition(foodElement, food);
-	board.appendChild(foodElement);
+	if (gameStarted) {
+		const foodElement = createGameElement('div', 'food');
+		setPosition(foodElement, food);
+		board.appendChild(foodElement);
+	}
 }
 
 function generateFood() {
@@ -180,11 +182,3 @@ function updateHighScore() {
 }
 
 document.addEventListener('keydown', handleKeypress);
-
-// draw();
-/* 
-let timeInterval = setInterval(() => {
-	move();
-	draw();
-}, 200);
- */
