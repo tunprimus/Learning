@@ -2,6 +2,8 @@
 
 
 /*
+Divide and conquer sorting algorithm
+
 Implementation
 - Use recursion
 - use the spread operator to clone the original array

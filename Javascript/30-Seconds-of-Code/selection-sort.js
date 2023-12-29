@@ -1,6 +1,8 @@
 //@ts-check
 
 /*
+In-place comparison sorting algorithm
+
 Implementation
 - Use the spread operator to clone the original array
 - use for loop to iterate over element in the array
