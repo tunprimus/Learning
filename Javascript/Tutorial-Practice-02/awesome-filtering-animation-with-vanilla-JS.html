@@ -1,0 +1,415 @@
+<!-- Awesome filtering animation with vanilla JS! | https://www.youtube.com/watch?v=jZiZs8cZAKU | https://codepen.io/kevinpowell/pen/GRzxybd/c5c073666a8225c2c8f2fadd4d7c049b -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Single Page View Transition - Awesome filtering animation with vanilla JS!</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		* {
+			margin: 0;
+		}
+
+		body {
+			margin: 0;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			line-height: 1.618;
+		}
+
+		.visually-hidden {
+			clip: rect(0 0 0 0);
+			clip-path: inset(50%);
+			height: 1px;
+			width: 1px;
+			overflow: hidden;
+			position: absolute;
+			white-space: nowrap;
+		}
+
+		.flow > * + * {
+			margin-top: var(--flow-spacing, 1rem);
+			margin-block-start: var(--flow-spacing, 1rem);
+		}
+
+		.content-grid {
+			--container-max-width: 60rem;
+			--min-inline-margin: 2rem;
+			display: grid;
+			grid-template-columns: 
+				[full-width-start breakout-left-start] minmax(100% - var(--min-inline-margin), var(--container-max-width)) [content-end breakout-left-start] minmax(1rem, 1fr) [full-width-end breakout-right-end];
+		}
+
+		.content-grid > *,
+		.full-width > * {
+			grid-column: content;
+		}
+
+		.content-grid > .full-width {
+			grid-template-columns: inherit;
+		}
+
+		.breakout-right {
+			grid-column: breakout-right;
+		}
+
+		.breakout-left {
+			grid-column: breakout-left;
+		}
+
+		.primary-header {
+			margin-right: 3rem;
+			margin-block-end: 3rem;
+			border-right: 0.0625rem solid var(--separator-color, black);
+			border-block-end: 0.0625rem solid var(--separator-color, black);
+		}
+
+		.primary-header__layout {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+
+		.primary-navigation > ul {
+			display: flex;
+			list-style: none;
+			margin: 1rem;
+			padding: var(--navigation-padding, 1rem) 0;
+		}
+
+		.primary-navigation > ul > li {
+			margin-left: 1rem;
+		}
+
+		.primary-navigation > ul > li:first-child {
+			margin-left: 0;
+		}
+
+		@supports (gap: clamp(1rem, 5vi, 2.5rem)) {
+			.primary-navigation > ul {
+				gap: clamp(1rem, 5vi, 2.5rem);
+				margin: 0;
+			}
+
+			.primary-navigation > ul > li {
+				margin-left: 0;
+			}
+		}
+
+		:is(.primary-navigation, .account-links) :where(a) {
+			font-weight: 500;
+			text-decoration: none;
+			color: var(--link-colour, #777777);
+		}
+
+		:is(.primary-navigation, .account-links) :where(a:hover, a:focus, a[aria-current="page"]) {
+			color: var(--link-current-colour, #111111);
+		}
+
+		.account-links {
+			display: flex;
+		}
+
+		.account-links > * {
+			display: flex;
+			align-items: center;
+			padding-top: var(--navigation-padding, 1rem);
+			padding-bottom: var(--navigation-padding, 1rem);
+			padding-block: var(--navigation-padding, 1rem);
+			padding-left: 3rem;
+			padding-right: 3rem;
+			padding-inline: 3rem;
+		}
+
+		.create-account {
+			background-color: var(--button-bg, #333333);
+			color: var(--button-text, white);
+		}
+
+		.main-with-aside {
+			--flow-spacing: 2rem;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 3rem;
+		}
+
+		.main-with-aside > :not(aside) {
+			flex-basis: 55ch;
+			flex-grow: 999;
+		}
+
+		.main-with-aside > aside {
+			flex-basis: 20.31rem;
+			flex-grow: 1;
+		}
+
+		.sidebar {
+			--flow-spacing: 1em;
+			align-self: flex-start;
+			padding: 2rem 3rem;
+			border: 0.125rem solid #eeeeee;
+			border-radius: 0.5rem;
+		}
+
+		.breadcrumbs ol {
+			list-style: none;
+			padding: 0;
+			display: flex;
+			/* gap: 0.5rem; */
+		}
+
+		.breadcrumbs ol li:last-child {
+			margin-left: 0.75rem;
+		}
+
+		@supports (gap: 0.5rem) {
+			.breadcrumbs ol {
+				gap: 0.75rem;
+			}
+
+			.breadcrumbs ol li:last-child {
+				margin-left: 0;
+			}
+		}
+
+		.breadcrumbs a {
+			display: inline-block;
+			padding: 0.25rem 1rem;
+			border-radius: 100vw;
+			background-color: var(--breadcrumb-colour, #eeeeee);
+			color: inherit;
+			font-weight: 500;
+			text-decoration: none;
+		}
+
+		.breadcrumbs li:not(:last-child)::after {
+			content: " / ";
+			display: inline-block;
+			font-size: 1.75em;
+			font-weight: 100;
+			transform: skew(-20deg);
+			line-height: 0;
+			margin-left: 0.5em;
+			margin-right: 0;
+			margin-inline: 0.5em 0;
+		}
+
+		.breadcrumbs a:hover,
+		.breadcrumbs a:focus {
+			background-color: #cccccc;
+		}
+
+		.conference-list {
+			list-style: none;
+			padding: 0;
+		}
+
+		.conference:not(:last-child):not(:has(+ [hidden])) {
+			padding-bottom: 2rem;
+			margin-bottom: 2rem;
+			border-bottom: 0.0625rem solid black;
+		}
+
+		.conference-date::after {
+			content: " •";
+		}
+
+		.filter {
+			display: flex;
+			flex-wrap: wrap;
+			border: 0;
+			padding: 0;
+			margin: -0.5rem;
+		}
+
+		.filter > * {
+			margin: 0.5rem;
+		}
+
+		@supports (gap: 0.5rem) {
+			.filter {
+				margin: 0;
+				gap: 0.5rem;
+			}
+
+			.filter > * {
+				margin: 0;
+			}
+		}
+
+		.filter-btn {
+			cursor: pointer;
+			text-transform: uppercase;
+			background-color: transparent;
+			border: 0;
+			border-radius: 0.25rem;
+			padding: 0.25rem 1rem;
+		}
+
+		.filter-btn:hover,
+		.filter-btn:focus {
+			background-color: #cccccc;
+		}
+
+		.filter-btn.active {
+			background-color: black;
+			color: white;
+			box-shadow: 0 0 0.5rem rgb(0 0 0 / 0.2);
+		}
+	</style>
+</head>
+<body>
+	<div class="content-grid">
+		<header class="primary-header full-width">
+			<div class="primary-header__layout breakout-right">
+				<nav class="primary-navigation">
+					<ul>
+						<li><a href="#">Discover</a></li>
+						<li><a href="#">Live</a></li>
+						<li><a href="#">Jobs</a></li>
+						<li><a aria-current="page" href="#">Conferences</a></li>
+					</ul>
+				</nav>
+	
+				<div class="account-links">
+					<a href="#">Log In</a>
+					<a href="#" class="create-account">Get Started</a>
+				</div>
+			</div>
+		</header>
+		<nav aria-label="Breadcrumb" class="breadcrumbs">
+			<ol>
+				<li><a href="#">Conferences</a></li>
+				<li><a href="#" aria-current="page">Tech</a></li>
+			</ol>
+		</nav>
+		<main class="main-with-aside">
+			<div class="flow">
+	
+				<h1>Tech Conferences</h1>
+				<div class="filter">
+					<h2 class="visually-hidden">Filter by type of conference</h2>
+					<button class='filter-btn active' data-filter="all">All</button>
+					<button class='filter-btn' data-filter="frontend">Frontend</button>
+					<button class='filter-btn' data-filter="backend">Backend</button>
+					<button class='filter-btn' data-filter="fullstack">Fullstack</button>
+				</div>
+	
+				<ul class="conference-list">
+					<li class="conference" data-category='fullstack'>
+						<div class="conference-details">
+							<span class="conference-date">January 30th - February 1st</span>
+							<span class="conference-category">Fullstack</span>
+						</div>
+						<h2 class="conference-name">THAT Conference Texas</h2>
+					</li>
+	
+					<li class="conference" data-category='fullstack'>
+						<div class="conference-details">
+							<span class="conference-date">February 29th - March 1st</span>
+							<span class="conference-category">Fullstack</span>
+						</div>
+						<h2 class="conference-name">DEVWorld</h2>
+					</li>
+	
+					<li class="conference" data-category='backend'>
+						<div class="conference-details">
+							<span class="conference-date">March 19th - March 23rd</span>
+							<span class="conference-category">Backend</span>
+						</div>
+						<h2 class="conference-name">SQLBits</h2>
+					</li>
+	
+					<li class="conference" data-category='frontend'>
+						<div class="conference-details">
+							<span class="conference-date">June 6th - June 7th</span>
+							<span class="conference-category">Frontend</span>
+						</div>
+						<h2 class="conference-name">CSS Day</h2>
+					</li>
+	
+					<li class="conference" data-category='frontend'>
+						<div class="conference-details">
+							<span class="conference-date">September 9th - September 11th</span>
+							<span class="conference-category">Frontend</span>
+						</div>
+						<h2 class="conference-name">SmashingConf Freiburg</h2>
+					</li>
+				</ul>
+			</div>
+			<aside class='sidebar flow'>
+				<h3>Discover</h3>
+				<div>
+					<h4>Lorem, ipsum dolor.</h4>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam nihil modi at?</p>
+				</div>
+				<div>
+					<h4>Aperiam, minima debitis!</h4>
+					<p>Perferendis unde possimus temporibus quia dolorem quibusdam ullam excepturi! Pariatur, saepe totam!</p>
+				</div>
+				<div>
+					<h4>Error, incidunt ab?</h4>
+					<p>Asperiores deleniti eum quos consectetur non eveniet error doloribus veniam dolores omnis.</p>
+				</div>
+				<div>
+					<h4>Perspiciatis, nesciunt amet.</h4>
+					<p>Ex impedit et molestias magni modi numquam doloremque repellat necessitatibus expedita porro?</p>
+				</div>
+			</aside>
+		</main>
+	</div>
+
+	<!-- JavaScript Here -->
+	<script>
+		const filterList = document.querySelector('.filter');
+		const filterButtons = filterList.querySelectorAll('.filter-btn');
+		const conferences = document.querySelectAll('.conference');
+
+		let conferenceIndex = 0;
+
+		conferences.forEach((conference) => {
+			conference.style.viewTransitionName = `conf-${++conferenceIndex}`;
+		});
+
+		filterButtons.forEach((button) => {
+			button.addEventListener('click', (evt) => {
+				let confCategory = evt.target.getAttribute('data-filter');
+
+				if (!document.startViewTransition) {
+					updateActiveButton(evt.target);
+					filterEvents(confCategory);
+				}
+
+				document.startViewTransition(() => {
+					updateActiveButton(evt.target);
+					filterEvents(confCategory);
+				});
+			});
+		});
+
+		function updateActiveButton(newButton) {
+			filterList.querySelector('.active').classList.remove('active');
+			newButton.classList.add('active');
+		}
+
+		function filterEvents(filter) {
+			conferences.forEach((conference) => {
+				// Get each conference category
+				let eventCategory = conference.getAttribute('data-category');
+
+				// Check if that category matches with the filter
+				if (filter === 'all' || filter === eventCategory) {
+					conference.removeAttribute('hidden');
+				} else {
+					conference.setAttribute('hidden', '');
+				}
+			});
+		}
+	</script>
+</body>
+</html>
