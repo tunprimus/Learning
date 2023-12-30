@@ -13,6 +13,12 @@ Implementation
 Complexity: O(n) n = number of dimensions
 */
 
+/**
+ * Calculate Euclidean distance between points in multiple dimensions
+ * @param {number|Array.<number>} coord1 - First coordinate or array of coordinates
+ * @param {number|Array.<number>} coord2 - Second coordinate or array of coordinates
+ * @returns {number}
+ */
 const euclideanDistance = (coord1, coord2) => {
 	return Math.hypot(...Object.keys(coord1).map(k => coord2[k] - coord1[k]));
 };
