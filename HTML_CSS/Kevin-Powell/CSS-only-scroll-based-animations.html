@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>CSS-only Scroll-driven Animations</title>
+	<style>
+		body {
+			background-image: url(../../../assets/images/sun-solar-corona.jpg);
+			object-fit: contain;
+			background-position: center center;
+			background-repeat: no-repeat;
+			/* background-size: cover; */
+		}
+
+		.scroll-watcher {
+			height: 0.625rem;
+			width: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+			background-color: lime;
+			transform: scale(0 1);
+			/* scale: 0 1; */
+			transform-origin: left;
+			animation: scroll-watcher linear;
+			animation-timeline: scroll();
+		}
+
+		@keyframes scroll-watcher {
+			to { transform: scale(1 1); }
+		}
+	</style>
+</head>
+<body>
+	<div class="scroll-watcher"></div>
+	<header class="header">
+		<h1 class="article-header">CSS-only scroll-driven animations are hot</h1>
+	</header>
+	<main class="main">
+		<article class="article">
+			<p>Scroll-driven animations was something that we used to rely on JavaScript for, with the help of scroll listeners and intersection observers.</p>
+			<p>Luckily for us, scroll-driven animations are coming to be a CSS feature and they make life so much simple and more performant.</p>
+		</article>
+	</main>
+</body>
+</html>
