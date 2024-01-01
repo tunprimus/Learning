@@ -16,6 +16,7 @@
 	<div id="controls" class="controls">
 		<button onclick="addRandomPoint()">Add Point</button>
 		<button onclick="addRandomSegment()">Add Segment</button>
+		<button onclick="removeRandomSegment()">Remove Segment</button>
 	</div>
 
 	<!-- JavaScript Here -->
@@ -59,6 +60,19 @@
 			const segmentSuccess = graph.tryAddSegment(
 				new Segment(graph.points[index1], graph.points[index2])
 			);
+
+			ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+			graph.draw(ctx);
+		}
+
+		function removeRandomSegment() {
+			if (graph.segments.length === 0) {
+				console.log('No segment');
+				alert('No segment');
+				return;
+			}
+			const index = Math.floor(Math.random() * graph.segments.length);
+			graph.removeSegment(graph.segments[index]);
 
 			ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
 			graph.draw(ctx);
