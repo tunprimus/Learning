@@ -13,6 +13,9 @@
 <body>
 	<h1 class="h1">World Editor</h1>
 	<canvas id="myCanvas" class="my-canvas"></canvas>
+	<div id="controls" class="controls">
+		<button onclick="addRandomPoint()">Add Point</button>
+	</div>
 
 	<!-- JavaScript Here -->
 	<script src="js/math/graph.js"></script>
@@ -36,6 +39,17 @@
 
 		const graph = new Graph([p1, p2, p3, p4], [s1, s2, s3, s4]);
 		graph.draw(ctx);
+
+		function addRandomPoint() {
+			const success = graph.tryAddPoint(
+				new Point(
+					Math.random() * myCanvas.width,
+					Math.random() * myCanvas.height
+				)
+			);
+			ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+			graph.draw(ctx);
+		}
 	</script>
 </body>
 </html>
