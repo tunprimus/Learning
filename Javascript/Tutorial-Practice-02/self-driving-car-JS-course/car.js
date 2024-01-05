@@ -44,6 +44,14 @@ class Car {
 		}
 
 		this.y -= this.speed;
+
+		if (this.controls.left) {
+			this.x -= 2;
+		}
+
+		if (this.controls.right) {
+			this.x += 2;
+		}
 	}
 
 	draw(ctx) {
