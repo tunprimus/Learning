@@ -5,3 +5,7 @@ body {
 	overflow: hidden;
 	text-align: center;
 }
+
+.my-canvas {
+	background-color: lightgrey;
+}
