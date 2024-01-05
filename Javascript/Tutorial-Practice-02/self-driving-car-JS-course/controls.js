@@ -27,7 +27,6 @@ class Controls {
 				default:
 					break;
 			}
-			console.table(this);
 		};
 
 		document.onkeyup = (event) => {
@@ -47,7 +46,6 @@ class Controls {
 				default:
 					break;
 			}
-			console.table(this);
 		};
 	}
 }
