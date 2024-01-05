@@ -6,10 +6,10 @@ class Controls {
 		this.right = false;
 		this.reverse = false;
 
-		this.#addKeyboardListeners();
+		this._addKeyboardListeners();
 	}
 
-	#addKeyboardListeners() {
+	_addKeyboardListeners() {
 		document.onkeydown = (event) => {
 			switch(event.key) {
 				case 'ArrowLeft':
