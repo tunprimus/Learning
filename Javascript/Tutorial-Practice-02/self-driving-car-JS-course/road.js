@@ -8,9 +8,9 @@ class Road {
 		this.left = x - width / 2;
 		this.right = x + width / 2;
 
-		const infinity = 1000000;
-		this.top = -infinity;
-		this.bottom = infinity;
+		const INFINITY = 1000000;
+		this.top = -INFINITY;
+		this.bottom = INFINITY;
 
 		const topLeft = {x: this.left, y: this.top};
 		const topRight = {x: this.right, y: this.top};
@@ -40,7 +40,7 @@ class Road {
 			ctx.lineTo(x, this.bottom);
 			ctx.stroke();
 		}
-		
+
 		ctx.setLineDash([]);
 		this.borders.forEach(border => {
 			ctx.beginPath();
