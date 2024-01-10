@@ -5,33 +5,28 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SVG + JavaScript Tutorial - How to Code an Animated Watch</title>
-	<style></style>
+	<style>
+		.hour-marker {
+			fill: transparent;
+			stroke: #f0f0c9;
+			stroke-width: 7;
+			stroke-dasharray: 0.2 0.8;
+			stroke-dashoffset: 0.1;
+		}
+
+		.minute-marker {
+			fill: transparent;
+			stroke: #0f0e0e;
+			stroke-width: 7;
+			stroke-dasharray: 0.2 0.8;
+			stroke-dashoffset: 0.1;
+		}
+	</style>
 </head>
 <body>
 	<svg width="200" height="200" viewBox="-100 -100 200 200">
-		<circle
-			cx="0"
-			cy="0"
-			r="90"
-			fill="transparent"
-			stroke="#0f0e0e"
-			stroke-width="7"
-			stroke-dasharray="0.2 0.8"
-			stroke-dashoffset="0.1"
-			pathLength="60"
-		/>
-
-		<circle
-			cx="0"
-			cy="0"
-			r="90"
-			fill="transparent"
-			stroke="#f0f0c9"
-			stroke-width="7"
-			stroke-dasharray="0.2 0.8"
-			stroke-dashoffset="0.1"
-			pathLength="60"
-		/>
+		<circle class="minute-marker" r="90" pathLength="60" />
+		<circle class="hour-marker" r="90" pathLength="60" />
 	</svg>
 	<!-- JavaScript Here -->
 </body>
