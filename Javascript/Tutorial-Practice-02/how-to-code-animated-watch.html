@@ -6,6 +6,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SVG + JavaScript Tutorial - How to Code an Animated Watch</title>
 	<style>
+		html {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		body {
+			background-color: #7b0828;
+			margin: 0;
+		}
+
 		.hour-marker {
 			fill: transparent;
 			stroke: #f0f0c9;
@@ -21,12 +34,34 @@
 			stroke-dasharray: 0.2 0.8;
 			stroke-dashoffset: 0.1;
 		}
+
+		.hand {
+			stroke: #ffffff;
+			stroke-width: 2;
+			stroke-linecap: round;
+		}
+
+		.hand--thick {
+			stroke-width: 7;
+		}
+
+		.hand--second {
+			stroke: yellow;
+		}
 	</style>
 </head>
 <body>
 	<svg width="200" height="200" viewBox="-100 -100 200 200">
 		<circle class="minute-marker" r="90" pathLength="60" />
 		<circle class="hour-marker" r="90" pathLength="60" />
+
+		<line class="hand" x1="0" y1="0" x2="0" y2="-50"/>
+		<line class="hand hand--thick" x1="0" y1="-12" x2="0" y2="-50"/>
+
+		<line class="hand" x1="0" y1="0" x2="0" y2="-80"/>
+		<line class="hand hand--thick" x1="0" y1="-12" x2="0" y2="-80"/>
+
+		<line class="hand hand--second" x1="0" y1="-12" x2="0" y2="-80"/>
 	</svg>
 	<!-- JavaScript Here -->
 </body>
