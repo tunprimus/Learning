@@ -54,6 +54,15 @@
 			stroke-width: 2;
 			stroke: white;
 		}
+
+		.text {
+			fill: #f0f0c9;
+			font-family: "Roboto", sans-serif;
+			text-anchor: middle;
+			cursor: pointer;
+			-webkit-user-select: none;
+			user-select: none;
+		}
 	</style>
 </head>
 <body>
@@ -61,6 +70,8 @@
 		<circle class="minute-marker" r="90" pathLength="60" />
 		<circle class="hour-marker" r="90" pathLength="60" />
 
+		<text id="text" class="text" x="45" y="5">00</text>
+		
 		<g id="hour-hand" class="hour-hand">
 			<line class="hand" x1="0" y1="0" x2="0" y2="-50"/>
 			<line class="hand hand--thick" x1="0" y1="-12" x2="0" y2="-50"/>
@@ -75,21 +86,27 @@
 			<line class="hand hand--second" x1="0" y1="12" x2="0" y2="-80"/>
 		</g>
 
-		<circle class="clock-centre" r="4"/>
+		<circle class="clock-centre" r="3"/>
 	</svg>
 	<!-- JavaScript Here -->
 	<script>
+		const textElement = document.getElementById('text');
 		const hoursElement = document.getElementById('hour-hand');
 		const minutesElement = document.getElementById('minute-hand');
 		const secondsElement = document.getElementById('second-hand');
 
+		let showDate = true;
+
 		function animate() {
 			const date = new Date();
 
+			const day = date.getDate();
+			const ampm = date.getHours >= 12 ? 'PM' : 'AM';
 			const hour = date.getHours() + date.getMinutes() / 60;
 			const minute = date.getMinutes() + date.getSeconds() / 60;
 			const second = date.getSeconds() + date.getMilliseconds() / 1000;
 
+			textElement.textContent = showDate ? day : ampm;
 			hoursElement.setAttribute('transform', `rotate(${(360 / 12) * hour})`);
 			minutesElement.setAttribute('transform', `rotate(${(360 / 60) * minute})`);
 			secondsElement.setAttribute('transform', `rotate(${(360 / 60) * second})`);
@@ -98,6 +115,10 @@
 		}
 
 		requestAnimationFrame(animate);
+
+		textElement.addEventListener('click', () => {
+			showDate = !showDate;
+		});
 	</script>
 </body>
 </html>
