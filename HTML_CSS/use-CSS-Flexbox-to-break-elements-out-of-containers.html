@@ -1,0 +1,73 @@
+<!-- How to Use CSS Flexbox to Break Elements Out of Their Containers | https://www.freecodecamp.org/news/break-out-elements-from-containers-using-flexbox/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to Use CSS Flexbox to Break Elements Out of Their Containers</title>
+	<style>
+		.image {
+			max-height: 400px;
+			object-fit: cover;
+			max-width: 100%;
+		}
+
+		.article > * + * {
+			margin-top: 2em;
+		}
+
+		.article__title {
+			text-align: center;
+			font-size: 3rem;
+		}
+
+		.article-2__image {
+			display: block;
+			width: 100%;
+			max-width: 100%;
+		}
+
+		.article > * {
+			max-width: 60ch;
+			/* font-size: 1.2rem; */
+			margin-left: auto;
+			margin-right: auto;
+			line-height: 1.618;
+		}
+
+		.breakout {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	</style>
+</head>
+<body>
+	<main class="main">
+		<article class="article article-1">
+			<h2 class="article__title">Plume bird the</h2>
+			<p class="article__text">Heavenly his blast sullen few. He cell days grief fellow to and to nor, friends what he venerable this so, childe wins whom a, if festal mighty een pilgrimage, deadly feeble who uses adversity the fame. His parasites.</p>
+			<img src="../../assets/images/Cat_520.jpg" alt="Cats in a basket" class="image article__image article-1__image">
+			<p class="article__text">Decorum head raven nights one yet i beguiling never the. That the angels gently leave lonely name thou of, surely whose nothing at thy floor flown. Gaunt of quoth a radiant before all lenore and, once footfalls tufted raven there croaking presently still yore, bird weak my i his and, his is door grim its. Of to velvet he.</p>
+		</article>
+
+		<article class="article article-2">
+			<h2 class="article__title">Plume the bird</h2>
+			<p class="article__text">Heavenly his blast sullen few. He cell days grief fellow to and to nor, friends what he venerable this so, childe wins whom a, if festal mighty een pilgrimage, deadly feeble who uses adversity the fame. His parasites.</p>
+			<img src="../../assets/images/Cat_520.jpg" alt="Cats in a basket" class="image article__image article-2__image">
+			<p class="article__text">Decorum head raven nights one yet i beguiling never the. That the angels gently leave lonely name thou of, surely whose nothing at thy floor flown. Gaunt of quoth a radiant before all lenore and, once footfalls tufted raven there croaking presently still yore, bird weak my i his and, his is door grim its. Of to velvet he.</p>
+		</article>
+
+		<article class="article article-3">
+			<h2 class="article__title">Plume the bird</h2>
+			<p class="article__text">Heavenly his blast sullen few. He cell days grief fellow to and to nor, friends what he venerable this so, childe wins whom a, if festal mighty een pilgrimage, deadly feeble who uses adversity the fame. His parasites.</p>
+			<figure class="figure breakout">
+				<img src="../../assets/images/Cat_520.jpg" width="900px" alt="Cats in a basket" class="image article__image article-3__image">
+				<figcaption class="figcaption"></figcaption>
+			</figure>
+			<p class="article__text">Decorum head raven nights one yet i beguiling never the. That the angels gently leave lonely name thou of, surely whose nothing at thy floor flown. Gaunt of quoth a radiant before all lenore and, once footfalls tufted raven there croaking presently still yore, bird weak my i his and, his is door grim its. Of to velvet he.</p>
+		</article>
+	</main>
+</body>
+</html>
