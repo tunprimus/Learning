@@ -51,18 +51,39 @@
 	</style>
 </head>
 <body>
-	<svg width="200" height="200" viewBox="-100 -100 200 200">
+	<svg width="400" height="400" viewBox="-100 -100 200 200">
 		<circle class="minute-marker" r="90" pathLength="60" />
 		<circle class="hour-marker" r="90" pathLength="60" />
 
-		<line class="hand" x1="0" y1="0" x2="0" y2="-50"/>
-		<line class="hand hand--thick" x1="0" y1="-12" x2="0" y2="-50"/>
+		<g id="hour-hand" class="hour-hand">
+			<line class="hand" x1="0" y1="0" x2="0" y2="-50"/>
+			<line class="hand hand--thick" x1="0" y1="-12" x2="0" y2="-50"/>
+		</g>
 
-		<line class="hand" x1="0" y1="0" x2="0" y2="-80"/>
-		<line class="hand hand--thick" x1="0" y1="-12" x2="0" y2="-80"/>
+		<g id="minute-hand" class="minute-hand">
+			<line class="hand" x1="0" y1="0" x2="0" y2="-80"/>
+			<line class="hand hand--thick" x1="0" y1="-12" x2="0" y2="-80"/>
+		</g>
 
-		<line class="hand hand--second" x1="0" y1="-12" x2="0" y2="-80"/>
+		<g id="second-hand" class="second-hand">
+			<line class="hand hand--second" x1="0" y1="-12" x2="0" y2="-80"/>
+		</g>
 	</svg>
 	<!-- JavaScript Here -->
+	<script>
+		const hoursElement = document.getElementById('hour-hand');
+		const minutesElement = document.getElementById('minute-hand');
+		const secondsElement = document.getElementById('second-hand');
+
+		const date = new Date();
+
+		const hour = date.getHours();
+		const minute = date.getMinutes();
+		const second = date.getSeconds();
+
+		hoursElement.setAttribute('transform', `rotate(${(360 / 12) * hour})`);
+		minutesElement.setAttribute('transform', `rotate(${(360 / 60) * minute})`);
+		secondsElement.setAttribute('transform', `rotate(${(360 / 60) * second})`);
+	</script>
 </body>
 </html>
