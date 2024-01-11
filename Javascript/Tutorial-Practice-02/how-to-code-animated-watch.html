@@ -75,15 +75,21 @@
 		const minutesElement = document.getElementById('minute-hand');
 		const secondsElement = document.getElementById('second-hand');
 
-		const date = new Date();
+		function animate() {
+			const date = new Date();
 
-		const hour = date.getHours();
-		const minute = date.getMinutes();
-		const second = date.getSeconds();
+			const hour = date.getHours();
+			const minute = date.getMinutes();
+			const second = date.getSeconds();
 
-		hoursElement.setAttribute('transform', `rotate(${(360 / 12) * hour})`);
-		minutesElement.setAttribute('transform', `rotate(${(360 / 60) * minute})`);
-		secondsElement.setAttribute('transform', `rotate(${(360 / 60) * second})`);
+			hoursElement.setAttribute('transform', `rotate(${(360 / 12) * hour})`);
+			minutesElement.setAttribute('transform', `rotate(${(360 / 60) * minute})`);
+			secondsElement.setAttribute('transform', `rotate(${(360 / 60) * second})`);
+
+			requestAnimationFrame(animate);
+		}
+
+		requestAnimationFrame(animate);
 	</script>
 </body>
 </html>
