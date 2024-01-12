@@ -1,7 +1,7 @@
 
-const RAY_COUNT = 3;
-const RAY_LENGTH = 100;
-const RAY_SPREAD_FACTOR = 4;
+const RAY_COUNT = 5;
+const RAY_LENGTH = 150;
+const RAY_SPREAD_FACTOR = 2;
 
 class Sensor {
 	constructor(car) {
@@ -16,7 +16,7 @@ class Sensor {
 	update() {
 		this.rays = [];
 		for (let i = 0; i < this.rayCount; i++) {
-			const rayAngle = lerp(this.raySpread / 2, -this.raySpread / 2, i / (this.rayCount - 1)) + this.car.angle;
+			const rayAngle = lerp(this.raySpread / 2, -this.raySpread / 2, this.rayCount ===1 ? 0.5 : i / (this.rayCount - 1)) + this.car.angle;
 
 			const start = {x: this.car.x, y: this.car.y};
 			const end = {x: this.car.x - Math.sin(rayAngle) * this.rayLength, y: this.car.y - Math.cos(rayAngle) * this.rayLength};
