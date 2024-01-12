@@ -1,10 +1,14 @@
 
+const RAY_COUNT = 3;
+const RAY_LENGTH = 100;
+const RAY_SPREAD_FACTOR = 4;
+
 class Sensor {
 	constructor(car) {
 		this.car = car;
-		this.rayCount = 3;
-		this.rayLength = 100;
-		this.raySpread = Math.PI / 4;
+		this.rayCount = RAY_COUNT;
+		this.rayLength = RAY_LENGTH;
+		this.raySpread = Math.PI / RAY_SPREAD_FACTOR;
 
 		this.rays = [];
 	}

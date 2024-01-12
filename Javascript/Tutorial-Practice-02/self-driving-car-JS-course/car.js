@@ -1,4 +1,9 @@
 
+const TURN_ANGLE = 0.015;
+const MAX_SPEED = 3;
+const FRICTION = 0.05;
+const ACCELERATION = 0.2;
+
 class Car {
 	constructor(x, y, width, height) {
 		this.x = x;
@@ -7,9 +12,9 @@ class Car {
 		this.height = height;
 
 		this.speed = 0;
-		this.acceleration = 0.2;
-		this.maxSpeed = 3;
-		this.friction = 0.05;
+		this.acceleration = ACCELERATION;
+		this.maxSpeed = MAX_SPEED;
+		this.friction = FRICTION;
 		this.angle = 0;
 
 		this.sensor = new Sensor(this);
@@ -54,11 +59,11 @@ class Car {
 			const flip = this.speed > 0 ? 1 : -1;
 
 			if (this.controls.left) {
-				this.angle += 0.03 * flip;
+				this.angle += TURN_ANGLE * flip;
 			}
 	
 			if (this.controls.right) {
-				this.angle -= 0.03 * flip;
+				this.angle -= TURN_ANGLE * flip;
 			}
 		}
 
