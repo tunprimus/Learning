@@ -1,5 +1,5 @@
 
-const LINE_WIDTH = 5;
+const ROAD_LINE_WIDTH = 5;
 const DASH_LINE_PLACE = 20;
 const DASH_LINE_GAP = 20;
 
@@ -32,7 +32,7 @@ class Road {
 	}
 
 	draw(ctx) {
-		ctx.lineWidth = LINE_WIDTH;
+		ctx.lineWidth = ROAD_LINE_WIDTH;
 		ctx.strokeStyle = 'white';
 
 		for (let i = 1; i <= this.laneCount - 1; i++) {
