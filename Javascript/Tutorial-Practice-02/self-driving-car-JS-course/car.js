@@ -16,14 +16,51 @@ class Car {
 		this.maxSpeed = MAX_SPEED;
 		this.friction = FRICTION;
 		this.angle = 0;
+		this.damaged = false;
 
 		this.sensor = new Sensor(this);
 		this.controls = new Controls();
 	}
 
 	update(roadBorders) {
-		this._move();
+		if (!this.damaged) {
+			this._move();
+			this.polygon = this._createPolygon();
+			this.damaged = this._assessDamage(roadBorders);
+		}
 		this.sensor.update(roadBorders);
+	}
+
+	_assessDamage(roadBorders) {
+		for (let i = 0; i < roadBorders.length; i++) {
+			if (polysIntersect(this.polygon, roadBorders[i])) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	_createPolygon() {
+		const points = [];
+		const rad = Math.hypot(this.width, this.height) / 2;
+		const alpha = Math.atan2(this.width, this.height);
+		points.push({
+			x: this.x - Math.sin(this.angle - alpha) * rad,
+			y: this.y - Math.cos(this.angle - alpha) * rad,
+		});
+		points.push({
+			x: this.x - Math.sin(this.angle + alpha) * rad,
+			y: this.y - Math.cos(this.angle + alpha) * rad,
+		});
+		points.push({
+			x: this.x - Math.sin(Math.PI + this.angle - alpha) * rad,
+			y: this.y - Math.cos(Math.PI + this.angle - alpha) * rad,
+		});
+		points.push({
+			x: this.x - Math.sin(Math.PI + this.angle + alpha) * rad,
+			y: this.y - Math.cos(Math.PI + this.angle + alpha) * rad,
+		});
+		return points;
 	}
 
 	_move() {
@@ -72,6 +109,22 @@ class Car {
 	}
 
 	draw(ctx) {
+		if (this.damaged) {
+			ctx.fillStyle = 'grey';
+		} else {
+			ctx.fillStyle = 'black';
+		}
+		ctx.beginPath();
+		ctx.moveTo(this.polygon[0].x, this.polygon[0].y);
+		for (let i = 1; i < this.polygon.length; i++) {
+			ctx.lineTo(this.polygon[i].x, this.polygon[i].y);
+		}
+		ctx.fill();
+
+		this.sensor.draw(ctx);
+	}
+
+	/* draw(ctx) {
 		ctx.save();
 		ctx.translate(this.x, this.y);
 		ctx.rotate(-this.angle);
@@ -82,5 +135,5 @@ class Car {
 		ctx.restore();
 
 		this.sensor.draw(ctx);
-	}
+	} */
 }
