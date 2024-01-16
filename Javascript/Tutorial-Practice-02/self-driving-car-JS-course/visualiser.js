@@ -27,5 +27,13 @@ class Visualiser {
 			ctx.fillStyle = 'white';
 			ctx.fill();
 		}
+
+		for (let i = 0; i < outputs.length; i++) {
+			const x = lerp(left, right, outputs.length === 1 ? 0.5 : i / (outputs.length - 1));
+			ctx.beginPath();
+			ctx.arc(x, top, nodeRadius, 0, Math.PI * 2);
+			ctx.fillStyle = 'white';
+			ctx.fill();
+		}
 	}
 }
