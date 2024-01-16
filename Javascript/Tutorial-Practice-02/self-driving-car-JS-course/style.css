@@ -3,7 +3,26 @@ body {
 	margin: 0;
 	background-color: darkgrey;
 	overflow: hidden;
-	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.vertical-buttons {
+	display: flex;
+	flex-direction: column;
+}
+
+.button {
+	border: none;
+	border-radius: 0.3125rem;
+	padding: 0.3125rem 0.3125rem 0.4375rem 0.3125rem;
+	margin: 0.125rem;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: blue;
 }
 
 .car-canvas {
