@@ -6,6 +6,8 @@ const CAR_START_Y_COORD = 100;
 const CAR_WIDTH = 30;
 const CAR_LENGTH = 50;
 const CAR_ON_CANVAS_OFFSET = 0.7;
+const CAR_COLOUR = 'blue';
+const TRAFFIC_COLOUR = 'red';
 
 
 const canvas = document.getElementById('my-canvas');
@@ -31,9 +33,9 @@ function animate() {
 
 	road.draw(ctx);
 	for (let i = 0; i < traffic.length; i++) {
-		traffic[i].draw(ctx);
+		traffic[i].draw(ctx, TRAFFIC_COLOUR);
 	}
-	car.draw(ctx);
+	car.draw(ctx, CAR_COLOUR);
 
 	ctx.restore();
 	requestAnimationFrame(animate);
