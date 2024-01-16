@@ -43,7 +43,7 @@ class Visualiser {
 
 			ctx.beginPath();
 			ctx.arc(x, bottom, nodeRadius * NODE_SCALE_FACTOR, 0, Math.PI * 2);
-			ctx.fillStyle = 'white';
+			ctx.fillStyle = getRGBA(inputs[i]);
 			ctx.fill();
 		}
 
@@ -56,7 +56,7 @@ class Visualiser {
 
 			ctx.beginPath();
 			ctx.arc(x, top, nodeRadius * NODE_SCALE_FACTOR, 0, Math.PI * 2);
-			ctx.fillStyle = 'white';
+			ctx.fillStyle = getRGBA(outputs[i]);
 			ctx.fill();
 
 			ctx.beginPath();
