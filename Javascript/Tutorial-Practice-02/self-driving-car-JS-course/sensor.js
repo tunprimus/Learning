@@ -2,7 +2,7 @@
 const RAY_COUNT = 5;
 const RAY_LENGTH = 150;
 const RAY_SPREAD_FACTOR = 2;
-const LINE_WIDTH = 2;
+const RAY_WIDTH = 2;
 
 class Sensor {
 	constructor(car) {
@@ -15,18 +15,18 @@ class Sensor {
 		this.readings = [];
 	}
 
-	update(roadBorders) {
+	update(roadBorders, traffic) {
 		this._castRays();
 		this.readings = [];
 
 		for (let i = 0; i < this.rays.length; i++) {
 			this.readings.push(
-				this._getReading(this.rays[i], roadBorders)
+				this._getReading(this.rays[i], roadBorders, traffic)
 			);
 		}
 	}
 
-	_getReading(ray, roadBorders) {
+	_getReading(ray, roadBorders, traffic) {
 		let touches = [];
 
 		for (let i = 0; i < roadBorders.length; i++) {
@@ -34,10 +34,25 @@ class Sensor {
 				ray[0],
 				ray[1],
 				roadBorders[i][0],
-				roadBorders[i][1]
+				roadBorders[i][1],
 			);
 			if (touch) {
 				touches.push(touch);
+			}
+		}
+
+		for (let i = 0; i < traffic.length; i++) {
+			const poly = traffic[i].polygon;
+			for (let j = 0; j < poly.length; j++) {
+				const value = getIntersection(
+					ray[0],
+					ray[1],
+					poly[j],
+					poly[(j + 1) % poly.length],
+				);
+				if (value) {
+					touches.push(value);
+				}
 			}
 		}
 
@@ -69,14 +84,14 @@ class Sensor {
 				end = this.readings[i];
 			}
 			ctx.beginPath();
-			ctx.lineWidth = LINE_WIDTH;
+			ctx.lineWidth = RAY_WIDTH;
 			ctx.strokeStyle = 'yellow';
 			ctx.moveTo(this.rays[i][0].x, this.rays[i][0].y);
 			ctx.lineTo(end.x, end.y);
 			ctx.stroke();
 
 			ctx.beginPath();
-			ctx.lineWidth = LINE_WIDTH;
+			ctx.lineWidth = RAY_WIDTH;
 			ctx.strokeStyle = 'black';
 			ctx.moveTo(this.rays[i][1].x, this.rays[i][1].y);
 			ctx.lineTo(end.x, end.y);
