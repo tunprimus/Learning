@@ -3,6 +3,8 @@
 const MARGIN = 50;
 const NODE_RADIUS = 18;
 const VISUALISER_LINE_WIDTH = 2;
+const NODE_SCALE_FACTOR = 0.6;
+const BIASES_SCALE_FACTOR = 0.8;
 
 class Visualiser {
 	static drawNetwork(ctx, network) {
@@ -18,7 +20,7 @@ class Visualiser {
 		const right = left + width;
 		const bottom = top + height;
 
-		const {inputs, outputs} = level;
+		const {inputs, outputs, weights, biases} = level;
 
 		for (let i = 0; i < inputs.length; i++) {
 			for (let j = 0; j < outputs.length; j++) {
@@ -26,7 +28,7 @@ class Visualiser {
 				ctx.moveTo(Visualiser._getNodeX(inputs, i, left, right), bottom);
 				ctx.lineTo(Visualiser._getNodeX(outputs, j, left, right), top);
 				ctx.lineWidth = VISUALISER_LINE_WIDTH;
-				ctx.strokeStyle = 'orange';
+				ctx.strokeStyle = getRGBA(weights[i][j]);
 				ctx.stroke();
 			}
 		}
@@ -36,6 +38,11 @@ class Visualiser {
 			const x = Visualiser._getNodeX(inputs, i, left, right);
 			ctx.beginPath();
 			ctx.arc(x, bottom, nodeRadius, 0, Math.PI * 2);
+			ctx.fillStyle = 'black';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(x, bottom, nodeRadius * NODE_SCALE_FACTOR, 0, Math.PI * 2);
 			ctx.fillStyle = 'white';
 			ctx.fill();
 		}
@@ -44,8 +51,21 @@ class Visualiser {
 			const x = Visualiser._getNodeX(outputs, i, left, right);
 			ctx.beginPath();
 			ctx.arc(x, top, nodeRadius, 0, Math.PI * 2);
+			ctx.fillStyle = 'black';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(x, top, nodeRadius * NODE_SCALE_FACTOR, 0, Math.PI * 2);
 			ctx.fillStyle = 'white';
 			ctx.fill();
+
+			ctx.beginPath();
+			ctx.lineWidth = VISUALISER_LINE_WIDTH;
+			ctx.arc(x, top, nodeRadius * BIASES_SCALE_FACTOR, 0, Math.PI * 2);
+			ctx.strokeStyle = getRGBA(biases[i]);
+			ctx.setLineDash([3, 3]);
+			ctx.stroke();
+			ctx.setLineDash([]);
 		}
 	}
 
