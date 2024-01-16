@@ -15,7 +15,7 @@ canvas.width = CANVAS_WIDTH;
 
 const ctx = canvas.getContext('2d');
 const road = new Road(canvas.width / 2, canvas.width * ROAD_SCALE_FACTOR);
-const car = new Car(road.getLaneCentre(1), CAR_START_Y_COORD, CAR_WIDTH, CAR_LENGTH, 'KEYS');
+const car = new Car(road.getLaneCentre(1), CAR_START_Y_COORD, CAR_WIDTH, CAR_LENGTH, 'AI');
 const traffic = [new Car(road.getLaneCentre(1), -100, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2)];
 // car.draw(ctx);
 
