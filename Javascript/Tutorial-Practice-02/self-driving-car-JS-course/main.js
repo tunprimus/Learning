@@ -9,6 +9,7 @@ const CAR_LENGTH = 50;
 const CAR_ON_CANVAS_OFFSET = 0.7;
 const CAR_COLOUR = 'blue';
 const TRAFFIC_COLOUR = 'red';
+const NETWORK_ANIMATION_DELAY_FACTOR = 100;
 
 
 const carCanvas = document.getElementById('car-canvas');
@@ -26,7 +27,7 @@ const traffic = [new Car(road.getLaneCentre(1), -100, CAR_WIDTH, CAR_LENGTH, 'DU
 
 animate();
 
-function animate() {
+function animate(time) {
 	for (let i = 0; i < traffic.length; i++) {
 		traffic[i].update(road.borders, []);
 	}
@@ -46,7 +47,8 @@ function animate() {
 
 	carCtx.restore();
 
+	networkCtx.lineDashOffset = -time / NETWORK_ANIMATION_DELAY_FACTOR;
 	Visualiser.drawNetwork(networkCtx, car.brain);
-	
+
 	requestAnimationFrame(animate);
 }
