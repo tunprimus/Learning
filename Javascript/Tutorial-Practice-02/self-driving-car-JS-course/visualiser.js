@@ -13,7 +13,13 @@ class Visualiser {
 		const width = ctx.canvas.width - MARGIN * 2;
 		const height = ctx.canvas.height - MARGIN * 2;
 
-		Visualiser.drawLevel(ctx, network.levels[0], left, top, width, height);
+		/* Visualiser.drawLevel(ctx, network.levels[0], left, top, width, height); */
+
+		const levelHeight = height / network.levels.length;
+		for (let i = 0; i < network.levels.length; i++) {
+			const levelTop = top + lerp(height - levelHeight, 0, network.levels.length === 1 ? 0.5 : i / (network.levels.length - 1));
+			Visualiser.drawLevel(ctx, network.levels[i], left, levelTop, width, levelHeight);
+		}
 	}
 
 	static drawLevel(ctx, level, left, top, width, height) {
