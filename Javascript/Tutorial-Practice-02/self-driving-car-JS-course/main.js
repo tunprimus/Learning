@@ -10,7 +10,7 @@ const CAR_ON_CANVAS_OFFSET = 0.7;
 const CAR_COLOUR = 'blue';
 const TRAFFIC_COLOUR = 'red';
 const NETWORK_ANIMATION_DELAY_FACTOR = 100;
-const NUMBER_OF_CARS = 100;
+const NUMBER_OF_CARS = 1;
 
 
 const carCanvas = document.getElementById('car-canvas');
@@ -30,7 +30,7 @@ if (localStorage.getItem('bestBrain')) {
 	for (let i = 0; i < cars.length; i++) {
 		cars[i].brain = JSON.parse(localStorage.getItem('bestBrain'));
 		if (i !== 0) {
-			NeuralNetwork.mutate(cars[i].brain, 0.2);
+			NeuralNetwork.mutate(cars[i].brain, 0.1);
 		}
 	}
 }
@@ -39,6 +39,10 @@ const traffic = [
 	new Car(road.getLaneCentre(1), -100, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
 	new Car(road.getLaneCentre(0), -300, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
 	new Car(road.getLaneCentre(2), -300, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
+	new Car(road.getLaneCentre(0), -500, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
+	new Car(road.getLaneCentre(1), -500, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
+	new Car(road.getLaneCentre(1), -700, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
+	new Car(road.getLaneCentre(2), -700, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
 ];
 
 animate();
