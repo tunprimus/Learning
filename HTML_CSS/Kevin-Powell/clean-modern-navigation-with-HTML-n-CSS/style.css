@@ -1,0 +1,92 @@
+:root {
+	--body-bg: #123123;
+	--nav-bg: rgb(69, 92, 115);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+	min-height: 200vh;
+	margin: 0;
+	font-size: 1.25rem;
+	background-color: var(--body-bg);
+	color: white;
+	display: grid;
+	grid-template-columns: 15rem 1fr;
+	grid-gap: 2rem;
+	gap: 2rem;
+}
+
+.nav {
+	height: 100%;
+	position: sticky;
+	top: 0;
+	max-height: 100vh;
+	max-height: 100svh;
+	background-color: var(--nav-bg);
+}
+
+.nav-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	grid-gap: 2cqw;
+	gap: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	padding-block: 2rem;
+	font-size: 2rem;
+}
+
+.nav-list__item {
+	padding: 1rem 2rem;
+	margin-left: 2rem;
+	border-radius: 100vw 0 0 100vw;
+}
+
+.nav-list__item.active {
+	view-transition-name: activeNavTab;
+	background-color: var(--body-bg);
+	position: relative;
+}
+
+::view-transition-group(activeNavTab) {
+	animation-duration: 0.5s;
+}
+
+.nav-list__item.active::before,
+.nav-list__item.active::after {
+	--border-radius: 1rem;
+
+	content: "";
+	position: absolute;
+	width: var(--border-radius);
+	height: var(--border-radius);
+	right: 0;
+	background-color: var(--nav-bg);
+	border-radius: 100vw;
+}
+
+.nav-list__item.active::before {
+	top: calc(var(--border-radius) * -1);
+	border-radius: 0 0 100vw 0;
+	box-shadow: 10px 10px 0 10px var(--body-bg);
+}
+
+.nav-list__item.active::after {
+	bottom: calc(var(--border-radius) * -1);
+	border-radius: 0 100vw 0 0;
+	box-shadow: 10px -10px 0 10px var(--body-bg);
+}
+
+.nav-list__link {
+	color: white;
+	text-decoration: none;
+}
