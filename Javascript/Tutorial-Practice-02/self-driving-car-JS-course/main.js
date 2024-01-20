@@ -36,13 +36,13 @@ if (localStorage.getItem('bestBrain')) {
 }
 
 const traffic = [
-	new Car(road.getLaneCentre(1), -100, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
-	new Car(road.getLaneCentre(0), -300, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
-	new Car(road.getLaneCentre(2), -300, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
-	new Car(road.getLaneCentre(0), -500, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
-	new Car(road.getLaneCentre(1), -500, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
-	new Car(road.getLaneCentre(1), -700, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
-	new Car(road.getLaneCentre(2), -700, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2),
+	new Car(road.getLaneCentre(1), -100, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2, getRandomColour()),
+	new Car(road.getLaneCentre(0), -300, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2, getRandomColour()),
+	new Car(road.getLaneCentre(2), -300, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2, getRandomColour()),
+	new Car(road.getLaneCentre(0), -500, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2, getRandomColour()),
+	new Car(road.getLaneCentre(1), -500, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2, getRandomColour()),
+	new Car(road.getLaneCentre(1), -700, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2, getRandomColour()),
+	new Car(road.getLaneCentre(2), -700, CAR_WIDTH, CAR_LENGTH, 'DUMMY', 2, getRandomColour()),
 ];
 
 animate();
