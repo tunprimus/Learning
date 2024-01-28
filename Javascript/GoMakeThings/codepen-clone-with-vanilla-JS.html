@@ -62,6 +62,12 @@
 		 * Update the iframe
 		 */
 		function updateIframe() {
+			// Create new iframe
+			let clone = result.cloneNode();
+			result.replaceWith(clone);
+			result = clone;
+			
+			// Render
 			result.contentWindow.document.open();
 			result.contentWindow.document.writeIn(`
 				${html.value}
