@@ -5,6 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>How to Create Codepen Clone with Vanilla JavaScript</title>
+	<style>
+		.main {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
 </head>
 <body>
 	<main class="main">
@@ -20,7 +28,48 @@
 		<p class="result__title"><strong>Result</strong></p>
 		<iframe id="result" class="result"></iframe>
 	</main>
+
 	<!-- JavaScript Here -->
-	<script></script>
+	<script>
+		let debounce;
+		// Get elements
+		let html = document.querySelector('#html');
+		let css = document.querySelector('#css');
+		let js = document.querySelector('#js');
+		let result = document.querySelector('#result');
+
+		// Listen for input events
+		document.addEventListener('input', inputHandler);
+
+		/**
+		 * Handle input events
+		 * @param {Event} event The event object
+		 */
+		function inputHandler(event) {
+			// Only run on our three fields
+			if (event.target !== html && event.target !== css && event.target !== js) {
+				return;
+			}
+
+			// Debounce the rendering for performance
+			clearTimeout(debounce);
+
+			// Set update to happen when typing stops
+			debounce = setTimeout(updateIframe, 500);
+		}
+
+		/**
+		 * Update the iframe
+		 */
+		function updateIframe() {
+			result.contentWindow.document.open();
+			result.contentWindow.document.writeIn(`
+				${html.value}
+				<style>${css.value}</style>
+				<script type="module">${js.value}</script>`
+				);
+			result.contentWindow.document.close();
+		}
+	</script>
 </body>
 </html>
