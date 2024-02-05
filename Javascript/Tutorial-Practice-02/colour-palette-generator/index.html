@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Colour Palette Generator</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<div class="container">
@@ -13,7 +14,16 @@
 			<h1 class="h1 header__title">Colour Palette Generator</h1>
 			<p class="header__text">Press <kbd class="space-key">space key</kbd> to generate new colour palette.</p>
 		</header>
-		<main class="main"></main>
+		<main class="main">
+			<div class="generated-colours">
+				<div class="generated-colour">
+					<label for="colour1">
+						<button class="copy">copy</button>
+						<p class="colour-value">#0be23c</p>
+					</label>
+				</div>
+			</div>
+		</main>
 	</div>
 </body>
 </html>
