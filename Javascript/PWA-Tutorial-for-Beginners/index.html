@@ -14,9 +14,98 @@
 	<!-- Top Navigation -->
 	<nav class="nav z-depth-0">
 		<div class="nav-wrapper container">
+		<div class="nav-wrapper container">
 			<a href="/" class="nav-link">Food<span class="nav-link__span">Ninja</span></a>
-			<span class="right grey-text text-darken-1 nav__span"><i class="material-icons sidenav-trigger" data-target="side-menu">menu</i></span>
+			<span class="right grey-text text-darken-1 nav__span"><i class="material-icons sidenav-trigger" data-target="side-menu">&#x2630;</i></span>
 		</div>
 	</nav>
+
+	<!-- Side Navigation -->
+	<ul id="side-menu" class="sidenav side-menu">
+		<li class="side-menu__item"><a class="subheader side-menu__link">FOODNINJA</a></li>
+		<li class="side-menu__item"><a href="/" class="waves-effect side-menu__link">Home</a></li>
+		<li class="side-menu__item"><a href="/pages/about.html" class="waves-effect side-menu__link">About</a></li>
+		<li class="side-menu__item"><hr class="divider"></li>
+		<li class="side-menu__item"><a href="/pages/contact.html" class="waves-effect side-menu__link"><i class="material-icons">&#x2709;mail_outline</i>Contact</a></li>
+	</ul>
+	
+	<!-- Recipes -->
+	<section class="recipes container grey-text text-darken-1">
+		<!-- 1st Recipe -->
+		<div class="card-panel recipe white row">
+      <img src="./img/dish.png" alt="recipe thumb" class="recipe__image">
+      <div class="recipe-details">
+        <div class="recipe-title">Edame Noodles</div>
+        <div class="recipe-ingredients">Edame Beans, Noodles, Garlic oil</div>
+      </div>
+      <div class="recipe-delete">
+				<span class="recipe__delete">&#x1F5D1;</span>
+        <i class="material-icons">delete_outline</i>
+      </div>
+    </div>
+
+		<!-- 2nd Recipe -->
+		<div class="card-panel recipe white row">
+      <img src="./img/dish.png" alt="recipe thumb" class="recipe__image">
+      <div class="recipe-details">
+        <div class="recipe-title">Edame Noodles</div>
+        <div class="recipe-ingredients">Edame Beans, Noodles, Garlic oil</div>
+      </div>
+      <div class="recipe-delete">
+				<span class="recipe__delete">&#x1F5D1;</span>
+        <i class="material-icons">delete_outline</i>
+      </div>
+    </div>
+
+		<!-- 3rd Recipe -->
+		<div class="card-panel recipe white row">
+      <img src="./img/dish.png" alt="recipe thumb" class="recipe__image">
+      <div class="recipe-details">
+        <div class="recipe-title">Edame Noodles</div>
+        <div class="recipe-ingredients">Edame Beans, Noodles, Garlic oil</div>
+      </div>
+      <div class="recipe-delete">
+				<span class="recipe__delete">&#x1F5D1;</span>
+        <i class="material-icons">delete_outline</i>
+      </div>
+    </div>
+
+		<!-- 4th Recipe -->
+		<div class="card-panel recipe white row">
+      <img src="./img/dish.png" alt="recipe thumb" class="recipe__image">
+      <div class="recipe-details">
+        <div class="recipe-title">Edame Noodles</div>
+        <div class="recipe-ingredients">Edame Beans, Noodles, Garlic oil</div>
+      </div>
+      <div class="recipe-delete">
+				<span class="recipe__delete">&#x1F5D1;</span>
+        <i class="material-icons">delete_outline</i>
+      </div>
+    </div>
+	</section>
+
+	<!-- Add Recipe Button -->
+	<section class="centre center add-recipe-icon">
+		<button type="button" class="btn-floating btn-small btn-large add-btn sidenav-trigger" data-target="side-form"><i class="material-icons">add</i></button>
+	</section>
+
+	<!-- Add Recipe Side Nav -->
+	<section id="side-form" class="sidenav side-form">
+		<form action="" class="add-recipe container section">
+			<p class="form__title">New Recipe</p>
+			<hr class="divider form__divider">
+			<div class="input-field">
+				<input type="text" id="title" class="validate form__input" placeholder="e.g. Ninja soup">
+				<label for="title" class="form__label">Recipe Title</label>
+			</div>
+			<div class="input-field">
+				<input type="text" id="ingredients" class="validate form__input" placeholder="e.g. Tofu, mushroom, garlic">
+				<label for="ingredients" class="form__label">Ingredients</label>
+			</d>
+			<div class="input-field centre center">
+				<button type="submit" class="btn btn-small">Add</button>
+			</div>
+		</form>
+	</section>
 </body>
 </html>
