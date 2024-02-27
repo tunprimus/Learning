@@ -1,7 +1,6 @@
 //@ts-check
 
 const recipes = document.querySelector('#recipes');
-// console.log(recipes);
 
 document.addEventListener('DOMContentLoaded', function() {
 	// Nav menu
@@ -32,6 +31,5 @@ const renderRecipe = (data, id) => {
 	</div>
 	`;
 
-	// recipes.innerHTML = '';
 	recipes.innerHTML += html;
 };
