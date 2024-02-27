@@ -8,8 +8,12 @@
 	<link rel="stylesheet" href="./css/materialize.min.css">
 	<link rel="stylesheet" href="./css/style.css">
 	<script src="./js/materialize.min.js" defer></script>
+	<script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js" defer></script>
+	<script src="https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js" defer></script>
 	<script src="./js/ui.js" defer></script>
 	<script src="./js/app.js" defer></script>
+	<script src="./js/firebase.js" defer></script>
+	<script src="./js/db.js" defer></script>
 	<link rel="manifest" href="./manifest.json">
 	<!-- iOS Support -->
 	<link rel="apple-touch-icon" href="./img/icons/icon-96x96.png">
@@ -113,5 +117,20 @@
 			</div>
 		</form>
 	</section>
+
+	<!-- JavaScript Here -->
+	<!-- <script>
+		// Initialise firebase
+		var config = {
+      apiKey: "AIzaSyDuDGcpHGU-Sx1Hla3wYwZvXbjeKpHqPjA",
+      authDomain: "net-ninja-pwa.firebaseapp.com",
+      databaseURL: "https://net-ninja-pwa.firebaseio.com",
+      projectId: "net-ninja-pwa",
+      storageBucket: "net-ninja-pwa.appspot.com",
+      messagingSenderId: "1008745109838"
+    };
+		firebase.initializeApp(config);
+		const db = firebase.firestore();
+	</script> -->
 </body>
 </html>
