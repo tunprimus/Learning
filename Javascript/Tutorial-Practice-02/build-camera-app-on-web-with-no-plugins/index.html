@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to Build a Camera App on the Web – No Plugins Required</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="app.js" defer></script>
+</head>
+<body class="body">
+	<main class="main">
+		<section class="camera-container" id="camera-container">
+			<canvas class="canvas" id="canvas"></canvas>
+
+			<div class="camera-view" id="camera-view">
+				<video class="camera-view__video camera-stream" id="camera-stream" autoplay loop muted>
+					<source src="">
+				</video>
+			</div>
+
+			<div class="camera-bottom" id="camera-bottom">
+				<div class="inner" id="inner">
+					<div class="lens-modifier" id="lens-modifier">
+						<button class="button lens-modifier__button">.5</button>
+						<button class="button lens-modifier__button active">1x</button>
+						<button class="button lens-modifier__button">3</button>
+					</div>
+
+					<div class="modes" id="modes">
+						<button class="button modes__button">SINGLE TAKE</button>
+						<button class="button modes__button active">PHOTO</button>
+						<button class="button modes__button">VIDEO</button>
+						<button class="button modes__button">PORTRAIT</button>
+					</div>
+
+					<div class="shutter-container" id="shutter-container">
+						<button class="button previous-shots" id="photos-btn"></button>
+						<button class="button shutter" id="shutter"></button>
+						<button class="button switch-device" id="switch-device">Sw</button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="gallery-view" id="gallery-view">
+			<button class="button gallery-view__button gallery-view__button--prev gallery-button__prev" id="prev">PREV</button>
+			<img class="gallery-view__image" data-index="0" src="" alt="current viewed image">
+			<button class="button gallery-view__button gallery-view__button--next gallery-button__next" id="next">NEXT</button>
+			<button class="button gallery-view__button gallery-view__button--close close-gallery" id="close-gallery">GO BACK</button>
+		</section>
+	</main>
+</body>
+</html>
