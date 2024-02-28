@@ -33,6 +33,9 @@ db.collection('recipes').onSnapshot((snapshot) => {
 	})
 });
 
+/**
+ * Add new recipe
+ */
 const form = document.querySelector('#add-recipe');
 form.addEventListener('submit', evt => {
 	evt.preventDefault();
@@ -47,4 +50,16 @@ form.addEventListener('submit', evt => {
 	
 	form.title.value = '';
 	form.ingredients.value = '';
+});
+
+
+/**
+ * Delete Recipe
+ */
+const recipesContainer = document.querySelector('#recipes');
+recipesContainer.addEventListener('click', evt => {
+	if (evt.target.tagName === 'SPAN' || evt.target.tagName === 'I') {
+		const id = evt.target.getAttribute('data-id');
+		db.collection('recipes').doc(id).delete();
+	}
 });
