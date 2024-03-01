@@ -1,0 +1,198 @@
+<!-- Creating a website theme switcher with CSS only - https://alexandersandberg.com/articles/creating-a-website-theme-switcher-with-css-only/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Creating a website theme switcher with CSS only</title>
+	<style>
+		:root {
+			/* Light mode */
+			--light-text: #222430;
+			--light-bg: #f7f7f7;
+			--light-theme: #d34a97;
+			--light-switch-shadow: #373d4e;
+			--light-switch-icon: "🌚";
+			--light-switch-text: "dark mode?";
+
+			/* Dark mode */
+			--dark-text: #f7f7f7;
+			--dark-bg: #222430;
+			--dark-theme: #bd93f9;
+			--dark-switch-shadow: #fce477;
+			--dark-switch-icon: "🌝";
+			--dark-switch-text: "light mode?";
+
+			/* Tomato mode */
+			--third-text: tomato;
+			--third-bg: #f7f7f7;
+			--third-theme: tomato;
+
+			/* Default mode */
+			--text-colour: var(--light-text);
+			--bg-colour: var(--light-bg);
+			--theme-colour: var(--light-theme);
+			--switch-shadow-colour: var(--light-switch-shadow);
+			--switch-icon: var(--light-switch-icon);
+			--switch-text: var(--light-switch-text);
+			--switch-shadow-colour: var(--light-switch-shadow);
+		}
+
+		/* Dark mode */
+		#theme-switch2:checked ~ #page {
+			--text-colour: var(--dark-text);
+			--bg-colour: var(--dark-bg);
+			--theme-colour: var(--light-theme);
+		}
+
+		/* Tomato mode */
+		#theme-switch3:checked ~ #page {
+			--text-colour: var(--third-text);
+			--bg-colour: var(--third-bg);
+			--theme-colour: var(--third-theme);
+		}
+
+		/* Theme switcher */
+		.theme-switch { /* Hides the checkbox */
+			position: absolute;
+			height: 1px;
+			width: 1px;
+			overflow: hidden;
+			clip: rect(1px, 1px, 1px, 1px);
+		}
+
+		.switch-label {
+			background-color: var(--text-colour);
+			border: 0.1875rem solid var(--text-colour);
+			border-radius: 0.3125rem;
+			color: var(--bg-colour);
+			cursor: pointer;
+			display: inline-block;
+			font-size: 125%;
+			margin: 1.25rem 0 1.25rem 1.25rem;
+			padding: 0.5rem 0.75rem;
+			transition: box-shadow 0.2s, border 0.2s;
+		}
+
+		.theme-switch:focus + .switch-label,
+		.switch-label:hover {
+			box-shadow: 0 0 0.625rem #20F1E7;
+			border: 0.1875rem solid #20F1E7;
+			border-radius: 0.3125rem;
+		}
+
+		/* General Page Styling */
+
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background-color: lightcoral;
+			box-sizing: border-box;
+		}
+
+		.page {
+			background-color: var(--bg-colour);
+			color: var(--text-colour);
+			font: normal 125%/1.4 Georgia, "Times New Roman", Times, serif;
+			min-height: 100%;
+			transition: color 0.2s, background-color 0.2s;
+		}
+
+		.content {
+			margin: auto;
+			max-width: 60ch;
+			padding: 2ch;
+		}
+
+		.nav__link {
+			color: var(--theme-colour);
+		}
+
+		pre {
+			max-width: 90vw;
+			margin: auto;
+		}
+
+		code {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			background-color: #777777;
+			margin-left: -5rem;
+		}
+
+		code > * {
+			flex-wrap: wrap;
+			margin-left: -5rem;
+		}
+
+		.footer {
+			padding: 1.25rem 0;
+			margin: 2.5rem 0;
+			border-top: 0.0625rem solid var(--text-colour);
+		}
+	</style>
+</head>
+<body>
+	<input type="radio" name="theme-switch" id="theme-switch1" class="theme-switch">
+	<label for="theme-switch1" class="switch-label">Light</label>
+	<input type="radio" name="theme-switch" id="theme-switch2" class="theme-switch">
+	<label for="theme-switch2" class="switch-label">Dark</label>
+	<input type="radio" name="theme-switch" id="theme-switch3" class="theme-switch">
+	<label for="theme-switch3" class="switch-label">Tomato</label>
+	<div id="page" class="page">
+		<div id="content" class="content">
+			<main class="main content__main">
+				<h1 class="h1 content__title">CSS Only Theme Switcher - Unlimited Version</h1>
+				<p class="content__text">This is a website theme switcher made using CSS only. This is the radio button–version, allowing you to use more than two themes! Here I use three, but you can create <em>as many as you'd like</em>.</p>
+				<p class="content__text"><a href="index.html" class="content__link">Two theme-version</a></p>
+				<p class="content__text">This version doesn't use any JavaScript to store your theme preference. When you reload the page, you'll always get the default theme.</p>
+				<h2 class="h2 content__subtitle">Limitations using this method</h2>
+        <p class="content__text">Despite being dubbed the <em>"unlimited"</em> version, using multiple radio buttons instead of a single checkbox has its limitations.</p>
+        <p class="content__text">For accessibility reasons—when styling the focused state—each switch label must be <em>adjacent to its radio button</em>:</p>
+        <pre>
+					<code>
+						&lt;input type="radio" name="theme-switch" id="theme-switch1"&gt;
+						&lt;label for="theme-switch1"&gt;Light&lt;/label&gt;
+					</code>
+				</pre>
+        <p class="content__text">This way, we can use the following CSS rule to set a style when the user has focus on a specific radio button:</p>
+        <pre>
+					<code>
+						.theme-switch:focus + .switch-label {
+  						/* style properties */
+						}
+					</code>
+				</pre>
+        <p class="content__text">This, however, means that we won't be able to use theme-specific styling for our switch labels, since they have to be placed <em>outside of our themed container</em> (<code>#page</code>). You will still have access to the default theme's colours though, since these are declared on <code>:root</code>.</p>
+			</main>
+			<footer class="content__footer">
+				<small class="content__small">>A tiny project by <a href="https://github.com/alexandersandberg" class="content__link">Alexander Sandberg</a> 🐨 / <a href="https://github.com/alexandersandberg/theme-switcher" class="content__link">GitHub repo</a></small>
+			</footer>
+		</div>
+	</div>
+
+	<!-- JavaScript Here -->
+	<script>
+		/**
+		 * This code is only used to remember theme selection between page loads
+		 */
+		const themeSwitch = document.querySelector('.theme-switch');
+		themeSwitch.checked = localStorage.getItem('switchedTheme') === 'true';
+
+		themeSwitch.addEventListener('change', function(evt) {
+			if (evt.currentTarget.checked === true) {
+				// Add item to local storage
+				localStorage.setItem('switchedTheme', 'true');
+			} else {
+				// Remove item if theme is switched back to normal
+				localStorage.removeItem('switchedTheme');
+			}
+		});
+	</script>
+</body>
+</html>
