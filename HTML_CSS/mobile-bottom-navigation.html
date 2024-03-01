@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mobile Bottom Navigation</title>
+	<style>
+		.wrapper {
+			max-width: 320px;
+			margin: 2rem auto;
+		}
+
+		.phone {
+			border: 0.125rem solid #eeeeee;
+			border-radius: 2rem;
+			position: relative;
+			padding-bottom: 170%;
+			height: 0;
+			overflow: hidden;
+			width: 100%;
+			height: auto;
+			box-shadow: 0 2.5rem 5rem rgba(0, 0, 0, 0.15);
+		}
+
+		.nav--icons {
+			position: absolute;
+			bottom: 2rem;
+			left: 1rem;
+			right: 1rem;
+		}
+
+		.nav__list {
+			font-family: sans-serif;
+			font-size: 0.688rem;
+			letter-spacing: 0.0625rem;
+			text-decoration: none;
+			list-style-type: none;
+			color: #000000;
+			line-height: 1;
+			vertical-align: middle;
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			border-radius: 3rem;
+			padding: 0.75rem 1.25rem;
+			transition: 0.6s ease-in-out;
+		}
+
+		.nav__link {
+			padding-top: 0.5rem;
+		}
+
+		.nav__link--icon {
+			font-size: 1.618rem;
+		}
+
+		.nav__link--text {
+			display: inline-block;
+			overflow: hidden;
+			max-width: 0;
+			opacity: 0;
+			padding-left: 0.5rem;
+			transform: translate3d(-0.5rem, 0, 0);
+			transition: opacity 0.6s, max-width 0.6s, transform 0.6s;
+			transition-timing-function: ease-in-out;
+		}
+
+		.nav__link:hover,
+		.nav__link.active {
+			color: #FFFFFF;
+			background-color: #000000;
+		}
+
+		.nav__link:hover .nav__link--text,
+		.nav__link.active .nav__link--text {
+			opacity: 1;
+			max-width: 2.5rem;
+			transform: translate3d(0, 0, 0);
+		}
+	</style>
+</head>
+<body>
+	<main class="wrapper">
+		<div class="phone">
+			<nav class="nav nav--icons">
+				<ul class="nav__list">
+					<li class="nav__item"><a class="nav__link" href="#home"><span class="nav__link--icon">&#x1F3E0;</span><span class="nav__link--text">Home</span></a></li>
+					<li class="nav__item"><a class="nav__link" href="#news"><span class="nav__link--icon">&#x1F4D1;</span><span class="nav__link--text">News</span></a></li>
+					<li class="nav__item"><a class="nav__link" href="#profile"><span class="nav__link--icon">&#x1F464;</span><span class="nav__link--text">Profile</span></a></li>
+					<li class="nav__item"><a class="nav__link" href="#search"><span class="nav__link--icon">&#x1F50D;</span><span class="nav__link--text">Search</span></a></li>
+				</ul>
+			</nav>
+		</div>
+	</main>
+</body>
+</html>
