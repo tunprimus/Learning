@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Creating a website theme switcher with CSS only</title>
+	<style>
+		:root {
+			/* Light mode */
+			--light-text: #222430;
+			--light-bg: #f7f7f7;
+			--light-theme: #d34a97;
+			--light-switch-shadow: #373d4e;
+			--light-switch-icon: "🌚";
+			--light-switch-text: "dark mode?";
+
+			/* Dark mode */
+			--dark-text: #f7f7f7;
+			--dark-bg: #222430;
+			--dark-theme: #bd93f9;
+			--dark-switch-shadow: #fce477;
+			--dark-switch-icon: "🌝";
+			--dark-switch-text: "light mode?";
+
+			/* Default mode */
+			--text-colour: var(--light-text);
+			--bg-colour: var(--light-bg);
+			--theme-colour: var(--light-theme);
+			--switch-shadow-colour: var(--light-switch-shadow);
+			--switch-icon: var(--light-switch-icon);
+			--switch-text: var(--light-switch-text);
+			--switch-shadow-colour: var(--light-switch-shadow);
+		}
+
+		/* Switched mode */
+		.theme-switch:checked ~ #page {
+			--text-colour: var(--dark-text);
+			--bg-colour: var(--dark-bg);
+			--theme-colour: var(--light-theme);
+			--switch-shadow-colour: var(--dark-switch-shadow);
+			--switch-icon: var(--dark-switch-icon);
+			--switch-text: var(--dark-switch-text);
+			--switch-shadow-colour: var(--dark-switch-shadow);
+		}
+
+		/* Theme switcher */
+		.theme-switch { /* Hides the checkbox */
+			position: absolute;
+			height: 1px;
+			width: 1px;
+			overflow: hidden;
+			clip: rect(1px, 1px, 1px, 1px);
+		}
+
+		.switch-label {
+			cursor: pointer;
+			display: flex;
+		}
+
+		.switch-label::before {
+			content: var(--switch-icon);
+			font-size: 2.5rem;
+			transition: text-shadow 0.2s;
+		}
+
+		.switch-label::after {
+			align-self: center;
+			content: var(--switch-text);
+			color: var(--switch-shadow-colour);
+			font-size: 1.75rem;
+			line-height: 2.5;
+			opacity: 0;
+			padding-left: 0.3125rem;
+			transition: opacity 0.2s;
+		}
+
+		.theme-switch:focus ~ #page .switch-label::before,
+		.switch-label:hover::before {
+			text-shadow: 0 0 0.938rem var(--switch-shadow-colour);
+		}
+
+		.theme-switch:focus ~ #page .switch-label::after,
+		.switch-label:hover::after {
+			opacity: 1;
+		}
+
+		/* General Page Styling */
+
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+		}
+
+		.page {
+			background-color: var(--bg-colour);
+			color: var(--text-colour);
+			font: normal 125%/1.4 Georgia, "Times New Roman", Times, serif;
+			min-height: 100%;
+			transition: color 0.2s, background-color 0.2s;
+		}
+
+		.content {
+			margin: auto;
+			max-width: 60ch;
+			padding: 2ch;
+		}
+
+		.nav__link {
+			color: var(--theme-colour);
+		}
+
+		.footer {
+			padding: 1.25rem 0;
+			margin: 2.5rem 0;
+			border-top: 0.0625rem solid var(--text-colour);
+		}
+	</style>
+</head>
+<body>
+	<input type="checkbox" name="theme-switch" id="theme-switch" class="theme-switch">
+	<div id="page" class="page">
+		<div id="content" class="content">
+			<header class="header content__header">
+				<label for="theme-switch" class="switch-label"></label>
+			</header>
+			<main class="main content__main">
+				<h1 class="h1 content__title">CSS Only Theme Switcher</h1>
+				<p class="content__text">This is a website theme switcher made using CSS only<i>*</i>. Click the moon above to try it out! You can also reach it by using your keyboard (<code>Tab</code> to focus, and <code>Space</code> to activate).</p>
+				<p class="content__text"><a href="unlimited.html" class="content__link">Unlimited themes-version</a></p>
+				<small class="content__small">>* The solution uses a tiny bit of optional JavaScript to store an item in localStorage, which allows the browser to remember which theme was selected when reloading the page.</small>
+				<p class="content__text">I wrote <a href="https://alexandersandberg.com/theme-switcher/" class="content__link">an article on my website</a>explaining the functionality behind this.</p>
+			</main>
+			<footer class="content__footer">
+				<small class="content__small">>A tiny project by <a href="https://github.com/alexandersandberg" class="content__link">Alexander Sandberg</a> 🐨 / <a href="https://github.com/alexandersandberg/theme-switcher" class="content__link">GitHub repo</a></small>
+			</footer>
+		</div>
+	</div>
+</body>
+</html>
