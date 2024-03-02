@@ -1,0 +1,230 @@
+<!-- How to Create Bottom Tab Bar Navigation Using HTML and Pure CSS | https://www.codewithfaraz.com/content/24/how-to-create-pure-css-bottom-tab-bar-navigation-using-html-and-css-only -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bottom Tab Bar Navigation Using HTML and Pure CSS</title>
+	<style>
+		body {
+			width: 100%;
+			height: 100%;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0;
+			margin: 0;
+			background-color: white;
+			background: linear-gradient(236deg, rgba(199, 152, 152, 0.817) 0%, #deaed4 100%);
+		}
+
+		a {
+			text-decoration: none;
+			font-family: sans-serif;
+			text-transform: lowercase;
+			font-size: 1.5rem;
+			color: #222222;
+		}
+
+		.menu {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			position: relative;
+			min-width: 95%;
+			width: 97%;
+			max-width: 99%;
+			height: 3.75rem;
+			padding: 0 0.938rem 0 0.938rem;
+			border-radius: 0.625rem 0.625rem 1.875rem 1.875rem;
+			background-color: #FFFFFF;
+			box-shadow: 0 0.375rem 1.125rem 0 #9F9F9F;
+			margin: 0.625rem;
+		}
+
+		.nav-item {
+			position: relative;
+		}
+
+		.tab-title {
+			display: none;
+			position: absolute;
+			top: -2.5rem;
+			left: 50%;
+			transform: translate(-50%, 0);
+			font-size: 0.75rem;
+			background-color: #222222;
+			color: #FFFFFF;
+			padding: 0.3125rem;
+			border-radius: 0.3125rem;
+			width: max-content;
+			text-transform: capitalize;
+		}
+
+		.tab-title::before {
+			content: "";
+			position: absolute;
+			border-color: #222222 transparent transparent transparent;
+			border-style: solid;
+			border-width: 0.375rem;
+			width: 0px;
+			height: 0px;
+			bottom: -0.75rem;
+			left: 50%;
+			transform: translate(-50%, 0);
+		}
+
+		.nav-item:hover .tab-title {
+			display: block;
+		}
+
+		.checkbox {
+			background-color: #FFFFFF;
+			cursor: pointer;
+			width: 0;
+			height: 0;
+			position: relative;
+			z-index: 1;
+		}
+
+		.checkbox::before {
+			content: "";
+			width: 5rem;
+			aspect-ratio: 1;
+			transform: translate(-50%, -50%);
+			top: -1.875rem;
+			left: 0;
+			position: absolute;
+			border-radius: 100%;
+			background-color: #EA4C89;
+			transition: all 0.2s linear;
+			border: 0.25rem solid #FFFFFF;
+		}
+
+		.checkbox::after {
+			content: "+";
+			position: absolute;
+			font-size: 4rem;
+			color: #FFFFFF;
+			top: -1.875rem;
+			left: 0;
+			transform: translate(-50%, -50%);
+			transition: all 0.1s linear;
+		}
+
+		.checkbox:checked + * {
+			top: -6.25rem;
+			transform: rotate(0deg);
+		}
+
+		.checkbox:checked + * .nav-item {
+			border-radius: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 3.75rem;
+			aspect-ratio: 1;
+			position: absolute;
+			left: 0;
+			transform: translate(-50%, -0.938rem);
+		}
+
+		.checkbox:checked + * .nav-item:hover .tab-title {
+			display: block !important;
+		}
+
+		.checkbox:checked + * .nav-item > .nav-item--icon {
+			color: #FFFFFF;
+			display: block;
+			transition: all 0.5s linear;
+		}
+
+		.checkbox:checked + * .nav-item:nth-child(1) {
+			background-color: #FF8182;
+			top: 0rem;
+			left: -5.625rem;
+		}
+
+		.checkbox:checked + * .nav-item:nth-child(2) {
+			background-color: #C641FF;
+			top: 0rem;
+			left: -2.5rem;
+		}
+
+		.checkbox:checked + * .nav-item:nth-child(3) {
+			background-color: #631AEE;
+			top: 0rem;
+			left: 5.625rem;
+		}
+
+		.checkbox:checked:before {
+			background-color: #FFFFFF;
+			box-shadow: 0 0 0.625rem #C7C7C7;
+		}
+
+		.checkbox:checked:after {
+			transform: translate(-50%, -50%) rotate(45deg);
+		}
+
+		.checkbox-list {
+			position: absolute;
+			top: 0;
+			display: block;
+			z-index: 0;
+			transform: rotate(-90deg) translate(0, -50%);
+			transition: all 0.1s linear;
+		}
+
+		.checkbox-list__nav-item {
+			border-radius: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 3.75rem;
+			aspect-ratio: 1;
+			position: absolute;
+			transform: translate(0.938rem, -50%);
+			transition: all 0.2s linear;
+		}
+
+		.tab-title__nav-item {
+			display: none;
+		}
+
+		.checkbox-list__nav-item--icon {
+			color: #FFFFFF;
+			display: block;
+		}
+
+		.checkbox-list__nav-item--icon:nth-child(1) {
+			background-color: #FF8182;
+			left: -4.688rem;
+		}
+
+		.checkbox-list__nav-item--icon:nth-child(2) {
+			background-color: #C641FF;
+			left: -4.063rem;
+		}
+
+		.checkbox-list__nav-item--icon:nth-child(3) {
+			background-color: #631AEE;
+			left: -4rem;
+		}
+	</style>
+</head>
+<body>
+	<nav class="menu" id="menu">
+		<a href="#" class="nav-item"><span class="nav-item--icon">&#x1F3E0;</span><span class="tab-title nav-item--text">Home</span></a>
+
+		<input type="checkbox" name="nav-checkbox" id="nav-checkbox" class="checkbox nav-checkbox">
+		<div class="checkbox-list">
+			<a href="#" class="nav-item checkbox-list__nav-item"><span class="nav-item--icon checkbox-list__nav-item--icon">&#x1F50D;</span><span class="tab-title tab-title__nav-item nav-item--text">Search</span></a>
+			<a href="#" class="nav-item checkbox-list__nav-item"><span class="nav-item--icon checkbox-list__nav-item--icon">&#x1F514;</span><span class="tab-title tab-title__nav-item nav-item--text">Notifications</span></a>
+			<a href="#" class="nav-item checkbox-list__nav-item"><span class="nav-item--icon checkbox-list__nav-item--icon">&#x1F499;</span><span class="tab-title tab-title__nav-item nav-item--text">Favourites</span></a>
+		</div>
+		<a href="#" class="nav-item"><span class="nav-item--icon">&#x1F464;</span><span class="tab-title nav-item--text">Your Profile</span></a>
+	</nav>
+</body>
+</html>
