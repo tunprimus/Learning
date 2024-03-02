@@ -1,0 +1,70 @@
+<!-- Bottom navigation for mobile screens | https://dev.to/ziratsu/bottom-navigation-for-mobile-screens-23mk -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bottom navigation for mobile screens</title>
+	<style>
+		:root {
+			--responsive-space: calc(8px + 1.618vw);
+		}
+
+		body {
+			box-sizing: border-box;
+		}
+
+		.mobile-nav {
+			background-color: #F1F1F1;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 4.063rem;
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+		}
+
+		.nav__link {
+			display: flex;
+			justify-content: center;align-items: center;
+			text-decoration: none;
+		}
+
+		.nav__link--icon {
+			font-size: 1.618rem;
+			min-width: 1.5rem;
+			min-width: 2.75rem;
+			padding: var(--responsive-space);
+		}
+
+		@media screen and (max-width: 320px) {
+			:root {
+				--responsive-space: calc(4px + 1.067vw);
+			}
+
+			.nav__link--icon {
+			padding: unset;
+			padding-top: var(--responsive-space);
+			padding-bottom: var(--responsive-space);
+			}
+		}
+		
+		@media screen and (min-width: 768px) {
+			.mobile-nav {
+				display: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<nav class="mobile-nav">
+		<a href="#" class="nav__link"><span class="nav__link--icon">&#x1F3E0;</span></a>
+		<a href="#" class="nav__link"><span class="nav__link--icon">&#x1F4C1;</span></a>
+		<a href="#" class="nav__link"><span class="nav__link--icon">&#x2295;</span></a>
+		<a href="#" class="nav__link"><span class="nav__link--icon">&#x2699;</span></a>
+		<a href="#" class="nav__link"><span class="nav__link--icon">&#x1F464;</span></a>
+	</nav>
+</body>
+</html>
