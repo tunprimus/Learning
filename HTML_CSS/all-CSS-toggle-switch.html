@@ -1,0 +1,64 @@
+<!-- All-CSS Toggle Switch (Checkbox Hack) | https://codepen.io/alvarotrigo/pen/abVPyaJ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>All-CSS Toggle Switch (Checkbox Hack)</title>
+	<style>
+		.body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.input[type="checkbox"] {
+			height: 0;
+			width: 0;
+			visibility: hidden;
+		}
+
+		.label {
+			cursor: pointer;
+			text-indent: -624.9375rem;
+			width: 12.5rem;
+			height: 6.25rem;
+			background-color: grey;
+			display: block;
+			border-radius: 6.25rem;
+			position: relative;
+		}
+
+		.label::after {
+			content: "";
+			position: absolute;
+			top: 0.3125rem;
+			left: 0.3125rem;
+			width: 5.625rem;
+			height: 5.625rem;
+			background-color: #FFFFFF;
+			border-radius: 5.625rem;
+			transition: 0.3s;
+		}
+
+		.input:checked + .label {
+			background-color: #BADA55;
+		}
+
+		.input:checked + .label::after {
+			left: calc(100% - 0.3125rem);
+			transform: translateX(-100%);
+		}
+
+		.label:active::after {
+			width: 8.13rem;
+		}
+	</style>
+</head>
+<body class="body">
+	<input type="checkbox" name="switch" id="switch" class="input switch">
+	<label for="switch" class="label">Toggle</label>
+</body>
+</html>
