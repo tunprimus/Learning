@@ -1,0 +1,31 @@
+.gameboard {
+	/* width: 24rem;
+	height: 24rem; */
+	width: 80vw;
+	height: 80vw;
+	background-color: black;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.square {
+	/* width: 3rem;
+	height: 3rem; */
+	width: 10vw;
+	height: 10vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.piece {
+	font-size: 9vw;
+}
+
+.beige {
+	background-color: rgb(110, 110, 98);
+}
+
+.brown {
+	background-color: rgb(169, 43, 43);
+}
