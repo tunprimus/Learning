@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CSS Aspect Ratio with Fallback</title>
+	<style>
+		.box {
+			width: 100%;
+			aspect-ratio: 1/1;
+			border: 0.0625rem solid #CCCCCC;
+		}
+		@supports not (aspect-ratio) {
+			.box {
+				padding-top: 100%;
+				height: 0;
+				position: relative;
+				overflow: hidden;
+			}
+		}
+
+		.img {
+			max-width: 100%;
+		}
+		@supports not (aspect-ratio) {
+			.img {
+				position: absolute;
+				transform: translate(-50%, -50%);
+				left: 50%;
+				top: 50%;
+				width: auto;
+				max-width: 100%;
+				height: auto;
+			}
+		}
+
+		.wrapper {
+			height: 100vh;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-evenly;
+			align-content: flex-start;
+			padding: 2.5rem;
+		}
+
+		.success,
+		.fail {
+			font-family: sans-serif;
+			display: none;
+			flex-basis: 100%;
+			text-align: center;
+			font-size: 2rem;
+		}
+
+		@supports (aspect-ratio: auto) {
+			.success {
+				display: block;
+			}
+		}
+		@supports not (aspect-ratio: auto) {
+			.fail {
+				display: block;
+			}
+		}
+
+		.item {
+			flex: 0 1 80%;
+			padding: 2.5rem 0;
+		}
+		@media (min-width: 768px) {
+			.item {
+				flex: 0 1 20%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="wrapper">
+		<p class="success">Great! Your browser supports aspect-ratio!</p>
+		<p class="fail">Your browser does not support aspect-ratio! No worries!</p>
+
+		<!-- Item 1 -->
+		<section class="item">
+			<div class="box">
+				<img src="../../assets/images/orange-globe.png" alt="orange globe" class="img">
+			</div>
+		</section>
+
+		<!-- Item 2 -->
+		<section class="item">
+			<div class="box">
+				<img src="../../assets/images/orange-globe.png" alt="orange globe" class="img">
+			</div>
+		</section>
+
+		<!-- Item 3 -->
+		<section class="item">
+			<div class="box">
+				<img src="../../assets/images/orange-globe.png" alt="orange globe" class="img">
+			</div>
+		</section>
+
+		<!-- Item 4 -->
+		<section class="item">
+			<div class="box">
+				<img src="../../assets/images/orange-globe.png" alt="orange globe" class="img">
+			</div>
+		</section>
+	</main>
+</body>
+</html>

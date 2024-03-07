@@ -16,10 +16,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 }
 
 .piece {
 	font-size: 9vw;
+	position: relative;
+	z-index: 9;
+}
+
+.path {
+	position: relative;
+	z-index: -10;
 }
 
 .beige {
