@@ -1,6 +1,4 @@
 .gameboard {
-	/* width: 24rem;
-	height: 24rem; */
 	width: 80vw;
 	height: 80vw;
 	background-color: black;
@@ -9,8 +7,6 @@
 }
 
 .square {
-	/* width: 3rem;
-	height: 3rem; */
 	width: 10vw;
 	height: 10vw;
 	display: flex;

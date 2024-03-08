@@ -67,25 +67,79 @@ function dragOver(evt) {
 
 function dragDrop(evt) {
 	evt.stopPropagation();
-	/* console.log('playerGo', playerGo);
-	console.log('evt.target', evt.target);
-	console.log(draggedElement); */
-	// const correctGo = draggedElement.firstChild.classList.contains(playerGo);
 	const correctGo = draggedElement.classList.contains(playerGo);
 	const taken = evt.target.classList.contains('piece');
+	const valid = checkIfValid(evt.target);
 	const opponentGo = playerGo === 'white' ? 'black' : 'white';
-	// console.log('opponentGo', opponentGo);
-	// const takenByOpponent = evt.target.firstChild && evt.target.firstChild.classList.contains(opponentGo);
 	const takenByOpponent = evt.target && evt.target.classList.contains(opponentGo);
 
 	if (correctGo) {
 		if (takenByOpponent && valid) {
 			evt.target.parentNode.append(draggedElement);
 			evt.target.remove();
+			changePlayer();
+			return;
+		}
+
+		if (taken && !takenByOpponent) {
+			infoDisplay.textContent = 'You cannot go here!';
+			setTimeout(() => infoDisplay.textContent = '', 2000);
+			return;
+		}
+
+		if (valid) {
+			evt.target.append(draggedElement);
+			changePlayer();
+			return;
 		}
 	}
-	
-	changePlayer();
+}
+
+function checkIfValid(target) {
+	const targetId = Number(target.getAttribute('square-id')) || Number(target.parentNode.getAttribute('square-id'));
+	const startId = Number(startPositionId);
+	const piece = draggedElement.id;
+	console.log(targetId, startId, piece);
+
+	switch(piece) {
+		case 'pawn':
+			const starterRow = [8, 9, 10, 11, 12, 13, 14, 15];
+			if (
+					starterRow.includes(startId) && startId + WIDTH * 2 === targetId || 
+					startId + WIDTH === targetId || 
+					startId + WIDTH - 1 === targetId && !document.querySelector(`[square-id="${startId + WIDTH - 1}"]`).firstChild || 
+					startId + WIDTH + 1 === targetId && !document.querySelector(`[square-id="${startId + WIDTH + 1}"]`).firstChild
+				) {
+					return true;
+				}
+			break;
+		case 'knight':
+			if (
+				startId + WIDTH * 2 - 1 === targetId ||
+				startId + WIDTH * 2 + 1 === targetId ||
+				startId + WIDTH - 2 === targetId ||
+				startId + WIDTH + 2 === targetId ||
+				startId - WIDTH * 2 - 1 === targetId ||
+				startId - WIDTH * 2 + 1 === targetId ||
+				startId - WIDTH - 2 === targetId ||
+				startId - WIDTH + 2 === targetId
+				) {
+				return true;
+			}
+			break;
+		case 'bishop':
+			if (
+				startId + WIDTH + 1 === targetId ||
+				startId + WIDTH * 2 + 2 && !document.querySelector(`[square-id="${startId + WIDTH + 1}"]`).firstChild ||
+				startId + WIDTH * 3 + 3 && !document.querySelector(`[square-id="${startId + WIDTH + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 2 + 2}"]`).firstChild ||
+				startId + WIDTH * 4 + 4 && !document.querySelector(`[square-id="${startId + WIDTH + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 2 + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 3 + 3}"]`).firstChild ||
+				startId + WIDTH * 5 + 5 && !document.querySelector(`[square-id="${startId + WIDTH + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 2 + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 3 + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 4 + 4}"]`).firstChild ||
+				startId + WIDTH * 6 + 6 && !document.querySelector(`[square-id="${startId + WIDTH + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 2 + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 3 + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 4 + 4}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 5 + 5}"]`).firstChild ||
+				startId + WIDTH * 6 + 6 && !document.querySelector(`[square-id="${startId + WIDTH + 1}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 2 + 2}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 3 + 3}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 4 + 4}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 5 + 5}"]`).firstChild && !document.querySelector(`[square-id="${startId + WIDTH * 6 + 6}"]`).firstChild
+				) {
+				return true;
+			}
+	}
 }
 
 function changePlayer() {
@@ -106,4 +160,12 @@ function reverseIds() {
 function revertIds() {
 	const allSquaresForRevert = document.querySelectorAll('.square');
 	allSquaresForRevert.forEach((square, index) => square.setAttribute('square-id', index));
+}
+
+function getKeyByValue(obj, value) {
+	for (const key of Object.keys(obj)) {
+		if (obj[key] === value) {
+			return key;
+		}
+	}
 }
