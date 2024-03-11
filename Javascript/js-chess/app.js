@@ -77,6 +77,7 @@ function dragDrop(evt) {
 		if (takenByOpponent && valid) {
 			evt.target.parentNode.append(draggedElement);
 			evt.target.remove();
+			checkForWin();
 			changePlayer();
 			return;
 		}
@@ -89,6 +90,7 @@ function dragDrop(evt) {
 
 		if (valid) {
 			evt.target.append(draggedElement);
+			checkForWin();
 			changePlayer();
 			return;
 		}
@@ -390,5 +392,20 @@ function getKeyByValue(obj, value) {
 		if (obj[key] === value) {
 			return key;
 		}
+	}
+}
+
+function checkForWin() {
+	const kings = Array.from(document.querySelectorAll('#king'));
+	if (!kings.some(king => king.firstChild.classList.contains('white'))) {
+		infoDisplay.textContent = 'Black player wins!';
+		const allSquares = document.querySelectorAll('.square');
+		allSquares.forEach(square => square.firstChild && square.firstChild.setAttribute('draggable', 'false'));
+	}
+
+	if (!kings.some(king => king.firstChild.classList.contains('black'))) {
+		infoDisplay.textContent = 'White player wins!';
+		const allSquares = document.querySelectorAll('.square');
+		allSquares.forEach(square => square.firstChild && square.firstChild.setAttribute('draggable', 'false'));
 	}
 }
