@@ -1,0 +1,117 @@
+<!-- A CSS-only reaction component using emoji | https://dev.to/afif/a-css-only-reaction-component-using-emoji-28i4 -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>A CSS-only reaction component using emoji</title>
+	<style>
+		.react {
+			--r: 6.25rem;
+			display: inline-grid;
+			cursor: pointer;
+			width: var(--r);
+			height: var(--r);
+			border-radius: 50%;
+			margin: calc(var(--r) / 3);
+			line-height: var(--r);
+			text-align: center;
+			transform: rotate(0);
+		}
+
+		.react__icon::before {
+			content: attr(data-icon);
+			grid-area: 1/1;
+			font-style: normal;
+			font-size: calc(0.6 * var(--r));
+		}
+
+		.react__icon {
+			filter: grayscale(100%);
+			transform: scale(1);
+			grid-area: 1/1;
+			display: inherit;
+			transition: transform 0.6s cubic-bezier(0.5, -12, 1, -12);
+		}
+
+		.react:hover {
+			transform: rotate(0.1deg);
+			transition: transform 0.25s cubic-bezier(0.5, 400, 0.5, -400);
+		}
+
+		.react::before {
+			content: "";
+			grid-area: 1/1;
+			border-radius: 50%;
+			border: calc(var(--r) / 2) solid orange;
+			transform: scale(0);
+		}
+
+		.react::after,
+		.react__icon::after {
+			content: "";
+			grid-area: 1/1;
+			margin: calc(var(--r) / -2);
+			--c1: radial-gradient(red 50%, #000000 60%);
+			--c2: radial-gradient(orange 50%, #000000 60%);
+			background: var(--c1), var(--c1), var(--c1), var(--c1), var(--c2), var(--c2), var(--c2), var(--c2);
+			background-size: calc(var(--r) / 6) calc(var(--r) / 6);
+			background-position: calc(50% - var(--r) / 2) calc(50% - var(--r) / 2), calc(50% + var(--r) / 2) calc(50% - var(--r) / 2), calc(50% - var(--r) / 2) calc(50% + var(--r) / 2), calc(50% + var(--r) / 2) calc(50% + var(--r) / 2), calc(50% + 0px) calc(50% + var(--r) * 0.707), calc(50% + var(--r) * 0.707) calc(50% + 0px), calc(50% - var(--r) * 0.707) calc(50% + 0px), calc(50% + 0px) calc(50% - var(--r) * 0.707);
+			background-repeat: no-repeat;
+			transform: scale(0);
+		}
+
+		.react__icon::after {
+			background-size: calc(var(--r) / 8) calc(var(--r) / 8);
+			transform: rotate(60deg) scale(0);
+		}
+
+		.input:checked + .react__icon {
+			filter: grayscale(0);
+			transform: scale(0.95);
+			transition: filter 0.5s 0.5s, transform 1s cubic-bezier(0, 26.67, 0.5, 26.67);
+		}
+
+		.input:checked + .react::before {
+			border-width: 0;
+			transform: scale(1);
+			transition: transform 0.5s, border-width 0.5s 0.5s;
+		}
+
+		.input:checked + .react::after,
+		.input:checked + .react__icon::after {
+			transform: scale(1);
+			opacity: 0;
+			background-size: 0 0;
+			transition: transform 0.5s 0.5s, opacity 0.4s 0.9s, background-size 0.5s 0.9s;
+		}
+
+		.input:checked + .react__icon::after {
+			transform: rotate(55deg) scale(1);
+		}
+
+		.input {
+			position: absolute;
+			visibility: hidden;
+			clip-path: inset(50%);
+		}
+	</style>
+</head>
+<body>
+	<input type="checkbox" id="r1" class="input r1">
+	<label for="r1" class="react">
+		<i class="react__icon" data-icon="💯"></i>
+	</label>
+
+	<input type="checkbox" id="r2" class="input r2">
+	<label for="r2" class="react">
+		<i class="react__icon" data-icon="❤️"></i>
+	</label>
+
+	<input type="checkbox" id="r3" class="input r3">
+	<label for="r3" class="react">
+		<i class="react__icon" data-icon="🦄"></i>
+	</label>
+</body>
+</html>
