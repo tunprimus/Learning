@@ -8,5 +8,5 @@ def test_argument():
 
 def test_argument_list():
     for name in ["Hermione", "Harry", "Ron"]:
-    assert hello(name) == f"hello, {name}"
+        assert hello(name) == f"hello, {name}"
 
