@@ -18,6 +18,12 @@
 			box-sizing: border-box;
 		}
 
+		@property --progress {
+			syntax: "<length-percentage>";
+			inherits: false;
+			initial-value: 0%;
+		}
+
 		body {
 			font-family: var(--font-base);
 			color: var(--colour-dark);
@@ -56,6 +62,10 @@
 			place-items: center;
 		}
 
+		[role="progressbar"] span {
+			display: none;
+		}
+
 		@supports not (aspect-ratio: auto) {
 			[role="progressbar"]::after {
 				padding-top: var(--size);
@@ -74,12 +84,34 @@
 			place-items: center;
 		}
 
-		.progressbar__span {
-			display: none;
+		[role="progressbar"][aria-valuenow="100"]::after {
+			animation: progressComplete 0s forwards;
+			animation-delay: 1000ms;
+		}
+
+		@keyframes progressComplete {
+			to {
+				content: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODUiIGhlaWdodD0iODUiIHZpZXdCb3g9IjUgMzAgNzUgMTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0zNS40MjM3IDUzLjczMjdMNjcuOTc4NyAyMS4xNzc3TDcyLjk4OTUgMjYuMTg0MkwzNS40MTk1IDYzLjc1TDEyLjg4NiA0MS4yMTIyTDE3Ljg5MjUgMzYuMjAxNUwzNS40MjM3IDUzLjczMjdaIiBmaWxsPSIjMWYxYTM4Ii8+Cjwvc3ZnPgo=");
+				background-color: var(--colour-success);
+			}
 		}
 
 		.progressbar:not([role="progressbar"]) {
 			color: red;
+			position: relative;
+		}
+
+		/**
+		* If JavaScript is disabled, hide the span
+		 */
+		.progressbar:not([role="progressbar"])::after {
+			display: none;
+		}
+
+		.progressbar:not([role="progressbar"]) span {
+			font-size: 1rem;
+			text-align: center;
+			color: var(--colour-success-dark);
 		}
 
 		.testing-ground {
@@ -137,12 +169,61 @@
 		const progressbar = document.querySelector('#progressbar');
 
 		function enableProgressbar() {
+			/**
+			* If JS is working, we'll enable the progress bar
+			* all the styling for it comes from the role="progressbar
+			* and having that removes the no-js message
+			* min of 0 and max of 100 are defaults, so we don't need aria-valuemin or -valuemax
+			 */
 			progressbar.setAttribute('role', 'progressbar');
 			progressbar.setAttribute('aria-valuenow', 0);
 			progressbar.setAttribute('aria-live', 'polite');
 		}
 
 		enableProgressbar();
+
+		/**
+		* For stimulating stuff when the buttons are clicked
+		 */
+		const testingGround = document.querySelector('#testing-ground');
+		let interval = null;
+		function simulateProgress(newProgressValue) {
+			clearInterval(interval);
+			if (newProgressValue === 'fake-upload') {
+				simulateUpload();
+			} else {
+				updateProgress(newProgressValue);
+			}
+		}
+
+		testingGround.addEventListener('click', (evt) => {
+			if (!evt.target.closest('button')) {
+				return;
+			}
+
+			progress = evt.target.dataset.progress;
+			simulateProgress(progress);
+		});
+		
+		function updateProgress(progress) {
+			progressbar.setAttribute('aria-valuenow', progress);
+			progressbar.setAttribute('--progress', `${progress}%`);
+		}
+
+		function simulateUpload() {
+			progressbar.setAttribute('aria-busy', true);
+			let progress = 0;
+			updateProgress(progress);
+
+			intervalTimer = setInterval(() => {
+				progress += 5;
+				updateProgress(progress);
+				if (progress === 100) {
+					progressbar.setAttribute('aria-busy', 'false');
+					clearInterval(intervalTimer);
+				}
+			}, 500);
+		}
 	</script>
 </body>
 </html>
