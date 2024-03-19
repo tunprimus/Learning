@@ -1,11 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB" dir="ltr">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Create an Animated Circular Progress Bar</title>
+	<style>
+		:root {
+			--font-base: "Space Mono", monospace;
+			--colour-dark: #1F1A38;
+			--colour-dark-glare: #989EA9;
+			--colour-success: #76F7BF;
+			--colour-success: #2D7A59;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: var(--font-base);
+			color: var(--colour-dark);
+			width: min(100% - 3rem, 40ch);
+			margin: 3rem auto;
+		}
+
+		a {
+			color: var(--colour-dark);
+		}
+
+		a:hover,
+		a:focus {
+			color: var(--colour-success);
+		}
+
+		@supports not (aspect-ratio: auto) {
+			[role="progressbar"] {
+				padding-top: var(--size);
+				height: 0;
+				position: relative;
+				overflow: hidden;
+			}
+		}
+		[role="progressbar"] {
+			--size: 132px;
+			--bar-width: 20px;
+
+			font-size: 2rem;
+			width: var(--size);
+			aspect-ratio: 1 / 1;
+			background-color: blue;
+			margin: 2rem auto;
+			border-radius: 50%;
+			display: grid;
+			place-items: center;
+		}
+
+		@supports not (aspect-ratio: auto) {
+			[role="progressbar"]::after {
+				padding-top: var(--size);
+				height: 0;
+				position: relative;
+				overflow: hidden;
+			}
+		}
+		[role="progressbar"]::after {
+			content: attr(aria-valuenow) "%";
+			background-color: white;
+			border-radius: inherit;
+			width: calc(100% - var(--bar-width));
+			aspect-ratio: 1 / 1;
+			display: grid;
+			place-items: center;
+		}
+
+		.progressbar__span {
+			display: none;
+		}
+
+		.progressbar:not([role="progressbar"]) {
+			color: red;
+		}
+
+		.testing-ground {
+			color: var(--colour-success);
+			font-weight: bold;
+			background-color: var(--colour-dark);
+			border: 5px solid var(--colour-dark-glare);
+			padding: 1rem;
+			margin-top: 3rem;
+			margin-bottom: 3rem;
+			display: grid;
+			grid-gap: 1rem;
+			gap: 1rem;
+		}
+
+		.testing-ground__button {
+			cursor: pointer;
+			font: inherit;
+			background-color: white;
+			color: var(--colour-dark);
+			border: 0;
+			padding: 0.5rem;
+		}
+
+		.testing-ground__button:hover,
+		.testing-ground__button:focus-visible {
+			background-color: var(--colour-success);
+		}
+
+		.testing-ground__button:focus-visible {
+			outline: 5px solid var(--colour-dark-glare);
+		}
+	</style>
 </head>
 <body>
-	
+	<h1 class="h1">Front-End challenge: Progress Indicator</h1>
+	<p class="description">A solution to the <a href="https://piccalil.li/blog/challenge-009-progress-indicator/">progress indicator challenge</a>, as part of the <a href="https://piccalil.li/category/front-end-challenges-club/">Front-End Challenges Club on Piccalilli</a>.</p>
+
+	<div class="progressbar" id="progressbar">
+		<span class="progressbar__span" id="progressbar__span">This <em>really awesome feature</em> requires JS 😢</span>
+	</div>
+
+	<div class="testing-ground" id="testing-ground">
+		<h2 class="testing-ground__title">Testing ground</h2>
+		<button class="testing-ground__button" id="testing-ground__button1" data-progress="0">0%</button>
+		<button class="testing-ground__button" id="testing-ground__button2" data-progress="25">25%</button>
+		<button class="testing-ground__button" id="testing-ground__button3" data-progress="57">57%</button>
+		<button class="testing-ground__button" id="testing-ground__button4" data-progress="82">82%</button>
+		<button class="testing-ground__button" id="testing-ground__button5" data-progress="100">100%</button>
+		<button class="testing-ground__button" id="testing-ground__button6" data-progress="fake-upload">Simulate a thing that takes a long time to do</button>
+	</div>
+
+	<!-- JavaScript Here -->
+	<script>
+		const progressbar = document.querySelector('#progressbar');
+
+		function enableProgressbar() {
+			progressbar.setAttribute('role', 'progressbar');
+			progressbar.setAttribute('aria-valuenow', 0);
+			progressbar.setAttribute('aria-live', 'polite');
+		}
+
+		enableProgressbar();
+	</script>
 </body>
 </html>
