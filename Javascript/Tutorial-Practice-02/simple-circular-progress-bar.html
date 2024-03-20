@@ -1,0 +1,210 @@
+<!-- Create simple circular progress bar using Html, CSS, Vanilla JavaScript | https://codepen.io/bumuoi/pen/yLvevQz -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Create simple circular progress bar using Html, CSS, Vanilla JavaScript</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: 400;
+			font-size: 1.25rem;
+			color: #333333;
+			list-style-type: none;
+			text-decoration: none;
+		}
+
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			padding: 1.25rem;
+			background-color: #292929;
+		}
+
+		.block {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			width: 30vw;
+			height: 30vw;
+			border-radius: 50%;
+		}
+
+		.box {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			width: calc(100% - 3.125rem);
+			height: calc(100% - 3.125rem);
+			border-radius: 50%;
+			background-color: #292929;
+			box-shadow: 0 0 0.3125rem 0.1875rem #222121;
+		}
+
+		.box::before {
+			position: absolute;
+			content: "";
+			width: calc(100% + 1.75rem);
+			height: calc(100% + 1.75rem);
+			border-radius: 50%;
+			border: 0.0625rem solid #353535;
+		}
+
+		.num,
+		.sub {
+			color: #E9E9E9;
+		}
+
+		.num {
+			font-size: 2.188rem;
+			font-weight: bold;
+		}
+
+		.sub {
+			font-size: 1.25rem;
+		}
+
+		.title {
+			font-size: 0.938rem;
+			color: #9B9B9B;
+		}
+
+		.dots {
+			display: block;
+			position: absolute;
+			z-index: 2;
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+			transition: 2s transform, 2s opacity ease;
+		}
+
+		.dots::after {
+			position: absolute;
+			content: "";
+			width: 0.625rem;
+			height: 0.625rem;
+			top: 0.3125rem;
+			left: 50%;
+			border-radius: 50%;
+			background-color: #B7B5B5;
+			box-shadow: 0 0 0.3125rem 0.1875rem #585858;
+			transform: translateX(-50%);
+		}
+
+		.svg {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			fill: none;
+			transform: rotate(-90deg);
+		}
+
+		.circle {
+			stroke: url(#gradientStyle);
+			stroke-width: 0.25rem;
+			stroke-dasharray: 503;
+			stroke-dashoffset: 503;
+			animation-duration: 2s;
+			animation-timing-function: linear;
+			animation-fill-mode: forwards;
+			transition: 2s stroke-dashoffset;
+		}
+	</style>
+</head>
+<body>
+	<!-- 1st Section -->
+	<section class="block">
+		<div class="box">
+			<p class="number">
+				<span class="num">80</span>
+				<span class="sub">%</span>
+			</p>
+			<p class="title">HTML</p>
+		</div>
+		<span class="dots"></span>
+		<svg class="svg">
+			<defs>
+				<linearGradient id="gradientStyle" class="gradient-style">
+					<stop offset="0%" stop-color="#565656"></stop>
+					<stop offset="100%" stop-color="#B7B5B5"></stop>
+				</linearGradient>
+			</defs>
+			<circle class="circle" cx="90" cy="90" r="80"/>
+		</svg>
+	</section>
+
+	<!-- 2nd Section -->
+	<section class="block">
+		<div class="box">
+			<p class="number">
+				<span class="num">100</span>
+				<span class="sub">%</span>
+			</p>
+			<p class="title">CSS</p>
+		</div>
+		<span class="dots"></span>
+		<svg class="svg">
+			<circle class="circle" cx="90" cy="90" r="80"/>
+		</svg>
+	</section>
+
+	<!-- 3rd Section -->
+	<section class="block">
+		<div class="box">
+			<p class="number">
+				<span class="num">35</span>
+				<span class="sub">%</span>
+			</p>
+			<p class="title">JS</p>
+		</div>
+		<span class="dots"></span>
+		<svg class="svg">
+			<circle class="circle" cx="90" cy="90" r="80"/>
+		</svg>
+	</section>
+
+	<!-- JavaScript Here -->
+	<script>
+		const block = document.querySelectorAll('.block');
+
+		window.addEventListener('load', function () {
+			block.forEach((item) => {
+				let numElement = item.querySelector('.num');
+				let num = parseInt(numElement.innerText);
+				let count = 0;
+				let time = 2000 / num;
+				let circle = item.querySelector('.circle');
+
+				setInterval(() => {
+					if (count == num) {
+						clearInterval();
+					} else {
+						count += 1;
+						numElement.innerText = count;
+					}
+				}, time);
+
+				circle.style.strokeDashOffset = 503 - 503 * (num / 100);
+
+				let dots = item.querySelector('.dots');
+				dots.style.transform = `rotate(${360 * (num / 100)}deg)`;
+				if (num == 100) {
+					dots.style.opacity = 0;
+				}
+			});
+		});
+	</script>
+</body>
+</html>
