@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Circular Progress Bar</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			align-items: center;
+			background-color: lightblue;
+			height: 100vh;
+		}
+
+		.progress {
+			width: 12.5rem;
+			height: 12.5rem;
+			font-size: 1.875rem;
+			color: #FFFFFF;
+			border-radius: 50%;
+			overflow: hidden;
+			position: relative;
+			background-color: #07070C;
+			text-align: center;
+			line-height: 6.5;
+			margin: 1.25rem;
+			box-shadow: 0.125rem 0.125rem 0.125rem 0.125rem white;
+		}
+
+		.progress::after {
+			content: "%";
+		}
+
+		.title {
+			position: relative;
+			z-index: 100;
+		}
+
+		.overlay {
+			width: 50%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-color: #07070C;
+			z-index: 1;
+		}
+
+		.left,
+		.right {
+			width: 50%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			border: 0.625rem solid grey;
+			border-radius: 6.25rem 0 0 6.25rem;
+			border-right: 0;
+			transform-origin: right;
+		}
+
+		.left {
+			animation: load1 1s linear forwards;
+		}
+
+		.progress:nth-of-type(2) .right,
+		.progress:nth-of-type(3) .right {
+			animation: load2 0.5s linear forwards 1s;
+		}
+
+		.progress:last-of-type .right,
+		.progress:first-of-type .right {
+			animation: load3 0.8s linear forwards 1s;
+		}
+
+		@keyframes load1 {
+			0% {
+				transform: rotate(0deg);
+			}		
+			100% {
+				transform: rotate(180deg);
+			}
+		}
+
+		@keyframes load2 {
+			0% {
+				z-index: 100;
+				transform: rotate(180deg);
+			}		
+			100% {
+				z-index: 100;
+				transform: rotate(270deg);
+			}
+		}
+
+		@keyframes load3 {
+			0% {
+				z-index: 100;
+				transform: rotate(180deg);
+			}		
+			100% {
+				z-index: 100;
+				transform: rotate(315deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="container">
+		<!-- 1st Section -->
+		<section class="progress">
+			<span class="title timer" data-from="0" data-to="85" data-speed="1800">85</span>
+			<div class="overlay"></div>
+			<div class="left"></div>
+			<div class="right"></div>
+		</section>
+
+		<!-- 2nd Section -->
+		<section class="progress">
+			<span class="title timer" data-from="0" data-to="70" data-speed="1500">70</span>
+			<div class="overlay"></div>
+			<div class="left"></div>
+			<div class="right"></div>
+		</section>
+
+		<!-- 3rd Section -->
+		<section class="progress">
+			<span class="title timer" data-from="0" data-to="70" data-speed="1500">70</span>
+			<div class="overlay"></div>
+			<div class="left"></div>
+			<div class="right"></div>
+		</section>
+
+		<!-- 4th Section -->
+		<section class="progress">
+			<span class="title timer" data-from="0" data-to="85" data-speed="1800">85</span>
+			<div class="overlay"></div>
+			<div class="left"></div>
+			<div class="right"></div>
+		</section>
+	</main>
+</body>
+</html>
