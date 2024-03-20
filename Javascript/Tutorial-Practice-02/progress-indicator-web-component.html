@@ -1,3 +1,4 @@
+<!-- Front-End solution: progress indicator | https://piccalil.li/blog/solution-009-progress-indicator -->
 <!DOCTYPE html>
 <html lang="en-GB" dir="ltr">
 <head>
@@ -5,6 +6,90 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Progress Indicator</title>
+	<style>
+		:root {
+			--font-base: "Space Mono", monospace;
+			--transition: 200ms linear;
+			--colour-dark: #1F1A38;
+			--colour-dark-glare: #989EA9;
+			--colour-success: #76F7BF;
+
+			--progress-indicator-colour-complete: var(--colour-success);
+			--progress-indicator-progress-stroke: var(--colour-dark);
+			--progress-indicator-bg-stroke: var(--colour-dark-glare);
+		}
+
+		body {
+			height: auto; /* Allows content to grow beyond the page without overflow */
+			width: auto; /* Allows content to grow beyond the page without overflow */
+			min-height: 100%; /* Starts web page with 100% height. Fallback for IE 4-6 and older browsers */
+			min-height: 100vh; /* Starts web page with 100% height. Uses the viewport's height. Only works in modern HTML5 browsers */
+			overflow-y: scroll; /* Optional: Adds an empty scrollbar to the right margin in case content grows vertically, creating a scrollbar.  Allows for better width calculations, as the browser pre-calculates width before scrollbar appears, avoiding page content shifting.*/
+			display: grid;
+			justify-items: center;
+			align-items: center;
+			place-items: center;
+			background-color: #F3F3F3;
+			font-family: sans-serif;
+		}
+
+		.progress-indicator {
+			font-family: var(--font-base);
+			line-height: 1.1;
+			color: var(--colour-dark);
+			container-type: inline-size;
+			width: var(--progress-indicator-viewbox);
+			height: auto;
+		}
+
+		.progress-indicator__progress-circle {
+			stroke: var(--progress-indicator-progress-stroke, currentColor);
+			transition: stroke-dashoffset var(--transition);
+
+		  /* The dash array starts from 90deg, so we need to transform it back to the top */
+			transform: rotate(-90deg);
+			transform-origin: 50% 50%;
+		}
+
+		.progress-indicator__background-circle {
+			stroke: var(--progress-indicator-bg-stroke, grey);
+		}
+
+		.progress-indicator__check {
+			width: var(--progress-indicator-check-size, 60cqw);
+			height: auto;
+			display: none;
+		}
+
+		.progress-indicator__visual {
+			display: grid;
+			grid-template-areas: "stack";
+			justify-items: center;
+			align-items: center;
+			place-items: center;
+		}
+
+		.progress-indicator__visual > * {
+			grid-area: stack;
+		}
+
+		.progress-indicator__count {
+			font-size: var(--progress-indicator-count-size, max(25cqw, 1rem));
+			z-index: 1;
+		}
+
+		[data-progress-state="complete"] .progress-indicator__progress-circle {
+			fill: var(--progress-indicator-colour-complete);
+		}
+
+		[data-progress-state="complete"] .progress-indicator__count {
+			display: none;
+		}
+
+		[data-progress-state="complete"] .progress-indicator__check {
+			display: revert;
+		}
+	</style>
 </head>
 <body>
 	<progress-indicator progress="0" stroke="8" viewbox="130">
@@ -18,10 +103,100 @@
 		class ProgressIndicator extends HTMLElement {
 			constructor() {
 				super();
+
+				// Calculate the circle radius and the normalised version which is radius minus the stroke width
+				const radius = this.viewBox / 2;
+				const normalisedRadius = radius - this.stroke;
+				this.calculateCircleCircumference = normalisedRadius * 2 * Math.PI;
+
+				// Set the custom property viewbox value for our CSS to latch on to
+				this.style.setProperty('--progress-indicator-viewbox', `${this.viewBox}px`);
+
+				// Set the default aria role states
+				this.setAttribute('aria-label', this.label);
+				this.setAttribute('role', 'progressbar');
+				this.setAttribute('aria-valuemax', '100');
+
+				// Render the component with all the data ready
+				this.innerHTML = `
+					<div class="progress-indicator">
+						<div class="progress-indicator__visual">
+							<div class="progress-indicator__count" data-progress-count></div>
+							<svg fill="none" viewBox="0 0 ${this.viewBox} ${this.viewBox}"  width="${this.viewBox}" height="${this.viewBox}" focusable="false" class="progress-indicator__circle">
+								<circle r="${normalisedRadius}" cx="${radius}" cy="${radius}" stroke-width="${this.stroke}" class="progress-indicator__background-circle"/>
+								<circle r="${normalisedRadius}" cx="${radius}" cy="${radius}" stroke-dasharray="${this.calculatedCircumference} ${this.calculatedCircumference}" stroke-width="${this.stroke}" class="progress-indicator__progress-circle" data-progress-circle/>
+							</svg>
+							<svg class="progress-indicator__check" focusable="false" viewBox="0 0 20 20" fill="none">
+								<path d="m8.335 12.643 7.66-7.66 1.179 1.178L8.334 15 3.032 9.697 4.21 8.518l4.125 4.125Z" fill="currentColor"/>
+							</svg>
+						</div>
+					</div>
+				`;
+			}
+			setProgress(percent) {
+				// Always make sure the percentage passed never exceeds the max
+				if (percent > 100) {
+					percent = 100;
+				}
+
+				// Set the aria role value for screen readers
+				this.setAttribute('aria-valuenow', percent);
+
+				const circle = this.querySelector('[data-progress-circle]');
+				const progressCount = this.querySelector('[data-progress-count]');
+
+				// Calculate the dash offset value based on the calculated circumference and the current percentage
+				circle.style.strokeDashoffset = this.calculatedCircumference - (percent / 100 * this.calculatedCircumference);
+
+				// A human readable version for the text label
+				progressCount.textContent = `${percent}%`;
+
+				// Set a complete or pending state based on progress
+				if (percent == 100) {
+					this.setAttribute('data-progress-state', 'complete');
+				} else {
+					this.setAttribute('data-progress-state', 'pending');
+				}
+			}
+
+			// Observe the progress attribute for changes
+			static get observedAttributes() {
+				return ['progress'];
+			}
+
+			get viewBox() {
+				return this.getAttribute('viewbox') || 100;
+			}
+
+			get stroke() {
+				return this.getAttribute('stroke') || 5;
+			}
+
+			get label() {
+				return this.getAttribute('label') || 'current progress';
+			}
+
+			// Listen to the progress attribute and if it has changed, trigger the set progress method
+			attributeChangedCallback(name, oldValue, newValue) {
+				if (name === 'progress') {
+					this.setProgress(newValue);
+				}
 			}
 		}
 
 		customElements.define('progress-indicator', ProgressIndicator);
+
+		let progress = 0;
+		const indicator = document.querySelector('progress-indicator');
+
+		const timer = setInterval(() => {
+			progress += 10;
+			indicator.setAttribute('progress', progress);
+
+			if (progress === 100) {
+				setTimeout(() => (progress = 0), 3000);
+			}
+		}, 1000);
 	</script>
 </body>
 </html>
