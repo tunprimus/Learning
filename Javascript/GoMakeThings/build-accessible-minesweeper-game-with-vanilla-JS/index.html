@@ -159,6 +159,8 @@ Artist: Ben Myers | https://www.youtube.com/watch?v=U9ZEHw0Ef-4 -->
 			</div>
 		`;
 
+		let found = 0;
+
 		app.addEventListener('click', function (evt) {
 			const monsterButton = evt.target.closest('[data-monster]');
 
@@ -173,6 +175,15 @@ Artist: Ben Myers | https://www.youtube.com/watch?v=U9ZEHw0Ef-4 -->
 			}
 
 			const { name, alt } = monsters[monsterId];
+			if (name === 'sock') {
+				window.location.href = 'lost.html';
+				return;
+			}
+
+			found++;
+			if (found === monsters.length - 1) {
+				window.location.href = 'won.html';
+			}
 			
 			const newMonster = document.createElement('img');
 			newMonster.src = './images/' + name + '.svg';
