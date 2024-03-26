@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to Build a Cipher Machine with JavaScript - Caesar Cipher</title>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.form {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="h1">Caesar Cipher</h1>
+	<form action="" class="form">
+		<label for="textarea" class="form__label--plaintext">Plaintext:</label>
+		<textarea name="plaintext" id="textarea" cols="30" rows="10" class="form_textarea">Top Secret</textarea>
+		<label for="shift" class="form__label--input">Shift:</label>
+		<input type="number" name="shift" id="shift" class="form__input--shift" value="5" min="1" max="26">
+		<input type="submit" value="encrypt" class="form__input--submit">
+	</form>
+
+	<h2 class="h2">Output</h2>
+	<div id="output"></div>
+
+	<!-- JavaScript Here -->
+	<script>
+		const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+		const form = document.forms[0];
+		const output = document.getElementById('output');
+
+		form.addEventListener('submit', evt => {
+			evt.preventDefault();
+			output.innerHTML = [... form.plaintext.value ].map(char => encrypt(char)).join('');
+		});
+
+		function encrypt(char) {
+			const shift = Number(form.shift.value);
+			if (alphabet.includes(char.toUpperCase())) {
+				const position = alphabet.indexOf(char.toUpperCase());
+				const newPosition = (position + shift) % 26;
+				return alphabet[newPosition];
+			} else {
+				return char;
+			}
+		}
+	</script>
+</body>
+</html>
