@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to Get the Ordinal of a Number</title>
+</head>
+<body>
+	<div class="ordinal">
+		<label for="" class="ordinal__label">Enter ranking number</label>
+		<input type="number" id="number" name="number" class="ordinal__input" min="0">
+	</div>
+	<button type="submit" id="submit" class="ordinal__submit">Get Ordinal</button>
+	<p id="result" class="ordinal__result"></p>
+
+	<!-- JavaScript Here -->
+	<script>
+		/**
+		 * @description Rules of ordinals in English
+		 * - "st" is appended to 1 and numbers one greater than multiple of ten, except for 11 and numbers 11 greater than a multiple of 100 e.g. 1st, 21st ... but 11th, 111th
+		 * - "nd" is appended to 2 and numbers two greater than multiple of ten, except for 12 and numbers 12 greater than a multiple of 100 e.g. 2nd, 32nd ... but 12th, 112th
+		 * - "rd" is appended to 3 and numbers three greater than multiple of 10, except for 13 and numbers thirteen greater than a multiple of 100 e.g. 3rd, 43rd ... but 3rd, 53rd
+		 * -"th" is appended to everything else e.g. 24th
+		 * 
+		 * @param {string} n
+		 * @returns {string}
+		 */
+		function getOrdinal(n) {
+			let ord = 'th';
+			const num = parseInt(n);
+
+			if (num < 1) {
+				alert('Number must be positive from 1');
+				return '';
+			}
+
+			if (num % 10 === 1 && num % 100 !== 11) {
+				ord = 'st';
+			} else if (num % 10 === 2 && num % 100 !== 12) {
+				ord = 'nd';
+			} else if (num % 10 === 3 && num % 100 !== 13) {
+				ord = 'rd';
+			}
+
+			return ord;
+		}
+
+		const inputElem = document.getElementById('number');
+		const resultElem = document.getElementById('result');
+		const submitElem = document.getElementById('submit');
+
+		submitElem.addEventListener('click', function() {
+			const number = inputElem.value;
+			number < 1 ? 
+				resultElem.textContent = '' + getOrdinal(number) :
+				resultElem.textContent = number + getOrdinal(number);
+		});
+	</script>
+</body>
+</html>
