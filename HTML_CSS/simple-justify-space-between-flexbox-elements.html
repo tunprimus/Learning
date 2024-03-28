@@ -1,0 +1,29 @@
+<!-- Justify Space Between Individual Items in Flexbox | https://blog.jim-nielsen.com/2023/justify-space-between-individual-items/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Justify Space Between Individual Items in Flexbox</title>
+	<style>
+		.nav {
+			display: flex;
+		}
+
+		.nav__link {
+			margin: 0.1rem 0.5rem;
+		}
+
+		.nav > :first-child {
+			margin-right: auto;
+		}
+	</style>
+</head>
+<body>
+	<nav class="nav">
+		<a class="nav__link" href="/">Home</a>
+		<a class="nav__link" href="/about">About</a>
+		<a class="nav__link" href="/archive">Archive</a>
+	</nav>
+</body>
+</html>
