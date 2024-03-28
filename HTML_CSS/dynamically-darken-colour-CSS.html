@@ -1,0 +1,31 @@
+<!-- Dynamically Darken a Colour in CSS | https://blog.jim-nielsen.com/2019/dynamically-darken-a-color-in-css/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dynamically Darken a Colour in CSS</title>
+	<style>
+		:root {
+			--colour-highlight: 255, 0, 0;
+		}
+
+		.target__link {
+			color: rgb(var(--colour-highlight));
+		}
+
+		.target__link:hover {
+			filter: brightness(0.6);
+		}
+	</style>
+</head>
+<body>
+	<div class="target">
+		<a href="#" class="target__link target__link--1">About</a>
+		<br>
+		<br>
+		<a href="#" class="target__link target__link--2">Of</a>
+	</div>
+</body>
+</html>
