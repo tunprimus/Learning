@@ -1,0 +1,27 @@
+<!-- Dynamic Colour Manipulation with CSS Relative Colours | https://blog.jim-nielsen.com/2021/css-relative-colors/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dynamic Colour Manipulation with CSS Relative Colours</title>
+	<style>
+		:root {
+			--colour-h: 0;
+			--colour-s: 100%;
+			--colour-l: 50%;
+			--colour: #FF0000;
+		}
+
+		.target {
+			width: 6.25rem;
+			height: 6.25rem;
+			border: 1px solid orangered;
+			background-color: hsl(from var(--colour) h calc(s - 10%) l);
+		}
+	</style>
+</head>
+<body>
+	<div class="target"></div>
+</body>
+</html>
