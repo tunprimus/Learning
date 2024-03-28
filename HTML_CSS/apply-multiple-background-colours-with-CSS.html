@@ -1,0 +1,56 @@
+<!-- Applying Multiple Background Colors with CSS | https://blog.jim-nielsen.com/2019/applying-multiple-background-colors-with-css/ -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Applying Multiple Background Colors with CSS</title>
+	<style>
+		.body {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			background-color: #fafafa;
+		}
+
+		.body > * {
+			width: 50vw;
+			height: 25vw;
+			border: 0.125rem solid #777777;
+			margin: 1.618rem auto;
+		}
+		.element {
+			background-image: 
+				/* Transparent colour on top */
+				linear-gradient(var(--colour-border-light), var(--colour-border-light)),
+				/* Solid colour underneath */
+				linear-gradient(var(--colour-background), var(--colour-background));
+		}
+
+		@media screen and (prefers-color-scheme: light) {
+			:root {
+				--colour-background: rgba(255,255,255,1);
+				--colour-border-dark: rgba(0,0,0,1);
+				--colour-border-medium: rgba(0,0,0,.7);
+				--colour-border-light: rgba(0,0,0,.3);
+			}
+		}
+
+		@media screen and (prefers-color-scheme: dark) {
+			:root {
+				--colour-background: rgba(0,0,0,1);
+				--colour-border-dark: rgba(255,255,255,1);
+				--colour-border-medium: rgba(255,255,255,.7);
+				--colour-border-light: rgba(255,255,255,.3);
+			}
+		}
+	</style>
+</head>
+<body class="body">
+	<header class="header element"></header>
+	<main class="main"></main>
+	<footer class="footer"></footer>
+</body>
+</html>
