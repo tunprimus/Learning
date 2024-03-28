@@ -1,0 +1,96 @@
+<!-- End-to-End Encryption in the Browser | https://blog.excalidraw.com/end-to-end-encryption/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>End-to-End Encryption in the Browser</title>
+</head>
+<body>
+	<main class="main">
+		<p>Trigram for heaven <span>&#x2630;</span>.</p>
+		<p>Saltire <span>&#x2613;</span>.</p>
+		<p>Sun <span>&#x2609;</span>.</p>
+		<p>Moon <span>&#x1F319;</span>.</p>
+		<p>Gear <span>&#x2699;</span>.</p>
+		<p>Warning sign <span>&#x26A0;</span>.</p>
+		<p>No entry <span>&#x26D4;</span>.</p>
+		<p>Wastebasket <span>&#x1F5D1;</span>.</p>
+		<p>Heavy plus sign <span>&#x2795;</span>.</p>
+		<p>Heavy minus sign <span>&#x2796;</span>.</p>
+		<p>Heavy multiplication sign <span>&#x2716;</span>.</p>
+		<p>Heavy division sign <span>&#x2797;</span>.</p>
+	</main>
+	<!-- JavaScript Here -->
+	<script>
+		/**
+		 * Generate a random key to encrypt the data
+		 */
+		const key = await window.crypto.subtle.generateKey(
+			{
+				name: 'AES-GCM',
+				length: 256
+			},
+			true, // extractable
+			['encrypt', 'decrypt'],
+		);
+
+		/**
+		 * Encrypt the data with the key only once
+		 * @param {object} content
+		 * @returns
+		 */
+		const encryptedUpload = await window.crypto.subtle.encrypt(
+			{
+				name: 'AES-GCM',
+				iv: new Uint8Array(12), /* don't reuse key! */
+			},
+			key,
+			new TextEncoder().encode(JSON.stringify(content)),
+		);
+
+		const uploadResponse = await (
+			await fetch(
+				'/upload', {
+					method: 'POST',
+					body: encryptedUpload,
+				})
+		).json();
+
+		const uploadObjectURL = uploadResponse.url;
+		const uploadObjectKey = (await window.crypto.subtle.exportKey('jwk', key)).k;
+		const url = uploadObjectURL + '#key=' + uploadObjectKey;
+
+		// For the download
+		const downloadResponse = await fetch(`/download?id=${id}`);
+		const encryptedDownload = await response.arrayBuffer();
+
+		const downloadObjectKey = window.location.hash.slice('#key='.length);
+		const downloadKey = await window.crypto.subtle.importKey(
+			'jwk',
+			{
+				k: downloadObjectKey,
+				alg: 'A128GCM',
+				ext: true,
+				key_ops: ['encrypt', 'decrypt'],
+				kty: 'oct',
+			},
+			{ name: 'AES-GCM', length: 128 },
+			false, // extractable
+			['decrypt'],
+		);
+
+		const decrypted = await window.crypto.subtle.decrypt(
+			{
+				name: 'AES-GCM',
+				iv: new Uint8Array(12),
+			},
+			downloadKey,
+			encryptedDownload,
+		);
+		const decoded = new window.TextDecoder().decode(new Uint8Array(decrypted));
+		const content = JSON.parse(decoded);
+	</script>
+</body>
+</html>
