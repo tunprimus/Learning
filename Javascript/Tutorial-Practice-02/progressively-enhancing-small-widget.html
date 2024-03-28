@@ -1,0 +1,50 @@
+<!-- Progressively Enhancing a Small Widget | https://blog.jim-nielsen.com/2020/progressively-enhancing-a-small-widget/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Progressively Enhancing a Small Widget</title>
+	<style>
+		.blog-posts--good:before {
+			content: "👍";
+		}
+		.blog-posts--bad:before {
+			content: "👎";
+		}
+		/* Other styles for to this widget... */
+	</style>
+</head>
+<body>
+	<div class="blog-posts">
+		<strong data-blog-posts="${postCount}">
+			${postCount} blog posts.
+		</strong>
+		<!-- Other static text for this widget... -->
+	</div>
+
+	<!-- JavaScript Here -->
+	<script>
+		// Get the bolded text which has our blog post count
+		const $el = document.querySelector('[data-blog-posts]');
+		// Get the count of blog posts
+		const blogPosts = Number($el.dataset.blogPosts);
+		// Get the current week number of the year
+		const weekNumber = getWeekNumber();
+		// Determine whether we're on pace or not
+		const onPace = blogPosts >= weekNumber;
+
+		/**
+		 * Overwrite the bolded text in the widget to include information about about how far along int he year we are and whether we are on pace or not
+		 */
+		$el.innerHTML = (onPace ? 'On pace:' : 'Falling behind: ') + blogPosts + ' posts in ' + weekNumber + ' weeks.';
+
+		document
+			.querySelector('.blog-posts')
+			.classList.add(onPace
+				? 'blog-posts--good'
+				: 'blog-posts--bad');
+	</script>
+</body>
+</html>
