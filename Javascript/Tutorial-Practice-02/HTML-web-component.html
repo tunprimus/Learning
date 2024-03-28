@@ -1,0 +1,42 @@
+<!-- HTML Web Components: An Example | https://blog.jim-nielsen.com/2023/html-web-components-an-example/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTML Web Components: An Example</title>
+</head>
+<body>
+	<user-avatar>
+		<img 
+			src="../../../../assets/images/taft200.jpg" 
+			alt="Profile of president Taft" 
+			width="32" 
+			height="32" 
+			title="President Taft"
+			loading="lazy"
+		/>
+	</user-avatar>
+
+	<!-- JavaScript Here -->
+	<script>
+		class UserAvatar extends HTMLElement {
+			connectedCallback() {
+				// Get the data for the component from existing markup
+				const $img = this.querySelector('img');
+				const src = $img.getAttribute('src');
+				const name = $img.getAttribute('title');
+
+				// Create the markup and event listeners for tooltip
+
+				// Append it to the DOM
+				this.insertAdjacentHTML(
+					'beforeend',
+					'<!-- code for tooltip here -->'
+				);
+			}
+		}
+		customElements.define('user-avatar', UserAvatar);
+	</script>
+</body>
+</html>
