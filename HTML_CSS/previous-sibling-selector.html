@@ -1,0 +1,48 @@
+<!-- A Previous Sibling Selector | https://blog.jim-nielsen.com/2022/previous-sibling-selector/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>A Previous Sibling Selector</title>
+	<style>
+		body {
+			margin: 0 auto;
+			max-width: 40rem;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		}
+
+		.link {
+			color: inherit;
+		}
+
+		/**
+		* https://stackoverflow.com/a/15503444
+		*/
+		.paragraph:has(+ hr) .link:only-child {
+			color: red;
+			font-weight: 500;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="h1">Document Title</h1>
+	<p class="paragraph">A paragraph of text</p>
+	<p class="paragraph">Another paragraph of text.</p>
+	<hr>
+	<h2 class="h2">Heading</h2>
+	<p class="paragraph">With another paragraph of text.</p>
+	<ul class="list">
+		<li class="list__item">And a bulleted list</li>
+		<li class="list__item">Of items</li>
+		<li class="list__item"><a href="#" class="link list__link">And a link</a></li>
+	</ul>
+	<p class="paragraph"><a href="#" class="link call-to-action">A call to action</a></p>
+	<hr>
+	<h2 class="h2">Another heading</h2>
+	<p class="paragraph">Yet another paragraph of text <a href="#" class="link">and a link</a>.</p>
+	<p class="paragraph"><a href="#" class="link call-to-action">Another call to action</a></p>
+	<hr>
+	<p class="paragraph">The end.</p>
+</body>
+</html>
