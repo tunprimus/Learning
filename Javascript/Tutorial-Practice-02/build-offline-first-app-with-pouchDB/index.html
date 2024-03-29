@@ -1,0 +1,121 @@
+<!-- Building an Offline First App with PouchDB | https://www.sitepoint.com/building-offline-first-app-pouchdb/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Build a Note Taking Application With PouchDB - Building an Offline First App with PouchDB</title>
+	<link rel="stylesheet" href="./css/style.css">
+	<script src="./js/pouchdb-nightly.min.js" defer></script>
+</head>
+<body>
+	<!-- Header -->
+	<header class="header">
+		<h1 class="h1">Build a Note Taking Application With PouchDB</h1>
+		<nav class="nav">
+			<a class="nav__link" href="http://www.sitepoint.com/building-offline-first-app-pouchdb/" target="_blank">Read the article</a>
+			<a class="nav__link" href="https://github.com/webinista/PouchNotes" target="_blank">View the repo</a>
+			<a class="nav__link" href="http://pouchdb.com/" target="_blank">Download PouchDB</a>
+		</nav>
+	</header>
+
+	<!-- Main -->
+	<main class="main">
+		<p class="rel">
+			<button type="button" class="clicktarget" data-action="viewnoteset" data-show="#allnotes" data-hide="section:not(#allnotes)">View Notes</button>
+			<button type="button" class="clicktarget" data-show="#addnote" data-hide="section:not(#addnote)">Add Note</button>
+		</p>
+
+		<!-- Add notes form section -->
+		<section id="addnote" class="section-addnote">
+			<form method="post" id="noteform" class="addnote__form" data-show="#allnotes" data-hide="#addnote">
+				<div class="hide" id="buttonwrapper">
+					<button type="button" class="clicktarget edit">Edit Note</button>
+					<button type="button" class="clicktarget delete">Delete Note</button>
+				</div>
+				<p class="form__inputs-container">
+					<input type="hidden" name="_rev" id="_rev" class="form__input" value="">
+					<input type="hidden" name="_id" id="_id" class="form__input" value="">
+					<label for="notetitle" class="form__label">Title:</label>
+					<input type="text" name="notetitle" id="notetitle" class="form__input" placeholder="Untitled Note" value="">
+				</p>
+				<p class="form__inputs-container">
+					<label for="note" class="form__label">Note text:</label>
+					<textarea name="note" id="note" cols="50" rows="5" class="form__textarea" placeholder="Add note text here. This field is required." required></textarea>
+				</p>
+				<p class="form__inputs-container">
+					<label for="tags" class="form__label">Tags:</label>
+					<input type="text" name="tags" id="tags" class="form__input">
+					<span class="guidance form__span">Separate tags with a comma</span>
+				</p>
+
+				<p class="rel">
+					<input type="file" name="attachment" id="attachment" class="abs form__input">
+					<label for="attachment" class="btn form__label">Attachment</label>(s):</label>
+					<span class="filelist form__span"></span>
+				</p>
+
+				<div id="attachments" class="hide form__attachment-container">
+					<h2 class="h2">Attachments</h2>
+					<ul id="attachmentlist"></ul>
+				</div>
+
+				<p class="form__inputs-container">
+					<button type="submit" class="form__button form__button--submit">Save Note</button>
+				</p>
+			</form>
+		</section>
+
+		<!-- Search notes form section -->
+		<section id="allnotes" class="section-allnotes">
+			<!-- Search form -->
+			<h2 class="h2">Recent notes</h2>
+			<form method="get" id="searchnotes" class="searchnotes">
+				<p class="form__inputs-container">
+					<label for="q" class="form__label">Search:</label>
+					<input type="search" name="q" id="q" class="form__input">
+					<button type="submit" class="form__button form__button--submit">Search</button>
+				</p>
+			</form>
+
+			<!-- Result table -->
+			<table id="notelist" class="notelist">
+				<thead class="notelist__thead">
+					<tr class="notelist__tr">
+						<th class="notelist__th">Title</th>
+						<th class="notelist__th">Created</th>
+						<th class="notelist__th">Updated</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</section>
+	</main>
+
+	<!-- Sync dialogue section -->
+	<section id="syncdialogue" class="dialogue hide" data-action="close">
+		<div class="dialogue__content">
+			<button type="button" class="close dialogue__button" data-action="close">Close</button>
+			<h2 class="h2">Sync-ing data</h2>
+			<div class="progressbar">
+				<progress max="100"></progress>
+			</div>
+		</div>
+	</section>
+
+	<!-- Error dialogue section -->
+	<section id="errordialogue" class="dialogue hide" data-action="close">
+		<div class="dialogue__content">
+			<button type="button" class="dialogue__button" data-action="close">.</button>
+			<h2 class="h2">Error</h2>
+			<div class="msg"></div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<p class="footer__text">Released under an Apache 2.0 licence.</p>
+	</footer>
+</body>
+</html>
