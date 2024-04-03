@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Simple JavaScript Countdown Timer</title>
+	<style>
+		body {
+			text-align: center;
+			background-color: #00ECB9;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: 100;
+		}
+
+		.h1 {
+			color: #339966;
+			font-weight: 100;
+			font-size: 2.5rem;
+			margin: 2.5rem 1.25rem;
+		}
+
+		.clock-section {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			color: #FFFFFF;
+			display: inline-block;
+			font-weight: 100;
+			text-align: center;
+			font-size: 1.875rem;
+		}
+
+		.clock-section__div  {
+			padding: 0.625rem;
+			border-radius: 0.1875rem;
+			background-color: #00BF96;
+			display: inline-block;
+		}
+
+		.clock-section__span {
+			padding: 0.9375rem;
+			border-radius: 0.1875rem;
+			background-color: #00816A;
+			display: inline-block;
+		}
+
+		.smalltext {
+			padding-top: 0.3125rem;
+			font-size: 1rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<h1 class="h1">Countdown Clock</h1>
+		<section id="clock-section" class="clock-section">
+			<!-- Days -->
+			<div id="days-holder" class="clock-section__div days-holder">
+				<span id="days" class="clock-section__span days"></span>
+				<p class="smalltext">Days</p>
+			</div>
+			<!-- Hours -->
+			<div id="hours-holder" class="clock-section__div hours-holder">
+				<span id="hours" class="clock-section__span hours"></span>
+				<p class="smalltext">Hours</p>
+			</div>
+			<!-- Minutes -->
+			<div id="minutes-holder" class="clock-section__div minutes-holder">
+				<span id="minutes" class="clock-section__span minutes"></span>
+				<p class="smalltext">Minutes</p>
+			</div>
+			<!-- Seconds -->
+			<div id="seconds-holder" class="clock-section__div seconds-holder">
+				<span id="seconds" class="clock-section__span seconds"></span>
+				<p class="smalltext">Seconds</p>
+			</div>
+		</section>
+	</div>
+
+	<!-- JavaScript Here -->
+	<script>
+		function getTimeRemaining(endtime) {
+			const total = Date.parse(endtime) - Date.parse(new Date());
+			const seconds = Math.floor((total / 1000) % 60);
+			const minutes = Math.floor((total / 1000 / 60) % 60);
+			const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+			const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+			return {total, days, hours, minutes, seconds};
+		}
+
+		function initialiseClock(id, endtime) {
+			const clock = document.getElementById(id);
+			const daysSpan = clock.querySelector('#days');
+			const hoursSpan = clock.querySelector('#hours');
+			const minutesSpan = clock.querySelector('#minutes');
+			const secondsSpan = clock.querySelector('#seconds');
+
+			function updateClock() {
+				const timeBuffer = getTimeRemaining(endtime);
+
+				daysSpan.textContent = timeBuffer.days;
+				hoursSpan.textContent = ('0' + timeBuffer.hours).slice(-2);
+				minutesSpan.textContent = ('0' + timeBuffer.minutes).slice(-2);
+				secondsSpan.textContent = ('0' + timeBuffer.seconds).slice(-2);
+
+				if (timeBuffer.total <= 0) {
+					clearInterval(timeinterval);
+				}
+			}
+
+			updateClock();
+			const timeinterval = setInterval(updateClock, 1000);
+		}
+
+		const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+		initialiseClock('clock-section', deadline);
+	</script>
+</body>
+</html>

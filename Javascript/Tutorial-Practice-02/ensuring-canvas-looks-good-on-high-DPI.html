@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ensuring Our Canvas Looks Good on Retina / High-DPI Screens</title>
+	<style>
+		body {
+			padding: 3.125rem;
+		}
+
+		.my-canvas {
+			border: 0.625rem solid #333333;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="my-canvas" class="my-canvas" width="550px" height="350px"></canvas>
+	<!-- JavaScript Here -->
+	<script>
+		const MYSHAPE = 'circle';
+		const XCOORD = 200;
+		const YCOORD = 200;
+		const RADIUS = 93;
+		const STARTANGLE = 0;
+		const ENDANGLE = 2 * Math.PI;
+		let canvas = document.querySelector('#my-canvas');
+		let context = canvas.getContext('2d');
+		let rect = canvas.getBoundingClientRect();
+		console.log(rect);
+		console.log(devicePixelRatio);
+
+		canvas.width = rect.width * devicePixelRatio;
+		canvas.height = rect.height * devicePixelRatio;
+
+		context.scale(devicePixelRatio, devicePixelRatio);
+
+		canvas.style.width = rect.width + 'px';
+		canvas.style.height = rect.height + 'px';
+
+		/* function drawCanvas(shape, xCoord=0, yCoord=0, width=0, height=0, radius=0, startAngle=0, endAngle=0, lineWidth=5, counterClockwiseDirection=true, fillColour, strokeColour) {
+			context.beginPath();
+			if (shape === 'circle') {
+				context.arc(`${xCoord}, ${yCoord}, ${radius}, ${startAngle}, ${endAngle}, ${counterClockwiseDirection}`);
+				context.fillStyle = `${fillColour}`;
+				context.fill();
+
+				context.lineWidth = lineWidth;
+				context.strokeStyle = `${strokeColour}`;
+				context.stroke();
+			}
+		}
+		drawCanvas(MYSHAPE, XCOORD, YCOORD, 0, 0, RADIUS, STARTANGLE, ENDANGLE, 20, true, '#E2FFC6', '#66CC01'); */
+
+		function draw() {
+			context.beginPath();
+			context.arc(200, 200, 93, 0, 2 * Math.PI, true);
+			context.fillStyle = '#E2FFC6';
+			context.fill();
+
+			context.lineWidth = 20;
+			context.strokeStyle = '#66CC01';
+			context.stroke();
+		}
+		draw();
+	</script>
+</body>
+</html>
