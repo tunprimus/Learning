@@ -5,3 +5,46 @@
 	width: 100%;
 	max-width: 450px;
 }
+
+.h2 {
+	display: block;
+	text-align: center;
+}
+
+.icons {
+	margin: 0.938rem auto;
+	text-align: center;
+}
+
+.icons__image {
+	display: inline-block;
+	margin: 0 0.625rem;
+	vertical-align: middle;
+}
+
+.p {
+	display: block;
+	margin: auto;
+	text-align: center;
+	padding: 0 0.625rem;
+	width: 100%;
+	max-width: 600px;
+}
+
+.item {
+	width: 100%;
+	max-width: 350px;
+	margin: auto;
+	display: block;
+}
+
+.h3 {
+	text-align: center;
+}
+
+.wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
