@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Quote Generator</title>
+	<style>
+		html {
+			box-sizing: border-box;
+		}
+
+		body {
+			min-height: 100vh;
+			background-color: #000000;
+			color: #FFFFFF;
+			font-family: "Merriweather", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: 700;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.quote-container {
+			width: auto;
+			max-width: 56.25rem;
+			margin: auto 0.625rem;
+			padding: 1.25rem 1.875rem;
+			border-radius: 0.625rem;
+			background-color: rgba(0, 0, 0, 0.5);
+			box-shadow: 0 0.625rem 0.625rem 0.3125rem rgba(0, 0, 0, 0.808);
+		}
+
+		.quote-text {
+			font-size: 2.5rem;
+		}
+
+		.long-quote {
+			font-size: 2rem;
+		}
+
+		.fa-quote-left {
+			font-size: 4rem;
+		}
+
+		.quote-author {
+			margin-top: 0.938rem;
+			font-size: 2rem;
+			font-weight: 300;
+			font-style: italic;
+		}
+
+		.button-container {
+			margin-top: 0.938rem;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.button {
+			cursor: pointer;
+			font-size: 1.2rem;
+			height: 2.5rem;
+			border: none;
+			border-radius: 0.625rem;
+			color: #FFFFFF;
+			background-color: #20201F;
+			outline: none;
+			padding: 0.5rem 1.8rem 0.5rem 1.8rem;
+			box-shadow: 0 0.625rem 0.625rem 0.3125rem rgba(29, 29, 27, 0.582);
+		}
+
+		.button:hover {
+			filter: brightness(130%);
+		}
+
+		.button:active {
+			transform: translate(0, 0.3125rem);
+			box-shadow: 0 0.1rem rgba(255, 255, 255, 0.65);
+		}
+
+		.twitter-button:hover {
+			color: #38A1F3;
+		}
+
+		.fa-twitter {
+			font-size: 1.5rem;
+		}
+
+		.loader {
+			border: 1rem solid #F3F3F3;
+			border-top: 1rem solid #1F0700;
+			border-radius: 50%;
+			width: 7.5rem;
+			height: 7.5rem;
+			animation: spin 2s linear infinite;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+		@media screen and (min-width: 1000px) {
+			.quote-container {
+				margin: unset;
+			}
+
+			.quote-text {
+				font-size: 2.75rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<main class="quote-container" id="quote-container">
+		<!-- Quote -->
+		<section id="quote-text" class="quote-text">
+			<span class="entity-emoji-icon fa-quote-left">&#x201C;</span>
+			<span id="quote" class="quote"></span>
+		</section>
+		<!-- Author -->
+		<section id="quote-author" class="quote-author">
+			<span id="author" class="author"></span>
+		</section>
+		<!-- Buttons -->
+		<section id="button-container" class="button-container">
+			<button class="button twitter-button" id="twitter" title="Tweet This!"><span class="entity-emoji-icon fa-twitter">&#x1F426;</span></button>
+			<button id="new-quote" class="button new-quote">New Quote</button>
+		</section>
+	</main>
+	<!-- Loader -->
+	<div class="loader" id="loader"></div>
+	<!-- JavaScript Here -->
+	<script>
+		const quoteContainer = document.getElementById('quote-container');
+		const quoteText = document.getElementById('quote');
+		const authorText = document.getElementById('author');
+		const newQuoteButton = document.getElementById('new-quote');
+		const twitterButton = document.getElementById('twitter');
+		const loader = document.getElementById('loader');
+
+		let apiQuotes = [];
+
+		// Show loading spinner
+		function showLoadingSpinner() {
+			loader.hidden = false;
+			quoteContainer.hidden = true;
+		}
+
+		// Remove loading spinner
+		function removeLoadingSpinner() {
+			quoteContainer.hidden = false;
+			loader.hidden = true;
+		}
+
+		// Show new quote
+		function newQuote() {
+			showLoadingSpinner();
+			// Pick a random quote from apiQuotes array
+			const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
+			// Check if Author: Firstname Lastname is blank and replace it with 'Unknown'
+			if (!quote.author) {
+				authorText.textContent = 'Unknown';
+			} else {
+				authorText.textContent = quote.author;
+			}
+			// Check quote length to determine styling
+			if (quote.text.length > 115) {
+				quoteText.classList.add('long-quote');
+			} else {
+				quoteText.classList.remove('long-quote');
+			}
+			// Set quote, hide loader
+			quoteText.textContent = quote.text;
+			removeLoadingSpinner();
+		}
+
+		// Get quotes from API
+		async function getQuotes() {
+			showLoadingSpinner();
+			const apiUrl = 'https://type.fit/api/quotes';
+			try {
+				const response = await fetch(apiUrl);
+				apiQuotes = await response.json();
+				newQuote();
+			} catch (err) {
+				// Catch error here
+				newQuote();
+			}
+		}
+
+		// Tweet quote
+		function tweetQuote() {
+			const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+			window.open(twitterUrl, '_blank');
+		}
+
+		// Event listeners
+		newQuoteButton.addEventListener('click', newQuote);
+		twitterButton.addEventListener('click', tweetQuote);
+		
+		// On load
+		getQuotes();
+	</script>
+</body>
+</html>
