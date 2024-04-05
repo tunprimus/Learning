@@ -1,0 +1,54 @@
+<!-- Design a typing speed test game using JavaScript -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Simple Speed Typing Game</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="game.js" defer></script>
+</head>
+<body>
+	<main class="container">
+		<section class="heading" id="heading">
+			Simple Speed Typing
+		</section>
+
+		<section id="header" class="header">
+			<!-- Subsection words per minute -->
+			<div id="wpm" class="wpm">
+				<div id="wpm-header-text" class="header__text">WPM</div>
+				<div id="wpm-current-wpm" class="current__wpm">100</div>
+			</div>
+			<!-- Subsection characters per minute -->
+			<div id="cpm" class="cpm">
+				<div id="cpm-header-text" class="header__text">CPM</div>
+				<div id="cpm-current-cpm" class="current__cpm">100</div>
+			</div>
+			<!-- Subsection errors -->
+			<div id="errors" class="errors">
+				<div id="errors-header-text" class="header__text">Errors</div>
+				<div id="errors-current-errors" class="current__errors">0</div>
+			</div>
+			<!-- Subsection timer -->
+			<div id="timer" class="timer">
+				<div id="timer-header-text" class="header__text">Time</div>
+				<div id="timer-current-timer" class="current__time">60s</div>
+			</div>
+			<!-- Subsection timer -->
+			<div id="accuracy" class="accuracy">
+				<div id="accuracy-header-text" class="header__text">% Accuracy</div>
+				<div id="accuracy-current-accuracy" class="current__accuracy">100</div>
+			</div>
+		</section>
+
+		<section id="quote" class="quote">
+			Click on the area below to start the game.
+		</section>
+
+		<textarea name="" id="input-area" class="input-area" placeholder="start typing here..." oninput="processCurrentText()" onfocus="startGame()"></textarea>
+
+		<button id="restart-btn" class="restart-btn" onclick="resetValues()">Restart</button>
+	</main>
+</body>
+</html>
