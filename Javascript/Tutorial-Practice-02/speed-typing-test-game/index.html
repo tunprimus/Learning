@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Speed Typing Test Game Using HTML, CSS And JavaScript</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js" defer></script>
+</head>
+<body>
+	<main class="wrapper">
+		<input type="text" class="input-field" id="input-field">
+		<section class="content-box">
+			<div class="typing-text">
+				<p class="typing-text__text" id="typing-text-id"></p>
+			</div>
+			<div class="content">
+				<ul class="result-details">
+					<li class="result-details__item time-left">
+						<p class="results-details__text time-left__text">time Left:</p>
+						<span class="results-details__span time-left__span"><b class="time-left__tag" id="time-left-tag">60</b>s</span>
+					</li>
+					<li class="result-details__item errors">
+						<p class="results-details__text errors__text">Errors:</p>
+						<span class="results-details__span errors__span" id="errors-span">0</span>
+					</li>
+					<li class="result-details__item wpm">
+						<p class="results-details__text wpm__text">WPM:</p>
+						<span class="results-details__span wpm__span" id="wpm-span">0</span>
+					</li>
+					<li class="result-details__item cpm">
+						<p class="results-details__text wpm__text">CPM:</p>
+						<span class="results-details__span cpm__span" id="cpm-span">0</span>
+					</li>
+				</ul>
+				<button type="button" class="content__button" id="content-button">Test Again</button>
+			</div>
+		</section>
+	</main>
+</body>
+</html>
