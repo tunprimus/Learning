@@ -1,0 +1,134 @@
+<!-- Pure CSS Popup / Modal Box without JavaScript | https://codepen.io/sahil4test/pen/xERYvX -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pure CSS Popup / Modal Box without JavaScript</title>
+	<style>
+		html {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: Arial, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			background: url(../../assets/images/flower-bouquet.jpg) no-repeat;
+			background-size: cover;
+			height: 100vh;
+		}
+
+		.h1 {
+			text-align: center;
+			font-family: Tahoma, Arial, sans-serif;
+			color: #06D85F;
+			margin: 5rem 0;
+		}
+
+		.box {
+			width: 70%;
+			margin: 0 auto;
+			padding: 2.188rem;
+			background-color: rgba(255, 255, 255, 0.2);
+			border: 0.125rem solid #FFFFFF;
+			border-radius: 1.25rem/3.125rem;
+			background-clip: padding-box;
+			text-align: center;
+		}
+
+		.trigger {
+			font-size: 1rem;
+			padding: 0.625rem;
+			color: inherit;
+			border: 0.125rem solid #06D85F;
+			border-radius: 1.25rem/3.125rem;
+			text-decoration: none;
+			cursor: pointer;
+			transition: all 0.3s ease-out;
+		}
+
+		.trigger:hover {
+			background-color: #06D85F;
+		}
+
+		.overlay {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: rgba(0, 0, 0, 0.7);
+			transition: opacity 500ms;
+			visibility: hidden;
+			opacity: 0;
+		}
+
+		.overlay:target {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		.popup {
+			margin: 4.375rem auto;
+			padding: 1.25rem;
+			background-color: #FFFFFF;
+			border-radius: 0.3125rem;
+			width: 70%;
+			position: relative;
+			transition: all 5s ease-in-out;
+		}
+
+		.popup__h2 {
+			margin-top: 0;
+			color: #333333;
+			font-family: Tahoma, Arial, sans-serif;
+		}
+
+		.popup__close {
+			position: absolute;
+			top: 1.25rem;
+			right: 1.875rem;
+			transition: all 200ms;
+			font-size: 1.875rem;
+			font-weight: bold;
+			text-decoration: none;
+			color: #333333;
+		}
+
+		.popup__close:hover {
+			color: #06D85F;
+		}
+
+		.popup__content {
+			max-height: 30%;
+			overflow: auto;
+		}
+
+		@media screen and (min-width: 768px) {
+			.box {
+				width: 40%;
+			}
+
+			.popup {
+				width: 30%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<h1 class="h1">Popup / Modal Box without JavaScript</h1>
+	<!-- Trigger div -->
+	<div class="box">
+		<a href="#popup1" class="trigger">Let me Pop up</a>
+	</div>
+
+	<!-- Modal / Pop up div -->
+	<div id="popup1" class="overlay">
+		<div class="popup">
+			<h2 class="h2 popup__h2">Here i am</h2>
+			<a href="#" class="close popup__close">&times;</a>
+			<div class="content popup__content">Thanks for popping me out of that button, but now I am done so you can close this window.</div>
+		</div>
+	</div>
+</body>
+</html>
