@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Advanced CSS Selectors – How and When to Use Them</title>
+	<style>
+		html {
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: #00AD8F;
+		}
+
+		.faq-section {
+			margin-top: 5rem;
+		}
+
+		.faq__title {
+			font-size: 2.5rem;
+		}
+
+		.faq-heading {
+			text-align: center;
+			margin-bottom: 2rem;
+			color: #FFFFFF;
+		}
+
+		.container {
+			max-width: 50rem;
+			margin: auto;
+			padding: 1rem;
+		}
+
+		.faq-item {
+			background-color: #FFFFFF;
+			border-radius: 0.3rem;
+			border: 0.0625rem solid #333333;
+			margin-bottom: 0.5rem;
+		}
+
+		.faq-toggle {
+			display: none; /* Hide checkbox */
+		}
+
+		.faq-question {
+			background-color: #EFEFEF;
+			padding: 1rem;
+			margin: 0;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			cursor: pointer;
+			border: none;
+			position: relative; /* Necessary for positioning ::before content */
+		}
+
+		.faq-answer {
+			max-height: 0;
+			overflow: hidden;
+			border-top: 1px solid #333333;
+			padding: 0 1rem;
+			transition: transform 0.3s ease, padding 0.3s ease;
+		}
+
+		.faq-toggle:checked + .faq-question::after {
+			content: "-"; /* Changes the plus to a minus on the FAQ question when the toggle is checked*/
+		}
+
+		.faq-toggle:checked + .faq-question + .faq-answer {
+			max-height: 62.5rem; /* Reveals the answer when the toggle is checked */
+		}
+
+		.faq-item:nth-of-type(odd) .faq-question {
+			background-color: #FFFFFF; /* For odd items */
+		}
+
+		.faq-item:nth-of-type(even) .faq-question {
+			background-color: #CAFFEE; /* For even items */
+		}
+
+		.faq-item:nth-of-type(odd) .faq-question:hover {
+			background-color: #DFDFDF;
+		}
+
+		.faq-item:nth-of-type(even) .faq-question:hover {
+			background-color: #9DEBD2;
+		}
+
+		.faq-item:first-of-type .faq-question {
+			border-top: 0.125rem solid #007BFF;
+		}
+
+		.faq-item:last-of-type .faq-question {
+			border-bottom: 0.125rem solid #007BFF;
+		}
+
+		.faq-question::after {
+			content: "+";
+			color: #00AD8F;
+			font-size: 1.4rem;
+		}
+
+		.faq-item[data-category^="important"] .faq-question {
+			color: #E91E63; /* Styles important questions differently */
+		}
+	</style>
+</head>
+<body>
+	<section class="faq-section">
+		<div class="container">
+			<div class="faq-heading">
+				<h1 class="h1 faq__title">Frequently Asked Questions</h1>
+				<p class="faq__text">Here are a few general CSS questions and their answers, hope they serve as a refresher.</p>
+			</div>
+			<div class="faq-container">
+				<!-- FAQ Item 1 -->
+				<div class="faq-item">
+					<input type="checkbox" name="faq1" id="faq1" class="faq-toggle" hidden>
+					<label for="faq1" class="faq-question">What is the difference between px, em, and rem?</label>
+					<div class="faq-answer">
+						<p class="faq-answer__text">px is a fixed size, em changes size based on the parent element's font size, and rem is always relative to the document's root font size, making layouts more flexible.</p>
+					</div>
+				</div>
+				<!-- FAQ Item 2 -->
+				<div class="faq-item">
+					<input type="checkbox" name="faq2" id="faq2" class="faq-toggle" hidden>
+					<label for="faq2" class="faq-question">Why use :hover and :focus pseudo-classes?</label>
+					<div class="faq-answer">
+						<p class="faq-answer__text">They let you style elements when users interact with them, like changing a button's color when hovered over, making websites more interactive.</p>
+					</div>
+				</div>
+				<!-- FAQ Item 3 -->
+				<div class="faq-item">
+					<input type="checkbox" name="faq3" id="faq3" class="faq-toggle" hidden>
+					<label for="faq3" class="faq-question">What is the CSS Box Model?</label>
+					<div class="faq-answer">
+						<p class="faq-answer__text">It is a concept that includes margins, borders, padding, and the actual content area, helping you control spacing and layout around elements.</p>
+					</div>
+				</div>
+				<!-- FAQ Item 4 -->
+				<div class="faq-item">
+					<input type="checkbox" name="faq4" id="faq4" class="faq-toggle" hidden>
+					<label for="faq4" class="faq-question">How does z-index work?</label>
+					<div class="faq-answer">
+						<p class="faq-answer__text">z-index decides which elements appear on top of others on the page. Higher values are closer to the front; useful for overlays or dropdown menus.</p>
+					</div>
+				</div>
+				<!-- FAQ Item 5 -->
+				<div class="faq-item">
+					<input type="checkbox" name="faq5" id="faq5" class="faq-toggle" hidden>
+					<label for="faq5" class="faq-question">Why use CSS variables?</label>
+					<div class="faq-answer">
+						<p class="faq-answer__text">They make it easy to update values like colours or fonts across your site by changing them in one place, keeping your styles consistent and easier to manage.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
