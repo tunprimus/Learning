@@ -1,0 +1,234 @@
+<!-- Learn how to use hue in CSS colors with HSL | https://developer.mozilla.org/en-US/blog/learn-css-hues-colors-hsl/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Learn how to use hue in CSS colors with HSL</title>
+	<style>
+		:root {
+			--hue: 0;
+		}
+
+		div {
+			width: 10vw;
+			height: 10vw;
+			margin: 0.618rem;
+			padding: 0.309rem;
+			text-align: center;
+			display: inline-block;
+		}
+
+		.first,
+		.second,
+		.fourth,
+		.fifth {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+		}
+
+		.red {
+			background-color: hsl(0, 100%, 50%);
+		}
+
+		.green {
+			background-color: hsl(120, 100%, 50%);
+		}
+
+		.blue {
+			background-color: hsl(240, 100%, 50%);
+		}
+
+		.red-hsl {
+			background-color: hsl(0, 100%, 50%);
+		}
+
+		.red-hsl-80 {
+			background-color: hsl(0, 80%, 50%);
+		}
+
+		.red-hsl-60 {
+			background-color: hsl(0, 60%, 50%);
+		}
+
+		.red-hsl-40 {
+			background-color: hsl(0, 40%, 50%);
+		}
+
+		.red-hsl-20 {
+			background-color: hsl(0, 20%, 50%);
+		}
+
+		.red-hsl-0 {
+			background-color: hsl(0, 0%, 50%);
+		}
+
+		.box {
+			width: 50vw;
+			height: 10vw;
+			outline: 0.1rem solid #777777;
+		}
+
+		.input {
+			display: block;
+			width: 90%;
+			outline: 0.0625rem dotted #777777;
+		}
+
+		.sec4-red-hsl {
+			background-color: hsl(var(--hue), 100%, 50%);
+		}
+
+		.sec4-red-hsl-80 {
+			background-color: hsl(var(--hue), 80%, 50%);
+		}
+
+		.sec4-red-hsl-60 {
+			background-color: hsl(var(--hue), 60%, 50%);
+		}
+
+		.sec4-red-hsl-40 {
+			background-color: hsl(var(--hue), 40%, 50%);
+		}
+
+		.sec4-red-hsl-20 {
+			background-color: hsl(var(--hue), 20%, 50%);
+		}
+
+		.colour-1 {
+			background-color: hsl(var(--hue), 100%, 50%);
+		}
+
+		.colour-2 {
+			background-color: hsl(calc(var(--hue) + 10), 100%, 50%);
+		}
+
+		.colour-3 {
+			background-color: hsl(calc(var(--hue) + 20), 100%, 50%);
+		}
+
+		.colour-4 {
+			background-color: hsl(calc(var(--hue) + 30), 100%, 50%);
+		}
+
+		.colour-5 {
+			background-color: hsl(calc(var(--hue) + 40), 100%, 50%);
+		}
+
+		.colour-6 {
+			background-color: hsl(calc(var(--hue) + 50), 100%, 50%);
+		}
+
+		.colour-7 {
+			background-color: hsl(calc(var(--hue) + 60), 100%, 50%);
+		}
+	</style>
+</head>
+<body>
+	<!-- Defining red, green, and blue using hsl() -->
+	<section class="section first">
+		<div id="red" class="red">Red</div>
+		<div id="green" class="green">Green</div>
+		<div id="blue" class="blue">Blue</div>
+	</section>
+
+	<hr>
+
+	<!-- Making a variation of a hue -->
+	<section class="section second">
+		<div id="red-hsl" class="red-hsl">sat. 100%</div>
+		<div id="red-hsl-80" class="red-hsl-80">sat. 80%</div>
+		<div id="red-hsl-60" class="red-hsl-60">sat. 60%</div>
+		<div id="red-hsl-40" class="red-hsl-40">sat. 40%</div>
+		<div id="red-hsl-20" class="red-hsl-20">sat. 20%</div>
+		<div id="red-hsl-0" class="red-hsl-0">sat. 0%</div>
+	</section>
+
+	<hr>
+
+	<!-- Exploring hue saturation and lightness using hsl() -->
+	<section class="section third">
+		<div id="box" class="box"></div>
+
+		<input type="range" min="0" max="360" value="0" step="0.1" name="h-slider" id="h-slider" class="input h-slider">
+		<input type="range" min="0" max="100" value="100" step="0.1" name="s-slider" id="s-slider" class="input s-slider">
+		<input type="range" min="0" max="100" value="50" step="0.1" name="l-slider" id="l-slider" class="input l-slider">
+
+		<p class="display">Hue: <span id="h-value" class="h-value">0deg</span></p>
+		<p class="display">Saturation: <span id="s-value" class="s-value">100%</span></p>
+		<p class="display">Lightness: <span id="l-value" class="l-value">50%</span></p>
+		<br>
+		<button type="reset">Reset</button>
+	</section>
+
+	<hr>
+
+	<!-- Using a variable to change hues in multiple places -->
+	<section class="section fourth">
+		<div id="sec4-red-hsl" class="sec4-red-hsl">sat. 100%</div>
+		<div id="sec4-red-hsl-80" class="sec4-red-hsl-80">sat. 80%</div>
+		<div id="sec4-red-hsl-60" class="sec4-red-hsl-60">sat. 60%</div>
+		<div id="sec4-red-hsl-40" class="sec4-red-hsl-40">sat. 40%</div>
+		<div id="sec4-red-hsl-20" class="sec4-red-hsl-20">sat. 20%</div>
+
+		<input type="range" min="0" max="360" value="0" step="0.1" name="sec4-hue" id="sec4-hue" class="input sec4-hue">
+	</section>
+
+	<hr>
+
+	<!-- Picking related colours based on hue angles -->
+	<section class="section five">
+		<div id="colour-1" class="colour-1">c-1</div>
+		<div id="colour-2" class="colour-2">c-2</div>
+		<div id="colour-3" class="colour-3">c-3</div>
+		<div id="colour-4" class="colour-4">c-4</div>
+		<div id="colour-5" class="colour-5">c-5</div>
+		<div id="colour-6" class="colour-6">c-6</div>
+		<div id="colour-7" class="colour-7">c-7</div>
+
+		<input type="range" min="0" max="360" value="0" step="0.1" name="sec5-hue" id="sec5-hue" class="input sec5-hue">
+	</section>
+
+	<!-- JavaScript Here -->
+	<script>
+		const box = document.querySelector('#box');
+		const hue = document.querySelector('#h-slider');
+		const saturation = document.querySelector('#s-slider');
+		const lightness = document.querySelector('#l-slider');
+
+		const hueValue = document.querySelector('#h-value');
+		const saturationValue = document.querySelector('#s-value');
+		const lightnessValue = document.querySelector('#l-value');
+
+		function updateBox() {
+			// Set hsl(<hue>deg, <saturation>%, <lightness>%)
+			box.style.backgroundColor = `hsl(${hue.value}, ${saturation.value}%, ${lightness.value}%)`;
+			// Some feedback so that changing values can be seen
+			hueValue.textContent = `${hue.value}deg`;
+			saturationValue.textContent = `${saturation.value}%`;
+			lightnessValue.textContent = `${lightness.value}%`;
+		}
+
+		hue.addEventListener('input', updateBox);
+		saturation.addEventListener('input', updateBox);
+		lightness.addEventListener('input', updateBox);
+
+		const sec4Hue = document.querySelector('#sec4-hue');
+
+		function updateHue () {
+			document.documentElement.style.setProperty('--hue', sec4Hue.value);
+		}
+
+		sec4Hue.addEventListener('input', updateHue);
+
+		const sec5Hue = document.querySelector('#sec5-hue');
+
+		function updateMultipleHue () {
+			document.documentElement.style.setProperty('--hue', sec5Hue.value);
+		}
+
+		sec5Hue.addEventListener('input', updateMultipleHue);
+	</script>
+</body>
+</html>
