@@ -1,0 +1,97 @@
+<!-- Solved with CSS! Dropdown Menus | https://css-tricks.com/solved-with-css-dropdown-menus/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Solved with CSS! Dropdown Menus</title>
+	<style>
+		.link {
+			text-decoration: none;
+			color: #FFFFFF;
+		}
+
+		.nav {
+			font-family: monospace;
+		}
+
+		.ul {
+			background-color: darkorange;
+			list-style: none;
+			margin: 0;
+			padding-left: 0;
+		}
+
+		.li {
+			color: #FFFFFF;
+			background-color: darkorange;
+			display: block;
+			float: left;
+			padding: 1rem;
+			position: relative;
+			text-decoration: none;
+			transition-duration: 0.5s;
+		}
+
+		.li:hover,
+		.li:focus-within {
+			background-color: red;
+			cursor: pointer;
+		}
+		
+		.nav-list-item {
+			display: block;
+			transition-duration: 0.5s;
+		}
+
+		.nav-list-item:hover {
+			cursor: pointer;
+		}
+
+		.nav-dropdown {
+			visibility: hidden;
+			opacity: 0;
+			position: absolute;
+			transition: all 0.5s ease;
+			margin-top: 1rem;
+			left: 0;
+			display: none;
+		}
+
+		.nav__item:hover > .nav-dropdown,
+		.nav-dropdown:hover,
+		.nav-dropdown:focus {
+			visibility: visible;
+			opacity: 1;
+			display: block;
+		}
+
+		.nav__item:focus-within > .nav-dropdown {
+			visibility: visible;
+			opacity: 1;
+			display: block;
+		}
+
+		.nav-dropdown__item {
+			clear: both;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<nav class="nav" role="navigation">
+		<ul class="ul nav__list">
+			<li class="li nav-list-item nav__item"><a href="#" class="link nav__link">One</a></li>
+			<li class="li nav-list-item nav__item"><a href="#" aria-haspopup="true" class="link nav__link">Two</a>
+				<ul class="ul nav-dropdown" aria-label="submenu">
+					<li class="li nav-list-item nav-dropdown__item"><a href="#" class="link nav-dropdown__link">Sub-1</a></li>
+					<li class="li nav-list-item nav-dropdown__item"><a href="#" class="link nav-dropdown__link">Sub-2</a></li>
+					<li class="li nav-list-item nav-dropdown__item"><a href="#" class="link nav-dropdown__link">Sub-3</a></li>
+				</ul>
+			</li>
+			<li class="li nav-list-item nav__item"><a href="#" class="link nav__link">Three</a></li>
+		</ul>
+	</nav>
+</body>
+</html>
