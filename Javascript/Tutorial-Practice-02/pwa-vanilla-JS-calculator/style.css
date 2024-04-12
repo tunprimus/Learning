@@ -1,0 +1,113 @@
+:root {
+	--box-shadow--1: rgba(50, 50, 93, 0.25) 0 1.875rem 3.75rem -0.75rem inset, rgba(0, 0, 0, 0.3) 0 1.125rem 2.25rem -1.125rem inset;
+	--box-shadow--2: rgba(0, 0, 0, 0.17) 0 -1.438rem 1.563rem 0 inset, rgba(0, 0, 0, 0.15) 0 2.25rem 1.875rem 0 inset, rgba(0, 0, 0, 0.1) 0 4.9375rem 2.5rem 0 inset, rgba(0, 0, 0, 0.06) 0 0.125rem 0.0625rem inset, rgba(0, 0, 0, 0.09) 0 0.25rem 0.125rem, rgba(0, 0, 0, 0.09) 0 0.5rem 0.25rem, rgba(0, 0, 0, 0.09) 0 1rem 0.5rem, rgba(0, 0, 0, 0.09) 0 2rem 1rem;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* CSS Height That Works in Both Modern and Legacy Browsers | https://stackoverflow.com/a/65836306 */
+html {
+	height: 100%; /* Fallback CSS for IE 4-6 and older browsers. Note: Without this setting, body below cannot achieve 100% height. */
+	height: 100vh; /* Overrides 100% height in modern HTML5 browsers and uses the viewport's height. Only works in modern HTML5 browsers */
+  font-size: calc(15px + 0.390625vw);
+	scroll-behavior: smooth;
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+	height: auto; /* Allows content to grow beyond the page without overflow */
+	width: auto; /* Allows content to grow beyond the page without overflow */
+	min-height: 100%; /* Starts web page with 100% height. Fallback for IE 4-6 and older browsers */
+	min-height: 100vh; /* Starts web page with 100% height. Uses the viewport's height. Only works in modern HTML5 browsers */
+	background-color: rgb(38, 37, 37);
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+* + * {
+	margin-top: 2vh;;
+}
+
+.table {
+	margin: 10vh auto;
+	padding: 2vh;
+	border-radius: 0.625rem;
+	background-color: grey;
+}
+
+.td {
+	width: 2vw;
+	height: 12vh;
+	padding: 2vh;
+}
+
+.display {
+	border: none;
+	background-color: #5E666F;
+	border-radius: 0.625rem;
+	padding: 2vh;
+	margin-bottom: 2vh;
+	font-family: "Roboto Mono", monospace;
+	font-size: 1.875rem;
+	text-align: right;
+	color: #800F0F;
+}
+
+.input {
+	border: none;
+	outline: none;
+}
+
+.button {
+	width: 100%;
+	height: 100%;
+	padding: 0.75vh;
+	border: none;
+	border-radius: 0.5rem;
+	font-family: "Poppins", sans-serif;
+	font-size: 5vh;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.button:hover {
+	transition: 1s;
+	transform: scale(1.1);
+}
+
+.multiply,
+.divide,
+.minus,
+.add,
+.equalTo {
+	background-color: #7E90A5;
+	box-shadow: var(--box-shadow--1);
+}
+
+.delete {
+	background-color: #4E2121;
+}
+
+.open-par,
+.close-par {
+	background-color: #65707D;
+	box-shadow: var(--box-shadow--1);
+}
+
+.dot,
+.zero,
+.one,
+.two,
+.three,
+.four,
+.five,
+.six,
+.seven,
+.eight,
+.nine {
+	box-shadow: var(--box-shadow--2);
+}
