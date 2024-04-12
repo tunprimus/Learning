@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Image Darning</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<form action="" class="form">
+		<p class="form__text">The image is loaded from here:</p>
+		<br>
+		<div class="load-image">
+			<input type="text" id="url" class="url" value="https://raw.githubusercontent.com/akalenuk/darning/master/screenshots/E_before.png">
+			<button type="button" class="button load-image__button" id="load-image-button" onclick="load(); drawCanvas();">Load yours</button>
+		</div>
+		<div id="canvas-container" class="canvas-container">
+			<br>
+			<canvas id="canvas" class="canvas" width="1024" height="1024"></canvas>
+			<br>
+			<button type="button" class="button canvas-conatainer__button canvas__darn-it" id="canvas-darn-it">Darn it!</button>
+			<button type="button" class="button canvas-conatainer__button canvas__restart" id="canvas-restart">Restart</button>
+		</div>
+	</form>
+	<!-- JavaScript Here -->
+	<script src="darn-it-image-correction.js"></script>
+	<script>
+		loadPixelsFrom("https://raw.githubusercontent.com/akalenuk/darning/master/screenshots/E_before.png");
+		restart();
+		initCanvas();
+	</script>
+</body>
+</html>
