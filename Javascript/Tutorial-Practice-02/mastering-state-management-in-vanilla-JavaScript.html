@@ -5,52 +5,91 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Back to Basics: Mastering State Management in Vanilla JavaScript</title>
+	<style>
+		body {
+			box-sizing: border-box;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		}
+
+		.section::after {
+			content: "--------------------------------------------------";
+			display: block;
+			color: #DBDBDB;
+		}
+
+		.button {
+			min-width: 12ch;
+			min-height: 44px;
+			min-height: 5ch;
+			max-width: 75%;
+			padding: 0.25em 0.75em;
+			font-family: inherit;
+			font-weight: inherit;
+			text-align: center;
+			text-decoration: none;
+			line-height: 1.1;
+			-webkit-border-radius: 0.4rem;
+			-moz-border-radius: 0.4rem;
+			border-radius: 0.4rem;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			touch-action: manipulation;
+		}
+
+		.p {
+			display: inline-block;
+		}
+	</style>
 </head>
 <body>
 	<!-- Simple state increment count UI output -->
 	<section class="section increment-count" id="increment-count">
-		<p id="increment-count-output" class="increment-count-output"><span id="count-display" class="count-display"></span></p>
-		<button type="button" id="increment-button">Increase Count</button>
+		<p id="increment-count-output" class="p increment-count-output"><span id="count-display" class="count-display"></span></p>
+		<button type="button" id="increment-button" class="button">Increase Count</button>
 	</section>
 	<br>
-	<hr>
+	
 
 	<!-- Complex state fetch user profile UI output -->
 	<section id="profile-section" class="section profile-section">
 		<div id="profiles" class="profiles">
-			<p class="profiles__text">Profile content will replace this paragraph.</p>
+			<p class="p profiles__text">Profile content will replace this paragraph.</p>
 		</div>
 	</section>
 	<br>
-	<hr>
+	
 
 	<!-- State management with global variables UI output -->
 	<section class="section global-count-section">
-		<p id="global-count-output" class="global-count-output"><span id="global-count-display" class="global-count-display"></span></p>
-		<button type="button" id="global-increment-button">Increase Global Count</button>
+		<p id="global-count-output" class="p global-count-output"><span id="global-count-display" class="global-count-display"></span></p>
+		<button type="button" id="global-increment-button" class="button">Increase Global Count</button>
 	</section>
 	<br>
-	<hr>
+	
 
 	<!-- State management with JavaScript objects UI output -->
 	<section class="section obj-count-section">
-		<p id="obj-count-output" class="obj-count-output"><span id="obj-count-display" class="obj-count-display"></span></p>
-		<button type="button" id="obj-increment-button">Increase Object Count</button>
+		<p id="obj-count-output" class="p obj-count-output"><span id="obj-count-display" class="obj-count-display"></span></p>
+		<button type="button" id="obj-increment-button" class="button">Increase Object Count</button>
 	</section>
 	<br>
-	<hr>
+	
 
 	<!-- Reacting to state changes via event listeners UI output -->
 	<section class="section name-input-section">
 		<input type="text" id="name-input" class="name-input" placeholder="Type name of recipient">
-		<p id="name-input-output" class="name-input-output"><span id="greeting" class="greeting"></span></p>
+		<p id="name-input-output" class="p name-input-output"><span id="greeting" class="greeting"></span></p>
 	</section>
 	<br>
-	<hr>
+	
 
 	<!-- Reacting to state changes via DOM UI output -->
 	<section class="section dom-task-list-section">
-		<p id="dom-task-list-output" class="dom-task-list-output"></p>
+		<p id="dom-task-list-output" class="p dom-task-list-output"></p>
 		<ul id="dom-task-list" class="dom-task-list"></ul>
 	</section>
 	<br>
@@ -59,11 +98,11 @@
 	<!-- To-Do List application -->
 	<section class="section to-do">
 		<input type="text" id="task-input" class="task-input" placeholder="Enter a new task">
-		<button type="button" onclick="addTask(document.getElementById('task-input').value)">Add Task</button>
+		<button type="button" onclick="addTask(document.getElementById('task-input').value)" class="button">Add Task</button>
 		<ul id="task-list" class="task-list"></ul>
-		<button type="button" onclick="changeFilter('all')">All</button>
-		<button type="button" onclick="changeFilter('active')">Active</button>
-		<button type="button" onclick="changeFilter('completed')">Completed</button>
+		<button type="button" onclick="changeFilter('all')" class="button">All</button>
+		<button type="button" onclick="changeFilter('active')" class="button">Active</button>
+		<button type="button" onclick="changeFilter('completed')" class="button">Completed</button>
 	</section>
 
 	<!-- JavaScript Here -->
