@@ -7,9 +7,51 @@
 	<title>Back to Basics: Mastering State Management in Vanilla JavaScript</title>
 </head>
 <body>
+	<!-- Simple state increment count UI output -->
 	<section class="section increment-count" id="increment-count">
 		<p id="increment-count-output" class="increment-count-output"><span id="count-display" class="count-display"></span></p>
 		<button type="button" id="increment-button">Increase Count</button>
+	</section>
+	<br>
+	<hr>
+
+	<!-- Complex state fetch user profile UI output -->
+	<section id="profile-section" class="section profile-section">
+		<div id="profiles" class="profiles">
+			<p class="profiles__text">Profile content will replace this paragraph.</p>
+		</div>
+	</section>
+	<br>
+	<hr>
+
+	<!-- State management with global variables UI output -->
+	<section class="section global-count-section">
+		<p id="global-count-output" class="global-count-output"><span id="global-count-display" class="global-count-display"></span></p>
+		<button type="button" id="global-increment-button">Increase Global Count</button>
+	</section>
+	<br>
+	<hr>
+
+	<!-- State management with JavaScript objects UI output -->
+	<section class="section obj-count-section">
+		<p id="obj-count-output" class="obj-count-output"><span id="obj-count-display" class="obj-count-display"></span></p>
+		<button type="button" id="obj-increment-button">Increase Object Count</button>
+	</section>
+	<br>
+	<hr>
+
+	<!-- Reacting to state changes via event listeners UI output -->
+	<section class="section name-input-section">
+		<input type="text" id="name-input" class="name-input" placeholder="Type name of recipient">
+		<p id="name-input-output" class="name-input-output"><span id="greeting" class="greeting"></span></p>
+	</section>
+	<br>
+	<hr>
+
+	<!-- Reacting to state changes via DOM UI output -->
+	<section class="section dom-task-list-section">
+		<p id="dom-task-list-output" class="dom-task-list-output"></p>
+		<ul id="dom-task-list" class="dom-task-list"></ul>
 	</section>
 	<br>
 	<hr>
@@ -23,6 +65,7 @@
 		<button type="button" onclick="changeFilter('active')">Active</button>
 		<button type="button" onclick="changeFilter('completed')">Completed</button>
 	</section>
+
 	<!-- JavaScript Here -->
 	<script>
 		/**
@@ -73,9 +116,9 @@
 			updateUIGlobal();
 		}
 		function updateUIGlobal() {
-			document.getElementById('globalCountDisplay').textContent = globalCount;
+			document.getElementById('global-count-display').textContent = globalCount;
 		}
-		document.getElementById('globalIncrementButton').addEventListener('click', incrementGlobalCount);
+		document.getElementById('global-increment-button').addEventListener('click', incrementGlobalCount);
 
 		/**
 		 * State management with JavaScript objects
@@ -87,10 +130,10 @@
 				this.updateObjCounterUI();
 			},
 			updateObjCounterUI: function() {
-				document.getElementById('objCountDisplay').textContent = this.count;
+				document.getElementById('obj-count-display').textContent = this.count;
 			}
 		};
-		document.getElementById('objIncrementButton').addEventListener('click', () => objCounter.increment());
+		document.getElementById('obj-increment-button').addEventListener('click', () => objCounter.increment());
 
 		/**
 		 * Reacting to state changes via event listeners
@@ -98,7 +141,7 @@
 		const eventState = {
 			userName: '',
 		};
-		document.getElementById('nameInput').addEventListener('input', (evt) => {
+		document.getElementById('name-input').addEventListener('input', (evt) => {
 			eventState.userName = evt.target.value;
 			updateGreeting();
 		});
