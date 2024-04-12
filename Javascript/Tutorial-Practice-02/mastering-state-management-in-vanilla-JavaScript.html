@@ -1,0 +1,233 @@
+<!-- Modified from Back to Basics: Mastering State Management in Vanilla JavaScript | https://webcache.googleusercontent.com/search?q=cache:https://medium.com/@asierr/back-to-basics-mastering-state-management-in-vanilla-javascript-e3be7377ac46 -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Back to Basics: Mastering State Management in Vanilla JavaScript</title>
+</head>
+<body>
+	<section class="section increment-count" id="increment-count">
+		<p id="increment-count-output" class="increment-count-output"><span id="count-display" class="count-display"></span></p>
+		<button type="button" id="increment-button">Increase Count</button>
+	</section>
+	<br>
+	<hr>
+	
+	<!-- To-Do List application -->
+	<section class="section to-do">
+		<input type="text" id="task-input" class="task-input" placeholder="Enter a new task">
+		<button type="button" onclick="addTask(document.getElementById('task-input').value)">Add Task</button>
+		<ul id="task-list" class="task-list"></ul>
+		<button type="button" onclick="changeFilter('all')">All</button>
+		<button type="button" onclick="changeFilter('active')">Active</button>
+		<button type="button" onclick="changeFilter('completed')">Completed</button>
+	</section>
+	<!-- JavaScript Here -->
+	<script>
+		/**
+		 * Simple state management
+		 */
+		let count = 0;
+		function incrementCount() {
+			count++;
+			updateUISimple();
+		}
+		function updateUISimple() {
+			document.getElementById('count-display').textContent = count;
+		}
+		document.getElementById('increment-button').addEventListener('click', incrementCount);
+
+		/**
+		 * Complex state management
+		 */
+		let userProfiles = [];
+		function fetchUserProfiles() {
+			fetch('https:api.example.com/users')
+				.then(response => response.json())
+				.then(data => {
+					userProfiles = data;
+					updateUIComplex();
+				})
+				.catch(err => {
+					console.error(err);
+				});
+		}
+		function updateUIComplex() {
+			const profilesContainer = document.getElementById('profiles');
+			profilesContainer.innerHTML = '';
+			userProfiles.forEach(profile => {
+				const profileDiv = document.createElement('div');
+				profileDiv.textContent = `Name: ${profile.name}, Age: ${profile.age}`;
+				profilesContainer.appendChild(profileDiv);
+			});
+		}
+		window.onload = fetchUserProfiles;
+
+		/**
+		 * State management with global variables
+		 */
+		let globalCount = 0;
+		function incrementGlobalCount() {
+			globalCount++;
+			updateUIGlobal();
+		}
+		function updateUIGlobal() {
+			document.getElementById('globalCountDisplay').textContent = globalCount;
+		}
+		document.getElementById('globalIncrementButton').addEventListener('click', incrementGlobalCount);
+
+		/**
+		 * State management with JavaScript objects
+		 */
+		const objCounter = {
+			count: 0,
+			increment: function() {
+				this.count++;
+				this.updateObjCounterUI();
+			},
+			updateObjCounterUI: function() {
+				document.getElementById('objCountDisplay').textContent = this.count;
+			}
+		};
+		document.getElementById('objIncrementButton').addEventListener('click', () => objCounter.increment());
+
+		/**
+		 * Reacting to state changes via event listeners
+		 */
+		const eventState = {
+			userName: '',
+		};
+		document.getElementById('nameInput').addEventListener('input', (evt) => {
+			eventState.userName = evt.target.value;
+			updateGreeting();
+		});
+		function updateGreeting() {
+			document.getElementById('greeting').textContent = `Hello, ${eventState.userName}`;
+		}
+
+		/**
+		 * Reacting to state changes via the DOM
+		 */
+		const domState = {
+			tasks: [],
+		};
+		function addDomTask(domTask) {
+			domState.tasks.push(domTask);
+			updateDomTaskListUI();
+		}
+		function updateDomTaskListUI(domTask) {
+			const domTaskElement = document.createElement('li');
+			domTaskElement.textContent = domTask;
+			document.getElementById('dom-task-list').appendChild(domTaskElement);
+		}
+
+		/**
+		 * Advance state management with Observer pattern
+		 */
+		class Subject {
+			constructor() {
+				this.observers = [];
+			}
+
+			subscribe(observer) {
+				this.observers.push(observer);
+			}
+
+			unsubscribe(observer) {
+				this.observers = this.observers.filter(obs => obs !== observer);
+			}
+
+			notify(data) {
+				this.observers.forEach(observer => observer.update(data));
+			}
+		}
+
+		class Observer {
+			update(data) {
+				console.log('Observer received data:', data);
+			}
+		}
+		const subject = new Subject();
+		const observer1 = new Observer();
+		const observer2 = new Observer();
+		subject.subscribe(observer1);
+		subject.subscribe(observer2);
+		subject.notify('Updated State');
+
+		/**
+		 * Advance state management with Singleton pattern
+		 */
+		let singletonInstance;
+		class GlobalState {
+			constructor() {
+				if (singletonInstance) {
+					return singletonInstance;
+				}
+				this.state = {};
+				singletonInstance = this;
+			}
+
+			getState(key) {
+				return this.state[key];
+			}
+
+			setState(key, value) {
+				this.state[key] = value;
+			}
+		}
+		const globalState1 = new GlobalState();
+		const globalState2 = new GlobalState();
+		globalState1.setState('user', 'Alice');
+		console.log(globalState2.getState('user'));
+
+		/**
+		 * State Management in Action via Structuring To-Do List Application
+		 */
+		let tasks = [];
+		let filter = 'all'; // can be 'all', 'active', 'completed'
+
+		function addTask(text) {
+			const newTask = {
+				id: Date.now(),
+				text: text,
+				completed: false,
+			};
+			tasks.push(newTask);
+			renderTasks();
+		}
+		function toggleTaskCompletion(taskId) {
+			const task = tasks.find(task => task.id === taskId);
+			if (task) {
+				task.completed = !task.completed;
+				renderTasks();
+			}
+		}
+		function changeFilter(newFilter) {
+			filter = newFilter;
+			renderTasks();
+		}
+		function renderTasks() {
+			const filteredTasks = tasks.filter(task => {
+				if (filter === 'active') {
+					return !task.completed;
+				}
+				if (filter === 'completed') {
+					return task.completed;
+				}
+				return true; // for 'all'
+			});
+
+			const taskListElement = document.getElementById('task-list');
+			taskListElement.innerHTML = '';
+			filteredTasks.forEach(task => {
+				const taskElement = document.createElement('li');
+				taskElement.textContent = task.text;
+				taskElement.className = task.completed ? 'completed' : '';
+				taskElement.onclick = () => toggleTaskCompletion(task.id);
+				taskListElement.appendChild(taskElement);
+			});
+		}
+	</script>
+</body>
+</html>
