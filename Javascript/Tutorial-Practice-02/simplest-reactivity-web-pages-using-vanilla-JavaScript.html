@@ -1,0 +1,78 @@
+<!-- Simplest Reactivity in Web Pages Using Vanilla JavaScript | https://dev.to/arnavk-09/simplest-reactivity-in-web-pages-using-vanilla-javascript-5ekp -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Simplest Reactivity in Web Pages Using Vanilla JavaScript</title>
+</head>
+<body>
+	<div data-reactive="name"></div>
+
+	<!-- JavaScript Here -->
+	<script>
+		/**
+		 * Create reactive values
+		 */
+		function reactiveValue(initialValue) {
+			let value = initialValue;
+			const subscribers = [];
+
+			function get() {
+				return value;
+			}
+
+			function set(newValue) {
+				if (value !== newValue) {
+					value = newValue;
+					subscribers.forEach((subscriber) => subscriber());
+				}
+			}
+
+			function subscribe(subscriber) {
+				subscribers.push(subscriber);
+			}
+
+			return { get, set, subscribe };
+		}
+
+		/**
+		 * Create reactive attributes
+		 */
+		const reactiveElements = document.querySelectorAll('[data-reactive]');
+		reactiveElements.forEach((element) => {
+			const name = element.dataset.reactive;
+			const value = reactiveValue(null);
+
+			// Set up a subscription to update the element when the value changes
+			value.subscribe(() => {
+				element.textContent = value.get();
+			});
+
+			// Update the value when the element changes
+			element.addEventListener('input', (evt) => {
+				value.set(evt.target.value);
+			});
+		});
+
+		function reactiveExpression(fn, ...values) {
+			const result = fn(...values.map((value) => value.get()));
+			const dependencies = values.filter((value) => value instanceof ReactiveValue);
+
+			const reactiveValue = reactiveValue(result);
+
+			dependencies.forEach((dependency) => {
+				dependency.subscribe(() => {
+					reactiveValue.set(fn(...dependencies.map((value) => value.get())));
+				});
+			});
+
+			return reactiveValue;
+		}
+
+		const a = reactiveValue(1);
+		const b = reactiveValue(2);
+		const c = reactiveExpression((x, y) => x + y, a, b);
+	</script>
+</body>
+</html>
