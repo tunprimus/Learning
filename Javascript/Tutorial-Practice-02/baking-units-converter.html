@@ -101,10 +101,14 @@
 
 		.close-converter:hover {
 			color: var(--blue-sapphire);
+			transform: scale(1.2);
+			outline: var(--border);
 		}
 
 		.close-converter:active {
 			color: var(--blue-sapphire);
+			transform: scale(1.2);
+			outline: var(--border);
 		}
 	</style>
 </head>
@@ -158,9 +162,131 @@
 
 		<article class="input-wrapper">
 			<label for="degF" class="form__label">deg Fahrenheit (deg F): </label>
-			<input type="number" name="degF" id="degF" value="1" class="form__input form__input--degF">
+			<input type="number" name="degF" id="degF" class="form__input form__input--degF">
 		</article>
 	</form>
+
 	<!-- JavaScript Here -->
+	<script>
+		const formElement = document.getElementById('baking-converter-form');
+		const resetElement = document.getElementById('close-converter');
+		/**
+		 * Get input element
+		 */
+		const cupRef = document.getElementById('cups');
+		const tbspRef = document.getElementById('tbsp');
+		const tspRef = document.getElementById('tsp');
+		const ozRef = document.getElementById('oz');
+		const gmsRef = document.getElementById('gms');
+		const mlRef = document.getElementById('ml');
+
+		const degCRef = document.getElementById('degC');
+		const degFRef = document.getElementById('degF');
+
+		/**
+		 * Functions to convert from one unit to another
+		 * Also using toFixed method to limit decimals to 2 digits only
+		 */
+		function convertFromGrams() {
+			let gms = gmsRef.value;
+
+			cupRef.value = (gms / 200).toFixed(2);
+			tbspRef.value = (gms / 17.07).toFixed(2);
+			tspRef.value = (gms / 5.69).toFixed(2);
+			ozRef.value = (gms * 0.035274).toFixed(2);
+			mlRef.value = (gms * 1).toFixed(1);
+			gmsRef.value = (oz * 28.3495).toFixed(2);
+			mlRef.value = (oz * 30).toFixed(1);
+		}
+
+		function convertFromOz() {
+			let oz = ozRef.value;
+
+			cupRef.value = (oz / 8).toFixed(2);
+			tbspRef.value = (oz * 2).toFixed(1);
+			tspRef.value = (oz * 6).toFixed(1);
+		}
+
+		function convertFromTbsp() {
+			let tbsp = tbspRef.value;
+
+			cupRef.value = (tbsp / 16).toFixed(1);
+			tspRef.value = (tbsp * 3).toFixed(1);
+			ozRef.value = (tbsp / 2).toFixed(2);
+			gmsRef.value = (tbsp * 17.07).toFixed(2);
+			mlRef.value = (tbsp * 15).toFixed(1);
+		}
+
+		function convertFromTsp() {
+			let tsp = tspRef.value;
+
+			cupRef.value = (tsp / 48).toFixed(2);
+			tbspRef.value = (tsp / 3).toFixed(1);
+			ozRef.value = (tsp / 6).toFixed(2);
+			gmsRef.value = (tsp * 5.69).toFixed(2);
+			mlRef.value = (tsp * 5).toFixed(1);
+		}
+
+		function convertFromCups() {
+			let cups = cupRef.value;
+
+			tbspRef.value = (cups * 16).toFixed(1);
+			tspRef.value = (cups * 48).toFixed(1);
+			ozRef.value = (cups * 8).toFixed(1);
+			gmsRef.value = (cups * 200).toFixed(1);
+			mlRef.value = (cups * 240).toFixed(1);
+		}
+
+		function convertFromMl() {
+			let ml = mlRef.value;
+
+			cupRef.value = (ml / 240).toFixed(2);
+			tbspRef.value = (ml / 15).toFixed(2);
+			tspRef.value = (ml / 5).toFixed(2);
+			ozRef.value = (ml / 30).toFixed(2);
+			gmsRef.value = (ml * 1).toFixed(1);
+		}
+
+		function convertFromDegC() {
+			let degC = degCRef.value;
+
+			degFRef.value = (degC * (9 / 5) + 32).toFixed(1);
+		}
+
+		function convertFromDegF() {
+			let degF = degFRef.value;
+
+			degCRef.value = ((degF - 32) * (5 / 9)).toFixed(1);
+		}
+
+		/**
+		 * Add event listeners to all input values
+		 */
+		cupRef.addEventListener('input', convertFromCups);
+		tbspRef.addEventListener('input', convertFromTbsp);
+		tspRef.addEventListener('input', convertFromTsp);
+		ozRef.addEventListener('input', convertFromOz);
+		gmsRef.addEventListener('input', convertFromGrams);
+		mlRef.addEventListener('input', convertFromMl);
+
+		degCRef.addEventListener('input', convertFromDegC);
+		degFRef.addEventListener('input', convertFromDegF);
+
+		/**
+		 * Add event listeners to window to begin converting from 1 cup as soon as window loads
+		 */
+		window.addEventListener('load', convertFromCups);
+		window.addEventListener('load', convertFromDegC);
+
+		/**
+		 * Reset form after calculations
+		 */
+		resetElement.addEventListener('click', (evt) => {
+			if (evt.target.id !== 'close-converter') {
+				return;
+			}
+			formElement.reset();
+		});
+	</script>
 </body>
 </html>
