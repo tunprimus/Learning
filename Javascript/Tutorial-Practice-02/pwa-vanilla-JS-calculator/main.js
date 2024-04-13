@@ -103,3 +103,12 @@ multiply.addEventListener('click', function() {
 divide.addEventListener('click', function() {
 	display.value += '/';
 });
+
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+		navigator.serviceWorker
+			.register('./service-worker.js')
+			.then(res => console.log('service worker: registered'))
+			.catch(err => console.error(`'service worker not registered', Error: ${err}`));
+	});
+}
