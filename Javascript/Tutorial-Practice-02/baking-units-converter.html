@@ -1,0 +1,166 @@
+<!-- How to Build a Unit Converter for Your Baking Needs with HTML, CSS & Vanilla JavaScript | https://www.designerkaran.com/2023/11/how-to-build-unit-converter-for-your.html?m=1 -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to Build a Unit Converter for Your Baking Needs with HTML, CSS & Vanilla JavaScript</title>
+	<style>
+		:root {
+			--ruby-red: #9B2226;
+			--rufous: #AE2012;
+			--rust: #BB3E03;
+			--alloy-orange: #CA6702;
+			--gamboge: #EE9B00;
+			--medium-champagne: #E9D8A6;
+			--middle-green-blue: #94D2BD;
+			--viridian-green: #0A9396;
+			--blue-sapphire: #005F73;
+			--rich-black: #001219;
+			--antique-white: #FFF1C9;
+			--box-shadow: 0 0.5rem 1.5rem rgba(0, 18, 25, 0.1);
+			--border: 0.15rem solid var(--rufous);
+			--border-small: 0.05rem solid  var(--rufous);
+			--outline: 0.1rem solid rgba(0, 18, 25, 0.1);
+			--outline-hover: 0.2rem solid var(--rich-black);
+		}
+
+		* {
+			box-sizing: border-box;
+			transition: all 0.2s linear;
+		}
+
+		html {
+			font-family: "Signika Negative", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			overflow-x: hidden;
+			scroll-behavior: smooth;
+			scroll-padding-top: 7rem;
+		}
+
+		body {
+			background-color: var(--medium-champagne);
+		}
+
+		.converter-form {
+			position: absolute;
+			top: 110%;
+			width: 90%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background-color: var(--antique-white);
+			border-radius: 0.5rem;
+			border: var(--border);
+			box-shadow: var(--box-shadow);
+			padding: 1.2rem;
+		}
+
+		.form__title {
+			font-size: 2rem;
+			color: var(--blue-sapphire);
+			text-align: center;
+		}
+
+		.input-wrapper {
+			padding: 0.6rem 0;
+			width: -moz-min-content;
+			width: min-content;
+		}
+
+		.form__input {
+			height: 3rem;
+			background-color: #FFFFFF;
+			color: var(--rich-black);
+			font-size: 1.5rem;
+			text-transform: none;
+			text-align: center;
+			border-radius: 0.5rem;
+			border: var(--border-small);
+			box-shadow: var(--box-shadow);
+		}
+
+		.form__text {
+			font-size: 1.2rem;
+			font-weight: 500;
+			margin: 0.5rem auto 0 auto;
+		}
+
+		.form__label {
+			font-size: 1.2rem;
+			padding: 0.4rem 0;
+			color: var(--rich-black);
+			text-align: center;
+		}
+
+		.close-converter {
+			font-size: 2rem;
+			color: var(--ruby-red);
+			padding: 0.5rem;
+		}
+
+		.close-converter:hover {
+			color: var(--blue-sapphire);
+		}
+
+		.close-converter:active {
+			color: var(--blue-sapphire);
+		}
+	</style>
+</head>
+<body>
+	<h1 class="h1">Baking Units Converter</h1>
+	<p class="p">Baking can be a precise science, and having the right unit conversions at your fingertips can make all the difference in the outcome of your delicious creations.</p>
+	<h2 class="h2">Use this converter to remove the headache</h2>
+	<form action="" class="form converter-form baking-converter-form" id="baking-converter-form">
+		<h3 class="h3 form__title">
+			<span class="emoji-entity-icon spoon-icon" id="spoon-icon">&#x1F944;</span>
+			Unit Converter
+			<span class="emoji-entity-icon close-icon close-converter" id="close-converter">&#x2716;</span>
+		</h3>
+
+		<p class="p form__text">Quantity:</p>
+		<article class="input-wrapper">
+			<label for="cups" class="form__label">cups: </label>
+			<input type="number" name="cups" id="cups" value="1" class="form__input form__input--cups">
+		</article>
+
+		<article class="input-wrapper">
+			<label for="tbsp" class="form__label">tablespoon (tbsp): </label>
+			<input type="number" name="tbsp" id="tbsp" class="form__input form__input--tbsp">
+		</article>
+
+		<article class="input-wrapper">
+			<label for="tsp" class="form__label">teaspoon (tsp): </label>
+			<input type="number" name="tsp" id="tsp" class="form__input form__input--tsp">
+		</article>
+
+		<article class="input-wrapper">
+			<label for="oz" class="form__label">ounces (oz): </label>
+			<input type="number" name="oz" id="oz" class="form__input form__input--oz">
+		</article>
+
+		<article class="input-wrapper">
+			<label for="gms" class="form__label">grams (gms): </label>
+			<input type="number" name="gms" id="gms" class="form__input form__input--gms">
+		</article>
+
+		<article class="input-wrapper">
+			<label for="ml" class="form__label">millilitres (ml): </label>
+			<input type="number" name="ml" id="ml" class="form__input form__input--ml">
+		</article>
+
+		<p class="p form__text">Temperature:</p>
+		<article class="input-wrapper">
+			<label for="degC" class="form__label">deg Celsius (deg C): </label>
+			<input type="number" name="degC" id="degC" value="1" class="form__input form__input--degC">
+		</article>
+
+		<article class="input-wrapper">
+			<label for="degF" class="form__label">deg Fahrenheit (deg F): </label>
+			<input type="number" name="degF" id="degF" value="1" class="form__input form__input--degF">
+		</article>
+	</form>
+	<!-- JavaScript Here -->
+</body>
+</html>
