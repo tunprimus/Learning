@@ -1,0 +1,46 @@
+<!-- Invoking Native Social Sharing with Vanilla JavaScript: A Comprehensive Guide | https://zerosack.org/blog/260423140023/invoking-native-social-sharing-with-vanilla-javascript-a-comprehensive-guide -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Invoking Native Social Sharing with Vanilla JavaScript: A Comprehensive Guide</title>
+</head>
+<body>
+	<button type="button" onclick="shareLink()">Share this link</button>
+	<button type="button" id="share-button">Share Link on Desktop</button>
+
+	<!-- JavaScript Here -->
+	<script>
+		function shareLink() {
+			navigator.share({
+				title: 'Check out this link',
+				text: 'This is a great resource for web developers',
+				url: 'https://example.com',
+			})
+				.then(() => console.log('Shared successfully'))
+				.catch(err => console.error('Error sharing:', err));
+		}
+
+		const shareButton = document.getElementById('share-button');
+		const title = 'My awesome post';
+		const text = 'Check out my awesome post!';
+		const url = 'https://example.com/my-post';
+
+		shareButton.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(`${title}\n${text}\n${url}`);
+				alert('Content copied to clipboard. Please paste it on your social media platform of choice.');
+			} catch (err) {
+				console.error('Error copying to clipboard: ', err);
+			}
+		});
+
+		if (navigator.share) {
+			alert('Native sharing is supported');
+		} else {
+			alert('Native sharing is not supported');
+		}
+	</script>
+</body>
+</html>
