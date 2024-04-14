@@ -190,7 +190,16 @@
 			updateDisplay();
 		}
 
-		function appendDot() {}
+		function appendDot() {
+			if (currentOperand.includes('.')) {
+				return;
+			}
+			if (currentOperand === '') {
+				currentOperand = '0.';
+			}
+			currentOperand += '.';
+			updateDisplay();
+		}
 
 		function appendNumber(number) {
 			// Prevent multiple decimals
