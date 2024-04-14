@@ -152,30 +152,6 @@
 
 		function deleteNumber() {}
 
-		function compute() {}
-
-		function appendDot() {}
-
-		function appendNumber(number) {
-			// Prevent multiple decimals
-			if (number === '.' && currentOperand.includes('.')) {
-				return;
-			}
-			currentOperand = currentOperand.toString() + number.toString();
-		}
-
-		function chooseOperation(selectedOperation) {
-			if (currentOperand === '') {
-				return;
-			}
-			if (previousOperand !== '') {
-				compute();
-			}
-			operation = selectedOperation;
-			previousOperand = currentOperand;
-			currentOperand = '';
-		}
-
 		function compute() {
 			let computation;
 			const prev = parseFloat(previousOperand);
@@ -204,6 +180,33 @@
 			previousOperand = '';
 			// Refresh the display with the new state
 			updateDisplay();
+		}
+
+		function appendDot() {}
+
+		function appendNumber(number) {
+			// Prevent multiple decimals
+			if (number === '.' && currentOperand.includes('.')) {
+				return;
+			}
+			currentOperand = currentOperand.toString() + number.toString();
+		}
+
+		function chooseOperation(selectedOperation) {
+			if (currentOperand === '') {
+				return;
+			}
+			if (previousOperand !== '') {
+				compute();
+			}
+			operation = selectedOperation;
+			previousOperand = currentOperand;
+			currentOperand = '';
+		}
+
+		function updateDisplay() {
+			document.getElementById('current-operand').innerText = currentOperand;
+			document.getElementById('previous-operand').innerText = previousOperand + ' ' + (operation || '');
 		}
 	</script>
 </body>
