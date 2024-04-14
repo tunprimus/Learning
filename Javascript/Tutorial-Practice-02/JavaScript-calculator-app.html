@@ -177,6 +177,18 @@
 				return;
 			}
 			switch (operation) {
+				case 'x²':
+					computation = Math.pow(current, 2);
+					break;
+				case '√':
+					computation = Math.sqrt(current);
+					break;
+				case '^':
+					computation = Math.pow(prev, current);
+					break;
+				case '%':
+					computation = (prev / 100) * current;
+					break;
 				case '+':
 					computation = prev + current;
 					break;
