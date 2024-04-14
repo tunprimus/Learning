@@ -103,6 +103,18 @@
 		<button type="button" class="button number equals" id="equals">=</button>
 		<button type="button" class="button operation add" id="add">+</button>
 	</section>
+
 	<!-- JavaScript Here -->
+	<script>
+		const calculator = document.getElementById('calculator');
+		const displayCurrent = document.getElementById('current-operand');
+		const displayPrevious = document.getElementById('previous-operand');
+		const numberButtons = document.querySelectorAll('.number');
+		const operationButtons = document.querySelectorAll('.operation');
+		const equalsButton = document.getElementById('equals');
+		const clearButton = document.getElementById('clear');
+		const deleteButton = document.getElementById('delete');
+		const dotButton = document.getElementById('dot');
+	</script>
 </body>
 </html>
