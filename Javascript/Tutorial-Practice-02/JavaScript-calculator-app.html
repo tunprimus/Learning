@@ -246,6 +246,32 @@
 			document.getElementById('current-operand').innerText = currentOperand;
 			document.getElementById('previous-operand').innerText = previousOperand + ' ' + (operation || '');
 		}
+
+		/**
+		 * Add keyboard support
+		 */
+		document.addEventListener('keydown', (evt) => {
+			if (evt.key >= 0 && evt.key <= 9) {
+				appendNumber(evt.key);
+			}
+			if (evt.key === '.') {
+				appendDot();
+			}
+			if (evt.key === '/' || evt.key === '*' || evt.key === '+' || evt.key === '-') {
+				chooseOperation(evt.key);
+			}
+			if (evt.key === 'Enter' || evt.key === '=') {
+				compute();
+			}
+			if (evt.key === 'Escape') {
+				clear();
+			}
+			if (evt.key === 'Backspace') {
+				deleteNumber();
+			}
+
+			updateDisplay();
+		});
 	</script>
 </body>
 </html>
