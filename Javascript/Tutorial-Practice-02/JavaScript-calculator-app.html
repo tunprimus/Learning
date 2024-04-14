@@ -163,6 +163,18 @@
 			}
 			currentOperand = currentOperand.toString() + number.toString();
 		}
+
+		function chooseOperation(selectedOperation) {
+			if (currentOperand === '') {
+				return;
+			}
+			if (previousOperand !== '') {
+				compute();
+			}
+			operation = selectedOperation;
+			previousOperand = currentOperand;
+			currentOperand = '';
+		}
 	</script>
 </body>
 </html>
