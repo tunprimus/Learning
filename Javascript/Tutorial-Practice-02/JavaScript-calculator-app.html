@@ -155,7 +155,10 @@
 			updateDisplay();
 		}
 
-		function deleteNumber() {}
+		function deleteNumber() {
+			currentOperand = currentOperand.toString().slice(0, -1);
+			updateDisplay();
+		}
 
 		function compute() {
 			let computation;
