@@ -148,7 +148,12 @@
 		let previousOperand = '';
 		let operation = null;
 
-		function clear() {}
+		function clear() {
+			currentOperand = '';
+			previousOperand = '';
+			operation = undefined;
+			updateDisplay();
+		}
 
 		function deleteNumber() {}
 
