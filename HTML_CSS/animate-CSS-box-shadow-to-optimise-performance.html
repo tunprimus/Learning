@@ -1,0 +1,132 @@
+<!-- How to Animate CSS Box Shadows and Optimise Performance | https://www.sitepoint.com/css-box-shadow-animation-performance/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to Animate CSS Box Shadows and Optimise Performance</title>
+	<style>
+		body {
+			height: 100vh;
+			width: 100%;
+			background-color: #E0FFFF;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		div {
+			height: 15.63rem;
+			width: 12.5rem;
+			background-color: #FFFFFF;
+			border-radius: 1.25rem;
+			margin: 1.25rem;
+		}
+
+		.box {
+			box-shadow: 0 0.3125rem 0.625rem 0 rgba(0, 0, 0, 0.5);
+			transition: transform 0.5s ease, box-shadow 0.5s ease;
+		}
+
+		.box:hover {
+			transform: translateY(-0.3125rem);
+			box-shadow: 0 0.625rem 1.25rem 0.125rem rgba(0, 0, 0, 0.25);
+		}
+
+		.box-1 {
+			box-shadow: 0 0.625rem 1.25rem 0 rgba(0, 0, 0, 0.5);
+			transition: box-shadow 0.5s ease;
+		}
+
+		.box-1:hover {
+			box-shadow: 0 0.625rem 1.25rem 0 rgba(0, 0, 0, 0.25);
+		}
+
+		.box-2 {
+			box-shadow: 0 0.625rem 1.25rem 0 rgba(0, 0, 0, 0.5);
+			transition: box-shadow 0.5s ease;
+		}
+
+		.box-2:hover {
+			box-shadow: 0 1.25rem 2.5rem 0 rgba(0, 0, 0, 0.25);
+		}
+
+		.box-3 {
+			box-shadow: 0 0.3125rem 0.625rem 0 rgba(0, 0, 0, 0.25), 0 0.625rem 1.25rem 0 rgba(0, 0, 0, 0.5);
+			transition: box-shadow 0.5s ease;
+		}
+
+		.box-3:hover {
+			box-shadow: 0 0.625rem 1.25rem 0 rgba(0, 0, 0, 0.25), 0, 1.25rem 2.5rem 0 rgba(0, 0, 0, 0.15);
+		}
+
+		.box-4 {
+			box-shadow: 0 0.625rem 1.25rem 0 rgba(0, 0, 0, 0.5);
+			transition: box-shadow 0.5s ease;
+		}
+
+		.box-4:hover {
+			box-shadow: 0 0.625rem 1.25rem 0 rgba(0, 0, 0, 0.25), 0, 1.25rem 2.5rem 0 rgba(0, 0, 0, 0.15);
+		}
+
+		.pseudo {
+			position: relative;
+			transition: box-shadow ease 0.5s, transform ease 0.5s;
+			box-shadow: 0 0.3125rem 0.625rem 0 rgba(0, 0, 0, 0.5); /*Initial shadow*/
+		}
+
+		.pseudo::after {
+			content: "";
+			position: absolute;
+			border-radius: 1.25rem;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			box-shadow: 0 0.625rem 1.25rem 0.125rem rgba(0, 0, 0, 0.25); /*final shadow*/
+			transition: opacity 0.5s ease;
+		}
+
+		.pseudo:hover {
+			transform: translateY(-0.625rem);
+		}
+
+		.pseudo:hover::after {
+			opacity: 1;
+		}
+	</style>
+</head>
+<body>
+	<!-- Typical box shadow animation -->
+	<section class="section">
+		<div class="box"></div>
+	</section>
+	<br>
+	<!-- Animating only opacity -->
+	<section class="section-1">
+		<div class="box-1"></div>
+	</section>
+	<br>
+	<!-- Animating spread and offset -->
+	<section class="section-2">
+		<div class="box-2"></div>
+	</section>
+	<br>
+	<!-- Animating multi-layered box-shadow -->
+	<section class="section-3">
+		<div class="box-3"></div>
+	</section>
+	<br>
+	<!-- Animating hover with box-shadow -->
+	<section class="section-4">
+		<div class="box-4"></div>
+	</section>
+	<br>
+	<!-- Animating pseudo element's box-shadow -->
+	<section class="section-5">
+		<div class="pseudo"></div>
+	</section>
+	<br>
+</body>
+</html>
