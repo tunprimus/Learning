@@ -1,0 +1,496 @@
+<!-- 20 Simple Ways to Style the HTML details Element | https://www.sitepoint.com/style-html-details-element/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>20 Simple Ways to Style the HTML details Element</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		}
+
+		.details__text {
+			background-color: #4C5568;
+			color: white;
+			padding: 1rem;
+			border-radius: 0.3125rem;
+		}
+
+		.section-1-details {
+			padding: 0.625rem;
+			border: 0.3125rem solid #F7F7F7;
+			border-radius: 0.1875rem;
+		}
+
+		.section-2-details {
+			padding: 0.625rem;
+			background-color: #E4EAEF;
+			border-radius: 0.3125rem;
+		}
+
+		.section-3-summary {
+			background-color: #2196F3;
+			color: white;
+			padding: 0.625rem;
+		}
+
+		.section-4-summary::marker {
+			color: #E162BF;
+			font-size: 1.2rem;
+		}
+
+		.section-5-summary {
+			list-style-position: outside;
+			margin-left: 1.875rem;
+			padding: 0.625rem 0.625rem 0.625rem 1.25rem;
+			border-radius: 0.3125rem;
+		}
+
+		.section-6-summary {
+			list-style-type: "⬇ ";
+		}
+
+		.section-6-details[open] > .section-6-summary {
+			list-style-type: "⬆ ";
+		}
+
+		.section-7-summary {
+			list-style: none;
+		}
+
+		.section-7-summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.section-8-summary {
+			list-style: none;
+			padding: 0.625rem 0.625rem 0.625rem 2.5rem;
+			background: url("https://uploads.sitepoint.com/wp-content/uploads/2023/10/1697699669arrow.svg") no-repeat 0.875rem 50%;
+			background-size: 1.125rem;
+			font-weight: bold;
+		}
+
+		.section-9-summary {
+			list-style: none;
+			display: flex;
+			align-items: center;
+			padding: 0.625rem;
+			font-weight: bold;
+		}
+
+		.section-9-summary::after {
+			content: "";
+			width: 1.125rem;
+			height: 0.625rem;
+			background: url("../../assets/icons/expand.svg") no-repeat;
+			background: url("https://uploads.sitepoint.com/wp-content/uploads/2023/10/1697699669arrow.svg") no-repeat;
+			background-size: cover;
+			margin-left: 0.75rem;
+			transition: 0.2s;
+		}
+
+		.section-9-details[open] > .section-9-summary::after {
+			transform: rotate(180deg);
+		}
+
+		.section-10-summary {
+			list-style: none;
+			display: inline-flex;
+			align-items: center;
+			padding: 0.625rem;
+			font-weight: bold;
+			background-color: #A3D4FB;
+			color: #30353B;
+			border-radius: 0.3125rem;
+		}
+
+		.section-10-details[open] > p {
+			background-color: #A3D4FB;
+			border-radius: 0.3125rem;
+		}
+
+		.section-11-details {
+			display: inline-block;
+		}
+
+		.section-12-summary {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0.625rem 0.938rem;
+			font-weight: bold;
+		}
+
+		.section-13-summary {
+			list-style: none;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0.625rem 0.938rem;
+			font-weight: bold;
+		}
+
+		.section-13-summary::after {
+			content: "";
+			width: 0;
+			height: 0;
+			border-top: 0.625rem solid #15171B;
+			border-inline: 0.4375rem solid transparent;
+			transition: 0.2s;
+		}
+
+		.section-13-details[open] > .section-13-summary {
+			border-bottom: 0.125rem solid #FFF9F1;
+		}
+
+		.section-13-details[open] > .section-13-summary::after {
+			transform: rotate(-180deg);
+		}
+
+		.section-14-summary {
+			list-style: none;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0.625rem 0.938rem;
+			font-weight: bold;
+			color: #30353B;
+		}
+
+		.section-14-summary::after {
+			content: "\25BC";
+			transition: 0.2s;
+		}
+
+		.section-14-details[open] > .section-14-summary {
+			border-bottom: 0.125rem solid #FFF9F1;
+		}
+
+		.section-14-details[open] > .section-14-summary::after {
+			transform: rotate(-180deg);
+		}
+
+		.section-14-details {
+			background-color: #EEEBDC;
+		}
+
+		.section-15-details {
+			transition: background-color 0.2s linear;
+		}
+
+		.section-15-details:hover {
+			background-color: #DAD3B1;
+		}
+
+		.section-15-details > .section-15-summary {
+			transition: color 1s;
+		}
+
+		.section-15-details[open] > .section-15-summary {
+			color: #D9103E;
+		}
+
+		.section-16-details__text {
+			opacity: 0;
+		}
+
+		.section-16-details[open] .section-16-details__text {
+			animation: fade-in 0.75s linear forwards;
+		}
+
+		@keyframes fade-in {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+
+		.section-17-details {
+			overflow: hidden;
+		}
+
+		.section-17-details[open] .section-17-details__text {
+			animation: animate-up 0.5s linear forwards;
+		}
+
+		@keyframes animate-up {
+			0% {
+				opacity: 0;
+				transform: translateY(100%);
+			}
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.section-18-summary::after {
+			content: " to show hidden content";
+		}
+
+		.section-18-details[open] .section-18-summary::after {
+			content: " to hide extra content";
+		}
+
+		.section-19-summary {
+			cursor: pointer;
+		}
+
+		.section-20-summary:focus {
+			outline: none;
+		}
+
+		.section-20-summary:focus-visible {
+			outline: 0.1875rem dotted #FF0060;
+		}
+
+		.section-20-summary {
+			padding: 0.625rem;
+		}
+
+		.section-21-details {
+			background-color: #2196F3;
+		}
+
+		.section-21-details[open] {
+			background-color: #CE0E99;
+		}
+
+		.section-21-summary {
+			padding: 0.625rem;
+			border-radius: 0.3125rem;
+		}
+
+		.section-21-details[open] .section-21-summary {
+			border-radius: 0.3125rem 0.3125rem 0 0;
+		}
+
+		.section-21-details {
+			border-radius: 0.3125rem;
+			margin-bottom: 0.625rem;
+			color: white;
+		}
+
+		.section-22-details {
+			background-color: #89B4D6;
+		}
+
+		.section-22-h2 {
+			display: inline;
+			font-size: 1rem;
+		}
+
+		.section-22-details[open] {
+			background-color: #7868A8;
+		}
+
+		.section-22-summary {
+			padding: 0.625rem;
+			border-radius: 0.3125rem;
+		}
+
+		.section-22-details[open] .section-22-summary {
+			border-radius: 0.3125rem 0.3125rem 0 0;
+		}
+
+		.section-22-details {
+			border-radius: 0.3125rem;
+			margin-bottom: 0.625rem;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<!-- Adding a border -->
+	<section class="section section-1">
+		<details class="details section-1-details">
+			<summary class="summary section-1-summary">Click me!</summary>
+			<p class="details__text">Section 1: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Adding some background colour -->
+	<section class="section section-2">
+		<details class="details section-2-details">
+			<summary class="summary section-2-summary">Click me!</summary>
+			<p class="details__text">Section 2: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Adding some background colour to the summary -->
+	<section class="section section-3">
+		<details class="details section-3-details">
+			<summary class="summary section-3-summary">Click me!</summary>
+			<p class="details__text">Section 3: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Changing the marker colour -->
+	<section class="section section-4">
+		<details class="details section-4-details">
+			<summary class="summary section-4-summary">Click me!</summary>
+			<p class="details__text">Section 4: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Changing the marker spacing -->
+	<section class="section section-5">
+		<details class="details section-5-details">
+			<summary class="summary section-5-summary">Click me!</summary>
+			<p class="details__text">Section 5: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Changing the marker shape -->
+	<section class="section section-6">
+		<details class="details section-6-details">
+			<summary class="summary section-6-summary">Click me!</summary>
+			<p class="details__text">Section 6: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Removing the custom marker -->
+	<section class="section section-7">
+		<details class="details section-7-details">
+			<summary class="summary section-7-summary">Click me!</summary>
+			<p class="details__text">Section 7: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Using a background image as a marker -->
+	<section class="section section-8">
+		<details class="details section-8-details">
+			<summary class="summary section-8-summary">Click me!</summary>
+			<p class="details__text">Section 8: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Using a background image as a marker with ::after -->
+	<section class="section section-9">
+		<details class="details section-9-details">
+			<summary class="summary section-9-summary">Click me!</summary>
+			<p class="details__text">Section 9: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Making the summary element look like a tab -->
+	<section class="section section-10">
+		<details class="details section-10-details">
+			<summary class="summary section-10-summary">Click me!</summary>
+			<p class="details__text">Section 10: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Limiting the width of the details element -->
+	<section class="section section-11">
+		<details class="details section-11-details">
+			<summary class="summary section-11-summary">Click me!</summary>
+			<p class="details__text">Section 11: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Placing the marker arrow at the far end of the summary -->
+	<section class="section section-12">
+		<details class="details section-12-details">
+			<summary class="summary section-12-summary">Click me!</summary>
+			<p class="details__text">Section 12: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Using ::after as a marker without a background image -->
+	<section class="section section-13">
+		<details class="details section-13-details">
+			<summary class="summary section-13-summary">Click me!</summary>
+			<p class="details__text">Section 13: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Right-aligned marker using summary::after and a Unicode character -->
+	<section class="section section-14">
+		<details class="details section-14-details">
+			<summary class="summary section-14-summary">Click me!</summary>
+			<p class="details__text">Section 14: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Hover effect on the details element -->
+	<section class="section section-15">
+		<details class="details section-15-details">
+			<summary class="summary section-15-summary">Click me!</summary>
+			<p class="details__text">Section 15: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- `Animating` the opening and closing of the details element content with fade in -->
+	<section class="section section-16">
+		<details class="details section-16-details">
+			<summary class="summary section-16-summary">Click me!</summary>
+			<p class="details__text section-16-details__text">Section 16: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- `Animating` the opening and closing of the details element content with slide in -->
+	<section class="section section-17">
+		<details class="details section-17-details">
+			<summary class="summary section-17-summary">Click me!</summary>
+			<p class="details__text section-17-details__text">Section 17: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Changing summary content in open and closed states -->
+	<section class="section section-18">
+		<details class="details section-18-details">
+			<summary class="summary section-18-summary">Click me!</summary>
+			<p class="details__text">Section 18: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Changing the summary cursor -->
+	<section class="section section-19">
+		<details class="details section-19-details">
+			<summary class="summary section-19-summary">Click me!</summary>
+			<p class="details__text">Section 19: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Changing the accessibility focus styles -->
+	<section class="section section-20">
+		<details class="details section-20-details">
+			<summary class="summary section-20-summary">Click me!</summary>
+			<p class="details__text">Section 20: Peekaboo! Here's some hidden content!</p>
+		</details>
+	</section>
+	<br>
+	<!-- Using multiple details elements like an accordion list -->
+	<section class="section section-21">
+		<details class="details section-21-details">
+			<summary class="summary section-21-summary">Click me!</summary>
+			<p class="details__text">Section 21: Unfortunately, it's not currently possible to coordinate multiple <code>details</code> elements in such a way that one closes when another one opens — except via JavaScript.</p>
+		</details>
+		<details class="details section-21-details">
+			<summary class="summary section-21-summary">Click me!</summary>
+			<p class="details__text">But we can style the currently open <code>details</code> element(s) differently from the closed ones.</p>
+		</details>
+		<details class="details section-21-details">
+			<summary class="summary section-21-summary">Click me!</summary>
+			<p class="details__text">You can read about all sorts of ways to style the <code>details</code> element on <a href="https://www.sitepoint.com/style-html-details-element/">SitePoint</a>.</p>
+		</details>
+	</section>
+	<br>
+	<!-- Changing the accessibility focus styles -->
+	<section class="section section-22">
+		<details class="details section-22-details">
+			<summary class="summary section-22-summary"><h2 class="h2 section-22-h2">Click this H2 summary</h2></summary>
+			<p class="details__text">Section 22: A heading inside the <code>summary</code> element may or may not have any value semantically, and probably should be avoided. But if you do use it, set it to <code>display: inline</code> to avoid layout issues.</p>
+		</details>
+	</section>
+<br>
+</body>
+</html>
