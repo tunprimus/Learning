@@ -81,3 +81,35 @@ function renderTodoList() {
 
 	addDraggableEventListeners();
 }
+
+let dragStartIndex;
+
+function addDraggableEventListeners() {
+	const todoItems = document.querySelectorAll('.todo-item');
+
+	todoItems.forEach((item, index) => {
+		item.addEventListener('dragstart', () => item.classList.add('dragging'));
+
+		item.addEventListener('dragend', () => {
+			item.classList.remove('dragging');
+			updateTodosOrder();
+		});
+	});
+
+	todoList.addEventListener('dragover', (evt) => {
+		evt.preventDefault();
+		const draggingItem = document.querySelector('.dragging');
+		// Get array of all items except the one being dragged
+		let siblings = [...todoList.querySelectorAll('.todo-item:not(.dragging)')];
+
+		// Find next sibling item after which the dragging item should be placed
+		let nextSibling = siblings.find(sibling => {
+			return evt.clientY <= sibling.offsetTop + (sibling.offsetHeight / 2);
+		});
+
+		// Inserting the dragging item before the found sibling
+		todoList.insertBefore(draggingItem, nextSibling);
+	});
+
+	todoList.addEventListener('dragenter', evt => evt.preventDefault());
+}
