@@ -9,6 +9,64 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	
+	<!-- header with buttons to switch themes -->
+	<header class="header">
+		<h1 class="h1 header-title">TODO</h1>
+		<button type="button" class="button dark-theme" id="dark-theme-btn"><img src="./images/icon-moon.svg" alt="dark theme icon" class="icon image btn-image btn-image--dark"></button>
+		<button type="button" class="button light-theme" id="light-theme-btn"><img src="./images/icon-sun.svg" alt="light theme icon" class="icon image btn-image btn-image--light"></button>
+	</header>
+
+	<main class="main">
+		<!-- Input and button to add todo items -->
+		<section class="section card add">
+			<div class="btn-container" id="btn-container">
+				<button type="button" id="add-btn" class="add-btn"><span class="emoji-entity-icon icon-plus" aria-hidden="true">&#x2795;</span></button>
+			</div>
+			<div class="txt-container" id="txt-container">
+				<input type="text" class="input todo-input" id="todo-input" placeholder="Create a new todo..." spellcheck="false" autocomplete="off">
+			</div>
+		</section>
+
+		<!-- List of all todo items -->
+		<ul class="ul todos">
+			<li class="li card todo-item" draggable="true" data-index="0">
+				<div class="todo">
+					<input type="checkbox" name="checkbox" class="input checkbox" id="checkbox">
+					<label for="checkbox" class="input-label"></label>
+				</div>
+				<div class="icons">
+					<span class="emoji-entity-icon icon-pencil" aria-hidden="true">&#x270F;</span>
+					<span class="emoji-entity-icon icon-times" aria-hidden="true">&#x2716;</span>
+				</div>
+			</li>
+
+			<!-- more similar items here -->
+		</ul>
+
+		<section class="section card stats">
+			<p class="p stats__text"><span class="stats__span" id="items-left">0</span> items left</p>
+			<!-- filter buttons  -->
+			<div class="filter stats__filter" id="filter">
+				<button type="button" id="all" class="button all button-all">All</button>
+				<button type="button" id="active" class="button active button-active">Active</button>
+				<button type="button" id="completed" class="button completed button-completed">Completed</button>
+			</div>
+			<div class="corner">
+				<button type="button" id="clear" class="button clear button-clear">Clear Completed</button>
+			</div>
+		</section>
+
+		<!-- Filter buttons on mobile -->
+		<section class="section card m-filter">
+			<button type="button" id="m-all" class="button all button-all">All</button>
+				<button type="button" id="m-active" class="button active button-active">Active</button>
+				<button type="button" id="m-completed" class="button completed button-completed">Completed</button>
+		</section>
+	</main>
+
+	<!-- footer -->
+	<footer class="footer">
+		<p class="footer__text">Drag and drop to reorder list</p>
+	</footer>
 </body>
 </html>
