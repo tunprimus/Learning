@@ -236,4 +236,28 @@ body {
   font-weight: var(--font-weight--bold);
 }
 
+.footer {
+  margin: 3rem 0;
+  text-align: center;
+  color: var(--placeholder-colour);
+  font-size: 0.875rem;
+}
 
+/**
+ * Media Queries
+*/
+@media screen and (min-width: 480px) {
+	/* Do not show on bigger screen size */
+	.m-filter {
+    display: none;
+  }
+
+	.emoji-entity-icon {
+		display: none;
+	}
+
+	/* Show on bigger screen size */
+	.filter {
+    display: block;
+  }
+}
