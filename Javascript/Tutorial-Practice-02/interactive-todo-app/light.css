@@ -7,3 +7,12 @@
 	--very-light-greyish-blue: hsl(236, 33%, 92%); 
 	--placeholder-colour: hsl(233, 11%, 84%);
 }
+
+/* Show the moon icon and hide the sun icon */
+.header .dark-theme {
+  display: block;
+}
+
+.header .light-theme {
+  display: none;
+}

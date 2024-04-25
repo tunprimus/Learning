@@ -36,3 +36,161 @@ body {
 	color: var(--text-colour);
 	transition: all 0.3s;
 }
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+.header-title {
+	color: var(--white);
+	letter-spacing: 1.3rem;
+	font-weight: var(--font-weight-bold);
+	font-size: 2.25rem;
+}
+
+/* Hide the moon icon */
+.header .dark-theme {
+  display: none;
+}
+
+.card {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem 1.2rem;
+	align-items: flex-start;
+	height: 3.5rem;
+	background-color: var(--card-bg);
+	border-top: 0.0625rem solid var(--placeholder-colour);
+}
+
+/* Make the inputs and buttons transparent */
+.input,
+.button {
+	font: inherit;
+	border: 0;
+	background-color: transparent;
+	color: var(--text-colour);
+}
+
+/* Remove outline on inputs & buttons */
+.input:focus,
+.button:focus {
+	outline: none;
+}
+
+.add {
+	margin: 1rem 0;
+	border-radius: 0.3rem;
+}
+
+.add-btn {
+	height: 1.5rem;
+	width: 1.5rem;
+	border-radius: 50%;
+	border: 0.0625rem solid var(--placeholder-colour);
+	cursor: pointer;
+}
+
+.add-btn-icon {
+	display: none;
+}
+
+.add-btn:hover .add-btn-icon {
+	display: block;
+}
+
+/* Expands the ToDo input field to fill available space */
+.txt-container {
+  flex: 1;
+}
+
+.txt-container__input {
+	width: 100%;
+	font-size: 1.125rem;
+}
+
+.txt-container__input::placeholder {
+	color: var(--placeholder-colour);
+}
+
+/* Eliminate list styles */
+.ul {
+	list-style: none;
+}
+
+/* Space items */
+.todo-item {
+  justify-content: space-between;
+}
+
+.todo,
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.emoji-entity-icon {
+	margin-top: 0.3rem;
+	cursor: pointer;
+	color: var(--placeholder-colour);
+}
+
+.emoji-entity-icon:hover {
+	color: var(--very-light-greyish-blue);
+}
+
+.emoji-entity-icon__icon-pencil {
+	font-size: 0.875rem;
+}
+
+.todo-item:hover .emoji-entity-icon {
+	display: block;
+}
+
+/* Give top border-radius to the first todo item*/
+.todos .card:first-child {
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.input[type="checkbox"] {
+  display: none;
+}
+
+.input[type="checkbox"] ~ .label {
+	width: 1.5rem;
+	height: 1.5rem;
+	border: 0.0625rem solid var(--placeholder-colour);
+	border-radius: 0.3rem;
+	cursor: pointer;
+}
+
+.input[type="checkbox"] ~ .label:hover {
+	border: 0.0625rem solid var(--purple-pink);
+}
+
+/* Give label background image when item is checked*/
+.input[type="checkbox"]:checked ~ .label {
+	background-image: url(./images/icon-check.svg),
+    linear-gradient(135deg, var(--bright-green) 0, var(--purple-pink));
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+/* Cross the text when item is checked */
+.input[type="checkbox"]:checked ~ .todo-item__text {
+	text-decoration: line-through;
+	color: var(--placeholder-colour);
+}
+
+/* Apply box-shadow */
+.todos,
+.stats,
+.m-filter {
+	box-shadow: 0 2rem 3rem -0.5rem var(--box-shadow);
+}

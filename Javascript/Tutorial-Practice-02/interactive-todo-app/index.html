@@ -7,6 +7,7 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
 	<title>Interactive Todo App Created with Pure Vanilla JavaScript HTML/CSS</title>
 	<link rel="stylesheet" href="style.css">
+	<link id="theme-style" rel="stylesheet" href="">
 </head>
 <body>
 	<!-- header with buttons to switch themes -->
@@ -20,10 +21,10 @@
 		<!-- Input and button to add todo items -->
 		<section class="section card add">
 			<div class="btn-container" id="btn-container">
-				<button type="button" id="add-btn" class="add-btn"><span class="emoji-entity-icon icon-plus" aria-hidden="true">&#x2795;</span></button>
+				<button type="button" id="add-btn" class="button add-btn"><span class="emoji-entity-icon add-btn-icon icon-plus" aria-hidden="true">&#x2795;</span></button>
 			</div>
 			<div class="txt-container" id="txt-container">
-				<input type="text" class="input todo-input" id="todo-input" placeholder="Create a new todo..." spellcheck="false" autocomplete="off">
+				<input type="text" class="input todo-input txt-container__input" id="todo-input" placeholder="Create a new todo..." spellcheck="false" autocomplete="off">
 			</div>
 		</section>
 
@@ -32,11 +33,12 @@
 			<li class="li card todo-item" draggable="true" data-index="0">
 				<div class="todo">
 					<input type="checkbox" name="checkbox" class="input checkbox" id="checkbox">
-					<label for="checkbox" class="input-label"></label>
+					<label for="checkbox" class="label input-label"></label>
+					<p class="p todo-item__text">one</p>
 				</div>
 				<div class="icons">
-					<span class="emoji-entity-icon icon-pencil" aria-hidden="true">&#x270F;</span>
-					<span class="emoji-entity-icon icon-times" aria-hidden="true">&#x2716;</span>
+					<span class="emoji-entity-icon emoji-entity-icon__icon-pencil icon-pencil" aria-hidden="true">&#x270F;</span>
+					<span class="emoji-entity-icon emoji-entity-icon__icon-times icon-times" aria-hidden="true">&#x2716;</span>
 				</div>
 			</li>
 
