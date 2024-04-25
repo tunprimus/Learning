@@ -20,3 +20,34 @@ if (localStorage.getItem('todos')) {
 	todos = JSON.parse(localStorage.getItem('todos'));
 	renderTodoList();
 }
+
+function addTodoItem() {
+	if (inputField.value.trim() === '') {
+		const todoText = inputField.value;
+		inputField.value = '';
+
+		const todoItemId = Math.floor(Math.random() * 10000);
+
+		const newTodoItem = {
+			id: todoItemId,
+			text: todoText,
+			isCompleted: false,
+		};
+
+		todos.push(newTodoItem);
+		localStorage.setItem('todos', JSON.stringify(todos));
+
+		renderTodoList();
+		updateItemsLeft();
+	}
+}
+
+inputField.addEventListener('keydown', (evt) => {
+	if (evt.key === 'Enter' && inputField.value.trim() !== '') {
+		addTodoItem();
+	}
+});
+
+addBtn.addEventListener('click', () => {
+	addTodoItem();
+});
