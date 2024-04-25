@@ -13,3 +13,10 @@ const clearBtn = document.querySelector('#clear');
 const mAllBtn = document.querySelector('#m-all');
 const mActiveBtn = document.querySelector('#m-active');
 const mCompletedBtn = document.querySelector('#m-completed');
+
+let todos = [];
+// Check if todos exist in the local storage
+if (localStorage.getItem('todos')) {
+	todos = JSON.parse(localStorage.getItem('todos'));
+	renderTodoList();
+}
