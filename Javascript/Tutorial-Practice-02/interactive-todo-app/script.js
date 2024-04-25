@@ -51,3 +51,33 @@ inputField.addEventListener('keydown', (evt) => {
 addBtn.addEventListener('click', () => {
 	addTodoItem();
 });
+
+function renderTodoList() {
+	todoList.innerHTML = '';
+
+	todos.forEach((todo, index) => {
+		const newTodoItem = document.createElement('li');
+		newTodoItem.classList.add('li');
+		newTodoItem.classList.add('card');
+		newTodoItem.classList.add('todo-item');
+		newTodoItem.setAttribute('draggable', 'true');
+		newTodoItem.setAttribute('data-index', String(index));
+
+		const todoContent = `
+			<div class="todo">
+				<input type="checkbox" name="checkbox" class="input checkbox" id="checkbox-${todo.id}" ${todo.isComplete ? "checked" : ""}>
+				<label for="checkbox-${todo.id}" class="label input-label"></label>
+				<p class="p todo-item__text">${todo.text}</p>
+			</div>
+			<div class="icons">
+				<span class="emoji-entity-icon emoji-entity-icon__icon-pencil icon-pencil" aria-hidden="true">&#x270F;</span>
+				<span class="emoji-entity-icon emoji-entity-icon__icon-times icon-times" aria-hidden="true">&#x2716;</span>
+			</div>
+		`;
+
+		newTodoItem.innerHTML = todoContent;
+		todoList.appendChild(newTodoItem);
+	});
+
+	addDraggableEventListeners();
+}
