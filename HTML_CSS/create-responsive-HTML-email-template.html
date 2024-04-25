@@ -1,0 +1,71 @@
+<!-- How to Create a Responsive HTML Email Template | https://www.freecodecamp.org/news/how-to-create-a-responsive-html-email-template/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to Create a Responsive HTML Email Template</title>
+	<style>
+		@media screen and (min-width: 600px) {
+			.content-table {
+				width: 600px;
+			}
+
+			.content-header,
+			.content-body,
+			.content-footer {
+				padding: 40px;
+			}
+		}
+	</style>
+</head>
+<body style="font-family: 'Poppins', Arial, sans-serif">
+	<table class="frame-table" width="100%" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td align="center">
+				<table class="content-table" width="100%" cellpadding="0" cellspacing="0" border="0" style="display: block; padding: 10px;">
+					<!-- Header -->
+					<tr>
+						<td class="content-header" style="background-color: #345C72; padding: 20px; text-align: center; color: white; font-size: 24px;">
+						Responsive Email Template
+						</td>
+					</tr>
+					<!-- Body -->
+					<tr>
+						<td class="content-body" style="padding: 20px; text-align: left; font-size: 16px; line-height: 1.6;">
+							Hello, All! <br>
+							Dear earthly grace it loved thee, sighed dwell a mood in.
+						<br><br>
+							Leave reply this its the tapping. Beak word me chamber sat you entreating and, lamplight the disaster mortals and whether wrought crest. That the hath name within on forget.
+						</td>
+					</tr>
+					<!-- Call to action Button -->
+					<tr>
+						<td style="padding: 0px 40px 0px 40px; text-align: center;">
+							<!-- CTA Button -->
+							<table cellspacing="0" cellpadding="0" style="margin: auto;">
+								<tr>
+									<td align="center" style="background-color: #345C72; padding: 10px 20px; border-radius: 5px;">
+										<a href="https://www.yourwebsite.com" target="_blank" style="color: #ffffff; text-decoration: none; font-weight: bold;">Book a Free Consultation</a>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td class="content-body" style="padding: 20px; text-align: left; font-size: 16px; line-height: 1.6;">
+							Now evil day were ancient long-deserted begun beyond, rake congealed can dwelt once sister land. In his day mine mammon lone did. Cell were he.
+						</td>
+					</tr>
+					<!-- Footer -->
+					<tr>
+						<td class="content-footer" style="background-color: #333333; padding: 40px; text-align: center; color: white; font-size: 14px;">
+						Copyright &copy; 2024 | Your brand name
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
