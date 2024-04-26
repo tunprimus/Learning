@@ -315,3 +315,15 @@ mCompletedBtn.addEventListener('click', () => {
 	mAllBtn.classList.remove('active');
 	filterTodoList('completed');
 });
+
+function clearCompletedTodos() {
+	todos = todos.filter((todo) => !todo.isComplete);
+
+	localStorage.setItem('todos', JSON.stringify(todos));
+	renderTodoList();
+	updateItemsLeft();
+}
+
+clearBtn.addEventListener('click', () => {
+	clearCompletedTodos();
+});
