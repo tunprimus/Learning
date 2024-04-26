@@ -22,7 +22,7 @@ if (localStorage.getItem('todos')) {
 }
 
 function addTodoItem() {
-	if (inputField.value.trim() === '') {
+	if (inputField.value.trim() !== '') {
 		const todoText = inputField.value;
 		inputField.value = '';
 
@@ -31,7 +31,7 @@ function addTodoItem() {
 		const newTodoItem = {
 			id: todoItemId,
 			text: todoText,
-			isCompleted: false,
+			isComplete: false,
 		};
 
 		todos.push(newTodoItem);
