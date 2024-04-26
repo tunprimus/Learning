@@ -126,3 +126,27 @@ function updateTodosOrder() {
 	todos = updatedTodos;
 	localStorage.setItem('todos', JSON.stringify(todos));
 }
+
+function toggleTodoCompletion(todoId) {
+	todos = todos.map((todo) => {
+		if (todo.id === todoId) {
+			todo.isComplete = !todo.isComplete;
+		}
+		return todo;
+	});
+	localStorage.setItem('todos', JSON.stringify(todos));
+	renderTodoList();
+	updateItemsLeft();
+}
+
+todoList.addEventListener('change', (evt) => {
+	const checkbox = evt.target;
+	const todoId = parseInt(checkbox.id.split('-')[1]);
+	/**
+	 * eg todo-item id="checkbox-10".
+	 * checkbox-2048.split("-") = ["checkbox", "10"]
+	 * [1] = "10"
+	 * parseInt("10") = 10
+	 */
+	toggleTodoCompletion(todoId);
+});
