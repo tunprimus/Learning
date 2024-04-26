@@ -113,3 +113,16 @@ function addDraggableEventListeners() {
 
 	todoList.addEventListener('dragenter', evt => evt.preventDefault());
 }
+
+function updateTodosOrder() {
+	const updatedTodos = [];
+	const todoItems = document.querySelectorAll('.todo-item');
+
+	todoItems.forEach((item) => {
+		const index = parseInt(item.getAttribute('data-index'));
+		updatedTodos.push(todos[index]);
+	});
+
+	todos = updatedTodos;
+	localStorage.setItem('todos', JSON.stringify(todos));
+}
