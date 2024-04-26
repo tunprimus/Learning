@@ -196,3 +196,8 @@ todoList.addEventListener('click', (evt) => {
 		deleteTodo(todoId);
 	}
 });
+
+function updateItemsLeft() {
+	const incompleteItems = todos.filter((todo) => !todo.isComplete);
+	itemsLeftElement.textContent = incompleteItems.length;
+}
