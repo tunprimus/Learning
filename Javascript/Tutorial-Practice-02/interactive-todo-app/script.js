@@ -150,3 +150,33 @@ todoList.addEventListener('change', (evt) => {
 	 */
 	toggleTodoCompletion(todoId);
 });
+
+function editTodo(todoId, updatedTodoText) {
+	todos = todos.map((todo) => {
+		if (todo.id === todoId) {
+			console.log(todo);
+			return {
+				id: todo.id,
+				text: updatedTodoText,
+				isComplete: todo.isComplete,
+			};
+		}
+		return todo;
+	});
+	localStorage.setItem('todos', JSON.stringify(todos));
+	renderTodoList();
+}
+
+todoList.addEventListener('click', (evt) => {
+	if (evt.target.classList.contains('emoji-entity-icon__icon-pencil')) {
+		const icon = evt.target;
+		const todoItem = icon.closest('.todo-item');
+		const todoId = parseInt(tododItem.querySelector('input[type="checkbox"]').id.split('-')[1]);
+		const todoText = todoItem.querySelector('p').textContent;
+		const newText = prompt('Edit the Todo item', todoText);
+
+		if (newText !== null && newText !== '') {
+			editTodo(todoId, newText);
+		}
+	}
+});
