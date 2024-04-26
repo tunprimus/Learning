@@ -201,3 +201,117 @@ function updateItemsLeft() {
 	const incompleteItems = todos.filter((todo) => !todo.isComplete);
 	itemsLeftElement.textContent = incompleteItems.length;
 }
+
+function filterTodoList(filterType) {
+	let filteredTodos = [];
+
+	switch (filterType) {
+		case 'all':
+			filteredTodos = todos;
+			break;
+		case 'active':
+			filteredTodos = todos.filter(function (todo) {
+				return !todo.isComplete;
+			});
+			break;
+		case 'completed':
+			filteredTodos = todos.filter(function (todo) {
+				return todo.isComplete;
+			});
+			break;
+		default:
+			return;
+			break;
+	}
+	renderFilteredTodoList(filteredTodos);
+}
+
+function renderFilteredTodoList(filteredTodos) {
+	todoList.innerHTML = '';
+
+	filteredTodos.forEach((todo, index) => {
+		const newTodoItem = document.createElement('li');
+		newTodoItem.classList.add('li');
+		newTodoItem.classList.add('card');
+		newTodoItem.classList.add('todo-item');
+		newTodoItem.setAttribute('draggable', 'true');
+		newTodoItem.setAttribute('data-index', String(index));
+
+		const todoContent = `
+			<div class="todo">
+				<input type="checkbox" name="checkbox" class="input checkbox" id="checkbox-${todo.id}" ${todo.isComplete ? "checked" : ""}>
+				<label for="checkbox-${todo.id}" class="label input-label"></label>
+				<p class="p todo-item__text">${todo.text}</p>
+			</div>
+			<div class="icons">
+				<span class="emoji-entity-icon emoji-entity-icon__icon-pencil icon-pencil" aria-hidden="true">&#x270F;</span>
+				<span class="emoji-entity-icon emoji-entity-icon__icon-times icon-times" aria-hidden="true">&#x2716;</span>
+			</div>
+		`;
+
+		newTodoItem.innerHTML = todoContent;
+		todoList.appendChild(newTodoItem);
+	});
+
+	addDraggableEventListeners();
+}
+
+allBtn.addEventListener('click', () => {
+	allBtn.classList.add('active');
+	mAllBtn.classList.add('active');
+	activeBtn.classList.remove('active');
+	mActiveBtn.classList.remove('active');
+	completedBtn.classList.remove('active');
+	mCompletedBtn.classList.remove('active');
+	filterTodoList('all');
+});
+
+mAllBtn.addEventListener('click', () => {
+	allBtn.classList.add('active');
+	mAllBtn.classList.add('active');
+	activeBtn.classList.remove('active');
+	mActiveBtn.classList.remove('active');
+	completedBtn.classList.remove('active');
+	mCompletedBtn.classList.remove('active');
+	filterTodoList('all');
+});
+
+activeBtn.addEventListener('click', () => {
+	activeBtn.classList.add('active');
+	mActiveBtn.classList.add('active');
+	allBtn.classList.remove('active');
+	mAllBtn.classList.remove('active');
+	completedBtn.classList.remove('active');
+	mCompletedBtn.classList.remove('active');
+	filterTodoList('active');
+});
+
+mActiveBtn.addEventListener('click', () => {
+	activeBtn.classList.add('active');
+	mActiveBtn.classList.add('active');
+	allBtn.classList.remove('active');
+	mAllBtn.classList.remove('active');
+	completedBtn.classList.remove('active');
+	mCompletedBtn.classList.remove('active');
+	filterTodoList('active');
+});
+
+completedBtn.addEventListener('click', () => {
+	completedBtn.classList.add('active');
+	mCompletedBtn.classList.add('active');
+	activeBtn.classList.remove('active');
+	mActiveBtn.classList.remove('active');
+	allBtn.classList.remove('active');
+	mAllBtn.classList.remove('active');
+	filterTodoList('completed');
+});
+
+mCompletedBtn.addEventListener('click', () => {
+	completedBtn.classList.add('active');
+	mCompletedBtn.classList.add('active');
+	activeBtn.classList.remove('active');
+	mActiveBtn.classList.remove('active');
+	allBtn.classList.remove('active');
+	mAllBtn.classList.remove('active');
+	filterTodoList('completed');
+});
