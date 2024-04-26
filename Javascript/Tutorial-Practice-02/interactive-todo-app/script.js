@@ -171,12 +171,28 @@ todoList.addEventListener('click', (evt) => {
 	if (evt.target.classList.contains('emoji-entity-icon__icon-pencil')) {
 		const icon = evt.target;
 		const todoItem = icon.closest('.todo-item');
-		const todoId = parseInt(tododItem.querySelector('input[type="checkbox"]').id.split('-')[1]);
+		const todoId = parseInt(todoItem.querySelector('input[type="checkbox"]').id.split('-')[1]);
 		const todoText = todoItem.querySelector('p').textContent;
 		const newText = prompt('Edit the Todo item', todoText);
 
 		if (newText !== null && newText !== '') {
 			editTodo(todoId, newText);
 		}
+	}
+});
+
+function deleteTodo(todoId) {
+	todos = todos.filter((todo) => todo.id !== todoId);
+	localStorage.setItem('todos', JSON.stringify(todos));
+	renderTodoList();
+	updateItemsLeft();
+}
+
+todoList.addEventListener('click', (evt) => {
+	if (evt.target.classList.contains('emoji-entity-icon__icon-times')) {
+		const icon = evt.target;
+		const todoItem = icon.closest('.todo-item');
+		const todoId = parseInt(todoItem.querySelector('input[type="checkbox"]').id.split('-')[1]);
+		deleteTodo(todoId);
 	}
 });
