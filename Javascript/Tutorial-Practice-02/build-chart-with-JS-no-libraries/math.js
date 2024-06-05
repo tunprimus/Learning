@@ -1,15 +1,15 @@
 const math = {};
 
-math.lerp = function(range1, range2, factor) {
-	return range1 + (range2 - range1) * factor;
+math.lerp = function(point1, point2, factor) {
+	return point1 + (point2 - point1) * factor;
 };
 
-math.invLerp = function(range1, range2, factor) {
-	return (factor - range1) / (range2 - range1);
+math.invLerp = function(point1, point2, factor) {
+	return (factor - point1) / (point2 - point1);
 };
 
-math.remap = function(oldRange1, oldRange2, newRange1, newRange2, factor) {
-	return math.lerp(newRange1, newRange2, math.invLerp(oldRange1, oldRange2, factor));
+math.remap = function(oldPoint1, oldPoint2, newPoint1, newPoint2, factor) {
+	return math.lerp(newPoint1, newPoint2, math.invLerp(oldPoint1, oldPoint2, factor));
 };
 
 math.remapPoint = function(oldBounds, newBounds, point) {
