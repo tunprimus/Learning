@@ -11,7 +11,7 @@
 <body>
 	<h1 class="h1">Custom Chart</h1>
 	<div id="chart-container" class="chart-container"></div>
-	<table id="data-table" class="data-table"></table>
+	<table id="dataTable" class="data-table"></table>
 
 	<!-- JavaScript Here -->
 	<script src="./math.js"></script>
@@ -22,14 +22,29 @@
 		for (let i = 0; i < NUMBER_CONSTANT; i++) {
 			const typeOfCar = Math.random() < 0.5 ? 'basic' : 'sport';
 			const km = math.lerp(3000, 300000, Math.random());
-			const carPrice = math.lerp(9000, 900, Math.random())
+			const corrCoefficient = math.invLerp(3000, 300000, km);
+			const carPrice = math.lerp(9000, 900, corrCoefficient);
 			samples.push({
 				id: i,
 				label: typeOfCar,
 				point: [km, carPrice],
 			});
 		}
-		console.table(samples);
+		const header = dataTable.createTHead();
+		const tr = header.insertRow();
+		tr.insertCell().innerHTML = 'Id';
+		tr.insertCell().innerHTML = 'Type';
+		tr.insertCell().innerHTML = 'Km';
+		tr.insertCell().innerHTML = 'Price';
+
+		const body = dataTable.createTBody();
+		samples.forEach(sample => {
+			const tr = body.insertRow();
+			tr.insertCell().innerHTML = sample.id;
+			tr.insertCell().innerHTML = sample.label;
+			tr.insertCell().innerHTML = math.formatNumber(sample.point[0]);
+			tr.insertCell().innerHTML = math.formatNumber(sample.point[1]);
+		});
 	</script>
 </body>
 </html>
