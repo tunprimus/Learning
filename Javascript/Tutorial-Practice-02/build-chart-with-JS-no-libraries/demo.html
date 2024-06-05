@@ -5,16 +5,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Custom Chart</title>
 	<link rel="stylesheet" href="style.css">
-	<!-- <script src="./math.js" defer></script> -->
-	<!-- <script type="module" src="./main.js" defer></script> -->
 </head>
 <body>
 	<h1 class="h1">Custom Chart</h1>
-	<div id="chart-container" class="chart-container"></div>
+	<div id="chartContainer" class="chart-container"></div>
 	<table id="dataTable" class="data-table"></table>
 
 	<!-- JavaScript Here -->
 	<script src="./math.js"></script>
+	<script src="./chart.js"></script>
 	<script defer>
 		const NUMBER_CONSTANT = 1000;
 		const samples = []
@@ -29,6 +28,18 @@
 				point: [km, carPrice],
 			});
 		}
+
+		const options = {
+			size: 250,
+			axesLabels: ['Kilometres', 'Price'],
+			styles: {
+				basic: 'grey',
+				sport: 'red',
+			}
+		};
+		
+		const chart = new Chart(chartContainer, samples, options);
+
 		const header = dataTable.createTHead();
 		const tr = header.insertRow();
 		tr.insertCell().innerHTML = 'Id';
