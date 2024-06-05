@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Custom Chart</title>
+	<link rel="stylesheet" href="style.css">
+	<!-- <script src="./math.js" defer></script> -->
+	<!-- <script type="module" src="./main.js" defer></script> -->
+</head>
+<body>
+	<h1 class="h1">Custom Chart</h1>
+	<div id="chart-container" class="chart-container"></div>
+	<table id="data-table" class="data-table"></table>
+
+	<!-- JavaScript Here -->
+	<script src="./math.js"></script>
+	<script defer>
+		const NUMBER_CONSTANT = 1000;
+		const samples = []
+
+		for (let i = 0; i < NUMBER_CONSTANT; i++) {
+			const typeOfCar = Math.random() < 0.5 ? 'basic' : 'sport';
+			const km = math.lerp(3000, 300000, Math.random());
+			const carPrice = math.lerp(9000, 900, Math.random())
+			samples.push({
+				id: i,
+				label: typeOfCar,
+				point: [km, carPrice],
+			});
+		}
+		console.table(samples);
+	</script>
+</body>
+</html>
