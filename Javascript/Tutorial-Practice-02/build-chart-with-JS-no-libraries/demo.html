@@ -22,8 +22,7 @@
 		for (let i = 0; i < NUMBER_CONSTANT; i++) {
 			const typeOfCar = Math.random() < 0.5 ? 'basic' : 'sport';
 			const km = math.lerp(3000, 300000, Math.random());
-			const corrCoefficient = math.invLerp(3000, 300000, km);
-			const carPrice = math.lerp(9000, 900, corrCoefficient);
+			const carPrice = math.remap(3000, 300000, 9000, 900, km);
 			samples.push({
 				id: i,
 				label: typeOfCar,
