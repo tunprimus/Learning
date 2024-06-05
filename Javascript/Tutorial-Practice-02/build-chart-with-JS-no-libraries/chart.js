@@ -69,8 +69,8 @@ class Chart {
 			loc: [canvas.width / 2, bottom + margin / 2],
 			size: margin * 0.618,
 		});
-
 		ctx.save();
+
 		ctx.translate(left - margin / 2, canvas.height / 2);
 		ctx.rotate(-Math.PI / 2);
 		graphics.drawText(ctx, {
@@ -78,7 +78,6 @@ class Chart {
 			loc: [0, 0],
 			size: margin * 0.618,
 		});
-
 		ctx.restore();
 
 		ctx.beginPath();
@@ -90,6 +89,50 @@ class Chart {
 		ctx.strokeStyle = 'lightgrey';
 		ctx.stroke();
 		ctx.setLineDash([]);
+
+		const dataMin = math.remapPoint(this.pixelBounds, this.dataBounds, [left, bottom]);
+
+		graphics.drawText(ctx, {
+			text: math.formatNumber(dataMin[0], 2),
+			loc: [left, bottom],
+			size: margin * 0.309,
+			align: 'left',
+			vAlign: 'top',
+		});
+		ctx.save();
+
+		ctx.translate(left, bottom);
+		ctx.rotate(-Math.PI / 2);
+		graphics.drawText(ctx, {
+			text: math.formatNumber(dataMin[1], 2),
+			loc: [0, 0],
+			size: margin * 0.309,
+			align: 'left',
+			vAlign: 'bottom',
+		});
+		ctx.restore();
+
+		const dataMax = math.remapPoint(this.pixelBounds, this.dataBounds, [right, top]);
+
+		graphics.drawText(ctx, {
+			text: math.formatNumber(dataMax[0], 2),
+			loc: [right, bottom],
+			size: margin * 0.309,
+			align: 'right',
+			vAlign: 'top',
+		});
+		ctx.save();
+
+		ctx.translate(left, top);
+		ctx.rotate(-Math.PI / 2);
+		graphics.drawText(ctx, {
+			text: math.formatNumber(dataMax[1], 2),
+			loc: [0, 0],
+			size: margin * 0.309,
+			align: 'right',
+			vAlign: 'bottom',
+		});
+		ctx.restore();
 	}
 
 	_drawSamples() {
