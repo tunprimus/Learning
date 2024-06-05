@@ -22,7 +22,7 @@
 		for (let i = 0; i < NUMBER_CONSTANT; i++) {
 			const typeOfCar = Math.random() < 0.5 ? 'basic' : 'sport';
 			const km = math.lerp(3000, 300000, Math.random());
-			const carPrice = math.remap(3000, 300000, 9000, 900, km) + math.lerp(-2000, 2000, Math.random());
+			const carPrice = math.remap(3000, 300000, 9000, 900, km) + math.lerp(-2000, 2000, Math.random()) + (typeOfCar === 'basic' ? 0 : 5000);
 			samples.push({
 				id: i,
 				label: typeOfCar,
