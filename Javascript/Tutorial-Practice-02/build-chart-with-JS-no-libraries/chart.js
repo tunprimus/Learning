@@ -54,9 +54,20 @@ class Chart {
 		const { canvas, ctx } = this;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+		this._drawAxes();
 		ctx.globalAlpha = this.transparency;
 		this._drawSamples();
 		ctx.globalAlpha = 1;
+	}
+
+	_drawAxes() {
+		const { ctx, canvas, axesLabels, margin } = this;
+		const { left, right, top, bottom } = this.pixelBounds;
+
+		graphics.drawText(ctx, {
+			text: axesLabels[0],
+			loc: [canvas.width / 2, bottom + margin / 2],
+		});
 	}
 
 	_drawSamples() {
