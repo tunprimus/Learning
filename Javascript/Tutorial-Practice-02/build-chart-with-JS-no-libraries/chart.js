@@ -20,6 +20,30 @@ class Chart {
 		this.dataBounds = this._getDataBounds();
 
 		this._draw();
+
+		this._addEventListeners();
+	}
+
+	_addEventListeners() {
+		const { canvas, dataTrans, dragInfo } = this;
+
+		canvas.onmousedown = (evt) => {
+			const dataLoc = this._getMouse(evt, true);
+			console.log(dataLoc);
+		}
+	}
+
+	_getMouse = (evt, dataSpace = false) => {
+		const rect = this.canvas.getBoundingClientRect();
+		const pixelLoc = [
+			evt.clientX - rect.left,
+			evt.clientY - rect.top,
+		];
+		if (dataSpace) {
+			const dataLoc = math.remapPoint(this.pixelBounds, this.dataBounds, pixelLoc);
+			return dataLoc;
+		}
+		return pixelLoc;
 	}
 
 	_getPixelBounds() {
