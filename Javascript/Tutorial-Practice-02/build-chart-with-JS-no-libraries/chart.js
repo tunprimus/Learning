@@ -84,10 +84,10 @@ class Chart {
 			(dataBounds.top + dataBounds.bottom) / 2,
 		];
 
-		dataBounds.left = math.lerp(centre[0], dataBounds.left, scale**2);
-		dataBounds.right = math.lerp(centre[0], dataBounds.right, scale**2);
-		dataBounds.top = math.lerp(centre[1], dataBounds.top, scale**2);
-		dataBounds.bottom = math.lerp(centre[1], dataBounds.bottom, scale**2);
+		dataBounds.left = math.lerp(centre[0], dataBounds.left, scale ** 2);
+		dataBounds.right = math.lerp(centre[0], dataBounds.right, scale ** 2);
+		dataBounds.top = math.lerp(centre[1], dataBounds.top, scale ** 2);
+		dataBounds.bottom = math.lerp(centre[1], dataBounds.bottom, scale ** 2);
 	}
 
 	_getMouse (evt, dataSpace = false) {
@@ -217,12 +217,12 @@ class Chart {
 	}
 
 	_drawSamples() {
-		const { ctx, samples, pixelBounds, dataBounds, styles } = this;
+		const { ctx, samples, pixelBounds, dataBounds } = this;
 
 		for (const sample of samples) {
-			const { point } = sample;
+			const { point, label } = sample;
 			const pixelLoc = math.remapPoint(dataBounds, pixelBounds, point);
-			graphics.drawPoint(ctx, pixelLoc);
+			graphics.drawPoint(ctx, pixelLoc, this.styles[label]);
 		}
 	}
 }
