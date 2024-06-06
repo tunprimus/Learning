@@ -15,7 +15,7 @@ class Chart {
 		this.ctx = this.canvas.getContext('2d');
 
 		this.margin = options.size * 0.1;
-		this.transparency = 0.5;
+		this.transparency = 0.7;
 
 		this.dataTrans = {
 			offset: [0, 0],
@@ -225,7 +225,7 @@ class Chart {
 			const pixelLoc = math.remapPoint(dataBounds, pixelBounds, point);
 			switch (this.icon) {
 				case 'text':
-					graphics.drawText(ctx, {text: this.styles[label].text, loc: pixelLoc,});
+					graphics.drawText(ctx, {text: this.styles[label].text, loc: pixelLoc, size: 20,});
 					break;
 				default:
 					graphics.drawPoint(ctx, pixelLoc, this.styles[label].colour);
