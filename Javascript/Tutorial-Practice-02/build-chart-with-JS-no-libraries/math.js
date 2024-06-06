@@ -19,6 +19,20 @@ math.remapPoint = function(oldBounds, newBounds, point) {
 	];
 };
 
+math.add = function(data1, data2) {
+	return [
+		data1[0] + data2[0],
+		data1[1] + data2[1],
+	];
+}
+
+math.subtract = function(data1, data2) {
+	return [
+		data1[0] - data2[0],
+		data1[1] - data2[1],
+	];
+}
+
 math.formatNumber = function(num, precision = 0) {
 	return num.toFixed(precision);
 };
