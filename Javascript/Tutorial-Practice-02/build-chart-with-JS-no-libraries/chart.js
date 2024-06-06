@@ -67,6 +67,7 @@ class Chart {
 			dataTrans.scale += direction * step;
 			this._updateDataBounds(dataTrans.offset, dataTrans.scale);
 			this._draw();
+			evt.preventDefault();
 		}
 	}
 
