@@ -15,9 +15,10 @@ const options = {
 	size: 250,
 	axesLabels: ['Kilometres', 'Price'],
 	styles: {
-		basic: 'grey',
-		sport: 'red',
-	}
+		basic: {colour: 'grey', text: '🚗'},
+		sport: {colour: 'red', text: '🏎'},
+	},
+	icon: 'text',
 };
 
 const chart = new Chart(chartContainer, samples, options)
