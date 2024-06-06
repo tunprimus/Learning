@@ -18,8 +18,10 @@ const options = {
 		basic: {colour: 'grey', text: '🚗'},
 		sport: {colour: 'red', text: '🏎'},
 	},
-	icon: 'text',
+	icon: 'image',
 };
+
+graphics.generateImages(options.styles);
 
 const chart = new Chart(chartContainer, samples, options)
 const header = dataTable.createTHead();

@@ -224,6 +224,9 @@ class Chart {
 			const { point, label } = sample;
 			const pixelLoc = math.remapPoint(dataBounds, pixelBounds, point);
 			switch (this.icon) {
+				case 'image':
+					graphics.drawImage(ctx, this.styles[label].image, pixelLoc);
+					break;
 				case 'text':
 					graphics.drawText(ctx, {text: this.styles[label].text, loc: pixelLoc, size: 20,});
 					break;
