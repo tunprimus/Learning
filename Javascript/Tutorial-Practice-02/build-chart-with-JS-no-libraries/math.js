@@ -33,6 +33,13 @@ math.subtract = function(data1, data2) {
 	];
 }
 
+math.scale = function(data, scaler) {
+	return [
+		data[0] * scaler,
+		data[1] * scaler,
+	];
+}
+
 math.formatNumber = function(num, precision = 0) {
 	return num.toFixed(precision);
 };
