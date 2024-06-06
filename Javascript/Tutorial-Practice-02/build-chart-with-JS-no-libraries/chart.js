@@ -51,7 +51,7 @@ class Chart {
 				dragInfo.end = dataLoc;
 				dragInfo.offset = math.scale(math.subtract(dragInfo.start, dragInfo.end), dataTrans.scale);
 				const newOffset = math.scale(math.add(dataTrans.offset, dragInfo.offset), dataTrans.scale);
-				this._updateDataBounds(newOffset, scale);
+				this._updateDataBounds(newOffset, dataTrans.scale);
 				this._draw();
 			}
 		}
@@ -65,6 +65,7 @@ class Chart {
 			const direction = Math.sign(evt.deltaY);
 			const step = 0.02;
 			dataTrans.scale += direction * step;
+			dataTrans.scale = Math.max(step, Math.min(2, dataTrans.scale));
 			this._updateDataBounds(dataTrans.offset, dataTrans.scale);
 			this._draw();
 			evt.preventDefault();
@@ -83,10 +84,10 @@ class Chart {
 			(dataBounds.top + dataBounds.bottom) / 2,
 		];
 
-		dataBounds.left = math.lerp(centre[0], dataBounds.left, scale);
-		dataBounds.right = math.lerp(centre[0], dataBounds.right, scale);
-		dataBounds.top = math.lerp(centre[1], dataBounds.top, scale);
-		dataBounds.bottom = math.lerp(centre[1], dataBounds.bottom, scale);
+		dataBounds.left = math.lerp(centre[0], dataBounds.left, scale**2);
+		dataBounds.right = math.lerp(centre[0], dataBounds.right, scale**2);
+		dataBounds.top = math.lerp(centre[1], dataBounds.top, scale**2);
+		dataBounds.bottom = math.lerp(centre[1], dataBounds.bottom, scale**2);
 	}
 
 	_getMouse (evt, dataSpace = false) {
