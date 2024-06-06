@@ -23,7 +23,10 @@ const options = {
 
 graphics.generateImages(options.styles);
 
-const chart = new Chart(chartContainer, samples, options)
+setTimeout(() => {
+	const chart = new Chart(chartContainer, samples, options);
+}, 100);
+
 const header = dataTable.createTHead();
 const tr = header.insertRow();
 tr.insertCell().innerHTML = 'Id';
