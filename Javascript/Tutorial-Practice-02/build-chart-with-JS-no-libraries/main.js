@@ -12,7 +12,7 @@ for (let i = 0; i < NUMBER_CONSTANT; i++) {
 }
 
 const options = {
-	size: 250,
+	size: 500,
 	axesLabels: ['Kilometres', 'Price'],
 	styles: {
 		basic: {colour: 'grey', text: '🚗'},

@@ -15,7 +15,7 @@ class Chart {
 
 		this.ctx = this.canvas.getContext('2d');
 
-		this.margin = options.size * 0.1;
+		this.margin = options.size * 0.11;
 		this.transparency = 0.7;
 
 		this.dataTrans = {
@@ -76,6 +76,8 @@ class Chart {
 		canvas.onmouseup = () => {
 			dataTrans.offset = math.add(dataTrans.offset, dragInfo.offset);
 			dragInfo.dragging = false;
+			dragInfo.end = [0, 0];
+			dragInfo.offset = [0, 0];
 		}
 
 		canvas.onwheel = (evt) => {
