@@ -149,8 +149,17 @@ class Chart {
 		ctx.globalAlpha = 1;
 
 		if (this.nearestSampleToMouse) {
-			this._drawSamples([this.nearestSampleToMouse]);
+			this._emphasiseSample(this.nearestSampleToMouse);
 		}
+	}
+
+	_emphasiseSample(sample, colour = 'white') {
+		const pLoc = math.remapPoint(this.dataBounds, this.pixelBounds, sample.point);
+		const grd = this.ctx.createRadialGradient(...pLoc, 0, ...pLoc, this.margin);
+		grd.addColorStop(0, colour);
+		grd.addColorStop(1, 'rgba(255, 255, 255, 0)');
+		graphics.drawPoint(this.ctx, pLoc, grd, this.margin * 2);
+		this._drawSamples([sample]);
 	}
 
 	_drawAxes() {
