@@ -28,6 +28,8 @@ class Chart {
 			dragging: false,
 		};
 
+		this.nearestSampleToMouse = null;
+
 		this.pixelBounds = this._getPixelBounds();
 		this.dataBounds = this._getDataBounds();
 		this.defaultDataBounds = this._getDataBounds();
@@ -53,8 +55,13 @@ class Chart {
 				dragInfo.offset = math.scale(math.subtract(dragInfo.start, dragInfo.end), dataTrans.scale);
 				const newOffset = math.scale(math.add(dataTrans.offset, dragInfo.offset), dataTrans.scale);
 				this._updateDataBounds(newOffset, dataTrans.scale);
-				this._draw();
 			}
+			const pLoc = this._getMouse(evt);
+			const pPoints = this.samples.map(s => math.remapPoint(this.dataBounds, this.pixelBounds, s.point));
+			const index = math.getNearest(pLoc, pPoints);
+			this.nearestSampleToMouse = this.samples[index];
+
+			this._draw();
 		}
 
 		canvas.onmouseup = () => {
@@ -138,8 +145,12 @@ class Chart {
 
 		this._drawAxes();
 		ctx.globalAlpha = this.transparency;
-		this._drawSamples();
+		this._drawSamples(this.samples);
 		ctx.globalAlpha = 1;
+
+		if (this.nearestSampleToMouse) {
+			this._drawSamples([this.nearestSampleToMouse]);
+		}
 	}
 
 	_drawAxes() {
@@ -217,8 +228,8 @@ class Chart {
 		ctx.restore();
 	}
 
-	_drawSamples() {
-		const { ctx, samples, pixelBounds, dataBounds } = this;
+	_drawSamples(samples) {
+		const { ctx, pixelBounds, dataBounds } = this;
 
 		for (const sample of samples) {
 			const { point, label } = sample;

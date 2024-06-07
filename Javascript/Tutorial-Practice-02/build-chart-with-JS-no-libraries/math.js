@@ -40,6 +40,26 @@ math.scale = function(data, scaler) {
 	];
 }
 
+math.distance = function(pt1, pt2) {
+	return Math.sqrt(((pt1[0] - pt2[0]) ** 2) + ((pt1[1] - pt2[1]) ** 2));
+}
+
 math.formatNumber = function(num, precision = 0) {
 	return num.toFixed(precision);
 };
+
+math.getNearest = function(loc, points) {
+	let minDist = Number.MAX_SAFE_INTEGER;
+	let nearestIndex = 0;
+
+	for (let i = 0; i < points.length; i++) {
+		const point = points[i];
+		const dist = math.distance(loc, point);
+
+		if (dist < minDist) {
+			minDist = dist;
+			nearestIndex = i;
+		}
+	}
+	return nearestIndex;
+}
