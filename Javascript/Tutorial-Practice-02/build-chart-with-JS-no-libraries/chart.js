@@ -96,12 +96,19 @@ class Chart {
 			}
 
 			if (this.hoveredSample) {
-				this.selectedSample = this.hoveredSample;
-				if (this.onClick) {
-					this.onClick(this.selectedSample);
+				if (this.selectedSample === this.hoveredSample) {
+					this.selectedSample = null;
+				} else {
+					this.selectedSample = this.hoveredSample;
 				}
-				this._draw();
+			} else {
+				this.selectedSample = null;
 			}
+
+			if (this.onClick) {
+				this.onClick(this.selectedSample);
+			}
+			this._draw();
 		}
 	}
 

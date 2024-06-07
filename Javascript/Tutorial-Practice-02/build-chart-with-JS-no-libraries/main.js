@@ -46,8 +46,19 @@ samples.forEach(sample => {
 });
 
 function handleClick(sample, doScroll = true) {
-	[...document.querySelectorAll('.emphasise')].forEach((elem) => elem.classList.remove('emphasise'));
+	if (sample === null) {
+		[...document.querySelectorAll('.emphasise')].forEach((elem) => elem.classList.remove('emphasise'));
+		return;
+	}
+	
 	const el = document.getElementById('sample_' + sample.id);
+	if (el.classList.contains('emphasise')) {
+		el.classList.remove('emphasise');
+		chart.selectSample(null);
+		return;
+	}
+
+	[...document.querySelectorAll('.emphasise')].forEach((elem) => elem.classList.remove('emphasise'));
 	el.classList.add('emphasise');
 	if (doScroll) {
 		el.scrollIntoView({
