@@ -18,12 +18,12 @@
 	<canvas id="my-canvas" class="my-canvas" width="550px" height="350px"></canvas>
 	<!-- JavaScript Here -->
 	<script>
-		const MYSHAPE = 'circle';
-		const XCOORD = 200;
-		const YCOORD = 200;
+		const MY_SHAPE = 'circle';
+		const X_COORD = 200;
+		const Y_COORD = 200;
 		const RADIUS = 93;
-		const STARTANGLE = 0;
-		const ENDANGLE = 2 * Math.PI;
+		const START_ANGLE = 0;
+		const END_ANGLE = 2 * Math.PI;
 		let canvas = document.querySelector('#my-canvas');
 		let context = canvas.getContext('2d');
 		let rect = canvas.getBoundingClientRect();
@@ -38,7 +38,7 @@
 		canvas.style.width = rect.width + 'px';
 		canvas.style.height = rect.height + 'px';
 
-		/* function drawCanvas(shape, xCoord=0, yCoord=0, width=0, height=0, radius=0, startAngle=0, endAngle=0, lineWidth=5, counterClockwiseDirection=true, fillColour, strokeColour) {
+		/** function drawCanvas(shape, xCoord=0, yCoord=0, width=0, height=0, radius=0, startAngle=0, endAngle=0, lineWidth=5, counterClockwiseDirection=true, fillColour, strokeColour) {
 			context.beginPath();
 			if (shape === 'circle') {
 				context.arc(`${xCoord}, ${yCoord}, ${radius}, ${startAngle}, ${endAngle}, ${counterClockwiseDirection}`);
@@ -50,7 +50,7 @@
 				context.stroke();
 			}
 		}
-		drawCanvas(MYSHAPE, XCOORD, YCOORD, 0, 0, RADIUS, STARTANGLE, ENDANGLE, 20, true, '#E2FFC6', '#66CC01'); */
+		drawCanvas(MY_SHAPE, X_COORD, Y_COORD, 0, 0, RADIUS, START_ANGLE, END_ANGLE, 20, true, '#E2FFC6', '#66CC01'); */
 
 		function draw() {
 			context.beginPath();
