@@ -1,10 +1,11 @@
 class Chart {
-	constructor(container, samples, options) {
+	constructor(container, samples, options, onClick = null) {
 		this.samples = samples;
 		
 		this.axesLabels = options.axesLabels;
 		this.styles = options.styles;
 		this.icon = options.icon;
+		this.onClick = onClick;
 
 		this.canvas = document.createElement('canvas');
 		this.canvas.width = options.size;
@@ -29,6 +30,7 @@ class Chart {
 		};
 
 		this.hoveredSample = null;
+		this.selectedSample = null;
 
 		this.pixelBounds = this._getPixelBounds();
 		this.dataBounds = this._getDataBounds();
@@ -84,6 +86,16 @@ class Chart {
 			this._updateDataBounds(dataTrans.offset, dataTrans.scale);
 			this._draw();
 			evt.preventDefault();
+		}
+
+		canvas.onclick = () => {
+			if (this.hoveredSample) {
+				this.selectedSample = this.hoveredSample;
+				if (this.onClick) {
+					this.onClick(this.selectedSample);
+				}
+				this._draw();
+			}
 		}
 	}
 
@@ -157,6 +169,10 @@ class Chart {
 
 		if (this.hoveredSample) {
 			this._emphasiseSample(this.hoveredSample);
+		}
+
+		if (this.selectedSample) {
+			this._emphasiseSample(this.selectedSample, 'yellow');
 		}
 	}
 
