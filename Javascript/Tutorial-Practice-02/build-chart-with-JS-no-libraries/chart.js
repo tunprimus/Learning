@@ -56,7 +56,7 @@ class Chart {
 			if (dragInfo.dragging) {
 				const dataLoc = this._getMouse(evt, true);
 				dragInfo.end = dataLoc;
-				dragInfo.offset = math.scale(math.subtract(dragInfo.start, dragInfo.end), dataTrans.scale);
+				dragInfo.offset = math.scale(math.subtract(dragInfo.start, dragInfo.end), dataTrans.scale ** 2);
 				const newOffset = math.scale(math.add(dataTrans.offset, dragInfo.offset), dataTrans.scale);
 				this._updateDataBounds(newOffset, dataTrans.scale);
 			}
