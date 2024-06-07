@@ -176,6 +176,11 @@ class Chart {
 		}
 	}
 
+	selectSample(sample) {
+		this.selectedSample = sample;
+		this._draw();
+	}
+
 	_emphasiseSample(sample, colour='white') {
 		const pLoc = math.remapPoint(this.dataBounds, this.pixelBounds, sample.point);
 		const grd = this.ctx.createRadialGradient(...pLoc, 0, ...pLoc, this.margin);

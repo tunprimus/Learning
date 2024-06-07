@@ -23,8 +23,9 @@ const options = {
 
 graphics.generateImages(options.styles);
 
+let chart;
 setTimeout(() => {
-	const chart = new Chart(chartContainer, samples, options, handleClick);
+	chart = new Chart(chartContainer, samples, options, handleClick);
 }, 100);
 
 const header = dataTable.createTHead();
@@ -37,18 +38,22 @@ const body = dataTable.createTBody();
 samples.forEach(sample => {
 	const tr = body.insertRow();
 	tr.id = 'sample_' + sample.id;
+	tr.onclick = () => handleClick(sample, false);
 	tr.insertCell().innerHTML = sample.id;
 	tr.insertCell().innerHTML = sample.label;
 	tr.insertCell().innerHTML = math.formatNumber(sample.point[0]);
 	tr.insertCell().innerHTML = math.formatNumber(sample.point[1]);
 });
 
-function handleClick(sample) {
+function handleClick(sample, doScroll = true) {
 	[...document.querySelectorAll('.emphasise')].forEach((elem) => elem.classList.remove('emphasise'));
 	const el = document.getElementById('sample_' + sample.id);
 	el.classList.add('emphasise');
-	el.scrollIntoView({
-		behavior: 'auto',
-		block: 'center',
-	});
+	if (doScroll) {
+		el.scrollIntoView({
+			behavior: 'auto',
+			block: 'center',
+		});
+	}
+	chart.selectSample(sample);
 }
