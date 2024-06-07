@@ -60,7 +60,6 @@ class Chart {
 			const pPoints = this.samples.map(s => math.remapPoint(this.dataBounds, this.pixelBounds, s.point));
 			const index = math.getNearest(pLoc, pPoints);
 			const nearest = this.samples[index];
-			console.log(nearest);
 			const dist = math.distance(pPoints[index], pLoc);
 
 			if (dist < (this.margin / 2)) {
@@ -156,8 +155,8 @@ class Chart {
 		this._drawSamples(this.samples);
 		ctx.globalAlpha = 1;
 
-		if (this.nearestSampleToMouse) {
-			this._emphasiseSample(this.nearestSampleToMouse);
+		if (this.hoveredSample) {
+			this._emphasiseSample(this.hoveredSample);
 		}
 	}
 
