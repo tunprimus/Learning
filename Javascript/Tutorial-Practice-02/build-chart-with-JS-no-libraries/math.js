@@ -1,5 +1,9 @@
 const math = {};
 
+math.equals = function(pt1, pt2) {
+	return pt1[0] == pt2[0] && pt1[1] == pt2[1];
+}
+
 math.lerp = function(point1, point2, factor) {
 	return point1 + (point2 - point1) * factor;
 };
