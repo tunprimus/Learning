@@ -24,7 +24,7 @@ const options = {
 graphics.generateImages(options.styles);
 
 setTimeout(() => {
-	const chart = new Chart(chartContainer, samples, options);
+	const chart = new Chart(chartContainer, samples, options, handleClick);
 }, 100);
 
 const header = dataTable.createTHead();
@@ -36,8 +36,18 @@ tr.insertCell().innerHTML = 'Price'
 const body = dataTable.createTBody();
 samples.forEach(sample => {
 	const tr = body.insertRow();
+	tr.id = 'sample_' + sample.id;
 	tr.insertCell().innerHTML = sample.id;
 	tr.insertCell().innerHTML = sample.label;
 	tr.insertCell().innerHTML = math.formatNumber(sample.point[0]);
 	tr.insertCell().innerHTML = math.formatNumber(sample.point[1]);
 });
+
+function handleClick(sample) {
+	const el = document.getElementById('sample_' + sample.id);
+	el.classList.add('emphasise');
+	el.scrollIntoView({
+		behavior: 'auto',
+		block: 'center',
+	});
+}
