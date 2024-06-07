@@ -19,6 +19,7 @@ const options = {
 		sport: {colour: 'red', text: '🏎'},
 	},
 	icon: 'image',
+	transparency: 0.618,
 };
 
 graphics.generateImages(options.styles);
@@ -50,7 +51,7 @@ function handleClick(sample, doScroll = true) {
 		[...document.querySelectorAll('.emphasise')].forEach((elem) => elem.classList.remove('emphasise'));
 		return;
 	}
-	
+
 	const el = document.getElementById('sample_' + sample.id);
 	if (el.classList.contains('emphasise')) {
 		el.classList.remove('emphasise');
