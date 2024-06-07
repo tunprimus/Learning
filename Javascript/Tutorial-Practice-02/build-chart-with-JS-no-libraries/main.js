@@ -44,6 +44,7 @@ samples.forEach(sample => {
 });
 
 function handleClick(sample) {
+	[...document.querySelectorAll('.emphasise')].forEach((elem) => elem.classList.remove('emphasise'));
 	const el = document.getElementById('sample_' + sample.id);
 	el.classList.add('emphasise');
 	el.scrollIntoView({
