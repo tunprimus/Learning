@@ -54,10 +54,10 @@ math.getNearest = function(loc, points) {
 
 	for (let i = 0; i < points.length; i++) {
 		const point = points[i];
-		const dist = math.distance(loc, point);
+		const d = math.distance(loc, point);
 
-		if (dist < minDist) {
-			minDist = dist;
+		if (d < minDist) {
+			minDist = d;
 			nearestIndex = i;
 		}
 	}

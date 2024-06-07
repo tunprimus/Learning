@@ -28,7 +28,7 @@ class Chart {
 			dragging: false,
 		};
 
-		this.nearestSampleToMouse = null;
+		this.hoveredSample = null;
 
 		this.pixelBounds = this._getPixelBounds();
 		this.dataBounds = this._getDataBounds();
@@ -59,7 +59,15 @@ class Chart {
 			const pLoc = this._getMouse(evt);
 			const pPoints = this.samples.map(s => math.remapPoint(this.dataBounds, this.pixelBounds, s.point));
 			const index = math.getNearest(pLoc, pPoints);
-			this.nearestSampleToMouse = this.samples[index];
+			const nearest = this.samples[index];
+			console.log(nearest);
+			const dist = math.distance(pPoints[index], pLoc);
+
+			if (dist < (this.margin / 2)) {
+				this.hoveredSample = nearest;
+			} else {
+				this.hoveredSample = null;
+			}
 
 			this._draw();
 		}
@@ -153,7 +161,7 @@ class Chart {
 		}
 	}
 
-	_emphasiseSample(sample, colour = 'white') {
+	_emphasiseSample(sample, colour='white') {
 		const pLoc = math.remapPoint(this.dataBounds, this.pixelBounds, sample.point);
 		const grd = this.ctx.createRadialGradient(...pLoc, 0, ...pLoc, this.margin);
 		grd.addColorStop(0, colour);
