@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html manifest="contactbook.appcache" lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contact Book</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div class="contact-book">
+		<header class="header contact-book-header">
+			<h1 class="h1">Contact Book</h1>
+		</header>
+
+		<main class="main contact-book-main">
+			<section class="section contact-list-section">
+				<ul class="ul contact-list" id="contactList">
+					<li class="li contact-list-item">
+						<div class="contact-name"></div>
+						<div class="contact-phone"></div>
+					</li>
+				</ul>
+			</section>
+
+			<section class="section contact-details-section">
+				<form action="" id="contactDetails" class="form contact-details">
+					<input type="hidden" name="contact-id" id="contactId" class="input contact-id">
+					<div class="contact-field">
+						<label for="firstname" class="label">First Name</label>
+						<input type="text" name="firstname" id="firstname" class="input contact-firstname">
+					</div>
+					<div class="contact-field">
+						<label for="surname" class="label">Surname</label>
+						<input type="text" name="surname" id="surname" class="input contact-surname">
+					</div>
+					<div class="contact-field">
+						<label for="phone" class="label">Phone</label>
+						<input type="tel" name="phone" id="phone" class="input contact-phone" autocomplete="off">
+					</div>
+				</form>
+
+				<div class="contact-controls">
+					<button id="addContact" class="contact-add" type="button">+ Add</button>
+					<button id="removeContact" class="contact-remove" type="button">- Delete</button>
+					<button id="editContact" class="contact-edit" type="button">Edit</button>
+					<button id="cancelContact" class="contact-edit-cancel" type="button">Cancel</button>
+					<button id="saveContact" class="contact-save" type="submit">Save</button>
+				</div>
+			</section>
+		</main>
+	</div>
+</body>
+</html>
