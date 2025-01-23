@@ -1,11 +1,3 @@
-{
-    "cSpell.ignoreWords": [
-        "Databinding",
-        "anim",
-        "elem",
-        "keyhandler",
-        "routechanged",
-        "slideschanged",
-        "tooltiptext"
-    ]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:de4865490dea07f49794b35c9ab41675ebf754577ddbc728ed369a09065da758
+size 185

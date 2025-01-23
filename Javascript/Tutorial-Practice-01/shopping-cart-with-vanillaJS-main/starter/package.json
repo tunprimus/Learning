@@ -1,16 +1,3 @@
-{
-  "name": "starter",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:638ead466d36e0d88ae3479cf70d5ffb272a41c9caa53570d66a63ce91788a41
+size 303

@@ -1,18 +1,3 @@
-{
-    "source": {
-        "include": ["src"],
-        "includePattern": ".js$",
-        "excludePattern": "(node_modules/|docs)"
-    },
-    "plugins": ["plugins/markdown"],
-    "templates": {
-        "cleverLinks": true,
-        "monospaceLinks": true
-    },
-    "opts": {
-        "recurse": true,
-        "destination": "./docs/",
-        "tutorials": "./tutorials",
-        "readme": "./readme.md"
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:345ca7913febdc14610c75b6c796a08bcae1125944bfc9c1fecf8aafdb830bb5
+size 407

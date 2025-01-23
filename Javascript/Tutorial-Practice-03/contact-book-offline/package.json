@@ -1,36 +1,3 @@
-{
-	"name": "contact-book-offline",
-	"version": "1.0.0",
-	"description": "Contact Book sample application working Offline",
-	"main": "app.js",
-	"scripts": {
-		"serve": "npm-run-all -p serve-front serve-backend",
-		"serve-front": "http-server -o",
-		"serve-backend": "pouchdb-server -d db"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/tabalinas/contact-book-offline.git"
-	},
-	"keywords": [
-		"serviceworker",
-		"offline",
-		"appcache"
-	],
-	"author": "Artem Tabalin <tabalinas@gmail.com> (http://tabalin.net/)",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/tabalinas/contact-book-offline/issues"
-	},
-	"homepage": "https://github.com/tabalinas/contact-book-offline#readme",
-	"devDependencies": {
-		"http-server": "^0.9.0",
-		"npm-run-all": "^3.1.1",
-		"pouchdb-server": "^1.2.1"
-	},
-	"dependencies": {
-		"babel-standalone": "^6.19.0",
-		"pouchdb": "^6.0.7"
-	}
-  }
-  
+version https://git-lfs.github.com/spec/v1
+oid sha256:80fef85bc8c5ba804666026848d3af8910ae02ff930f22a43f749c23c13aea0b
+size 902

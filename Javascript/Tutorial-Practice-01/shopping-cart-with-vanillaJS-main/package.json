@@ -1,15 +1,3 @@
-{
-  "name": "shopping-cart-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:fcd1cee6093b399efc459768af49a1937a9cdcca8d5a226f4c62e5a91ad99eb4
+size 281

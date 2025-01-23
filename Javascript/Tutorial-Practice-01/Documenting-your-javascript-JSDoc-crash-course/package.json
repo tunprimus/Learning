@@ -1,15 +1,3 @@
-{
-  "name": "Documenting-your-javascript-JSDoc-crash-course",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "doc": "jsdoc -c jsdoc.json"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "jsdoc": "^4.0.2"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:5ec58920770936e378cd487e5b59f1d66bfd511cfd562df0fa93de6f32372d26
+size 285

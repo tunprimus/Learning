@@ -1,21 +1,3 @@
-{
-    "name": "ejs-skillsharing",
-    "version": "1.0.0",
-    "main": "skillsharing_server.js",
-    "description": "Skill-sharing website example from Eloquent JavaScript",
-    "dependencies": {
-        "ecstatic": "^3.1.0"
-    },
-    "license": "MIT",
-    "bugs": "https://github.com/marijnh/Eloquent-JavaScript/issues",
-    "homepage": "https://eloquentjavascript.net/21_skillsharing.html",
-    "maintainers": [{
-        "name": "Marijn Haverbeke",
-        "email": "marijnh@gmail.com",
-        "web": "https://marijnhaverbeke.nl/"
-    }],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/marijnh/Eloquent-JavaScript.git"
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:28d6babc60d02040ac96b198ec0ad4d4bf3f4085a88aaef62c94f2e97cf1c444
+size 661
