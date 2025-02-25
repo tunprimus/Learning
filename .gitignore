@@ -14,3 +14,4 @@ build/*
 .hintrc
 secrets.txt
 config.ini
+./Javascript/Tutorial-Practice-01/PWA-Bridging-the-Gap-btw-Web-n-Mobile/colourpicker-pwa/node_modules/.pnpm/vite@5.0.3/node_modules/vite/bin/vite.js
