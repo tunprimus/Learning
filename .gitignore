@@ -3,6 +3,9 @@ node_modules/
 node_modules/*
 node_modules/**
 **/node_modules/**
+*/node_modules/**
+*/node_modules/*
+*/node_modules/
 /node_modules
 node_modules
 dist/*
@@ -14,4 +17,7 @@ build/*
 .hintrc
 secrets.txt
 config.ini
+/vite.js
+**/vite.js
+*/vite.js
 vite.js
